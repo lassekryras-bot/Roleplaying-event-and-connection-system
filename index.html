@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timeline Lanes</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="timeline-page">
+      <header class="timeline-header">
+        <h1>Timeline</h1>
+        <nav class="lane-jump-controls" aria-label="Jump to timeline lanes">
+          <button data-lane-jump="past">Past</button>
+          <button data-lane-jump="now">Now</button>
+          <button data-lane-jump="future_possible">Future Possible</button>
+        </nav>
+      </header>
+
+      <section class="timeline-lanes" aria-label="Timeline lanes">
+        <section class="timeline-lane" data-lane="past" id="lane-past">
+          <h2>Past</h2>
+          <div class="lane-cards" data-lane-cards="past"></div>
+        </section>
+
+        <section class="timeline-lane timeline-lane-now" data-lane="now" id="lane-now">
+          <div class="lane-heading-with-anchor">
+            <h2>Now</h2>
+            <span class="now-anchor" aria-label="Current point in timeline">Now</span>
+          </div>
+          <div class="lane-cards" data-lane-cards="now"></div>
+        </section>
+
+        <section class="timeline-lane" data-lane="future_possible" id="lane-future_possible">
+          <h2>Future Possible</h2>
+          <div class="lane-cards" data-lane-cards="future_possible"></div>
+        </section>
+      </section>
+    </main>
+
+    <aside class="event-side-panel" id="event-side-panel" aria-hidden="true" aria-label="Event details">
+      <div class="side-panel-header">
+        <h3 id="panel-title">Event</h3>
+        <button id="close-panel" aria-label="Close details">✕</button>
+      </div>
+      <dl class="side-panel-meta">
+        <dt>Lane</dt>
+        <dd id="panel-lane"></dd>
+        <dt>Time</dt>
+        <dd id="panel-time"></dd>
+      </dl>
+      <p id="panel-description"></p>
+    </aside>
+
+    <template id="event-card-template">
+      <article class="event-card" tabindex="0">
+        <h3 class="event-title"></h3>
+        <p class="event-time"></p>
+        <p class="event-hover-detail" role="tooltip"></p>
+      </article>
+    </template>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
