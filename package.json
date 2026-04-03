@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test"
+    "test": "npm run test:unit && npm run test:behavior",
+    "test:unit": "node --test",
+    "test:behavior": "node tests/behavior/run-behavior-tests.js"
   },
   "engines": {
     "node": ">=20"
