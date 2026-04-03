@@ -10,6 +10,8 @@ export async function beforeScenario(world) {
 
   world.server = createServer({
     getThreadById: (threadId) => world.threads.get(threadId),
+    listThreads: () => [...world.threads.values()].map((thread) => ({ ...thread })),
+    listEvents: () => [],
   });
 
   await new Promise((resolve) => world.server.listen(0, resolve));
