@@ -8,11 +8,11 @@ import { MembershipRole } from "../domain/entities.js";
  * @returns {object}
  */
 export function filterThreadForRole(thread, role) {
-  if (!thread) {
+  if (!thread || typeof thread !== "object" || Array.isArray(thread)) {
     throw new Error("thread is required");
   }
 
-  if (!role) {
+  if (!role || typeof role !== "string") {
     throw new Error("role is required");
   }
 

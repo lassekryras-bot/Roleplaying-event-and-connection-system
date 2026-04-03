@@ -15,7 +15,15 @@ const TIMELINE_ORDER = Object.freeze({
  * @returns {Array}
  */
 export function sortEventsForTimeline(events) {
+  if (!Array.isArray(events)) {
+    throw new Error("events must be an array");
+  }
+
   return [...events].sort((a, b) => {
+    if (!a || !b || typeof a !== "object" || typeof b !== "object") {
+      throw new Error("each event must be an object");
+    }
+
     const positionDiff =
       (TIMELINE_ORDER[a.timeline_position] ?? Number.MAX_SAFE_INTEGER) -
       (TIMELINE_ORDER[b.timeline_position] ?? Number.MAX_SAFE_INTEGER);
