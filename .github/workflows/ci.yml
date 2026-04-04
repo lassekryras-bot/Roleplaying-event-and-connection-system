@@ -13,3 +13,7 @@ jobs:
 
       - name: Validate root package.json
         run: node -e "JSON.parse(require('node:fs').readFileSync('package.json', 'utf8')); console.log('package.json is valid JSON')"
+
+      - name: Validate web/package.json and required CI scripts
+        run: |
+          node -e "const fs=require('node:fs'); const pkg=JSON.parse(fs.readFileSync('web/package.json','utf8')); const required=['build','lint','typecheck']; const missing=required.filter((name)=>!pkg.scripts||!pkg.scripts[name]); if(missing.length){console.error('Missing scripts required by CI:', missing.join(', ')); process.exit(1);} console.log('web/package.json is valid JSON and all CI-required scripts exist:', required.join(', '));"
