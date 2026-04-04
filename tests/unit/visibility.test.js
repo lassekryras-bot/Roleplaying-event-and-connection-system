@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 
 import { MembershipRole } from "../../src/domain/entities.js";
 import { filterThreadForRole } from "../../src/visibility/filterThreadForRole.js";
+import { sanitizeVisibilityPayloadForRole } from "../../src/visibility/visibilityPolicy.js";
 import { sortEventsForTimeline } from "../../src/timeline/sortEvents.js";
 
 test("should hide gm truth from player thread detail", () => {
@@ -51,6 +52,22 @@ test("should throw error for unsupported visibility role", () => {
   );
 });
 
+
+
+test("should apply visibility policy to timeline payload collection", () => {
+  const timelinePayload = [
+    {
+      id: "event-1",
+      gm_truth: "A hidden saboteur met the harbor master.",
+      player_summary: "Dock tensions rose overnight.",
+    },
+  ];
+
+  const result = sanitizeVisibilityPayloadForRole(timelinePayload, MembershipRole.PLAYER);
+
+  assert.equal(result[0].gm_truth, undefined);
+  assert.equal(result[0].player_summary, "Dock tensions rose overnight.");
+});
 test("should sort events from past to now to future possible", () => {
   const events = [
     { id: "e3", timeline_position: "future_possible", sequence: 1 },
