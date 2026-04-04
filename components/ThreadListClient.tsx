@@ -69,6 +69,9 @@ export default function ThreadListClient() {
   return (
     <main className="page">
       <h1>Threads</h1>
+      <p>
+        <Link href="/timeline">Open simplified timeline board →</Link>
+      </p>
       <section className="controls" aria-label="Thread controls">
         <label>
           Search title/summary
