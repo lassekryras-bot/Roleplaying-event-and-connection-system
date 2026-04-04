@@ -13,7 +13,7 @@
     "build-storybook": "storybook build",
     "test": "npm run lint && npm run typecheck && npm run test:unit",
     "test:unit": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "node scripts/run-coverage.mjs"
   },
   "dependencies": {
     "next": "15.2.0",

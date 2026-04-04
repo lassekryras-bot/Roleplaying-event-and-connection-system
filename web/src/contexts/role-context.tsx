@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import React from 'react';
 
 const DEFAULT_ROLE = 'player';
 
