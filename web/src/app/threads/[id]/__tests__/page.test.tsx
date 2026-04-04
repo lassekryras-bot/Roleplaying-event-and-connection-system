@@ -1,5 +1,6 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import React from 'react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import ThreadDetailPage from '../page';
 
@@ -8,6 +9,10 @@ const mockUseApiClient = vi.fn();
 vi.mock('@/lib/use-api-client', () => ({
   useApiClient: () => mockUseApiClient(),
 }));
+
+afterEach(() => {
+  cleanup();
+});
 
 describe('Thread detail role-safe rendering', () => {
   beforeEach(() => {
@@ -26,7 +31,7 @@ describe('Thread detail role-safe rendering', () => {
       }),
     });
 
-    render(<ThreadDetailPage params={{ id: 'thread-1' }} />);
+    render(<ThreadDetailPage params={Promise.resolve({ id: 'thread-1' })} />);
 
     await waitFor(() => {
       expect(screen.getByText('Whispers in the harbor')).toBeInTheDocument();
@@ -50,7 +55,7 @@ describe('Thread detail role-safe rendering', () => {
       }),
     });
 
-    render(<ThreadDetailPage params={{ id: 'thread-1' }} />);
+    render(<ThreadDetailPage params={Promise.resolve({ id: 'thread-1' })} />);
 
     await waitFor(() => {
       expect(screen.getByText('Whispers in the harbor')).toBeInTheDocument();

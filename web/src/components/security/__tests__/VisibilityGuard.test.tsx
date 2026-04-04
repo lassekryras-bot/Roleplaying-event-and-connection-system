@@ -1,8 +1,13 @@
 import '@testing-library/jest-dom/vitest';
-import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { cleanup, render, screen } from '@testing-library/react';
+import React from 'react';
+import { afterEach, describe, expect, it } from 'vitest';
 
 import { VisibilityGuard } from '../VisibilityGuard';
+
+afterEach(() => {
+  cleanup();
+});
 
 function GmTruth() {
   return <div data-testid="gm-truth">Top-secret GM truth</div>;
