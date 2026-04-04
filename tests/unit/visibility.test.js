@@ -53,6 +53,11 @@ test("should throw error for unsupported visibility role", () => {
 });
 
 
+test("should throw when thread payload is missing", () => {
+  assert.throws(() => filterThreadForRole(null, MembershipRole.GM), /thread is required/);
+});
+
+
 
 test("should apply visibility policy to timeline payload collection", () => {
   const timelinePayload = [
