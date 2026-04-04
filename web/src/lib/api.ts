@@ -5,6 +5,8 @@ export type ThreadSummary = {
 };
 
 export type ThreadDetail = ThreadSummary & {
+  player_summary?: string;
+  gm_truth?: string;
   messages?: Array<{
     id: string;
     author: string;
