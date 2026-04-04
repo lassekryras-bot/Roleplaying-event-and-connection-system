@@ -32,3 +32,12 @@ A separate Node API MVP still exists under `src/` and can be started with:
 ```bash
 npm start
 ```
+
+## Branch protection guidance
+
+To prevent regressions, configure your default branch protection rule to require status checks from **both** CI jobs before merge:
+
+- `backend`
+- `frontend`
+
+In GitHub: **Settings → Branches → Branch protection rules → Require status checks to pass before merging**, then select both checks.
