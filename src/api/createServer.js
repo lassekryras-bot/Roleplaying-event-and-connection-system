@@ -1,6 +1,7 @@
 import http from "node:http";
 
 import { sanitizeVisibilityPayloadForRole } from "../visibility/visibilityPolicy.js";
+import { filterThreadForRole } from "../visibility/filterThreadForRole.js";
 import { sortEventsForTimeline } from "../timeline/sortEvents.js";
 
 function sendJson(response, statusCode, payload) {
@@ -86,7 +87,7 @@ export function createServer({ getThreadById, listThreads, listEvents }) {
       }
 
       try {
-        const filteredThread = sanitizeVisibilityPayloadForRole(thread, role);
+        const filteredThread = filterThreadForRole(thread, role);
         sendJson(response, 200, filteredThread);
         return;
       } catch (error) {

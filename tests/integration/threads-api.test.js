@@ -63,6 +63,29 @@ test("should return gm_truth for GM role on GET /threads/:id", async () => {
   });
 });
 
+test("should return role-consistent thread payloads between list and detail endpoints", async () => {
+  await withTestServer(async ({ baseUrl }) => {
+    const [listResponse, detailResponse] = await Promise.all([
+      fetch(`${baseUrl}/threads`, {
+        headers: { "x-role": "PLAYER" },
+      }),
+      fetch(`${baseUrl}/threads/thread-1`, {
+        headers: { "x-role": "PLAYER" },
+      }),
+    ]);
+
+    const listPayload = await listResponse.json();
+    const detailPayload = await detailResponse.json();
+
+    assert.equal(listResponse.status, 200);
+    assert.equal(detailResponse.status, 200);
+    assert.equal(listPayload[0].id, detailPayload.id);
+    assert.equal(listPayload[0].player_summary, detailPayload.player_summary);
+    assert.equal(listPayload[0].gm_truth, undefined);
+    assert.equal(detailPayload.gm_truth, undefined);
+  });
+});
+
 test("should reject unsupported role on GET /threads/:id", async () => {
   await withTestServer(async ({ baseUrl }) => {
     const response = await fetch(`${baseUrl}/threads/thread-1`, {
