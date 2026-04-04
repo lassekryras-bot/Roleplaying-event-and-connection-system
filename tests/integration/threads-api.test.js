@@ -192,6 +192,24 @@ test("should allow valid escalation transitions", async () => {
   });
 });
 
+
+
+test("should reject non-canonical thread states with deterministic validation error", async () => {
+  await withTestServer(async ({ baseUrl }) => {
+    const response = await fetch(`${baseUrl}/threads/thread-1`, {
+      method: "PATCH",
+      headers: { "content-type": "application/json", "x-role": "GM", "x-user-id": "gm-1" },
+      body: JSON.stringify({ state: "open" }),
+    });
+    const payload = await response.json();
+
+    assert.equal(response.status, 400);
+    assert.deepEqual(payload, {
+      code: "INVALID_STATE_TRANSITION",
+      error: "Invalid target thread state: open",
+    });
+  });
+});
 test("should reject invalid escalation transitions", async () => {
   await withTestServer(async ({ baseUrl }) => {
     const response = await fetch(`${baseUrl}/threads/thread-2`, {

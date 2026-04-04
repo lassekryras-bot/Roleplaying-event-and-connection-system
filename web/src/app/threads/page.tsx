@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { ThreadSummary } from '@/lib/api';
+import { toUiThreadStatus } from '@/lib/thread-state';
 import { useApiClient } from '@/lib/use-api-client';
 
 export default function ThreadsPage() {
@@ -24,6 +25,7 @@ export default function ThreadsPage() {
         {threads.map((thread) => (
           <li key={thread.id} className="card">
             <Link href={`/threads/${thread.id}`}>{thread.title || thread.id}</Link>
+            <span> — {toUiThreadStatus(thread.state)}</span>
           </li>
         ))}
       </ul>
