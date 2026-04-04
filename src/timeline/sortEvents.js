@@ -2,16 +2,38 @@ import { TimelinePosition } from "../domain/entities.js";
 
 const TIMELINE_ORDER = Object.freeze({
   [TimelinePosition.PAST]: 0,
+  now: 1,
+  current: 1,
   [TimelinePosition.NOW]: 1,
   [TimelinePosition.FUTURE_POSSIBLE]: 2,
+  future: 2,
 });
 
+function toTimelineBucket(position) {
+  return TIMELINE_ORDER[position] ?? Number.MAX_SAFE_INTEGER;
+}
+
+function toTimestampValue(value) {
+  if (typeof value !== "string" || value.trim().length === 0) {
+    return Number.MAX_SAFE_INTEGER;
+  }
+
+  const timestamp = Date.parse(value);
+  return Number.isNaN(timestamp) ? Number.MAX_SAFE_INTEGER : timestamp;
+}
+
 /**
- * Sort events into a consistent shared-timeline order:
- * past -> now -> future_possible
- * then by `sequence` ascending inside each segment.
+ * Deterministically sort timeline entries into:
+ * 1) past, 2) current/now, 3) future.
  *
- * @param {Array<{timeline_position:string,sequence:number}>} events
+ * Within each segment we apply deterministic tie-breakers in this order:
+ *   a) timestamp (`occurred_at` or `scheduled_for`) ascending
+ *   b) `sequence` ascending
+ *   c) `id` lexicographically ascending
+ *
+ * Unknown timeline positions are always placed last.
+ *
+ * @param {Array<{id?:string,timeline_position:string,occurred_at?:string,scheduled_for?:string,sequence?:number}>} events
  * @returns {Array}
  */
 export function sortEventsForTimeline(events) {
@@ -24,14 +46,23 @@ export function sortEventsForTimeline(events) {
       throw new Error("each event must be an object");
     }
 
-    const positionDiff =
-      (TIMELINE_ORDER[a.timeline_position] ?? Number.MAX_SAFE_INTEGER) -
-      (TIMELINE_ORDER[b.timeline_position] ?? Number.MAX_SAFE_INTEGER);
-
+    const positionDiff = toTimelineBucket(a.timeline_position) - toTimelineBucket(b.timeline_position);
     if (positionDiff !== 0) {
       return positionDiff;
     }
 
-    return (a.sequence ?? 0) - (b.sequence ?? 0);
+    const timestampDiff =
+      toTimestampValue(a.occurred_at ?? a.scheduled_for) -
+      toTimestampValue(b.occurred_at ?? b.scheduled_for);
+    if (timestampDiff !== 0) {
+      return timestampDiff;
+    }
+
+    const sequenceDiff = (a.sequence ?? Number.MAX_SAFE_INTEGER) - (b.sequence ?? Number.MAX_SAFE_INTEGER);
+    if (sequenceDiff !== 0) {
+      return sequenceDiff;
+    }
+
+    return String(a.id ?? "").localeCompare(String(b.id ?? ""));
   });
 }

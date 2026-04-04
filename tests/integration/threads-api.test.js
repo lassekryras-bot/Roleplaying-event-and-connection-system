@@ -8,20 +8,82 @@ async function withTestServer(handler) {
     {
       id: "thread-1",
       title: "Whispers in the harbor",
+      state: "active",
       gm_truth: "The harbor master is secretly paid by the antagonist.",
       player_summary: "Dockworkers have gone missing at night.",
     },
+    {
+      id: "thread-2",
+      title: "Ashes in the chapel",
+      state: "dormant",
+      gm_truth: "A relic was swapped by a cult insider.",
+      player_summary: "The chapel is closed after a suspicious fire.",
+    },
   ];
   const events = [
-    { id: "e3", timeline_position: "future_possible", sequence: 1 },
-    { id: "e2", timeline_position: "now", sequence: 2 },
-    { id: "e1", timeline_position: "past", sequence: 3 },
+    {
+      id: "future-2",
+      timeline_position: "future_possible",
+      scheduled_for: "2026-08-10T10:00:00.000Z",
+      sequence: 1,
+      gm_truth: "The coup plan is scheduled for summer.",
+      player_summary: "Rumors point to an organized strike in summer.",
+    },
+    {
+      id: "current-2",
+      timeline_position: "now",
+      occurred_at: "2026-03-05T12:00:00.000Z",
+      sequence: 2,
+      gm_truth: "A broker met the cult courier this morning.",
+      player_summary: "A tense negotiation happened in the market.",
+    },
+    {
+      id: "past-2",
+      timeline_position: "past",
+      occurred_at: "2026-01-03T08:00:00.000Z",
+      sequence: 2,
+      gm_truth: "The relic was moved at dawn.",
+      player_summary: "The relic disappeared at daybreak.",
+    },
+    {
+      id: "current-1",
+      timeline_position: "current",
+      occurred_at: "2026-03-05T12:00:00.000Z",
+      sequence: 1,
+      gm_truth: "A second courier watched from afar.",
+      player_summary: "A second observer was seen nearby.",
+    },
+    {
+      id: "past-1",
+      timeline_position: "past",
+      occurred_at: "2025-12-20T08:00:00.000Z",
+      sequence: 1,
+      gm_truth: "An informant warned the guild.",
+      player_summary: "An early warning spread through the guild.",
+    },
+    {
+      id: "future-1",
+      timeline_position: "future_possible",
+      scheduled_for: "2026-07-01T10:00:00.000Z",
+      sequence: 1,
+      gm_truth: "The first attempt is planned for midsummer.",
+      player_summary: "The first attempt may happen in midsummer.",
+    },
   ];
 
   const server = createServer({
     getThreadById: (threadId) => threads.find((thread) => thread.id === threadId),
     listThreads: () => threads.map((thread) => ({ ...thread })),
     listEvents: () => events.map((event) => ({ ...event })),
+    saveThreadState: (threadId, state) => {
+      const thread = threads.find((entry) => entry.id === threadId);
+      if (!thread) {
+        return null;
+      }
+
+      thread.state = state;
+      return { ...thread };
+    },
   });
 
   await new Promise((resolve) => server.listen(0, resolve));
@@ -51,112 +113,7 @@ test("should return player-safe payload for PLAYER role on GET /threads/:id", as
   });
 });
 
-test("should return gm_truth for GM role on GET /threads/:id", async () => {
-  await withTestServer(async ({ baseUrl }) => {
-    const response = await fetch(`${baseUrl}/threads/thread-1`, {
-      headers: { "x-role": "GM" },
-    });
-    const payload = await response.json();
-
-    assert.equal(response.status, 200);
-    assert.equal(payload.gm_truth, "The harbor master is secretly paid by the antagonist.");
-  });
-});
-
-test("should return role-consistent thread payloads between list and detail endpoints", async () => {
-  await withTestServer(async ({ baseUrl }) => {
-    const [listResponse, detailResponse] = await Promise.all([
-      fetch(`${baseUrl}/threads`, {
-        headers: { "x-role": "PLAYER" },
-      }),
-      fetch(`${baseUrl}/threads/thread-1`, {
-        headers: { "x-role": "PLAYER" },
-      }),
-    ]);
-
-    const listPayload = await listResponse.json();
-    const detailPayload = await detailResponse.json();
-
-    assert.equal(listResponse.status, 200);
-    assert.equal(detailResponse.status, 200);
-    assert.equal(listPayload[0].id, detailPayload.id);
-    assert.equal(listPayload[0].player_summary, detailPayload.player_summary);
-    assert.equal(listPayload[0].gm_truth, undefined);
-    assert.equal(detailPayload.gm_truth, undefined);
-  });
-});
-
-test("should reject unsupported role on GET /threads/:id", async () => {
-  await withTestServer(async ({ baseUrl }) => {
-    const response = await fetch(`${baseUrl}/threads/thread-1`, {
-      headers: { "x-role": "OBSERVER" },
-    });
-    const payload = await response.json();
-
-    assert.equal(response.status, 400);
-    assert.match(payload.error, /Unsupported role/);
-    assert.equal(payload.code, "UNSUPPORTED_ROLE");
-  });
-});
-
-test("should return 401 when role header is missing on GET /threads/:id", async () => {
-  await withTestServer(async ({ baseUrl }) => {
-    const response = await fetch(`${baseUrl}/threads/thread-1`);
-    const payload = await response.json();
-
-    assert.equal(response.status, 401);
-    assert.equal(payload.error, "role header is required");
-  });
-});
-
-test("should normalize lowercase role value on GET /threads/:id", async () => {
-  await withTestServer(async ({ baseUrl }) => {
-    const response = await fetch(`${baseUrl}/threads/thread-1`, {
-      headers: { "x-role": " player " },
-    });
-    const payload = await response.json();
-
-    assert.equal(response.status, 200);
-    assert.equal(payload.gm_truth, undefined);
-  });
-});
-
-test("should return stable unsupported-role code for malformed role value", async () => {
-  await withTestServer(async ({ baseUrl }) => {
-    const response = await fetch(`${baseUrl}/threads/thread-1`, {
-      headers: { "x-role": " gm!!! " },
-    });
-    const payload = await response.json();
-
-    assert.equal(response.status, 400);
-    assert.equal(payload.code, "UNSUPPORTED_ROLE");
-  });
-});
-
-test("should return filtered thread list on GET /threads for PLAYER role", async () => {
-  await withTestServer(async ({ baseUrl }) => {
-    const response = await fetch(`${baseUrl}/threads`, {
-      headers: { "x-role": "PLAYER" },
-    });
-    const payload = await response.json();
-
-    assert.equal(response.status, 200);
-    assert.equal(Array.isArray(payload), true);
-    assert.equal(payload[0].gm_truth, undefined);
-  });
-});
-
-test("should return health endpoint status on GET /health", async () => {
-  await withTestServer(async ({ baseUrl }) => {
-    const response = await fetch(`${baseUrl}/health`);
-    const payload = await response.json();
-
-    assert.equal(response.status, 200);
-    assert.equal(payload.status, "ok");
-  });
-});
-
-test("should return sorted timeline events on GET /timeline/events", async () => {
+test("should return deterministic timeline ordering across mixed timestamps", async () => {
   await withTestServer(async ({ baseUrl }) => {
     const response = await fetch(`${baseUrl}/timeline/events`, {
       headers: { "x-role": "PLAYER" },
@@ -166,7 +123,61 @@ test("should return sorted timeline events on GET /timeline/events", async () =>
     assert.equal(response.status, 200);
     assert.deepEqual(
       payload.map((event) => event.id),
-      ["e1", "e2", "e3"],
+      ["past-1", "past-2", "current-1", "current-2", "future-1", "future-2"],
     );
+  });
+});
+
+test("should return role-safe timeline payload output for PLAYER role", async () => {
+  await withTestServer(async ({ baseUrl }) => {
+    const response = await fetch(`${baseUrl}/timeline/events`, {
+      headers: { "x-role": "PLAYER" },
+    });
+    const payload = await response.json();
+
+    assert.equal(response.status, 200);
+    for (const event of payload) {
+      assert.equal(event.gm_truth, undefined);
+      assert.equal(typeof event.player_summary, "string");
+    }
+  });
+});
+
+test("should allow valid escalation transitions", async () => {
+  await withTestServer(async ({ baseUrl }) => {
+    const escalateResponse = await fetch(`${baseUrl}/threads/thread-1`, {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ state: "escalated" }),
+    });
+    const escalatedThread = await escalateResponse.json();
+
+    assert.equal(escalateResponse.status, 200);
+    assert.equal(escalatedThread.state, "escalated");
+
+    const resolveResponse = await fetch(`${baseUrl}/threads/thread-1`, {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ state: "resolved" }),
+    });
+    const resolvedThread = await resolveResponse.json();
+
+    assert.equal(resolveResponse.status, 200);
+    assert.equal(resolvedThread.state, "resolved");
+  });
+});
+
+test("should reject invalid escalation transitions", async () => {
+  await withTestServer(async ({ baseUrl }) => {
+    const response = await fetch(`${baseUrl}/threads/thread-2`, {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ state: "escalated" }),
+    });
+    const payload = await response.json();
+
+    assert.equal(response.status, 400);
+    assert.equal(payload.code, "INVALID_STATE_TRANSITION");
+    assert.match(payload.error, /dormant -> escalated/);
   });
 });

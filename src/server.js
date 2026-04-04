@@ -1,5 +1,5 @@
 import { createServer } from "./api/createServer.js";
-import { getThreadById, listEvents, listThreads } from "./data/inMemoryStore.js";
+import { getThreadById, listEvents, listThreads, updateThreadState } from "./data/inMemoryStore.js";
 
 const port = Number(process.env.PORT ?? 3000);
 
@@ -7,6 +7,7 @@ const server = createServer({
   getThreadById,
   listThreads,
   listEvents,
+  saveThreadState: updateThreadState,
 });
 
 server.listen(port, () => {
