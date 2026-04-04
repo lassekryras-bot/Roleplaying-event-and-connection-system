@@ -52,14 +52,22 @@ Backend tests are split into three layers with dedicated commands:
 
 - **Unit tests** (`tests/unit/**/*.test.js`): fast checks for isolated behavior.
   - Command: `npm run test:unit`
-- **Integration tests** (`tests/integration/**/*.test.js`): endpoint and system-level checks across modules.
-  - Command: `npm run test:integration`
+- **Integration tests**: split into two complementary layers so contributors know exactly what runs.
+  - Node-level integration checks (`tests/integration/**/*.test.js`).
+    - Command: `npm run test:integration:node`
+  - Gherkin endpoint narratives (`tests/integration/features/*.feature`) executed by the integration scenario runner.
+    - Command: `npm run test:integration:gherkin`
+  - Combined command (runs both in order): `npm run test:integration`
 - **Behavior tests** (`tests/behavior/**`): higher-level scenario coverage driven by behavior test scripts.
   - Command: `npm run test:behavior`
 - **Contract tests** (`tests/contract/**/*.test.js`): API contract checks for status codes, payload shape, and auth guarantees.
   - Command: `npm run test:contract`
 
-Use `npm test` to run all backend layers in deterministic order: unit → integration → behavior.
+Use `npm test` to run all backend layers in deterministic order:
+1. `npm run test:unit`
+2. `npm run test:integration` (`node:test` checks then Gherkin scenarios)
+3. `npm run test:contract`
+4. `npm run test:behavior`
 
 For smoke-only behavior coverage (including invite flow smoke scenarios), run:
 

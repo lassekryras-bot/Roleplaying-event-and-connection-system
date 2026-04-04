@@ -7,13 +7,15 @@
     "start": "node src/server.js",
     "test": "npm run test:unit && npm run test:integration && npm run test:contract && npm run test:behavior",
     "test:unit": "node --test \"tests/unit/**/*.test.js\"",
-    "test:integration": "node --test \"tests/integration/**/*.test.js\"",
+    "test:integration": "npm run test:integration:node && npm run test:integration:gherkin",
     "test:behavior": "node tests/behavior/run-behavior-tests.js",
     "test:behavior:smoke": "BEHAVIOR_TAGS=\"@smoke\" node tests/behavior/run-behavior-tests.js",
     "test:behavior:full": "BEHAVIOR_TAGS=\"@full\" node tests/behavior/run-behavior-tests.js",
     "test:coverage": "node scripts/run-backend-coverage.mjs",
     "coverage:ratchet": "node scripts/check-coverage-ratchet.mjs",
-    "test:contract": "node --test \"tests/contract/**/*.test.js\""
+    "test:contract": "node --test \"tests/contract/**/*.test.js\"",
+    "test:integration:node": "node --test \"tests/integration/**/*.test.js\"",
+    "test:integration:gherkin": "node tests/integration/run-integration-tests.js"
   },
   "engines": {
     "node": ">=20"
