@@ -77,6 +77,9 @@ jobs:
           cache: npm
           cache-dependency-path: web/package-lock.json
 
+      - name: Validate canonical frontend documentation
+        run: npm run docs:check
+
       - name: Install frontend dependencies
         run: npm --prefix web install
 

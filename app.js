@@ -1,3 +1,5 @@
+// Archived static prototype: do not use for active frontend development.
+// Use `npm --prefix web run dev` for local frontend work.
 const laneLabel = {
   past: 'Past',
   now: 'Now',
