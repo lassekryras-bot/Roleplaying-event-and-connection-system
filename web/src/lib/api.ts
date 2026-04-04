@@ -1,6 +1,9 @@
+import { DomainThreadState } from '@/lib/thread-state';
+
 export type ThreadSummary = {
   id: string;
   title: string;
+  state: DomainThreadState;
   updatedAt?: string;
 };
 

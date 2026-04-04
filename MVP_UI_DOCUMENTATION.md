@@ -60,7 +60,9 @@ Create and edit core campaign entities.
 ### Threads (tab)
 - Thread title
 - Type (main / side / rumor / mystery)
-- Status (open / in progress / resolved)
+- Status (UI labels: open / in progress / resolved; canonical domain states: dormant / active / escalated / resolved)
+  - UI → domain mapping: open → dormant, in progress → active, resolved → resolved
+  - Domain → UI mapping: dormant → open, active → in progress, escalated → in progress, resolved → resolved
 - Timeline anchor
 - Linked entities (character/event/NPC/item/location)
 
