@@ -4,19 +4,11 @@ import { sanitizeVisibilityPayloadForRole } from "../visibility/visibilityPolicy
 import { filterThreadForRole } from "../visibility/filterThreadForRole.js";
 import { sortEventsForTimeline } from "../timeline/sortEvents.js";
 import { transitionThreadState } from "../threads/threadStateMachine.js";
+import { getWriteEndpoints, requireAccess, resolveRequestContext } from "./accessGuards.js";
 
 function sendJson(response, statusCode, payload) {
   response.writeHead(statusCode, { "content-type": "application/json" });
   response.end(JSON.stringify(payload));
-}
-
-function normalizeRole(roleHeaderValue) {
-  if (typeof roleHeaderValue !== "string") {
-    return null;
-  }
-
-  const normalizedRole = roleHeaderValue.trim().toUpperCase();
-  return normalizedRole.length > 0 ? normalizedRole : null;
 }
 
 function parseJsonBody(request) {
@@ -44,7 +36,15 @@ function parseJsonBody(request) {
   });
 }
 
-export function createServer({ getThreadById, listThreads, listEvents, saveThreadState }) {
+export function createServer({
+  getThreadById,
+  listThreads,
+  listEvents,
+  saveThreadState,
+  createProjectMembership,
+  createProjectInvite,
+  getProjectMembershipByUserId,
+}) {
   if (typeof getThreadById !== "function" || typeof listThreads !== "function") {
     throw new Error("getThreadById and listThreads functions are required");
   }
@@ -52,22 +52,30 @@ export function createServer({ getThreadById, listThreads, listEvents, saveThrea
   return http.createServer(async (request, response) => {
     const url = new URL(request.url, "http://localhost");
     const threadDetailMatch = /^\/threads\/([^/]+)$/.exec(url.pathname);
-    const role = normalizeRole(request.headers["x-role"]);
+    const projectMembershipMatch = /^\/projects\/([^/]+)\/memberships$/.exec(url.pathname);
+    const projectInviteMatch = /^\/projects\/([^/]+)\/invites$/.exec(url.pathname);
+    const accessContext = resolveRequestContext(request, { getProjectMembershipByUserId });
 
     if (request.method === "GET" && url.pathname === "/health") {
       sendJson(response, 200, { status: "ok" });
       return;
     }
 
+    if (request.method === "GET" && url.pathname === "/meta/write-endpoints") {
+      sendJson(response, 200, { write_endpoints: getWriteEndpoints() });
+      return;
+    }
+
     if (request.method === "GET" && url.pathname === "/threads") {
-      if (!role) {
-        sendJson(response, 401, { error: "role header is required" });
+      const guardResult = requireAccess(accessContext);
+      if (!guardResult.allowed) {
+        sendJson(response, guardResult.status, guardResult.payload);
         return;
       }
 
       const threads = listThreads();
       try {
-        const filteredThreads = sanitizeVisibilityPayloadForRole(threads, role);
+        const filteredThreads = sanitizeVisibilityPayloadForRole(threads, accessContext.role);
         sendJson(response, 200, filteredThreads);
         return;
       } catch (error) {
@@ -82,20 +90,59 @@ export function createServer({ getThreadById, listThreads, listEvents, saveThrea
         return;
       }
 
-      if (!role) {
-        sendJson(response, 401, { error: "role header is required" });
+      const guardResult = requireAccess(accessContext);
+      if (!guardResult.allowed) {
+        sendJson(response, guardResult.status, guardResult.payload);
         return;
       }
 
       try {
         const timelineEvents = sortEventsForTimeline(listEvents());
-        const filteredTimelineEvents = sanitizeVisibilityPayloadForRole(timelineEvents, role);
+        const filteredTimelineEvents = sanitizeVisibilityPayloadForRole(timelineEvents, accessContext.role);
         sendJson(response, 200, filteredTimelineEvents);
         return;
       } catch (error) {
         sendJson(response, 400, { error: error.message, code: "UNSUPPORTED_ROLE" });
         return;
       }
+    }
+
+    if (request.method === "POST" && projectMembershipMatch) {
+      if (typeof createProjectMembership !== "function") {
+        sendJson(response, 501, { error: "project membership endpoint not implemented" });
+        return;
+      }
+
+      const projectId = decodeURIComponent(projectMembershipMatch[1]);
+      const guardResult = requireAccess(accessContext, { allowRoles: ["GM"], projectId });
+      if (!guardResult.allowed) {
+        sendJson(response, guardResult.status, guardResult.payload);
+        return;
+      }
+
+      const body = await parseJsonBody(request);
+      const membership = createProjectMembership(projectId, body);
+      sendJson(response, 201, membership);
+      return;
+    }
+
+    if (request.method === "POST" && projectInviteMatch) {
+      if (typeof createProjectInvite !== "function") {
+        sendJson(response, 501, { error: "project invite endpoint not implemented" });
+        return;
+      }
+
+      const projectId = decodeURIComponent(projectInviteMatch[1]);
+      const guardResult = requireAccess(accessContext, { allowRoles: ["GM"], projectId });
+      if (!guardResult.allowed) {
+        sendJson(response, guardResult.status, guardResult.payload);
+        return;
+      }
+
+      const body = await parseJsonBody(request);
+      const invite = createProjectInvite(projectId, body);
+      sendJson(response, 201, invite);
+      return;
     }
 
     if (request.method === "PATCH" && threadDetailMatch) {
@@ -112,6 +159,15 @@ export function createServer({ getThreadById, listThreads, listEvents, saveThrea
         return;
       }
 
+      const guardResult = requireAccess(accessContext, {
+        allowRoles: ["GM", "HELPER"],
+        projectId: currentThread.project_id,
+      });
+      if (!guardResult.allowed) {
+        sendJson(response, guardResult.status, guardResult.payload);
+        return;
+      }
+
       try {
         const body = await parseJsonBody(request);
         const updatedThread = transitionThreadState(currentThread, body.state);
@@ -125,8 +181,9 @@ export function createServer({ getThreadById, listThreads, listEvents, saveThrea
     }
 
     if (request.method === "GET" && threadDetailMatch) {
-      if (!role) {
-        sendJson(response, 401, { error: "role header is required" });
+      const guardResult = requireAccess(accessContext);
+      if (!guardResult.allowed) {
+        sendJson(response, guardResult.status, guardResult.payload);
         return;
       }
 
@@ -139,7 +196,7 @@ export function createServer({ getThreadById, listThreads, listEvents, saveThrea
       }
 
       try {
-        const filteredThread = filterThreadForRole(thread, role);
+        const filteredThread = filterThreadForRole(thread, accessContext.role);
         sendJson(response, 200, filteredThread);
         return;
       } catch (error) {

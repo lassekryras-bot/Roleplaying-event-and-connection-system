@@ -1,5 +1,13 @@
 import { createServer } from "./api/createServer.js";
-import { getThreadById, listEvents, listThreads, updateThreadState } from "./data/inMemoryStore.js";
+import {
+  createInvite,
+  createMembership,
+  getMembershipByProjectAndUser,
+  getThreadById,
+  listEvents,
+  listThreads,
+  updateThreadState,
+} from "./data/inMemoryStore.js";
 
 const port = Number(process.env.PORT ?? 3000);
 
@@ -8,6 +16,9 @@ const server = createServer({
   listThreads,
   listEvents,
   saveThreadState: updateThreadState,
+  createProjectMembership: createMembership,
+  createProjectInvite: createInvite,
+  getProjectMembershipByUserId: getMembershipByProjectAndUser,
 });
 
 server.listen(port, () => {

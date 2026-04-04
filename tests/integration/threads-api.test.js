@@ -3,10 +3,13 @@ import assert from "node:assert/strict";
 
 import { createServer } from "../../src/api/createServer.js";
 
+const FORBIDDEN_ERROR = { error: "forbidden", code: "FORBIDDEN" };
+
 async function withTestServer(handler) {
   const threads = [
     {
       id: "thread-1",
+      project_id: "project-1",
       title: "Whispers in the harbor",
       state: "active",
       gm_truth: "The harbor master is secretly paid by the antagonist.",
@@ -14,6 +17,7 @@ async function withTestServer(handler) {
     },
     {
       id: "thread-2",
+      project_id: "project-1",
       title: "Ashes in the chapel",
       state: "dormant",
       gm_truth: "A relic was swapped by a cult insider.",
@@ -70,6 +74,13 @@ async function withTestServer(handler) {
       player_summary: "The first attempt may happen in midsummer.",
     },
   ];
+  const memberships = [
+    { project_id: "project-1", user_id: "gm-1", role: "GM", status: "active" },
+    { project_id: "project-1", user_id: "helper-1", role: "HELPER", status: "active" },
+    { project_id: "project-1", user_id: "player-1", role: "PLAYER", status: "active" },
+    { project_id: "project-1", user_id: "removed-1", role: "PLAYER", status: "removed" },
+  ];
+  const invites = [];
 
   const server = createServer({
     getThreadById: (threadId) => threads.find((thread) => thread.id === threadId),
@@ -84,6 +95,18 @@ async function withTestServer(handler) {
       thread.state = state;
       return { ...thread };
     },
+    createProjectMembership: (projectId, membership) => {
+      const created = { project_id: projectId, ...membership, status: "active" };
+      memberships.push(created);
+      return created;
+    },
+    createProjectInvite: (projectId, invite) => {
+      const created = { id: `invite-${invites.length + 1}`, project_id: projectId, ...invite };
+      invites.push(created);
+      return created;
+    },
+    getProjectMembershipByUserId: (projectId, userId) =>
+      memberships.find((entry) => entry.project_id === projectId && entry.user_id === userId) ?? null,
   });
 
   await new Promise((resolve) => server.listen(0, resolve));
@@ -145,9 +168,11 @@ test("should return role-safe timeline payload output for PLAYER role", async ()
 
 test("should allow valid escalation transitions", async () => {
   await withTestServer(async ({ baseUrl }) => {
+    const headers = { "content-type": "application/json", "x-role": "GM", "x-user-id": "gm-1" };
+
     const escalateResponse = await fetch(`${baseUrl}/threads/thread-1`, {
       method: "PATCH",
-      headers: { "content-type": "application/json" },
+      headers,
       body: JSON.stringify({ state: "escalated" }),
     });
     const escalatedThread = await escalateResponse.json();
@@ -157,7 +182,7 @@ test("should allow valid escalation transitions", async () => {
 
     const resolveResponse = await fetch(`${baseUrl}/threads/thread-1`, {
       method: "PATCH",
-      headers: { "content-type": "application/json" },
+      headers,
       body: JSON.stringify({ state: "resolved" }),
     });
     const resolvedThread = await resolveResponse.json();
@@ -171,7 +196,7 @@ test("should reject invalid escalation transitions", async () => {
   await withTestServer(async ({ baseUrl }) => {
     const response = await fetch(`${baseUrl}/threads/thread-2`, {
       method: "PATCH",
-      headers: { "content-type": "application/json" },
+      headers: { "content-type": "application/json", "x-role": "GM", "x-user-id": "gm-1" },
       body: JSON.stringify({ state: "escalated" }),
     });
     const payload = await response.json();
@@ -179,5 +204,81 @@ test("should reject invalid escalation transitions", async () => {
     assert.equal(response.status, 400);
     assert.equal(payload.code, "INVALID_STATE_TRANSITION");
     assert.match(payload.error, /dormant -> escalated/);
+  });
+});
+
+test("should expose all write endpoints for projects, memberships, invites, and thread updates", async () => {
+  await withTestServer(async ({ baseUrl }) => {
+    const response = await fetch(`${baseUrl}/meta/write-endpoints`);
+    const payload = await response.json();
+
+    assert.equal(response.status, 200);
+    assert.deepEqual(payload.write_endpoints, [
+      { method: "PATCH", path: "/threads/:threadId", domain: "thread updates" },
+      { method: "POST", path: "/projects/:projectId/memberships", domain: "memberships" },
+      { method: "POST", path: "/projects/:projectId/invites", domain: "invites" },
+    ]);
+  });
+});
+
+test("should forbid removed member thread updates with consistent forbidden shape", async () => {
+  await withTestServer(async ({ baseUrl }) => {
+    const response = await fetch(`${baseUrl}/threads/thread-1`, {
+      method: "PATCH",
+      headers: { "content-type": "application/json", "x-role": "PLAYER", "x-user-id": "removed-1" },
+      body: JSON.stringify({ state: "escalated" }),
+    });
+    const payload = await response.json();
+
+    assert.equal(response.status, 403);
+    assert.deepEqual(payload, FORBIDDEN_ERROR);
+  });
+});
+
+test("should enforce helper role restrictions for invite and membership writes", async () => {
+  await withTestServer(async ({ baseUrl }) => {
+    const headers = { "content-type": "application/json", "x-role": "HELPER", "x-user-id": "helper-1" };
+
+    const inviteResponse = await fetch(`${baseUrl}/projects/project-1/invites`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ email: "new@helper.test", role: "PLAYER" }),
+    });
+    const invitePayload = await inviteResponse.json();
+
+    const membershipResponse = await fetch(`${baseUrl}/projects/project-1/memberships`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ user_id: "player-2", role: "PLAYER" }),
+    });
+    const membershipPayload = await membershipResponse.json();
+
+    assert.equal(inviteResponse.status, 403);
+    assert.deepEqual(invitePayload, FORBIDDEN_ERROR);
+    assert.equal(membershipResponse.status, 403);
+    assert.deepEqual(membershipPayload, FORBIDDEN_ERROR);
+  });
+});
+
+test("should reject role mismatch on invite and thread write actions", async () => {
+  await withTestServer(async ({ baseUrl }) => {
+    const inviteResponse = await fetch(`${baseUrl}/projects/project-1/invites`, {
+      method: "POST",
+      headers: { "content-type": "application/json", "x-role": "GM", "x-user-id": "player-1" },
+      body: JSON.stringify({ email: "new@campaign.test", role: "PLAYER" }),
+    });
+    const invitePayload = await inviteResponse.json();
+
+    const threadResponse = await fetch(`${baseUrl}/threads/thread-1`, {
+      method: "PATCH",
+      headers: { "content-type": "application/json", "x-role": "HELPER", "x-user-id": "player-1" },
+      body: JSON.stringify({ state: "escalated" }),
+    });
+    const threadPayload = await threadResponse.json();
+
+    assert.equal(inviteResponse.status, 403);
+    assert.deepEqual(invitePayload, FORBIDDEN_ERROR);
+    assert.equal(threadResponse.status, 403);
+    assert.deepEqual(threadPayload, FORBIDDEN_ERROR);
   });
 });
