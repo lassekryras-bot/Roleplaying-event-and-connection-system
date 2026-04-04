@@ -102,6 +102,123 @@ h2 {
   border-left: 4px solid #8158fb;
 }
 
+.timeline-shell {
+  display: grid;
+  gap: 1rem;
+}
+
+.timeline-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.timeline-controls {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.timeline-controls label {
+  min-width: 220px;
+}
+
+.timeline-surface {
+  position: relative;
+  min-height: 280px;
+  overflow: hidden;
+  transform-origin: top center;
+  transition: transform 140ms ease;
+}
+
+.time-axis {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: 118px;
+  border-top: 2px solid #2f7bff;
+  box-shadow: 0 0 12px rgba(47, 123, 255, 0.45);
+}
+
+.time-node {
+  position: absolute;
+  top: 104px;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #2f7bff;
+  background: #e8f0ff;
+  box-shadow: 0 0 10px rgba(47, 123, 255, 0.35);
+}
+
+.time-node span {
+  position: absolute;
+  white-space: nowrap;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #3858a5;
+  font-weight: 600;
+}
+
+.time-node.now {
+  box-shadow: 0 0 16px rgba(47, 123, 255, 0.7);
+  background: #d6e7ff;
+}
+
+.connection-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.connection-line {
+  stroke: #9cb1e0;
+  stroke-width: 0.35;
+  opacity: 0.6;
+}
+
+.thread-node {
+  position: absolute;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  border: 1px solid transparent;
+  padding: 0.28rem 0.58rem;
+  font-size: 0.78rem;
+  cursor: pointer;
+  color: #1d2236;
+  background: #fff6db;
+  box-shadow: 0 6px 16px rgba(23, 32, 69, 0.08);
+}
+
+.thread-node.high {
+  background: #ffd8d8;
+  border-color: #ef7272;
+}
+
+.thread-node.active {
+  background: #ffe8cc;
+  border-color: #ffac4b;
+}
+
+.thread-node.passive {
+  background: #fff3b0;
+  border-color: #d2af26;
+}
+
+.thread-node.selected {
+  outline: 2px solid #3f60b4;
+  outline-offset: 2px;
+}
+
+.thread-detail-panel h2 {
+  margin-bottom: 0.5rem;
+}
+
 .skeleton {
   border-radius: 8px;
   background: linear-gradient(90deg, #eceff8 25%, #dfe4ef 50%, #eceff8 75%);
