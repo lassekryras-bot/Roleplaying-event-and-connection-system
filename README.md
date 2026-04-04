@@ -54,7 +54,9 @@ To prevent regressions, configure your default branch protection rule to require
 - `backend`
 - `frontend`
 
-In GitHub: **Settings → Branches → Branch protection rules → Require status checks to pass before merging**, then select both checks.
+This repository also publishes a `merge-readiness` job that fails unless both checks passed, but branch protection should still explicitly require `backend` and `frontend` so both are visible and mandatory.
+
+In GitHub: **Settings → Branches → Branch protection rules → Require status checks to pass before merging**, then select `backend` and `frontend` (and optionally `merge-readiness`).
 
 ## Coverage in CI and local development
 
@@ -108,4 +110,4 @@ Policy details:
 - Any decrease fails CI unless explicit approval is provided by setting:
   - `COVERAGE_THRESHOLD_REDUCTION_APPROVED=true`
 
-Contributors should treat threshold reductions as exceptional and document the reason in the PR when approved.
+Contributors should treat threshold reductions as exceptional and document the reason in the PR when approved. **No coverage threshold decrease is allowed unless explicit approval is recorded in the PR.**
