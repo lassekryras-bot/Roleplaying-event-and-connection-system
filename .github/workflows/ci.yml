@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -23,23 +25,30 @@ jobs:
       - name: Install backend dependencies
         run: npm install
 
-      - name: Run backend verification commands
+      - name: Enforce coverage ratchet policy
+        run: npm run coverage:ratchet
+
+      - name: Run backend coverage checks
         run: |
           mkdir -p artifacts/backend
           set -o pipefail
-          npm run test:unit 2>&1 | tee artifacts/backend/unit-test.log
-          npm run test:integration 2>&1 | tee artifacts/backend/integration-test.log
+          npm run test:coverage 2>&1 | tee artifacts/backend/coverage.log
+
+      - name: Run backend behavior tests
+        run: |
+          mkdir -p artifacts/backend
+          set -o pipefail
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             npm run test:behavior:smoke 2>&1 | tee artifacts/backend/behavior-test.log
           else
             npm run test:behavior:full 2>&1 | tee artifacts/backend/behavior-test.log
           fi
 
-      - name: Upload backend test logs
+      - name: Upload backend artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: backend-test-logs
+          name: backend-artifacts
           path: artifacts/backend
           if-no-files-found: error
 
@@ -56,6 +65,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -67,8 +78,22 @@ jobs:
       - name: Install frontend dependencies
         run: npm --prefix web install
 
-      - name: Run canonical frontend test command
-        run: npm --prefix web run test
+      - name: Enforce coverage ratchet policy
+        run: npm run coverage:ratchet
+
+      - name: Run frontend coverage checks
+        run: |
+          mkdir -p artifacts/frontend
+          set -o pipefail
+          npm --prefix web run test:coverage 2>&1 | tee artifacts/frontend/coverage.log
 
       - name: Run canonical frontend build command
         run: npm --prefix web run build
+
+      - name: Upload frontend artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-artifacts
+          path: artifacts/frontend
+          if-no-files-found: error

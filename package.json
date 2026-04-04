@@ -10,7 +10,9 @@
     "test:integration": "node --test \"tests/integration/**/*.test.js\"",
     "test:behavior": "node tests/behavior/run-behavior-tests.js",
     "test:behavior:smoke": "BEHAVIOR_TAGS=\"@smoke\" node tests/behavior/run-behavior-tests.js",
-    "test:behavior:full": "BEHAVIOR_TAGS=\"@full\" node tests/behavior/run-behavior-tests.js"
+    "test:behavior:full": "BEHAVIOR_TAGS=\"@full\" node tests/behavior/run-behavior-tests.js",
+    "test:coverage": "node scripts/run-backend-coverage.mjs",
+    "coverage:ratchet": "node scripts/check-coverage-ratchet.mjs"
   },
   "engines": {
     "node": ">=20"
