@@ -1,6 +1,6 @@
 import http from "node:http";
 
-import { filterThreadForRole } from "../visibility/filterThreadForRole.js";
+import { sanitizeVisibilityPayloadForRole } from "../visibility/visibilityPolicy.js";
 import { sortEventsForTimeline } from "../timeline/sortEvents.js";
 
 function sendJson(response, statusCode, payload) {
@@ -40,7 +40,7 @@ export function createServer({ getThreadById, listThreads, listEvents }) {
 
       const threads = listThreads();
       try {
-        const filteredThreads = threads.map((thread) => filterThreadForRole(thread, role));
+        const filteredThreads = sanitizeVisibilityPayloadForRole(threads, role);
         sendJson(response, 200, filteredThreads);
         return;
       } catch (error) {
@@ -55,9 +55,20 @@ export function createServer({ getThreadById, listThreads, listEvents }) {
         return;
       }
 
-      const timelineEvents = sortEventsForTimeline(listEvents());
-      sendJson(response, 200, timelineEvents);
-      return;
+      if (!role) {
+        sendJson(response, 401, { error: "role header is required" });
+        return;
+      }
+
+      try {
+        const timelineEvents = sortEventsForTimeline(listEvents());
+        const filteredTimelineEvents = sanitizeVisibilityPayloadForRole(timelineEvents, role);
+        sendJson(response, 200, filteredTimelineEvents);
+        return;
+      } catch (error) {
+        sendJson(response, 400, { error: error.message, code: "UNSUPPORTED_ROLE" });
+        return;
+      }
     }
 
     if (request.method === "GET" && threadDetailMatch) {
@@ -75,7 +86,7 @@ export function createServer({ getThreadById, listThreads, listEvents }) {
       }
 
       try {
-        const filteredThread = filterThreadForRole(thread, role);
+        const filteredThread = sanitizeVisibilityPayloadForRole(thread, role);
         sendJson(response, 200, filteredThread);
         return;
       } catch (error) {

@@ -135,7 +135,9 @@ test("should return health endpoint status on GET /health", async () => {
 
 test("should return sorted timeline events on GET /timeline/events", async () => {
   await withTestServer(async ({ baseUrl }) => {
-    const response = await fetch(`${baseUrl}/timeline/events`);
+    const response = await fetch(`${baseUrl}/timeline/events`, {
+      headers: { "x-role": "PLAYER" },
+    });
     const payload = await response.json();
 
     assert.equal(response.status, 200);
