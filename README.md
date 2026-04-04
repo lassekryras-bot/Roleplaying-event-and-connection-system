@@ -34,6 +34,18 @@ A separate Node API MVP still exists under `src/` and can be started with:
 npm start
 ```
 
+### MVP backend endpoints (discoverable routes)
+
+- `GET /projects` — list projects available to the authenticated role.
+- `GET /memberships?project_id=<id>&user_id=<id>` — list memberships (supports optional filtering).
+- `POST /invites` — create an invite using `{ project_id, email, role }`.
+- Existing write routes are also available under project-scoped paths:
+  - `POST /projects/:projectId/memberships`
+  - `POST /projects/:projectId/invites`
+
+Role expectations from the architecture baseline are enforced in tests:
+- Invite writes: `GM` and `HELPER` allowed, `PLAYER` denied.
+
 ## Backend test layers
 
 Backend tests are split into three layers with dedicated commands:
@@ -44,8 +56,16 @@ Backend tests are split into three layers with dedicated commands:
   - Command: `npm run test:integration`
 - **Behavior tests** (`tests/behavior/**`): higher-level scenario coverage driven by behavior test scripts.
   - Command: `npm run test:behavior`
+- **Contract tests** (`tests/contract/**/*.test.js`): API contract checks for status codes, payload shape, and auth guarantees.
+  - Command: `npm run test:contract`
 
 Use `npm test` to run all backend layers in deterministic order: unit → integration → behavior.
+
+For smoke-only behavior coverage (including invite flow smoke scenarios), run:
+
+```bash
+npm run test:behavior:smoke
+```
 
 ## Branch protection guidance
 

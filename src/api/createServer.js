@@ -11,6 +11,10 @@ function sendJson(response, statusCode, payload) {
   response.end(JSON.stringify(payload));
 }
 
+function sendError(response, statusCode, code, error) {
+  sendJson(response, statusCode, { code, error });
+}
+
 function parseJsonBody(request) {
   return new Promise((resolve, reject) => {
     let rawBody = "";
@@ -39,6 +43,8 @@ function parseJsonBody(request) {
 export function createServer({
   getThreadById,
   listThreads,
+  listProjects,
+  listMemberships,
   listEvents,
   saveThreadState,
   createProjectMembership,
@@ -84,6 +90,72 @@ export function createServer({
       }
     }
 
+    if (request.method === "GET" && url.pathname === "/projects") {
+      if (typeof listProjects !== "function") {
+        sendError(response, 501, "NOT_IMPLEMENTED", "projects endpoint not implemented");
+        return;
+      }
+
+      const guardResult = requireAccess(accessContext);
+      if (!guardResult.allowed) {
+        sendJson(response, guardResult.status, guardResult.payload);
+        return;
+      }
+
+      sendJson(response, 200, listProjects());
+      return;
+    }
+
+    if (request.method === "GET" && url.pathname === "/memberships") {
+      if (typeof listMemberships !== "function") {
+        sendError(response, 501, "NOT_IMPLEMENTED", "memberships endpoint not implemented");
+        return;
+      }
+
+      const guardResult = requireAccess(accessContext);
+      if (!guardResult.allowed) {
+        sendJson(response, guardResult.status, guardResult.payload);
+        return;
+      }
+
+      const projectId = url.searchParams.get("project_id") ?? undefined;
+      const userId = url.searchParams.get("user_id") ?? undefined;
+      const memberships = listMemberships({ projectId, userId });
+      sendJson(response, 200, memberships);
+      return;
+    }
+
+    if (request.method === "POST" && url.pathname === "/invites") {
+      if (typeof createProjectInvite !== "function") {
+        sendError(response, 501, "NOT_IMPLEMENTED", "invites endpoint not implemented");
+        return;
+      }
+
+      let body;
+      try {
+        body = await parseJsonBody(request);
+      } catch {
+        sendError(response, 400, "INVALID_JSON", "invalid JSON body");
+        return;
+      }
+
+      if (typeof body.project_id !== "string" || body.project_id.trim().length === 0) {
+        sendError(response, 400, "PROJECT_ID_REQUIRED", "project_id is required");
+        return;
+      }
+
+      const projectId = body.project_id.trim();
+      const guardResult = requireAccess(accessContext, { allowRoles: ["GM", "HELPER"], projectId });
+      if (!guardResult.allowed) {
+        sendJson(response, guardResult.status, guardResult.payload);
+        return;
+      }
+
+      const invite = createProjectInvite(projectId, body);
+      sendJson(response, 201, invite);
+      return;
+    }
+
     if (request.method === "GET" && url.pathname === "/timeline/events") {
       if (typeof listEvents !== "function") {
         sendJson(response, 501, { error: "timeline endpoint not implemented" });
@@ -114,7 +186,7 @@ export function createServer({
       }
 
       const projectId = decodeURIComponent(projectMembershipMatch[1]);
-      const guardResult = requireAccess(accessContext, { allowRoles: ["GM"], projectId });
+      const guardResult = requireAccess(accessContext, { allowRoles: ["GM", "HELPER"], projectId });
       if (!guardResult.allowed) {
         sendJson(response, guardResult.status, guardResult.payload);
         return;
@@ -133,13 +205,19 @@ export function createServer({
       }
 
       const projectId = decodeURIComponent(projectInviteMatch[1]);
-      const guardResult = requireAccess(accessContext, { allowRoles: ["GM"], projectId });
+      const guardResult = requireAccess(accessContext, { allowRoles: ["GM", "HELPER"], projectId });
       if (!guardResult.allowed) {
         sendJson(response, guardResult.status, guardResult.payload);
         return;
       }
 
-      const body = await parseJsonBody(request);
+      let body;
+      try {
+        body = await parseJsonBody(request);
+      } catch {
+        sendError(response, 400, "INVALID_JSON", "invalid JSON body");
+        return;
+      }
       const invite = createProjectInvite(projectId, body);
       sendJson(response, 201, invite);
       return;

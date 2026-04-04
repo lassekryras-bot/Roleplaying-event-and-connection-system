@@ -235,7 +235,7 @@ test("should forbid removed member thread updates with consistent forbidden shap
   });
 });
 
-test("should enforce helper role restrictions for invite and membership writes", async () => {
+test("should allow helper role for invite and membership writes", async () => {
   await withTestServer(async ({ baseUrl }) => {
     const headers = { "content-type": "application/json", "x-role": "HELPER", "x-user-id": "helper-1" };
 
@@ -253,10 +253,10 @@ test("should enforce helper role restrictions for invite and membership writes",
     });
     const membershipPayload = await membershipResponse.json();
 
-    assert.equal(inviteResponse.status, 403);
-    assert.deepEqual(invitePayload, FORBIDDEN_ERROR);
-    assert.equal(membershipResponse.status, 403);
-    assert.deepEqual(membershipPayload, FORBIDDEN_ERROR);
+    assert.equal(inviteResponse.status, 201);
+    assert.equal(invitePayload.email, "new@helper.test");
+    assert.equal(membershipResponse.status, 201);
+    assert.equal(membershipPayload.user_id, "player-2");
   });
 });
 

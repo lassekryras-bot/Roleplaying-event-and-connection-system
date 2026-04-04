@@ -5,11 +5,13 @@ import process from "node:process";
 import {
   afterScenario,
   beforeScenario,
-  steps,
+  steps as threadVisibilitySteps,
 } from "./steps/thread-visibility.steps.js";
+import { steps as inviteFlowSteps } from "./steps/invite-flow.steps.js";
 
-const featurePath = path.resolve("tests/behavior/thread-visibility.feature");
+const featureDir = path.resolve("tests/behavior");
 const reportDir = path.resolve("artifacts/behavior");
+const steps = new Map([...threadVisibilitySteps, ...inviteFlowSteps]);
 
 function parseFeature(content) {
   const scenarios = [];
@@ -128,8 +130,16 @@ async function writeReports(results) {
 }
 
 async function run() {
-  const featureContent = await fs.readFile(featurePath, "utf8");
-  const scenarios = parseFeature(featureContent);
+  const entries = await fs.readdir(featureDir, { withFileTypes: true });
+  const featureFiles = entries
+    .filter((entry) => entry.isFile() && entry.name.endsWith(".feature"))
+    .map((entry) => path.join(featureDir, entry.name))
+    .sort((a, b) => a.localeCompare(b));
+
+  const parsedScenarios = await Promise.all(
+    featureFiles.map(async (featurePath) => parseFeature(await fs.readFile(featurePath, "utf8"))),
+  );
+  const scenarios = parsedScenarios.flat();
   const selectedScenarios = scenarios.filter((scenario) =>
     evaluateTagExpression(scenario.tags, process.env.BEHAVIOR_TAGS?.trim()),
   );

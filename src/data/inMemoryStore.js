@@ -17,9 +17,18 @@ const threads = [
   },
 ];
 
+const projects = [
+  {
+    id: "project-1",
+    name: "Harbor of Whispers",
+    status: "active",
+  },
+];
+
 const memberships = [
   { project_id: "project-1", user_id: "gm-1", role: "GM", status: "active" },
   { project_id: "project-1", user_id: "helper-1", role: "HELPER", status: "active" },
+  { project_id: "project-1", user_id: "player-1", role: "PLAYER", status: "active" },
 ];
 
 const invites = [];
@@ -53,8 +62,26 @@ export function listThreads() {
   return threads.map((thread) => ({ ...thread }));
 }
 
+export function listProjects() {
+  return projects.map((project) => ({ ...project }));
+}
+
 export function listEvents() {
   return events.map((event) => ({ ...event }));
+}
+
+export function listMemberships({ projectId, userId } = {}) {
+  return memberships
+    .filter((membership) => {
+      if (projectId && membership.project_id !== projectId) {
+        return false;
+      }
+      if (userId && membership.user_id !== userId) {
+        return false;
+      }
+      return true;
+    })
+    .map((membership) => ({ ...membership }));
 }
 
 export function updateThreadState(threadId, newState) {
