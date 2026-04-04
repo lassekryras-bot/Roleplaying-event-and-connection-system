@@ -24,6 +24,7 @@ npm --prefix web run test
 
 - `npm --prefix web run lint`
 - `npm --prefix web run typecheck`
+- `npm --prefix web run test:unit`
 
 ## Backend API (separate from frontend)
 
@@ -54,3 +55,57 @@ To prevent regressions, configure your default branch protection rule to require
 - `frontend`
 
 In GitHub: **Settings → Branches → Branch protection rules → Require status checks to pass before merging**, then select both checks.
+
+## Coverage in CI and local development
+
+Coverage is enforced for both stacks in CI, and CI fails when thresholds are missed.
+
+### Backend (Node API)
+
+Run locally:
+
+```bash
+npm run test:coverage
+```
+
+What this does:
+
+- Prints a concise backend coverage summary in logs.
+- Emits raw V8 coverage artifacts under `artifacts/backend/v8-coverage` for CI inspection.
+- Enforces thresholds from `coverage-thresholds.json` for:
+  - Global backend coverage.
+  - Key files: `src/api/createServer.js` and `src/visibility/filterThreadForRole.js`.
+
+If a threshold is missed, the command exits non-zero and prints each failed metric.
+
+### Frontend (Next.js app)
+
+Run locally:
+
+```bash
+npm --prefix web run test:coverage
+```
+
+What this does:
+
+- Runs Vitest with V8 coverage.
+- Generates reports under `artifacts/frontend/coverage` (`text-summary`, `json-summary`, and `lcov`).
+- Enforces global thresholds and key-file thresholds (including `src/components/security/VisibilityGuard.tsx` and `src/app/page.tsx`) from `coverage-thresholds.json`.
+
+### Ratcheting policy
+
+Coverage thresholds are ratcheted: they can stay the same or increase, but must not be lowered without explicit approval.
+
+Run locally:
+
+```bash
+npm run coverage:ratchet
+```
+
+Policy details:
+
+- The ratchet check compares `coverage-thresholds.json` against the baseline (PR base branch in CI, previous commit locally).
+- Any decrease fails CI unless explicit approval is provided by setting:
+  - `COVERAGE_THRESHOLD_REDUCTION_APPROVED=true`
+
+Contributors should treat threshold reductions as exceptional and document the reason in the PR when approved.
