@@ -205,9 +205,10 @@ Required test layers:
   - Player view does not expose GM Truth
 
 Test specification conventions (required):
-- Integration and behavior tests must be written in **Cucumber/Gherkin style**.
+- Unit and low-level contract checks remain in **node:test**.
+- High-level integration narratives must run as **Gherkin-compatible scenarios**.
 - Scenarios should use explicit **Given / When / Then** steps.
-- Test/scenario names must start with **`should...`** (for example: `should hide GM truth from player endpoints`).
+- Integration and behavior scenario names must start with **`should...`** (for example: `should hide GM truth from player endpoints`).
 
 ### Example Cucumber scenarios
 ```gherkin
