@@ -5,8 +5,7 @@
 The production frontend lives in **`/web/src/app`** (Next.js App Router).
 
 - Canonical routes: `web/src/app/**`
-- Deprecated/archived legacy routes: `archive/root-next-app/app/**`
-- Deprecated/removed Vite entrypoint: `web/src/main.tsx` (removed)
+- Canonical package scripts: `web/package.json`
 
 ## Canonical frontend commands
 
@@ -19,6 +18,14 @@ npm --prefix web run build
 npm --prefix web run start
 npm --prefix web run test
 ```
+
+## Do not use root static prototype
+
+The repository root `index.html` + `app.js` files are an archived static prototype kept only for historical reference.
+
+- Do **not** run frontend development from repository root static files.
+- Use `npm --prefix web run dev` for local frontend development.
+- Use `npm --prefix web run build` for production build validation.
 
 `test` is the canonical CI check command for the frontend and currently runs:
 
