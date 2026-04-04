@@ -72,6 +72,41 @@ test("should reject unsupported role on GET /threads/:id", async () => {
 
     assert.equal(response.status, 400);
     assert.match(payload.error, /Unsupported role/);
+    assert.equal(payload.code, "UNSUPPORTED_ROLE");
+  });
+});
+
+test("should return 401 when role header is missing on GET /threads/:id", async () => {
+  await withTestServer(async ({ baseUrl }) => {
+    const response = await fetch(`${baseUrl}/threads/thread-1`);
+    const payload = await response.json();
+
+    assert.equal(response.status, 401);
+    assert.equal(payload.error, "role header is required");
+  });
+});
+
+test("should normalize lowercase role value on GET /threads/:id", async () => {
+  await withTestServer(async ({ baseUrl }) => {
+    const response = await fetch(`${baseUrl}/threads/thread-1`, {
+      headers: { "x-role": " player " },
+    });
+    const payload = await response.json();
+
+    assert.equal(response.status, 200);
+    assert.equal(payload.gm_truth, undefined);
+  });
+});
+
+test("should return stable unsupported-role code for malformed role value", async () => {
+  await withTestServer(async ({ baseUrl }) => {
+    const response = await fetch(`${baseUrl}/threads/thread-1`, {
+      headers: { "x-role": " gm!!! " },
+    });
+    const payload = await response.json();
+
+    assert.equal(response.status, 400);
+    assert.equal(payload.code, "UNSUPPORTED_ROLE");
   });
 });
 

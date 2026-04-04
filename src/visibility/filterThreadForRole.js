@@ -12,10 +12,6 @@ export function filterThreadForRole(thread, role) {
     throw new Error("thread is required");
   }
 
-  if (!role || typeof role !== "string") {
-    throw new Error("role is required");
-  }
-
   if (role === MembershipRole.GM || role === MembershipRole.HELPER_GM) {
     return { ...thread };
   }
