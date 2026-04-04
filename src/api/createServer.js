@@ -8,6 +8,15 @@ function sendJson(response, statusCode, payload) {
   response.end(JSON.stringify(payload));
 }
 
+function normalizeRole(roleHeaderValue) {
+  if (typeof roleHeaderValue !== "string") {
+    return null;
+  }
+
+  const normalizedRole = roleHeaderValue.trim().toUpperCase();
+  return normalizedRole.length > 0 ? normalizedRole : null;
+}
+
 export function createServer({ getThreadById, listThreads, listEvents }) {
   if (typeof getThreadById !== "function" || typeof listThreads !== "function") {
     throw new Error("getThreadById and listThreads functions are required");
@@ -16,7 +25,7 @@ export function createServer({ getThreadById, listThreads, listEvents }) {
   return http.createServer((request, response) => {
     const url = new URL(request.url, "http://localhost");
     const threadDetailMatch = /^\/threads\/([^/]+)$/.exec(url.pathname);
-    const role = request.headers["x-role"];
+    const role = normalizeRole(request.headers["x-role"]);
 
     if (request.method === "GET" && url.pathname === "/health") {
       sendJson(response, 200, { status: "ok" });
@@ -24,13 +33,18 @@ export function createServer({ getThreadById, listThreads, listEvents }) {
     }
 
     if (request.method === "GET" && url.pathname === "/threads") {
+      if (!role) {
+        sendJson(response, 401, { error: "role header is required" });
+        return;
+      }
+
       const threads = listThreads();
       try {
         const filteredThreads = threads.map((thread) => filterThreadForRole(thread, role));
         sendJson(response, 200, filteredThreads);
         return;
       } catch (error) {
-        sendJson(response, 400, { error: error.message });
+        sendJson(response, 400, { error: error.message, code: "UNSUPPORTED_ROLE" });
         return;
       }
     }
@@ -47,6 +61,11 @@ export function createServer({ getThreadById, listThreads, listEvents }) {
     }
 
     if (request.method === "GET" && threadDetailMatch) {
+      if (!role) {
+        sendJson(response, 401, { error: "role header is required" });
+        return;
+      }
+
       const threadId = decodeURIComponent(threadDetailMatch[1]);
       const thread = getThreadById(threadId);
 
@@ -60,7 +79,7 @@ export function createServer({ getThreadById, listThreads, listEvents }) {
         sendJson(response, 200, filteredThread);
         return;
       } catch (error) {
-        sendJson(response, 400, { error: error.message });
+        sendJson(response, 400, { error: error.message, code: "UNSUPPORTED_ROLE" });
         return;
       }
     }
