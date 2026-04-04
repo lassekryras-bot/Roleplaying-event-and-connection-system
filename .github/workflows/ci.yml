@@ -5,18 +5,11 @@ on:
   pull_request:
 
 jobs:
-  validate-package-json:
+  frontend:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Validate root package.json
-        run: node -e "JSON.parse(require('node:fs').readFileSync('package.json', 'utf8')); console.log('package.json is valid JSON')"
-
-      - name: Validate web/package.json and required CI scripts
-        run: |
-          node -e "const fs=require('node:fs'); const pkg=JSON.parse(fs.readFileSync('web/package.json','utf8')); const required=['build','lint','typecheck']; const missing=required.filter((name)=>!pkg.scripts||!pkg.scripts[name]); if(missing.length){console.error('Missing scripts required by CI:', missing.join(', ')); process.exit(1);} console.log('web/package.json is valid JSON and all CI-required scripts exist:', required.join(', '));"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -25,8 +18,11 @@ jobs:
           cache: npm
           cache-dependency-path: web/package.json
 
-      - name: Install web dependencies
+      - name: Install frontend dependencies
         run: npm --prefix web install
 
-      - name: Type check web app (tsc --noEmit)
-        run: npm --prefix web run typecheck
+      - name: Run canonical frontend test command
+        run: npm --prefix web run test
+
+      - name: Run canonical frontend build command
+        run: npm --prefix web run build
