@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "start": "node src/server.js",
-    "test": "npm run test:unit && npm run test:behavior",
-    "test:unit": "node --test",
+    "test": "npm run test:unit && npm run test:integration && npm run test:behavior",
+    "test:unit": "node --test \"tests/unit/**/*.test.js\"",
+    "test:integration": "node --test \"tests/integration/**/*.test.js\"",
     "test:behavior": "node tests/behavior/run-behavior-tests.js"
   },
   "engines": {
