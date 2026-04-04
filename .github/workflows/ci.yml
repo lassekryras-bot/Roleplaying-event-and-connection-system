@@ -17,3 +17,16 @@ jobs:
       - name: Validate web/package.json and required CI scripts
         run: |
           node -e "const fs=require('node:fs'); const pkg=JSON.parse(fs.readFileSync('web/package.json','utf8')); const required=['build','lint','typecheck']; const missing=required.filter((name)=>!pkg.scripts||!pkg.scripts[name]); if(missing.length){console.error('Missing scripts required by CI:', missing.join(', ')); process.exit(1);} console.log('web/package.json is valid JSON and all CI-required scripts exist:', required.join(', '));"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: web/package.json
+
+      - name: Install web dependencies
+        run: npm --prefix web install
+
+      - name: Type check web app (tsc --noEmit)
+        run: npm --prefix web run typecheck
