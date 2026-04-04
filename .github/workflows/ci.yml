@@ -25,7 +25,7 @@ jobs:
         run: |
           mkdir -p artifacts/backend
           set -o pipefail
-          npm run test 2>&1 | tee artifacts/backend/backend-test.log
+          npm test 2>&1 | tee artifacts/backend/backend-test.log
 
       - name: Upload backend test logs
         if: always()
