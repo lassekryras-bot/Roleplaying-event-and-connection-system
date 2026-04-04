@@ -47,3 +47,15 @@ export function listThreads() {
 export function listEvents() {
   return events.map((event) => ({ ...event }));
 }
+
+
+export function updateThreadState(threadId, newState) {
+  const thread = threads.find((entry) => entry.id === threadId);
+
+  if (!thread) {
+    return null;
+  }
+
+  thread.state = newState;
+  return { ...thread };
+}
