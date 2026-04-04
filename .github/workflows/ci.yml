@@ -3,6 +3,8 @@ name: CI
 on:
   push:
   pull_request:
+  schedule:
+    - cron: "0 5 * * *"
 
 jobs:
   backend:
@@ -25,7 +27,13 @@ jobs:
         run: |
           mkdir -p artifacts/backend
           set -o pipefail
-          npm test 2>&1 | tee artifacts/backend/backend-test.log
+          npm run test:unit 2>&1 | tee artifacts/backend/unit-test.log
+          npm run test:integration 2>&1 | tee artifacts/backend/integration-test.log
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            npm run test:behavior:smoke 2>&1 | tee artifacts/backend/behavior-test.log
+          else
+            npm run test:behavior:full 2>&1 | tee artifacts/backend/behavior-test.log
+          fi
 
       - name: Upload backend test logs
         if: always()
@@ -33,6 +41,14 @@ jobs:
         with:
           name: backend-test-logs
           path: artifacts/backend
+          if-no-files-found: error
+
+      - name: Upload behavior reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: behavior-test-reports
+          path: artifacts/behavior
           if-no-files-found: error
 
   frontend:
