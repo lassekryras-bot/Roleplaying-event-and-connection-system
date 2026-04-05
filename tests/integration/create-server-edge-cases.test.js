@@ -132,3 +132,83 @@ test("returns health and not-found responses", async () => {
     assert.deepEqual(await notFoundResponse.json(), { error: "not found" });
   });
 });
+
+test("handles auth login success and stable error responses", async () => {
+  await withServer({
+    authenticateUser: (username, password) => {
+      if (username === "player" && password === "secret") {
+        return { user_id: "player-1", username: "player", role: "PLAYER" };
+      }
+
+      return null;
+    },
+  }, async ({ baseUrl }) => {
+    const successfulLogin = await fetch(`${baseUrl}/auth/login`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ username: "player", password: "secret" }),
+    });
+    const invalidCredentials = await fetch(`${baseUrl}/auth/login`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ username: "player", password: "wrong" }),
+    });
+    const invalidJson = await fetch(`${baseUrl}/auth/login`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: "{ bad-json",
+    });
+    const invalidRequest = await fetch(`${baseUrl}/auth/login`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(["player", "secret"]),
+    });
+    const missingUsername = await fetch(`${baseUrl}/auth/login`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ password: "secret" }),
+    });
+    const missingPassword = await fetch(`${baseUrl}/auth/login`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ username: "player" }),
+    });
+
+    assert.equal(successfulLogin.status, 200);
+    assert.deepEqual(await successfulLogin.json(), {
+      user_id: "player-1",
+      username: "player",
+      role: "PLAYER",
+    });
+
+    assert.equal(invalidCredentials.status, 401);
+    assert.deepEqual(await invalidCredentials.json(), {
+      code: "INVALID_CREDENTIALS",
+      error: "invalid username or password",
+    });
+
+    assert.equal(invalidJson.status, 400);
+    assert.deepEqual(await invalidJson.json(), {
+      code: "INVALID_JSON",
+      error: "invalid JSON body",
+    });
+
+    assert.equal(invalidRequest.status, 400);
+    assert.deepEqual(await invalidRequest.json(), {
+      code: "INVALID_REQUEST",
+      error: "request body must be a JSON object",
+    });
+
+    assert.equal(missingUsername.status, 400);
+    assert.deepEqual(await missingUsername.json(), {
+      code: "USERNAME_REQUIRED",
+      error: "username is required",
+    });
+
+    assert.equal(missingPassword.status, 400);
+    assert.deepEqual(await missingPassword.json(), {
+      code: "PASSWORD_REQUIRED",
+      error: "password is required",
+    });
+  });
+});

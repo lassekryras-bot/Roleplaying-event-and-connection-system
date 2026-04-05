@@ -88,6 +88,21 @@ export function createServer({
         return;
       }
 
+      if (typeof body !== "object" || body === null || Array.isArray(body)) {
+        sendError(response, 400, "INVALID_REQUEST", "request body must be a JSON object");
+        return;
+      }
+
+      if (typeof body.username !== "string" || body.username.trim().length === 0) {
+        sendError(response, 400, "USERNAME_REQUIRED", "username is required");
+        return;
+      }
+
+      if (typeof body.password !== "string" || body.password.length === 0) {
+        sendError(response, 400, "PASSWORD_REQUIRED", "password is required");
+        return;
+      }
+
       const authenticatedUser = authenticateUser(body.username, body.password);
       if (!authenticatedUser) {
         sendError(response, 401, "INVALID_CREDENTIALS", "invalid username or password");
@@ -95,11 +110,9 @@ export function createServer({
       }
 
       sendJson(response, 200, {
-        user: {
-          id: authenticatedUser.id,
-          username: authenticatedUser.username,
-          role: authenticatedUser.role,
-        },
+        user_id: authenticatedUser.user_id ?? authenticatedUser.id,
+        username: authenticatedUser.username,
+        role: authenticatedUser.role,
       });
       return;
     }
