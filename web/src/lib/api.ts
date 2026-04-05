@@ -18,6 +18,12 @@ export type ThreadDetail = ThreadSummary & {
   }>;
 };
 
+export type AuthenticatedUser = {
+  id: string;
+  username: string;
+  role: string;
+};
+
 export type TimelineEvent = {
   id: string;
   type: string;
@@ -27,12 +33,18 @@ export type TimelineEvent = {
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:3001';
 
-async function apiRequest<T>(path: string, role: string): Promise<T> {
+async function apiRequest<T>(path: string, role: string, userId?: string): Promise<T> {
+  const headers: Record<string, string> = {
+    'content-type': 'application/json',
+    'x-role': role
+  };
+
+  if (userId && userId.trim().length > 0) {
+    headers['x-user-id'] = userId;
+  }
+
   const response = await fetch(`${API_BASE_URL}${path}`, {
-    headers: {
-      'content-type': 'application/json',
-      'x-role': role
-    },
+    headers,
     cache: 'no-store'
   });
 
@@ -44,8 +56,24 @@ async function apiRequest<T>(path: string, role: string): Promise<T> {
 }
 
 export const api = {
-  getHealth: (role: string) => apiRequest<{ status: string }>('/health', role),
-  getThreads: (role: string) => apiRequest<ThreadSummary[]>('/threads', role),
-  getThreadById: (id: string, role: string) => apiRequest<ThreadDetail>(`/threads/${id}`, role),
-  getTimelineEvents: (role: string) => apiRequest<TimelineEvent[]>('/timeline/events', role)
+  getHealth: (role: string, userId?: string) => apiRequest<{ status: string }>('/health', role, userId),
+  getThreads: (role: string, userId?: string) => apiRequest<ThreadSummary[]>('/threads', role, userId),
+  getThreadById: (id: string, role: string, userId?: string) => apiRequest<ThreadDetail>(`/threads/${id}`, role, userId),
+  getTimelineEvents: (role: string, userId?: string) => apiRequest<TimelineEvent[]>('/timeline/events', role, userId),
+  login: async (username: string, password: string) => {
+    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      cache: 'no-store',
+      body: JSON.stringify({ username, password })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Login failed (${response.status})`);
+    }
+
+    return response.json() as Promise<{ user: AuthenticatedUser }>;
+  }
 };

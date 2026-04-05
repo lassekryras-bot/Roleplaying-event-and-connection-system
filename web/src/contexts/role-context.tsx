@@ -3,34 +3,55 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import React from 'react';
 
-const DEFAULT_ROLE = 'player';
-
 type RoleContextValue = {
   role: string;
-  setRole: (role: string) => void;
+  username: string;
+  userId: string;
+  setSession: (session: { role: string; username: string; userId: string }) => void;
+};
+
+const DEFAULT_SESSION = {
+  role: 'player',
+  username: '',
+  userId: ''
 };
 
 const RoleContext = createContext<RoleContextValue | null>(null);
 
 export function RoleProvider({ children }: { children: React.ReactNode }) {
-  const [role, setRole] = useState<string>(DEFAULT_ROLE);
+  const [role, setRole] = useState<string>(DEFAULT_SESSION.role);
+  const [username, setUsername] = useState<string>(DEFAULT_SESSION.username);
+  const [userId, setUserId] = useState<string>(DEFAULT_SESSION.userId);
 
   useEffect(() => {
-    const stored = window.localStorage.getItem('mvp-role');
-    if (stored) {
-      setRole(stored);
+    const stored = window.localStorage.getItem('mvp-session');
+    if (!stored) {
+      return;
+    }
+
+    try {
+      const parsed = JSON.parse(stored) as Partial<typeof DEFAULT_SESSION>;
+      setRole(typeof parsed.role === 'string' ? parsed.role : DEFAULT_SESSION.role);
+      setUsername(typeof parsed.username === 'string' ? parsed.username : DEFAULT_SESSION.username);
+      setUserId(typeof parsed.userId === 'string' ? parsed.userId : DEFAULT_SESSION.userId);
+    } catch {
+      window.localStorage.removeItem('mvp-session');
     }
   }, []);
 
   const value = useMemo(
     () => ({
       role,
-      setRole: (nextRole: string) => {
-        setRole(nextRole);
-        window.localStorage.setItem('mvp-role', nextRole);
+      username,
+      userId,
+      setSession: (nextSession: { role: string; username: string; userId: string }) => {
+        setRole(nextSession.role);
+        setUsername(nextSession.username);
+        setUserId(nextSession.userId);
+        window.localStorage.setItem('mvp-session', JSON.stringify(nextSession));
       }
     }),
-    [role]
+    [role, username, userId]
   );
 
   return <RoleContext.Provider value={value}>{children}</RoleContext.Provider>;

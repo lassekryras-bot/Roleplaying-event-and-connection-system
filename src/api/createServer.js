@@ -50,6 +50,7 @@ export function createServer({
   createProjectMembership,
   createProjectInvite,
   getProjectMembershipByUserId,
+  authenticateUser,
 }) {
   if (typeof getThreadById !== "function" || typeof listThreads !== "function") {
     throw new Error("getThreadById and listThreads functions are required");
@@ -69,6 +70,37 @@ export function createServer({
 
     if (request.method === "GET" && url.pathname === "/meta/write-endpoints") {
       sendJson(response, 200, { write_endpoints: getWriteEndpoints() });
+      return;
+    }
+
+
+    if (request.method === "POST" && url.pathname === "/auth/login") {
+      if (typeof authenticateUser !== "function") {
+        sendError(response, 501, "NOT_IMPLEMENTED", "auth endpoint not implemented");
+        return;
+      }
+
+      let body;
+      try {
+        body = await parseJsonBody(request);
+      } catch {
+        sendError(response, 400, "INVALID_JSON", "invalid JSON body");
+        return;
+      }
+
+      const authenticatedUser = authenticateUser(body.username, body.password);
+      if (!authenticatedUser) {
+        sendError(response, 401, "INVALID_CREDENTIALS", "invalid username or password");
+        return;
+      }
+
+      sendJson(response, 200, {
+        user: {
+          id: authenticatedUser.id,
+          username: authenticatedUser.username,
+          role: authenticatedUser.role,
+        },
+      });
       return;
     }
 
