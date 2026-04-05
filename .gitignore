@@ -1,0 +1,7 @@
+# Prevent nested dependency installs from polluting git status
+node_modules/**/node_modules/
+web/node_modules/
+
+# Common local artifacts
+*.log
+.DS_Store
