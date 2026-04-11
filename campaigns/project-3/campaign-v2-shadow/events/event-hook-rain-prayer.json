@@ -1,0 +1,20 @@
+{
+  "id": "event-hook-rain-prayer",
+  "type": "event",
+  "title": "Rain Prayer Pact",
+  "summary": "The shrine keeper knows who promised safe passage during the last storm.",
+  "status": "available",
+  "eventType": "npc-meeting",
+  "notes": "Checks: Read the keeper's bargain Religion DC 15\n\nDiplomatic alternative future session.\n\nPriority: medium.\n\nLinked thread refs: Rain Pact.\n\nImported from gm-timeline hook hook-rain-prayer.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-cascade-shrine"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "session-cascade-parley"
+    }
+  ],
+  "createdEffectIds": []
+}

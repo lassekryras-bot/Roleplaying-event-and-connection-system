@@ -1,0 +1,14 @@
+{
+  "id": "location-cascade-shrine",
+  "type": "location",
+  "campaignId": "project-3",
+  "title": "Cascade Shrine",
+  "summary": "A rain-streaked shrine where quiet promises are safer than loud ones.",
+  "tags": [
+    "shrine",
+    "future",
+    "parley",
+    "legacy-place"
+  ],
+  "relations": []
+}

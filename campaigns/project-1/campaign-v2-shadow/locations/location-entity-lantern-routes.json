@@ -1,0 +1,13 @@
+{
+  "id": "location-entity-lantern-routes",
+  "type": "location",
+  "campaignId": "project-1",
+  "title": "Lantern Route Markers",
+  "summary": "A broker warns that blue lanterns mark safe routes and amber lanterns mark traps.",
+  "tags": [
+    "location",
+    "shared",
+    "legacy-entity"
+  ],
+  "relations": []
+}

@@ -1,0 +1,10 @@
+{
+  "id": "place-cascade-shrine",
+  "campaignId": "project-3",
+  "headline": "Cascade Shrine",
+  "description": "A rain-streaked shrine where quiet promises are safer than loud ones.",
+  "tags": ["shrine", "future", "parley"],
+  "hookIds": ["hook-rain-prayer"],
+  "notes": "Good when the table slows down and wants truth instead of force.",
+  "updatedAt": "2026-04-06T09:30:00.000Z"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "place-brass-docks",
+  "campaignId": "project-3",
+  "headline": "Brass Docks",
+  "description": "Fog, labor crews, and a berth where half the rumors begin.",
+  "tags": ["harbor", "rumor", "past"],
+  "readAloudSections": [
+    {
+      "id": "read-brass-docks-smoke",
+      "header": "Coal Smoke",
+      "trigger": "When the crew first steps onto the quay.",
+      "text": "Coal smoke hangs low over the water, and every rope sounds louder than it should.",
+      "completed": true
+    }
+  ],
+  "hookIds": ["hook-ghost-barge-rumor"],
+  "notes": "Good callback location if the dock code returns.",
+  "updatedAt": "2026-04-06T09:30:00.000Z"
+}

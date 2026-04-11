@@ -1,0 +1,10 @@
+{
+  "id": "place-gilt-hall",
+  "campaignId": "project-3",
+  "headline": "Gilt Hall",
+  "description": "A hired hall used for masked exchanges and private bids.",
+  "tags": ["auction", "nobles"],
+  "hookIds": ["hook-sable-auctioneer"],
+  "notes": "The room should feel expensive and temporary at the same time.",
+  "updatedAt": "2026-04-06T09:30:00.000Z"
+}

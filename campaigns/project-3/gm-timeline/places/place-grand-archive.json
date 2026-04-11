@@ -1,0 +1,19 @@
+{
+  "id": "place-grand-archive",
+  "campaignId": "project-3",
+  "headline": "Grand Archive",
+  "description": "A powder-dry archive where ledgers go missing in plain sight.",
+  "tags": ["records", "investigation", "current"],
+  "readAloudSections": [
+    {
+      "id": "read-archive-dust",
+      "header": "Dust and Brass",
+      "trigger": "When the archive scene opens.",
+      "text": "Dust coats the brass railings like ash, and every missing ledger leaves a cleaner stripe behind.",
+      "completed": false
+    }
+  ],
+  "hookIds": ["hook-sealed-stacks", "hook-librarian-debt"],
+  "notes": "Best used as a slow-pressure scene before the market spike.",
+  "updatedAt": "2026-04-06T09:30:00.000Z"
+}

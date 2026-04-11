@@ -1,0 +1,13 @@
+{
+  "id": "location-sparklock-bank",
+  "type": "location",
+  "campaignId": "project-3",
+  "title": "Sparklock Bank",
+  "summary": "A tight bank with nervous clerks, layered locks, and private notes.",
+  "tags": [
+    "bank",
+    "future",
+    "legacy-place"
+  ],
+  "relations": []
+}

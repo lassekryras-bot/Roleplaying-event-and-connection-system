@@ -1,0 +1,24 @@
+{
+  "id": "event-thread-test-35",
+  "type": "event",
+  "title": "Test Threat 35",
+  "summary": "Test threat 35 keeps pressure on the board for layout checks.",
+  "status": "active",
+  "eventType": "consequence-triggered",
+  "notes": "GM truth: Threat 35 is part of the seeded stress campaign used to inspect board density.\n\nLegacy thread state: escalated.\n\nLegacy timeline anchor: now.\n\nImported from legacy thread thread-test-35.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-entity-zone-5"
+    },
+    {
+      "type": "involves",
+      "targetId": "location-entity-pattern-anchor-5"
+    },
+    {
+      "type": "belongsTo",
+      "targetId": "effect-pattern-test-5"
+    }
+  ],
+  "createdEffectIds": []
+}

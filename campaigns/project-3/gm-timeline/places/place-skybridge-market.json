@@ -1,0 +1,19 @@
+{
+  "id": "place-skybridge-market",
+  "campaignId": "project-3",
+  "headline": "Skybridge Market",
+  "description": "A noisy market where couriers, brokers, and thieves overlap.",
+  "tags": ["market", "broker", "current"],
+  "readAloudSections": [
+    {
+      "id": "read-market-bells",
+      "header": "Bridge Bells",
+      "trigger": "When the scarf broker enters play.",
+      "text": "Bridge bells clatter above the stalls, and every head turns just late enough to miss the broker's first glance.",
+      "completed": false
+    }
+  ],
+  "hookIds": ["hook-scarf-broker", "hook-runner-ambush"],
+  "notes": "This is the fast board for the live session.",
+  "updatedAt": "2026-04-06T09:30:00.000Z"
+}

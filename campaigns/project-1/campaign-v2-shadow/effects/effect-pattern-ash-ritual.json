@@ -1,0 +1,12 @@
+{
+  "id": "effect-pattern-ash-ritual",
+  "type": "effect",
+  "title": "Ash and Ritual",
+  "summary": "The chapel fire, relic theft, and strange ash all point to ritual preparation close to the city center.",
+  "status": "active",
+  "effectType": "pressure",
+  "scope": "city",
+  "severity": "high",
+  "notes": "Legacy threads in this pattern: Ashes in the Chapel, Stolen Reliquary.\n\nImported from legacy pattern pattern-ash-ritual.",
+  "relations": []
+}

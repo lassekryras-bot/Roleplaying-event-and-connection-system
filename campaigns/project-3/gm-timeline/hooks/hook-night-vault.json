@@ -1,0 +1,21 @@
+{
+  "id": "hook-night-vault",
+  "campaignId": "project-3",
+  "placeId": "place-sparklock-bank",
+  "headline": "Night Vault Transfer",
+  "description": "A quiet transfer route moves the wrong papers through the right vault.",
+  "status": "available",
+  "priority": "high",
+  "checks": [
+    {
+      "id": "check-vault-route",
+      "label": "Read the transfer pattern",
+      "attribute": "Investigation",
+      "dc": 18,
+      "rollMode": "d20_button"
+    }
+  ],
+  "threadIds": ["thread-red-silt-route"],
+  "notes": "Future-session anchor for the bank path.",
+  "updatedAt": "2026-04-06T09:30:00.000Z"
+}

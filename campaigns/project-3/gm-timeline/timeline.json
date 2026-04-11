@@ -1,0 +1,17 @@
+{
+  "campaignId": "project-3",
+  "title": "Hundred Notes GM Timeline",
+  "currentSequence": 3,
+  "activeSessionId": "session-mornqar-ledger",
+  "sessionIds": [
+    "session-smoke-on-the-quay",
+    "session-gilt-mask-auction",
+    "session-mornqar-ledger",
+    "session-bank-of-ashen-notes",
+    "session-glassworks-ghost-route",
+    "session-cascade-parley",
+    "session-gunworks-blackmail"
+  ],
+  "notes": "Current play is orbiting the scarf ledger, the market broker, and the bank trail.",
+  "updatedAt": "2026-04-06T09:30:00.000Z"
+}

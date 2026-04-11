@@ -1,0 +1,21 @@
+{
+  "id": "hook-runner-ambush",
+  "campaignId": "project-3",
+  "placeId": "place-skybridge-market",
+  "headline": "Runner Ambush",
+  "description": "A courier disappears between stalls just before the scarf broker changes direction.",
+  "status": "available",
+  "priority": "high",
+  "checks": [
+    {
+      "id": "check-runner-chase",
+      "label": "Win the foot chase",
+      "attribute": "Athletics",
+      "dc": 17,
+      "rollMode": "d20_button"
+    }
+  ],
+  "threadIds": ["thread-red-silt-route"],
+  "notes": "Escalates the session into motion immediately.",
+  "updatedAt": "2026-04-06T09:30:00.000Z"
+}

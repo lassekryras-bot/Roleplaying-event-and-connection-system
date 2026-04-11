@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://living-campaign.dev/schemas/campaign/revision.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "projectId": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "actorUserId": {
+      "$ref": "./common.schema.json#/$defs/nonEmptyString"
+    },
+    "actorRole": {
+      "$ref": "./common.schema.json#/$defs/membershipRole"
+    },
+    "commandKind": {
+      "$ref": "./common.schema.json#/$defs/nonEmptyString"
+    },
+    "summary": {
+      "$ref": "./common.schema.json#/$defs/nonEmptyString"
+    },
+    "createdAt": {
+      "$ref": "./common.schema.json#/$defs/nonEmptyString"
+    },
+    "snapshot": {
+      "$ref": "./snapshot.schema.json"
+    }
+  },
+  "required": [
+    "id",
+    "projectId",
+    "actorUserId",
+    "actorRole",
+    "commandKind",
+    "summary",
+    "createdAt",
+    "snapshot"
+  ]
+}

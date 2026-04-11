@@ -1,0 +1,24 @@
+{
+  "id": "event-thread-test-21",
+  "type": "event",
+  "title": "Test Threat 21",
+  "summary": "Test threat 21 keeps pressure on the board for layout checks.",
+  "status": "available",
+  "eventType": "clue-found",
+  "notes": "Pressure note 21 needs attention.\n\nGM truth: Threat 21 is part of the seeded stress campaign used to inspect board density.\n\nLegacy thread state: active.\n\nLegacy timeline anchor: future_possible.\n\nImported from legacy thread thread-test-21.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-entity-zone-3"
+    },
+    {
+      "type": "involves",
+      "targetId": "location-entity-pattern-anchor-3"
+    },
+    {
+      "type": "belongsTo",
+      "targetId": "effect-pattern-test-3"
+    }
+  ],
+  "createdEffectIds": []
+}

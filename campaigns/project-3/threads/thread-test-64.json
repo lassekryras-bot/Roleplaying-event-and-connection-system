@@ -1,0 +1,15 @@
+{
+  "id": "thread-test-64",
+  "title": "Test Threat 64",
+  "state": "active",
+  "playerSummary": "Test threat 64 keeps pressure on the board for layout checks.",
+  "gmTruth": "Threat 64 is part of the seeded stress campaign used to inspect board density.",
+  "timelineAnchor": "past",
+  "linkedEntityIds": [
+    "entity-zone-4",
+    "entity-cross-14",
+    "entity-pattern-anchor-4",
+    "entity-cross-1"
+  ],
+  "playerVisible": true
+}

@@ -1,0 +1,7 @@
+{
+  "id": "thread-rain-pact",
+  "title": "Rain Pact",
+  "summary": "The shrine keeper knows who promised safe passage in the storm.",
+  "linkedHookIds": ["hook-rain-prayer"],
+  "playerVisible": false
+}

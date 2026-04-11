@@ -1,0 +1,13 @@
+{
+  "id": "location-sunspike-glassworks",
+  "type": "location",
+  "campaignId": "project-3",
+  "title": "Sunspike Glassworks",
+  "summary": "A furnace district where shipments vanish into heat and reflected light.",
+  "tags": [
+    "glassworks",
+    "future",
+    "legacy-place"
+  ],
+  "relations": []
+}

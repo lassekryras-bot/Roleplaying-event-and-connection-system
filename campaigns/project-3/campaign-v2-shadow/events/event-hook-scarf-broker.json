@@ -1,0 +1,24 @@
+{
+  "id": "event-hook-scarf-broker",
+  "type": "event",
+  "title": "Scarf Broker",
+  "summary": "A broker with Mornqar's scarf is moving too calmly for someone carrying a live lead.",
+  "status": "active",
+  "eventType": "clue-found",
+  "notes": "Checks: Keep the tail clean Stealth DC 18\n\nRead-aloud cues: Scarf in Motion - When the broker comes into view. - The scarf catches the wind before the broker turns, as though it knows who is watching first.\n\nThis is the live-play centerpiece hook for the MVP board.\n\nPriority: critical.\n\nLinked thread refs: Mornqar's Scarf.\n\nImported from gm-timeline hook hook-scarf-broker.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-skybridge-market"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "session-cascade-parley"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "session-mornqar-ledger"
+    }
+  ],
+  "createdEffectIds": []
+}

@@ -1,0 +1,15 @@
+{
+  "id": "location-state-gilt-hall-initial",
+  "type": "locationState",
+  "locationId": "location-gilt-hall",
+  "title": "Gilt Hall Before Visit",
+  "summary": "A hired hall used for masked exchanges and private bids.",
+  "status": "resolved",
+  "notes": "A hired hall used for masked exchanges and private bids.\n\nUsable as imported from gm-timeline place place-gilt-hall.\n\nPrep: The room should feel expensive and temporary at the same time.\n\nImported from gm-timeline place place-gilt-hall.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-sable-auctioneer"
+    }
+  ]
+}

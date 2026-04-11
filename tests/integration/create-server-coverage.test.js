@@ -64,7 +64,18 @@ test("covers success and validation branches for createServer", async () => {
     const writeEndpointsResponse = await fetch(`${baseUrl}/meta/write-endpoints`);
     assert.equal(writeEndpointsResponse.status, 200);
     const writeEndpointsPayload = await writeEndpointsResponse.json();
-    assert.equal(writeEndpointsPayload.write_endpoints.length, 3);
+    assert.equal(writeEndpointsPayload.write_endpoints.length, 6);
+    assert.deepEqual(
+      writeEndpointsPayload.write_endpoints.map((endpoint) => `${endpoint.method} ${endpoint.path}`),
+      [
+        "POST /projects/:projectId/commands",
+        "POST /projects/:projectId/history/undo",
+        "POST /projects/:projectId/history/redo",
+        "PATCH /threads/:threadId",
+        "POST /projects/:projectId/memberships",
+        "POST /projects/:projectId/invites",
+      ],
+    );
 
     const missingRoleThreadsResponse = await fetch(`${baseUrl}/threads`);
     assert.equal(missingRoleThreadsResponse.status, 401);

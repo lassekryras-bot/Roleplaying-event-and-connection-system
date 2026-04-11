@@ -1,0 +1,31 @@
+[
+  {
+    "userId": "player-1",
+    "username": "Adminplayer",
+    "displayName": "Pattern Scout",
+    "patternId": "pattern-test-1",
+    "perspectivePatternIds": [
+      "pattern-test-2",
+      "pattern-test-3"
+    ],
+    "perspectiveThreadIds": [
+      "thread-test-41",
+      "thread-test-52",
+      "thread-test-67"
+    ]
+  },
+  {
+    "userId": "player-3",
+    "username": "Adminplayer3",
+    "displayName": "Crosswind Watch",
+    "patternId": "pattern-test-4",
+    "perspectivePatternIds": [
+      "pattern-test-5"
+    ],
+    "perspectiveThreadIds": [
+      "thread-test-58",
+      "thread-test-73",
+      "thread-test-84"
+    ]
+  }
+]

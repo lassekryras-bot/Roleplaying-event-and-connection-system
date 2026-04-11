@@ -1,0 +1,13 @@
+{
+  "name": "campaign-v2-schema-package",
+  "version": "0.1.0",
+  "schemaDraft": "2020-12",
+  "entrypoints": {
+    "relation": "relation.schema.json",
+    "location": "location.schema.json",
+    "locationState": "locationState.schema.json",
+    "session": "session.schema.json",
+    "event": "event.schema.json",
+    "effect": "effect.schema.json"
+  }
+}

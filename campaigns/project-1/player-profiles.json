@@ -1,0 +1,29 @@
+[
+  {
+    "userId": "player-1",
+    "username": "Adminplayer",
+    "displayName": "Dockside Watch",
+    "patternId": "pattern-harbor-conspiracy",
+    "perspectivePatternIds": [
+      "pattern-lantern-routes"
+    ]
+  },
+  {
+    "userId": "player-2",
+    "username": "Adminplayer2",
+    "displayName": "Ash Circle",
+    "patternId": "pattern-ash-ritual",
+    "perspectivePatternIds": [
+      "pattern-harbor-conspiracy"
+    ]
+  },
+  {
+    "userId": "player-3",
+    "username": "Adminplayer3",
+    "displayName": "Lantern Route",
+    "patternId": "pattern-lantern-routes",
+    "perspectivePatternIds": [
+      "pattern-harbor-conspiracy"
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "id": "location-state-skybridge-market-initial",
+  "type": "locationState",
+  "locationId": "location-skybridge-market",
+  "title": "Skybridge Market Before Visit",
+  "summary": "A noisy market where couriers, brokers, and thieves overlap.",
+  "status": "active",
+  "notes": "A noisy market where couriers, brokers, and thieves overlap.\n\nRead-aloud cues: Bridge Bells - When the scarf broker enters play. - Bridge bells clatter above the stalls, and every head turns just late enough to miss the broker's first glance.\n\nUsable as imported from gm-timeline place place-skybridge-market.\n\nPrep: Read-aloud cues: Bridge Bells - When the scarf broker enters play. - Bridge bells clatter above the stalls, and every head turns just late enough to miss the broker's first glance.\n\nImported from gm-timeline place place-skybridge-market.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-runner-ambush"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-scarf-broker"
+    }
+  ]
+}

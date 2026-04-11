@@ -1,0 +1,13 @@
+{
+  "id": "location-entity-pattern-anchor-1",
+  "type": "location",
+  "campaignId": "project-3",
+  "title": "Pattern Anchor 1",
+  "summary": "Test threat 01 keeps pressure on the board for layout checks.",
+  "tags": [
+    "location",
+    "shared",
+    "legacy-entity"
+  ],
+  "relations": []
+}

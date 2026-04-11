@@ -1,0 +1,15 @@
+{
+  "id": "location-state-entity-river-ferry-initial",
+  "type": "locationState",
+  "locationId": "location-entity-river-ferry",
+  "title": "River Ferry Crossing Before Visit",
+  "summary": "Boat crews repeat warning phrases before any official signal reaches the river crossing.",
+  "status": "resolved",
+  "notes": "Related legacy threads: River Static.\n\nReferenced by 1 legacy thread.\n\nImported from legacy linked entity entity-river-ferry.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-river-static"
+    }
+  ]
+}

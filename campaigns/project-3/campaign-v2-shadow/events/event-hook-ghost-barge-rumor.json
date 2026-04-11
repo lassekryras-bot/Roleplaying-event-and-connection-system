@@ -1,0 +1,20 @@
+{
+  "id": "event-hook-ghost-barge-rumor",
+  "type": "event",
+  "title": "Ghost Barge Rumor",
+  "summary": "Dockhands keep swearing the same lantern code means the barge is back.",
+  "status": "resolved",
+  "eventType": "clue-found",
+  "notes": "Checks: Read the dockhands Society DC 15\n\nAlready paid off in play, but useful as connective tissue.\n\nPriority: medium.\n\nLinked thread refs: Brass Ghost Barge.\n\nImported from gm-timeline hook hook-ghost-barge-rumor.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-brass-docks"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "session-smoke-on-the-quay"
+    }
+  ],
+  "createdEffectIds": []
+}

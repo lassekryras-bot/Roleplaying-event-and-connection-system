@@ -1,0 +1,15 @@
+{
+  "id": "thread-test-88",
+  "title": "Test Threat 88",
+  "state": "active",
+  "playerSummary": "Test threat 88 keeps pressure on the board for layout checks.",
+  "gmTruth": "Threat 88 is part of the seeded stress campaign used to inspect board density.",
+  "timelineAnchor": "past",
+  "linkedEntityIds": [
+    "entity-zone-4",
+    "entity-cross-11",
+    "entity-pattern-anchor-2",
+    "entity-cross-6"
+  ],
+  "playerVisible": true
+}

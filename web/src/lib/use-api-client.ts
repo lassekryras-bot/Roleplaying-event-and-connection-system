@@ -1,19 +1,39 @@
 'use client';
 
-import { useRole } from '@/contexts/role-context';
-import { api } from '@/lib/api';
+import { useMemo } from 'react';
+
+import { useAuth } from '@/contexts/auth-context';
+import { api, normalizeRoleForRequest } from '@/lib/api';
 import { normalizeUsername } from '@/lib/auth';
 
 export function useApiClient() {
-  const { role, userId } = useRole();
+  const { role, userId } = useAuth();
+  const authenticatedRequest = useMemo(
+    () => ({
+      role: normalizeRoleForRequest(role),
+      userId,
+    }),
+    [role, userId],
+  );
 
-  return {
-    role,
-    userId,
-    getHealth: () => api.getHealth(role, userId),
-    getThreads: () => api.getThreads(role, userId),
-    getThreadById: (id: string) => api.getThreadById(id, role, userId),
-    getTimelineEvents: () => api.getTimelineEvents(role, userId),
-    login: (username: string, password: string) => api.login(normalizeUsername(username), password)
-  };
+  return useMemo(
+    () => ({
+      role,
+      userId,
+      getHealth: () => api.getHealth(authenticatedRequest),
+      getProjects: () => api.getProjects(authenticatedRequest),
+      getProjectGraph: (id: string, view: 'gm' | 'player', playerUserId?: string) =>
+        api.getProjectGraph(id, view, authenticatedRequest, playerUserId),
+      runProjectCommand: (projectId: string, command: Parameters<typeof api.runProjectCommand>[1]) =>
+        api.runProjectCommand(projectId, command, authenticatedRequest),
+      getProjectHistory: (projectId: string) => api.getProjectHistory(projectId, authenticatedRequest),
+      undoProjectHistory: (projectId: string) => api.undoProjectHistory(projectId, authenticatedRequest),
+      redoProjectHistory: (projectId: string) => api.redoProjectHistory(projectId, authenticatedRequest),
+      getThreads: () => api.getThreads(authenticatedRequest),
+      getThreadById: (id: string) => api.getThreadById(id, authenticatedRequest),
+      getTimelineEvents: () => api.getTimelineEvents(authenticatedRequest),
+      login: (username: string, password: string) => api.login(normalizeUsername(username), password),
+    }),
+    [authenticatedRequest, role, userId],
+  );
 }

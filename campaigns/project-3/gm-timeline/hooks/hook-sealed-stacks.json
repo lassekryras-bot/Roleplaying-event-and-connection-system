@@ -1,0 +1,30 @@
+{
+  "id": "hook-sealed-stacks",
+  "campaignId": "project-3",
+  "placeId": "place-grand-archive",
+  "headline": "Sealed Stack Twelve",
+  "description": "A sealed archive stack contains the ledger pages that should not exist together.",
+  "status": "available",
+  "priority": "high",
+  "readAloudSections": [
+    {
+      "id": "read-stack-twelve",
+      "header": "The Missing Shelf",
+      "trigger": "When the crew reaches the sealed stack.",
+      "text": "The shelf label is still there, but the wood behind it is cleaner than the shelves around it.",
+      "completed": false
+    }
+  ],
+  "checks": [
+    {
+      "id": "check-stack-pattern",
+      "label": "Spot the missing pattern",
+      "attribute": "Perception",
+      "dc": 16,
+      "rollMode": "d20_button"
+    }
+  ],
+  "threadIds": ["thread-sealed-stack-twelve"],
+  "notes": "This should open the bank trail if the broker scene stalls.",
+  "updatedAt": "2026-04-06T09:30:00.000Z"
+}

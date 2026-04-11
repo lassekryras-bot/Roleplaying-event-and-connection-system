@@ -1,0 +1,19 @@
+{
+  "id": "location-state-entity-ruined-chapel-initial",
+  "type": "locationState",
+  "locationId": "location-entity-ruined-chapel",
+  "title": "Ruined Chapel Before Visit",
+  "summary": "The chapel remains closed after a suspicious fire and a handful of whispered sightings.",
+  "status": "available",
+  "notes": "Related legacy threads: Ashes in the Chapel, Stolen Reliquary.\n\nReferenced by 2 legacy threads.\n\nImported from legacy linked entity entity-ruined-chapel.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-ashes-chapel"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-stolen-relic"
+    }
+  ]
+}

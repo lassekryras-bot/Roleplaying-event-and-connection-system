@@ -1,0 +1,10 @@
+{
+  "id": "place-sunspike-glassworks",
+  "campaignId": "project-3",
+  "headline": "Sunspike Glassworks",
+  "description": "A furnace district where shipments vanish into heat and reflected light.",
+  "tags": ["glassworks", "future"],
+  "hookIds": ["hook-furnace-saboteur"],
+  "notes": "Use if the vault trail becomes an industrial route instead of a paperwork route.",
+  "updatedAt": "2026-04-06T09:30:00.000Z"
+}

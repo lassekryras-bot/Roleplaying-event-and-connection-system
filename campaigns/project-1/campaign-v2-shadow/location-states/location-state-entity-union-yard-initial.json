@@ -1,0 +1,19 @@
+{
+  "id": "location-state-entity-union-yard-initial",
+  "type": "locationState",
+  "locationId": "location-entity-union-yard",
+  "title": "Dockworkers Union Yard Before Visit",
+  "summary": "A labor pledge briefly stabilized the docks before fear took over again.",
+  "status": "active",
+  "notes": "Related legacy threads: Dockworkers Oath, Whispers in the Harbor.\n\nReferenced by 2 legacy threads.\n\nImported from legacy linked entity entity-union-yard.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-dockworkers-oath"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-whispers-harbor"
+    }
+  ]
+}

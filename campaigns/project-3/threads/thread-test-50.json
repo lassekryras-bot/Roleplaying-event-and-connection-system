@@ -1,0 +1,14 @@
+{
+  "id": "thread-test-50",
+  "title": "Test Threat 50",
+  "state": "escalated",
+  "playerSummary": "Test threat 50 keeps pressure on the board for layout checks.",
+  "gmTruth": "Threat 50 is part of the seeded stress campaign used to inspect board density.",
+  "timelineAnchor": "now",
+  "linkedEntityIds": [
+    "entity-zone-2",
+    "entity-cross-6",
+    "entity-pattern-anchor-2"
+  ],
+  "playerVisible": true
+}

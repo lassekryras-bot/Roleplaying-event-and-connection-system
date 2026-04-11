@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://living-campaign.dev/schemas/campaign/history-index.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "revisionIds": {
+      "$ref": "./common.schema.json#/$defs/idArray"
+    },
+    "headIndex": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "required": ["revisionIds", "headIndex"]
+}

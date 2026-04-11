@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "relation.schema.json",
+  "title": "Relation",
+  "description": "Generic link between two objects in the campaign model.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "targetId"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "dependsOn",
+        "unlocks",
+        "follows",
+        "modifies",
+        "occursAt",
+        "belongsTo",
+        "relatedTo",
+        "appliesTo",
+        "contains",
+        "partOf",
+        "involves",
+        "blocks"
+      ]
+    },
+    "targetId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive",
+        "draft"
+      ]
+    }
+  }
+}

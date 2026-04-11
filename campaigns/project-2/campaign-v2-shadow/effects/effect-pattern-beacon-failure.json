@@ -1,0 +1,12 @@
+{
+  "id": "effect-pattern-beacon-failure",
+  "type": "effect",
+  "title": "Beacon Failure",
+  "summary": "Signal towers are failing in a deliberate pattern, creating panic and tactical blind spots.",
+  "status": "active",
+  "effectType": "pressure",
+  "scope": "city",
+  "severity": "medium",
+  "notes": "Legacy threads in this pattern: The Red Signal, South March Mobilizes.\n\nImported from legacy pattern pattern-beacon-failure.",
+  "relations": []
+}

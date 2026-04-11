@@ -1,0 +1,15 @@
+{
+  "id": "thread-whispers-harbor",
+  "title": "Whispers in the Harbor",
+  "state": "active",
+  "hook": "Dockworkers have started refusing night shifts.",
+  "playerSummary": "Dockworkers say someone is paying for silence at the piers.",
+  "gmTruth": "Vel has been paid to redirect patrol routes and bury the first reports.",
+  "timelineAnchor": "now",
+  "linkedEntityIds": [
+    "entity-harbor-master",
+    "entity-union-yard"
+  ],
+  "patternId": "pattern-harbor-conspiracy",
+  "playerVisible": true
+}

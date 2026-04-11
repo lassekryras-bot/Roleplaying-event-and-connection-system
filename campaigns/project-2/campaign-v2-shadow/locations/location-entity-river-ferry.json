@@ -1,0 +1,13 @@
+{
+  "id": "location-entity-river-ferry",
+  "type": "location",
+  "campaignId": "project-2",
+  "title": "River Ferry Crossing",
+  "summary": "Boat crews repeat warning phrases before any official signal reaches the river crossing.",
+  "tags": [
+    "location",
+    "shared",
+    "legacy-entity"
+  ],
+  "relations": []
+}

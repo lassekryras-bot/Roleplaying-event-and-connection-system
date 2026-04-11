@@ -1,0 +1,14 @@
+{
+  "id": "thread-ashes-chapel",
+  "title": "Ashes in the Chapel",
+  "state": "dormant",
+  "hook": "Fine ash keeps appearing in the chapel even after the fire was contained.",
+  "playerSummary": "The chapel remains closed after a suspicious fire and a handful of whispered sightings.",
+  "gmTruth": "The ash is residue from failed rehearsal rites in the crypt.",
+  "timelineAnchor": "past",
+  "linkedEntityIds": [
+    "entity-ruined-chapel"
+  ],
+  "patternId": "pattern-ash-ritual",
+  "playerVisible": true
+}

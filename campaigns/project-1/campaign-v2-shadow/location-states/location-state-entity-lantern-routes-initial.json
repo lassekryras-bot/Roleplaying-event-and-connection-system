@@ -1,0 +1,15 @@
+{
+  "id": "location-state-entity-lantern-routes-initial",
+  "type": "locationState",
+  "locationId": "location-entity-lantern-routes",
+  "title": "Lantern Route Markers Before Visit",
+  "summary": "A broker warns that blue lanterns mark safe routes and amber lanterns mark traps.",
+  "status": "available",
+  "notes": "Related legacy threads: Lantern Broker's Warning.\n\nReferenced by 1 legacy thread.\n\nImported from legacy linked entity entity-lantern-routes.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-lantern-broker"
+    }
+  ]
+}

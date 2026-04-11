@@ -1,0 +1,7 @@
+{
+  "id": "thread-brass-ghost-barge",
+  "title": "Brass Ghost Barge",
+  "summary": "Dock rumors keep pointing at the same silent barge.",
+  "linkedHookIds": ["hook-ghost-barge-rumor"],
+  "playerVisible": false
+}

@@ -1,0 +1,61 @@
+{
+  "generatedAt": "2026-04-06T09:30:00.000Z",
+  "items": [
+    {
+      "id": "thread-brass-ghost-barge",
+      "title": "Brass Ghost Barge",
+      "summary": "Dock rumors keep pointing at the same silent barge.",
+      "linkedHookIds": ["hook-ghost-barge-rumor"],
+      "file": "thread-brass-ghost-barge.json"
+    },
+    {
+      "id": "thread-auction-mask-network",
+      "title": "Auction Mask Network",
+      "summary": "Masks from the hall keep resurfacing around paid silence.",
+      "linkedHookIds": ["hook-sable-auctioneer"],
+      "file": "thread-auction-mask-network.json"
+    },
+    {
+      "id": "thread-sealed-stack-twelve",
+      "title": "Sealed Stack Twelve",
+      "summary": "A missing archive stack contains ledger pages with scorched edges.",
+      "linkedHookIds": ["hook-sealed-stacks"],
+      "file": "thread-sealed-stack-twelve.json"
+    },
+    {
+      "id": "thread-sable-creditors",
+      "title": "Sable Creditors",
+      "summary": "Someone is paying off debts to keep archive staff compliant.",
+      "linkedHookIds": ["hook-librarian-debt"],
+      "file": "thread-sable-creditors.json"
+    },
+    {
+      "id": "thread-mornqar-scarf",
+      "title": "Mornqar's Scarf",
+      "summary": "The scarf is acting like a signal as much as a possession.",
+      "linkedHookIds": ["hook-scarf-broker"],
+      "file": "thread-mornqar-scarf.json"
+    },
+    {
+      "id": "thread-red-silt-route",
+      "title": "Red Silt Route",
+      "summary": "A courier lane links the market ambush to the bank transfer.",
+      "linkedHookIds": ["hook-runner-ambush", "hook-night-vault"],
+      "file": "thread-red-silt-route.json"
+    },
+    {
+      "id": "thread-furnace-blackmail",
+      "title": "Furnace Blackmail",
+      "summary": "A saboteur in the glassworks is being paid to ruin the wrong shipment.",
+      "linkedHookIds": ["hook-furnace-saboteur"],
+      "file": "thread-furnace-blackmail.json"
+    },
+    {
+      "id": "thread-rain-pact",
+      "title": "Rain Pact",
+      "summary": "The shrine keeper knows who promised safe passage in the storm.",
+      "linkedHookIds": ["hook-rain-prayer"],
+      "file": "thread-rain-pact.json"
+    }
+  ]
+}

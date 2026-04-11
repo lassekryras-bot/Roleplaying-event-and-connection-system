@@ -1,0 +1,15 @@
+{
+  "id": "thread-night-watch",
+  "title": "Night Watch Vanishes",
+  "state": "escalated",
+  "hook": "A patrol disappears after following lantern lights toward the sea caves.",
+  "playerSummary": "The watch lost contact with an entire patrol near the low-tide tunnels.",
+  "gmTruth": "The patrol found a ritual staging point and was captured alive for leverage.",
+  "timelineAnchor": "now",
+  "linkedEntityIds": [
+    "entity-night-watch",
+    "entity-cinder-choir"
+  ],
+  "patternId": "pattern-harbor-conspiracy",
+  "playerVisible": true
+}

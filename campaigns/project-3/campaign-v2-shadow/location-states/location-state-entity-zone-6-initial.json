@@ -1,0 +1,71 @@
+{
+  "id": "location-state-entity-zone-6-initial",
+  "type": "locationState",
+  "locationId": "location-entity-zone-6",
+  "title": "Stress Zone 6 Before Visit",
+  "summary": "Test threat 06 keeps pressure on the board for layout checks.",
+  "status": "available",
+  "notes": "Related legacy threads: Test Threat 06, Test Threat 12, Test Threat 18, Test Threat 24, Test Threat 30, Test Threat 36, Test Threat 42, Test Threat 48, Test Threat 54, Test Threat 60, Test Threat 66, Test Threat 72, Test Threat 78, Test Threat 84, Test Threat 90.\n\nReferenced by 15 legacy threads.\n\nImported from legacy linked entity entity-zone-6.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-06"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-12"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-18"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-24"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-30"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-36"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-42"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-48"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-54"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-60"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-66"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-72"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-78"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-84"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-90"
+    }
+  ]
+}

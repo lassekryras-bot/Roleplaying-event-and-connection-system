@@ -18,14 +18,20 @@ export default function ThreadsPage() {
   }, [getThreads]);
 
   return (
-    <section>
-      <h1>Threads</h1>
-      {error && <p>{error}</p>}
+    <section className="page-section">
+      <h1 className="page-title">Threads</h1>
+      <p className="page-subtitle">Track conversation context and current state.</p>
+
+      {error && <p className="error-text">{error}</p>}
+
       <ul className="card-list">
         {threads.map((thread) => (
-          <li key={thread.id} className="card">
-            <Link href={`/threads/${thread.id}`}>{thread.title || thread.id}</Link>
-            <span> — {toUiThreadStatus(thread.state)}</span>
+          <li key={thread.id} className="card stack">
+            <div className="row-between">
+              <Link href={`/threads/${thread.id}`}>{thread.title || thread.id}</Link>
+              <span className="status-text">{toUiThreadStatus(thread.state)}</span>
+            </div>
+            <p className="meta-text">Thread ID: {thread.id}</p>
           </li>
         ))}
       </ul>

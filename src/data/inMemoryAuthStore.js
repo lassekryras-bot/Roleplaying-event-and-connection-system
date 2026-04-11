@@ -8,6 +8,18 @@ const AUTH_USERS = [
     role: "PLAYER",
   },
   {
+    user_id: "player-2",
+    username: "Adminplayer2",
+    password: "1234",
+    role: "PLAYER",
+  },
+  {
+    user_id: "player-3",
+    username: "Adminplayer3",
+    password: "1234",
+    role: "PLAYER",
+  },
+  {
     user_id: "gm-1",
     username: "Admingm",
     password: "1234",

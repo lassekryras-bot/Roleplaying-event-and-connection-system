@@ -1,0 +1,14 @@
+{
+  "id": "location-brass-docks",
+  "type": "location",
+  "campaignId": "project-3",
+  "title": "Brass Docks",
+  "summary": "Fog, labor crews, and a berth where half the rumors begin.",
+  "tags": [
+    "harbor",
+    "rumor",
+    "past",
+    "legacy-place"
+  ],
+  "relations": []
+}

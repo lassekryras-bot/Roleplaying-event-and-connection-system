@@ -1,0 +1,15 @@
+{
+  "id": "location-state-brass-docks-post-major-visit",
+  "type": "locationState",
+  "locationId": "location-brass-docks",
+  "title": "Brass Docks After Major Visit",
+  "summary": "The crew traced rumors of a ghost barge through the Brass Docks.",
+  "status": "active",
+  "notes": "Past session only; inspect for context.\n\nDockworkers still remember the lantern code if the GM wants to call back to it.\n\nGenerated as a post-major-visit state from legacy session session-smoke-on-the-quay.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-ghost-barge-rumor"
+    }
+  ]
+}

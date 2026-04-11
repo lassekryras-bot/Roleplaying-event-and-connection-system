@@ -1,0 +1,20 @@
+{
+  "id": "event-thread-river-static",
+  "type": "event",
+  "title": "River Static",
+  "summary": "Boat crews repeat warning phrases before any official signal reaches the river crossing.",
+  "status": "archived",
+  "eventType": "consequence-triggered",
+  "notes": "GM truth: The buried engine is piggybacking on ferry gossip to amplify false mobilization orders.\n\nLegacy thread state: active.\n\nLegacy timeline anchor: past.\n\nImported from legacy thread thread-river-static.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-entity-river-ferry"
+    },
+    {
+      "type": "belongsTo",
+      "targetId": "effect-pattern-river-static"
+    }
+  ],
+  "createdEffectIds": []
+}

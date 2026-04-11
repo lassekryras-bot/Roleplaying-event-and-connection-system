@@ -1,0 +1,13 @@
+{
+  "id": "location-entity-signal-hill",
+  "type": "location",
+  "campaignId": "project-2",
+  "title": "Signal Hill",
+  "summary": "One tower keeps flashing a red pattern no operator admits to sending.",
+  "tags": [
+    "location",
+    "shared",
+    "legacy-entity"
+  ],
+  "relations": []
+}

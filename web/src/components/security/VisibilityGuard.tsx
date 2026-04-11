@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
 import React from 'react';
+import { canViewGmContent, getRoleLabel, type FrontendRole } from '@/lib/roles';
 
-export type UserRole = 'PLAYER' | 'GM' | 'HELPER_GM';
+export type UserRole = FrontendRole;
 
 interface VisibilityGuardProps {
   role: UserRole;
@@ -11,8 +12,6 @@ interface VisibilityGuardProps {
   className?: string;
 }
 
-const GM_ELIGIBLE_ROLES: ReadonlySet<UserRole> = new Set(['GM', 'HELPER_GM']);
-
 export function VisibilityGuard({
   role,
   children,
@@ -20,7 +19,7 @@ export function VisibilityGuard({
   showDetailPageNote = false,
   className,
 }: VisibilityGuardProps) {
-  const canViewGmBlocks = GM_ELIGIBLE_ROLES.has(role);
+  const canViewGmBlocks = canViewGmContent(role);
 
   return (
     <section className={className} data-testid="visibility-guard">
@@ -39,7 +38,7 @@ export function VisibilityGuard({
             color: '#0a3d8f',
           }}
         >
-          {`Viewing as ${role}`}
+          {`Viewing as ${getRoleLabel(role)}`}
         </span>
       </header>
 
@@ -47,7 +46,7 @@ export function VisibilityGuard({
 
       {canViewGmBlocks ? <div data-testid="gm-only-content">{gmOnly}</div> : null}
 
-      {role === 'PLAYER' && showDetailPageNote ? (
+      {role === 'player' && showDetailPageNote ? (
         <p
           data-testid="player-gm-hidden-note"
           style={{ marginTop: '0.75rem', color: '#37506b', fontSize: '0.9rem' }}

@@ -1,0 +1,19 @@
+{
+  "id": "location-alkenstar",
+  "type": "location",
+  "title": "Alkenstar",
+  "campaignId": "mornqar-alkenstar",
+  "summary": "A soot-choked industrial city where black powder, clockwork, crime, and political corruption collide. It serves as a central urban hub for heists, investigations, underworld deals, and escalating conflict around Mugland's influence.",
+  "tags": [
+    "city",
+    "industrial",
+    "urban",
+    "black-powder",
+    "clockwork",
+    "corruption",
+    "underworld",
+    "campaign-hub"
+  ],
+  "parentLocationId": null,
+  "relations": []
+}

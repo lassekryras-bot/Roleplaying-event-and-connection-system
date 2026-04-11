@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/hook-index.schema.json",
+  "title": "Hook Index",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "items"
+  ],
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/indexItem"
+      }
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "$defs": {
+    "indexItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "headline",
+        "placeId",
+        "file"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^hook-[a-z0-9-]+$"
+        },
+        "headline": {
+          "type": "string",
+          "minLength": 1
+        },
+        "placeId": {
+          "type": "string",
+          "pattern": "^place-[a-z0-9-]+$"
+        },
+        "threadIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^thread-[a-z0-9-]+$"
+          }
+        },
+        "file": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

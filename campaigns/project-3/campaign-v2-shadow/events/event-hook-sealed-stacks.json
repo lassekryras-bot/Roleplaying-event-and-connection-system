@@ -1,0 +1,24 @@
+{
+  "id": "event-hook-sealed-stacks",
+  "type": "event",
+  "title": "Sealed Stack Twelve",
+  "summary": "A sealed archive stack contains the ledger pages that should not exist together.",
+  "status": "available",
+  "eventType": "clue-found",
+  "notes": "Checks: Spot the missing pattern Perception DC 16\n\nRead-aloud cues: The Missing Shelf - When the crew reaches the sealed stack. - The shelf label is still there, but the wood behind it is cleaner than the shelves around it.\n\nThis should open the bank trail if the broker scene stalls.\n\nPriority: high.\n\nLinked thread refs: Sealed Stack Twelve.\n\nImported from gm-timeline hook hook-sealed-stacks.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-grand-archive"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "session-bank-of-ashen-notes"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "session-mornqar-ledger"
+    }
+  ],
+  "createdEffectIds": []
+}

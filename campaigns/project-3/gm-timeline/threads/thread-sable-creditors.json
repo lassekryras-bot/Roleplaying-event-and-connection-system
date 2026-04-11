@@ -1,0 +1,7 @@
+{
+  "id": "thread-sable-creditors",
+  "title": "Sable Creditors",
+  "summary": "Someone is paying off debts to keep archive staff compliant.",
+  "linkedHookIds": ["hook-librarian-debt"],
+  "playerVisible": false
+}

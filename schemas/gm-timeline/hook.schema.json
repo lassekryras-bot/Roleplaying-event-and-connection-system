@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/hook.schema.json",
+  "title": "Hook",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "campaignId",
+    "placeId",
+    "headline",
+    "description",
+    "status",
+    "checks",
+    "threadIds"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^hook-[a-z0-9-]+$"
+    },
+    "campaignId": {
+      "$ref": "shared-defs.schema.json#/$defs/campaignId"
+    },
+    "placeId": {
+      "type": "string",
+      "pattern": "^place-[a-z0-9-]+$"
+    },
+    "headline": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "available",
+        "in_progress",
+        "resolved",
+        "discarded"
+      ]
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ]
+    },
+    "readAloudSections": {
+      "type": "array",
+      "items": {
+        "$ref": "shared-defs.schema.json#/$defs/readAloudSection"
+      }
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "$ref": "shared-defs.schema.json#/$defs/check"
+      }
+    },
+    "threadIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^thread-[a-z0-9-]+$"
+      },
+      "uniqueItems": true
+    },
+    "notes": {
+      "type": "string"
+    },
+    "updatedAt": {
+      "$ref": "shared-defs.schema.json#/$defs/timestamp"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "session-gunworks-blackmail",
+  "type": "session",
+  "title": "Gunworks Blackmail",
+  "locationId": "location-sparklock-bank",
+  "summary": "Fallback future session if the bank trail points toward the gunworks instead.",
+  "startingLocationStateId": "location-state-sparklock-bank-initial",
+  "resultingLocationStateId": "location-state-sparklock-bank-post-major-visit",
+  "notes": "Keep this in overflow until the table points hard at industrial sabotage.\n\nThis one exists mainly to prove the future overflow UI.\n\nImported from gm-timeline session session-gunworks-blackmail.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-night-vault"
+    },
+    {
+      "type": "follows",
+      "targetId": "session-cascade-parley"
+    }
+  ]
+}

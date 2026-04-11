@@ -1,0 +1,14 @@
+{
+  "id": "session-gunworks-blackmail",
+  "campaignId": "project-3",
+  "sequence": 7,
+  "status": "planning",
+  "headline": "Gunworks Blackmail",
+  "summary": "Fallback future session if the bank trail points toward the gunworks instead.",
+  "expectedDirection": "Keep this in overflow until the table points hard at industrial sabotage.",
+  "placeIds": ["place-sparklock-bank"],
+  "notes": "This one exists mainly to prove the future overflow UI.",
+  "startedAt": null,
+  "endedAt": null,
+  "updatedAt": "2026-04-06T09:30:00.000Z"
+}

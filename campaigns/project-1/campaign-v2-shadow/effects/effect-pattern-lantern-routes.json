@@ -1,0 +1,17 @@
+{
+  "id": "effect-pattern-lantern-routes",
+  "type": "effect",
+  "title": "Lantern Routes",
+  "summary": "Lantern codes, safe approaches, and trap routes are quietly shaping who reaches the ruins alive.",
+  "status": "active",
+  "effectType": "pressure",
+  "scope": "local",
+  "severity": "low",
+  "notes": "Legacy threads in this pattern: Lantern Broker's Warning.\n\nImported from legacy pattern pattern-lantern-routes.",
+  "relations": [
+    {
+      "type": "appliesTo",
+      "targetId": "location-entity-lantern-routes"
+    }
+  ]
+}

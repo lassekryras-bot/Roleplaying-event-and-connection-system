@@ -1,0 +1,16 @@
+{
+  "id": "event-thread-engine-heart",
+  "type": "event",
+  "title": "Engine Heart",
+  "summary": "GM-only engine diagnostics remain hidden.",
+  "status": "active",
+  "eventType": "consequence-triggered",
+  "notes": "GM truth: The engine is waking faster every time the network carries a false alarm.\n\nLegacy thread state: active.\n\nLegacy timeline anchor: now.\n\nSource thread was GM-only.\n\nImported from legacy thread thread-engine-heart.",
+  "relations": [
+    {
+      "type": "belongsTo",
+      "targetId": "effect-pattern-buried-engine"
+    }
+  ],
+  "createdEffectIds": []
+}

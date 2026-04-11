@@ -1,0 +1,17 @@
+{
+  "id": "pattern-test-2",
+  "title": "Test Pattern 2",
+  "summary": "Pattern 2 groups a fixed cluster of threats for board load testing.",
+  "escalationLevel": 2,
+  "threadIds": [
+    "thread-test-09",
+    "thread-test-10",
+    "thread-test-11",
+    "thread-test-12",
+    "thread-test-13",
+    "thread-test-14",
+    "thread-test-15",
+    "thread-test-16"
+  ],
+  "playerVisible": true
+}

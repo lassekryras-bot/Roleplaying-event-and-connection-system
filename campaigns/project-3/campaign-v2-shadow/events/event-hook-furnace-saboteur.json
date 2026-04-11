@@ -1,0 +1,20 @@
+{
+  "id": "event-hook-furnace-saboteur",
+  "type": "event",
+  "title": "Furnace Saboteur",
+  "summary": "Someone inside the works is ruining shipments on a schedule, not a grudge.",
+  "status": "available",
+  "eventType": "hook-progressed",
+  "notes": "Checks: Work the heat line Fortitude DC 16\n\nAlternate future path if the vault thread widens out instead of deepening.\n\nPriority: medium.\n\nLinked thread refs: Furnace Blackmail.\n\nImported from gm-timeline hook hook-furnace-saboteur.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-sunspike-glassworks"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "session-glassworks-ghost-route"
+    }
+  ],
+  "createdEffectIds": []
+}

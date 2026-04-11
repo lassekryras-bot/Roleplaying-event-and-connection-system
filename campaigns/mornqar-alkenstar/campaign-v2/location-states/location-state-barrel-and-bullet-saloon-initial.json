@@ -1,0 +1,10 @@
+{
+  "id": "location-state-barrel-and-bullet-saloon-initial",
+  "type": "locationState",
+  "locationId": "location-barrel-and-bullet-saloon",
+  "title": "Barrel & Bullet Saloon Initial State",
+  "summary": "A rough but dependable saloon in Alkenstar's Ferrous Quarter that functions as a safehouse, job hub, and neutral meeting ground for outcasts, mercenaries, and conspirators.",
+  "status": "active",
+  "notes": "The Barrel & Bullet Saloon is a squat two-story tavern known for cheap rooms, decent food, loud regulars, and a constant edge of danger. Run by Foebe Dunsmith, it serves as a place to broker work, hide from enemies, hold private meetings, access basic crafting support, and regroup between operations. In the current campaign it is a recurring base of operations tied to Foebe's network, Gattlebee's protection, and the party's ongoing moves against Mugland and Loveless.\n\nUseful for mission briefings, underworld contact scenes, private negotiations, recovery after jobs, and recurring NPC encounters. Foebe Dunsmith, Ershap, and regulars such as Neekle Burnwater give the location ongoing social and operational value.",
+  "relations": []
+}

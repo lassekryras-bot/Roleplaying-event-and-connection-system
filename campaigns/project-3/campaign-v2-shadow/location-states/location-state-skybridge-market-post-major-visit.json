@@ -1,0 +1,23 @@
+{
+  "id": "location-state-skybridge-market-post-major-visit",
+  "type": "locationState",
+  "locationId": "location-skybridge-market",
+  "title": "Skybridge Market After Major Visit",
+  "summary": "A shrine contact may turn rumor into leverage if the table pivots diplomatic.",
+  "status": "active",
+  "notes": "Use the shrine pact when the crew wants answers without a heist.\n\nThis future session should read as softer, not safer.\n\nGenerated as a post-major-visit state from legacy session session-cascade-parley.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-runner-ambush"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-scarf-broker"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-rain-prayer"
+    }
+  ]
+}

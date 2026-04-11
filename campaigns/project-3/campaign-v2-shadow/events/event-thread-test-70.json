@@ -1,0 +1,20 @@
+{
+  "id": "event-thread-test-70",
+  "type": "event",
+  "title": "Test Threat 70",
+  "summary": "Test threat 70 keeps pressure on the board for layout checks.",
+  "status": "archived",
+  "eventType": "consequence-triggered",
+  "notes": "GM truth: Threat 70 is part of the seeded stress campaign used to inspect board density.\n\nLegacy thread state: escalated.\n\nLegacy timeline anchor: past.\n\nImported from legacy thread thread-test-70.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-entity-zone-4"
+    },
+    {
+      "type": "involves",
+      "targetId": "location-entity-pattern-anchor-1"
+    }
+  ],
+  "createdEffectIds": []
+}

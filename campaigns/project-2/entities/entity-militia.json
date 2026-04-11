@@ -1,0 +1,6 @@
+{
+  "id": "entity-militia",
+  "type": "npc",
+  "name": "South March Militia",
+  "playerVisible": true
+}

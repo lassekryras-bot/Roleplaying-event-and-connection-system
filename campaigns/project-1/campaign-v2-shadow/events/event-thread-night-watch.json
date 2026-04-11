@@ -1,0 +1,16 @@
+{
+  "id": "event-thread-night-watch",
+  "type": "event",
+  "title": "Night Watch Vanishes",
+  "summary": "The watch lost contact with an entire patrol near the low-tide tunnels.",
+  "status": "active",
+  "eventType": "npc-meeting",
+  "notes": "A patrol disappears after following lantern lights toward the sea caves.\n\nGM truth: The patrol found a ritual staging point and was captured alive for leverage.\n\nLegacy thread state: escalated.\n\nLegacy timeline anchor: now.\n\nImported from legacy thread thread-night-watch.",
+  "relations": [
+    {
+      "type": "belongsTo",
+      "targetId": "effect-pattern-harbor-conspiracy"
+    }
+  ],
+  "createdEffectIds": []
+}

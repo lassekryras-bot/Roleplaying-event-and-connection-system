@@ -1,0 +1,21 @@
+{
+  "id": "effect-bar-ignores-wanted-status",
+  "type": "effect",
+  "title": "Bar Ignores Wanted Status",
+  "summary": "A back-room dockside bar near the union yard keeps serving the crew even when the city-wide heat is up.",
+  "status": "active",
+  "notes": "Seeded as a local counter-pressure so prep can show a modifier overriding a broader effect.",
+  "relations": [
+    {
+      "type": "appliesTo",
+      "targetId": "location-entity-union-yard"
+    },
+    {
+      "type": "modifies",
+      "targetId": "effect-wanted-in-city"
+    }
+  ],
+  "effectType": "safe-haven",
+  "scope": "local",
+  "severity": "low"
+}

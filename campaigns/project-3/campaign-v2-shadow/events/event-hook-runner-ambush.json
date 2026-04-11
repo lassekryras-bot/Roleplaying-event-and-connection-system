@@ -1,0 +1,24 @@
+{
+  "id": "event-hook-runner-ambush",
+  "type": "event",
+  "title": "Runner Ambush",
+  "summary": "A courier disappears between stalls just before the scarf broker changes direction.",
+  "status": "available",
+  "eventType": "combat-happened",
+  "notes": "Checks: Win the foot chase Athletics DC 17\n\nEscalates the session into motion immediately.\n\nPriority: high.\n\nLinked thread refs: Red Silt Route.\n\nImported from gm-timeline hook hook-runner-ambush.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-skybridge-market"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "session-cascade-parley"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "session-mornqar-ledger"
+    }
+  ],
+  "createdEffectIds": []
+}

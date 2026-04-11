@@ -1,0 +1,20 @@
+{
+  "id": "event-thread-dockworkers-oath",
+  "type": "event",
+  "title": "Dockworkers Oath",
+  "summary": "A labor pledge briefly stabilized the docks before fear took over again.",
+  "status": "resolved",
+  "eventType": "clue-found",
+  "notes": "GM truth: The pledge failed after the union leadership was blackmailed.\n\nLegacy thread state: resolved.\n\nLegacy timeline anchor: past.\n\nImported from legacy thread thread-dockworkers-oath.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-entity-union-yard"
+    },
+    {
+      "type": "belongsTo",
+      "targetId": "effect-pattern-harbor-conspiracy"
+    }
+  ],
+  "createdEffectIds": []
+}

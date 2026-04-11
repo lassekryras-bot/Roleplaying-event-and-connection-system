@@ -1,0 +1,11 @@
+{
+  "id": "pattern-beacon-failure",
+  "title": "Beacon Failure",
+  "summary": "Signal towers are failing in a deliberate pattern, creating panic and tactical blind spots.",
+  "escalationLevel": 2,
+  "threadIds": [
+    "thread-red-signal",
+    "thread-south-march"
+  ],
+  "playerVisible": true
+}

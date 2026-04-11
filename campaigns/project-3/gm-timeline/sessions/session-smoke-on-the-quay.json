@@ -1,0 +1,14 @@
+{
+  "id": "session-smoke-on-the-quay",
+  "campaignId": "project-3",
+  "sequence": 1,
+  "status": "ended",
+  "headline": "Smoke on the Quay",
+  "summary": "The crew traced rumors of a ghost barge through the Brass Docks.",
+  "expectedDirection": "Past session only; inspect for context.",
+  "placeIds": ["place-brass-docks"],
+  "notes": "Dockworkers still remember the lantern code if the GM wants to call back to it.",
+  "startedAt": "2026-03-04T19:00:00.000Z",
+  "endedAt": "2026-03-04T22:15:00.000Z",
+  "updatedAt": "2026-03-04T22:15:00.000Z"
+}

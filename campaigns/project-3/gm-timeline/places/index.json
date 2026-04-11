@@ -1,0 +1,54 @@
+{
+  "generatedAt": "2026-04-06T09:30:00.000Z",
+  "items": [
+    {
+      "id": "place-brass-docks",
+      "headline": "Brass Docks",
+      "description": "Fog, labor crews, and a berth where half the rumors begin.",
+      "tags": ["harbor", "rumor", "past"],
+      "file": "place-brass-docks.json"
+    },
+    {
+      "id": "place-gilt-hall",
+      "headline": "Gilt Hall",
+      "description": "A hired hall used for masked exchanges and private bids.",
+      "tags": ["auction", "nobles"],
+      "file": "place-gilt-hall.json"
+    },
+    {
+      "id": "place-grand-archive",
+      "headline": "Grand Archive",
+      "description": "A powder-dry archive where ledgers go missing in plain sight.",
+      "tags": ["records", "investigation", "current"],
+      "file": "place-grand-archive.json"
+    },
+    {
+      "id": "place-skybridge-market",
+      "headline": "Skybridge Market",
+      "description": "A noisy market where couriers, brokers, and thieves overlap.",
+      "tags": ["market", "broker", "current"],
+      "file": "place-skybridge-market.json"
+    },
+    {
+      "id": "place-sparklock-bank",
+      "headline": "Sparklock Bank",
+      "description": "A tight bank with nervous clerks, layered locks, and private notes.",
+      "tags": ["bank", "future"],
+      "file": "place-sparklock-bank.json"
+    },
+    {
+      "id": "place-sunspike-glassworks",
+      "headline": "Sunspike Glassworks",
+      "description": "A furnace district where shipments vanish into heat and reflected light.",
+      "tags": ["glassworks", "future"],
+      "file": "place-sunspike-glassworks.json"
+    },
+    {
+      "id": "place-cascade-shrine",
+      "headline": "Cascade Shrine",
+      "description": "A rain-streaked shrine where quiet promises are safer than loud ones.",
+      "tags": ["shrine", "future", "parley"],
+      "file": "place-cascade-shrine.json"
+    }
+  ]
+}

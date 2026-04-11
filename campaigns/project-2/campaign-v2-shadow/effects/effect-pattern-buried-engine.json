@@ -1,0 +1,12 @@
+{
+  "id": "effect-pattern-buried-engine",
+  "type": "effect",
+  "title": "Buried Engine",
+  "summary": "Something ancient under Signal Hill is learning the region's wartime habits and exploiting them.",
+  "status": "active",
+  "effectType": "pressure",
+  "scope": "city",
+  "severity": "high",
+  "notes": "Legacy threads in this pattern: Engine Heart.\n\nLegacy pattern was GM-only in the source data.\n\nImported from legacy pattern pattern-buried-engine.",
+  "relations": []
+}

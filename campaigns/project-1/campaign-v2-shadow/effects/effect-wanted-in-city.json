@@ -1,0 +1,17 @@
+{
+  "id": "effect-wanted-in-city",
+  "type": "effect",
+  "title": "Wanted in City",
+  "summary": "Descriptions are circulating across the harbor, so anyone tied to the unrest draws attention fast.",
+  "status": "active",
+  "notes": "The harbor is uneasy, the watch is stretched thin, and too many rumors point toward the old ruins.\n\nThe Cinder Choir is using the unrest to hide ritual logistics while the harbor master suppresses the missing-person reports.\n\nSeeded as a city-wide pressure from the current campaign moment.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-now-project-1"
+    }
+  ],
+  "effectType": "wanted",
+  "scope": "city",
+  "severity": "high"
+}

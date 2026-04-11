@@ -1,0 +1,20 @@
+[
+  {
+    "userId": "player-1",
+    "username": "Adminplayer",
+    "displayName": "Beacon Runner",
+    "patternId": "pattern-beacon-failure",
+    "perspectivePatternIds": [
+      "pattern-river-static"
+    ]
+  },
+  {
+    "userId": "player-2",
+    "username": "Adminplayer2",
+    "displayName": "River Courier",
+    "patternId": "pattern-river-static",
+    "perspectivePatternIds": [
+      "pattern-beacon-failure"
+    ]
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "id": "session-smoke-on-the-quay",
+  "type": "session",
+  "title": "Smoke on the Quay",
+  "locationId": "location-brass-docks",
+  "summary": "The crew traced rumors of a ghost barge through the Brass Docks.",
+  "startingLocationStateId": "location-state-brass-docks-initial",
+  "resultingLocationStateId": "location-state-brass-docks-post-major-visit",
+  "notes": "Past session only; inspect for context.\n\nDockworkers still remember the lantern code if the GM wants to call back to it.\n\nImported from gm-timeline session session-smoke-on-the-quay.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-ghost-barge-rumor"
+    }
+  ]
+}

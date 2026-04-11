@@ -1,0 +1,15 @@
+{
+  "id": "location-state-entity-signal-hill-initial",
+  "type": "locationState",
+  "locationId": "location-entity-signal-hill",
+  "title": "Signal Hill Before Visit",
+  "summary": "One tower keeps flashing a red pattern no operator admits to sending.",
+  "status": "active",
+  "notes": "Related legacy threads: The Red Signal.\n\nReferenced by 1 legacy thread.\n\nImported from legacy linked entity entity-signal-hill.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-red-signal"
+    }
+  ]
+}

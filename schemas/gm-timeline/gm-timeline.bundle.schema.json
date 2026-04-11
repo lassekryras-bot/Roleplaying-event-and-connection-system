@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/gm-timeline.bundle.schema.json",
+  "title": "GM Timeline Schema Bundle",
+  "description": "Bundled package manifest for all GM timeline JSON schemas.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "schemas"
+  ],
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "schemas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "timeline",
+        "session",
+        "place",
+        "hook",
+        "threadRef",
+        "sessionIndex",
+        "placeIndex",
+        "hookIndex",
+        "threadIndex"
+      ],
+      "properties": {
+        "timeline": {
+          "$ref": "timeline.schema.json"
+        },
+        "session": {
+          "$ref": "session.schema.json"
+        },
+        "place": {
+          "$ref": "place.schema.json"
+        },
+        "hook": {
+          "$ref": "hook.schema.json"
+        },
+        "threadRef": {
+          "$ref": "thread-ref.schema.json"
+        },
+        "sessionIndex": {
+          "$ref": "session-index.schema.json"
+        },
+        "placeIndex": {
+          "$ref": "place-index.schema.json"
+        },
+        "hookIndex": {
+          "$ref": "hook-index.schema.json"
+        },
+        "threadIndex": {
+          "$ref": "thread-index.schema.json"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "location-entity-ruined-chapel",
+  "type": "location",
+  "campaignId": "project-1",
+  "title": "Ruined Chapel",
+  "summary": "The chapel remains closed after a suspicious fire and a handful of whispered sightings.",
+  "tags": [
+    "location",
+    "shared",
+    "legacy-entity"
+  ],
+  "relations": []
+}

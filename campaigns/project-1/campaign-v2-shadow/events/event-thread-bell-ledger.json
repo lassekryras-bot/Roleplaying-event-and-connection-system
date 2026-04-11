@@ -1,0 +1,16 @@
+{
+  "id": "event-thread-bell-ledger",
+  "type": "event",
+  "title": "Silent Bell Ledger",
+  "summary": "GM-only courier routes are still hidden from the players.",
+  "status": "active",
+  "eventType": "clue-found",
+  "notes": "A courier ledger maps hidden payments and meeting routes.\n\nGM truth: The ledger reveals how the cult's harbor cells coordinate every public disruption.\n\nLegacy thread state: active.\n\nLegacy timeline anchor: now.\n\nSource thread was GM-only.\n\nImported from legacy thread thread-bell-ledger.",
+  "relations": [
+    {
+      "type": "belongsTo",
+      "targetId": "effect-pattern-silent-bell"
+    }
+  ],
+  "createdEffectIds": []
+}

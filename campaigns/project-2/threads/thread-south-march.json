@@ -1,0 +1,13 @@
+{
+  "id": "thread-south-march",
+  "title": "South March Mobilizes",
+  "state": "escalated",
+  "playerSummary": "Militias are preparing to march on rumors alone.",
+  "gmTruth": "The militias were fed forged responses timed to the beacon failures.",
+  "timelineAnchor": "future_possible",
+  "linkedEntityIds": [
+    "entity-militia"
+  ],
+  "patternId": "pattern-beacon-failure",
+  "playerVisible": true
+}

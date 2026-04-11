@@ -3,12 +3,8 @@
 import { useEffect, useState } from 'react';
 import React from 'react';
 import { ThreadDetail } from '@/lib/api';
+import { canViewGmContent } from '@/lib/roles';
 import { useApiClient } from '@/lib/use-api-client';
-
-function isPrivilegedRole(role: string) {
-  const normalizedRole = role.trim().toUpperCase();
-  return normalizedRole === 'GM' || normalizedRole === 'HELPER_GM';
-}
 
 export default function ThreadDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { getThreadById, role } = useApiClient();
@@ -16,7 +12,7 @@ export default function ThreadDetailPage({ params }: { params: Promise<{ id: str
   const [thread, setThread] = useState<ThreadDetail | null>(null);
   const [error, setError] = useState<string>('');
 
-  const canSeeGmTruth = isPrivilegedRole(role);
+  const canSeeGmTruth = canViewGmContent(role);
 
   useEffect(() => {
     let active = true;
@@ -49,15 +45,23 @@ export default function ThreadDetailPage({ params }: { params: Promise<{ id: str
   }, [getThreadById, params]);
 
   return (
-    <section>
-      <h1>Thread: {threadId || 'loading...'}</h1>
-      {error && <p>{error}</p>}
+    <section className="page-section">
+      <h1 className="page-title">Thread: {threadId || 'loading...'}</h1>
+      <p className="page-subtitle">Thread details, visibility, and message summary.</p>
+
+      {error && <p className="error-text">{error}</p>}
+
       {thread && (
-        <article className="card">
+        <article className="card stack">
           <h2>{thread.title}</h2>
           {thread.player_summary ? <p>{thread.player_summary}</p> : null}
-          {canSeeGmTruth && thread.gm_truth ? <p>GM Truth: {thread.gm_truth}</p> : null}
-          <p>Messages: {thread.messages?.length ?? 0}</p>
+          {canSeeGmTruth && thread.gm_truth ? (
+            <div className="card stack">
+              <strong>GM Truth</strong>
+              <p>{thread.gm_truth}</p>
+            </div>
+          ) : null}
+          <p className="meta-text">Messages: {thread.messages?.length ?? 0}</p>
         </article>
       )}
     </section>

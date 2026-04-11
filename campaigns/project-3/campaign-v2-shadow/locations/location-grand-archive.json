@@ -1,0 +1,14 @@
+{
+  "id": "location-grand-archive",
+  "type": "location",
+  "campaignId": "project-3",
+  "title": "Grand Archive",
+  "summary": "A powder-dry archive where ledgers go missing in plain sight.",
+  "tags": [
+    "records",
+    "investigation",
+    "current",
+    "legacy-place"
+  ],
+  "relations": []
+}

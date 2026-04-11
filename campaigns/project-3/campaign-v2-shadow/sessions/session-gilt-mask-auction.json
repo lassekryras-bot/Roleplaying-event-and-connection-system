@@ -1,0 +1,20 @@
+{
+  "id": "session-gilt-mask-auction",
+  "type": "session",
+  "title": "The Gilt Mask Auction",
+  "locationId": "location-gilt-hall",
+  "summary": "A masked buyer bought silence, credit, and three missing ledgers.",
+  "startingLocationStateId": "location-state-gilt-hall-initial",
+  "resultingLocationStateId": "location-state-gilt-hall-post-major-visit",
+  "notes": "Past session only; inspect for blackmail leverage.\n\nPast sessions stay read-only in the MVP board.\n\nImported from gm-timeline session session-gilt-mask-auction.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-sable-auctioneer"
+    },
+    {
+      "type": "follows",
+      "targetId": "session-smoke-on-the-quay"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/thread-ref.schema.json",
+  "title": "Thread Reference",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "linkedHookIds"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^thread-[a-z0-9-]+$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string"
+    },
+    "linkedHookIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^hook-[a-z0-9-]+$"
+      },
+      "uniqueItems": true
+    },
+    "playerVisible": {
+      "type": "boolean"
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://living-campaign.dev/schemas/campaign/common.schema.json",
+  "$defs": {
+    "text": {
+      "type": "string"
+    },
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "id": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "idArray": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "projectStatus": {
+      "type": "string",
+      "enum": ["active", "paused"]
+    },
+    "threadState": {
+      "type": "string",
+      "enum": ["dormant", "active", "escalated", "resolved"]
+    },
+    "timelineAnchor": {
+      "type": "string",
+      "enum": ["past", "now", "future_possible"]
+    },
+    "linkedEntityType": {
+      "type": "string",
+      "enum": ["character", "event", "npc", "item", "location", "thread"]
+    },
+    "membershipRole": {
+      "type": "string",
+      "enum": ["GM", "HELPER_GM", "PLAYER"]
+    },
+    "staging": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "isStaged": {
+          "const": true
+        },
+        "trayAnchor": {
+          "$ref": "#/$defs/timelineAnchor"
+        }
+      },
+      "required": ["isStaged", "trayAnchor"]
+    },
+    "stringToIdArrayMap": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/nonEmptyString"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/idArray"
+      }
+    }
+  }
+}

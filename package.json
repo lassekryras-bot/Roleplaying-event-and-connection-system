@@ -7,6 +7,10 @@
     "start": "node src/server.js",
     "dev": "npm --prefix web run dev",
     "dev:web": "npm --prefix web run dev",
+    "generate:gm-timeline-types": "npm --prefix web run generate:gm-timeline-types",
+    "generate:campaign-v2-types": "npm --prefix web run generate:campaign-v2-types",
+    "generate:campaign-v2-shadow": "node scripts/generate-campaign-v2-shadow.mjs",
+    "validate:campaign-v2": "node scripts/validate-campaign-v2.mjs",
     "docs:check": "node scripts/check-frontend-docs.mjs",
     "test": "npm run test:unit && npm run test:integration && npm run test:contract && npm run test:behavior",
     "test:unit": "node --test \"tests/unit/**/*.test.js\"",
@@ -29,6 +33,7 @@
     "react-dom": "18.3.1"
   },
   "devDependencies": {
+    "ajv": "^8.17.1",
     "typescript": "5.5.4",
     "@types/node": "20.14.12",
     "@types/react": "18.3.3",

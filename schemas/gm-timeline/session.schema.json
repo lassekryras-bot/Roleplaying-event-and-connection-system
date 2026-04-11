@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/session.schema.json",
+  "title": "Session",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "campaignId",
+    "sequence",
+    "status",
+    "headline",
+    "placeIds"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^session-[a-z0-9-]+$"
+    },
+    "campaignId": {
+      "$ref": "shared-defs.schema.json#/$defs/campaignId"
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "planning",
+        "active",
+        "ended",
+        "archived"
+      ]
+    },
+    "headline": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string"
+    },
+    "expectedDirection": {
+      "type": "string"
+    },
+    "placeIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^place-[a-z0-9-]+$"
+      },
+      "uniqueItems": true
+    },
+    "notes": {
+      "type": "string"
+    },
+    "startedAt": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "shared-defs.schema.json#/$defs/timestamp"
+        }
+      ]
+    },
+    "endedAt": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "shared-defs.schema.json#/$defs/timestamp"
+        }
+      ]
+    },
+    "updatedAt": {
+      "$ref": "shared-defs.schema.json#/$defs/timestamp"
+    }
+  }
+}

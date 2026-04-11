@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/place.schema.json",
+  "title": "Place",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "campaignId",
+    "headline",
+    "description",
+    "hookIds"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^place-[a-z0-9-]+$"
+    },
+    "campaignId": {
+      "$ref": "shared-defs.schema.json#/$defs/campaignId"
+    },
+    "headline": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "readAloudSections": {
+      "type": "array",
+      "items": {
+        "$ref": "shared-defs.schema.json#/$defs/readAloudSection"
+      }
+    },
+    "hookIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^hook-[a-z0-9-]+$"
+      },
+      "uniqueItems": true
+    },
+    "notes": {
+      "type": "string"
+    },
+    "updatedAt": {
+      "$ref": "shared-defs.schema.json#/$defs/timestamp"
+    }
+  }
+}

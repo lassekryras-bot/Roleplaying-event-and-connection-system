@@ -1,0 +1,14 @@
+{
+  "id": "session-glassworks-ghost-route",
+  "campaignId": "project-3",
+  "sequence": 5,
+  "status": "planning",
+  "headline": "Glassworks Ghost Route",
+  "summary": "If the vault trail slips, the crew chases shipments to the glassworks.",
+  "expectedDirection": "Shift from paper pressure to shipment sabotage.",
+  "placeIds": ["place-sparklock-bank", "place-sunspike-glassworks"],
+  "notes": "Keep this close enough to the bank session that drag-reordering matters.",
+  "startedAt": null,
+  "endedAt": null,
+  "updatedAt": "2026-04-06T09:30:00.000Z"
+}

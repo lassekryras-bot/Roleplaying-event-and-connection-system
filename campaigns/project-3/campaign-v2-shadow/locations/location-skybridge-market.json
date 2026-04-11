@@ -1,0 +1,14 @@
+{
+  "id": "location-skybridge-market",
+  "type": "location",
+  "campaignId": "project-3",
+  "title": "Skybridge Market",
+  "summary": "A noisy market where couriers, brokers, and thieves overlap.",
+  "tags": [
+    "market",
+    "broker",
+    "current",
+    "legacy-place"
+  ],
+  "relations": []
+}

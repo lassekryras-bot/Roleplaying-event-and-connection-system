@@ -1,0 +1,15 @@
+{
+  "id": "thread-test-10",
+  "title": "Test Threat 10",
+  "state": "escalated",
+  "playerSummary": "Test threat 10 keeps pressure on the board for layout checks.",
+  "gmTruth": "Threat 10 is part of the seeded stress campaign used to inspect board density.",
+  "timelineAnchor": "past",
+  "linkedEntityIds": [
+    "entity-zone-4",
+    "entity-cross-9",
+    "entity-pattern-anchor-2"
+  ],
+  "patternId": "pattern-test-2",
+  "playerVisible": true
+}

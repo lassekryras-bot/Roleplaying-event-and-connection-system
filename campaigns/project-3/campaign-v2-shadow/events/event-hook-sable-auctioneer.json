@@ -1,0 +1,20 @@
+{
+  "id": "event-hook-sable-auctioneer",
+  "type": "event",
+  "title": "Sable Auctioneer",
+  "summary": "The auctioneer knows who paid for silence but will not say it cheaply.",
+  "status": "missed",
+  "eventType": "npc-meeting",
+  "notes": "Checks: Pressure the auctioneer Deception DC 17\n\nThis line is cold unless the table loops back.\n\nPriority: low.\n\nLinked thread refs: Auction Mask Network.\n\nImported from gm-timeline hook hook-sable-auctioneer.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-gilt-hall"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "session-gilt-mask-auction"
+    }
+  ],
+  "createdEffectIds": []
+}

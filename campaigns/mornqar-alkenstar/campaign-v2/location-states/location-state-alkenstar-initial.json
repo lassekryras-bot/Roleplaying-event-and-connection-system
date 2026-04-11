@@ -1,0 +1,10 @@
+{
+  "id": "location-state-alkenstar-initial",
+  "type": "locationState",
+  "locationId": "location-alkenstar",
+  "title": "Alkenstar Initial State",
+  "summary": "A soot-choked industrial city where black powder, clockwork, crime, and political corruption collide. It serves as a central urban hub for heists, investigations, underworld deals, and escalating conflict around Mugland's influence.",
+  "status": "active",
+  "notes": "Alkenstar is a dense, smoke-filled city of factories, workshops, saloons, banks, scrapyards, and crooked institutions. It is a place where innovation and desperation live side by side, and where gangs, financiers, corrupt officers, and desperate opportunists all compete for power. In the current campaign, Alkenstar is the main pressure-cooker location tying together Mugland's operations, criminal logistics, player grudges, and multiple active threads.\n\nUse as the parent city-level location for district, faction, and encounter-specific child locations such as banks, saloons, scrapyards, hideouts, and corrupt institutions.",
+  "relations": []
+}

@@ -1,0 +1,11 @@
+{
+  "campaignId": "mornqar-alkenstar",
+  "title": "Mornqar: Alkenstar GM Timeline",
+  "currentSequence": 1,
+  "activeSessionId": null,
+  "sessionIds": [
+    "session-alkenstar-opening-pressure"
+  ],
+  "notes": "Initial timeline seed for Alkenstar. Start from the saloon safehouse and branch into city pressure, underworld jobs, and Mugland's influence.",
+  "updatedAt": "2026-04-11T21:45:00.000Z"
+}

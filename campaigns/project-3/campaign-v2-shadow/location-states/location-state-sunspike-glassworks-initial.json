@@ -1,0 +1,15 @@
+{
+  "id": "location-state-sunspike-glassworks-initial",
+  "type": "locationState",
+  "locationId": "location-sunspike-glassworks",
+  "title": "Sunspike Glassworks Before Visit",
+  "summary": "A furnace district where shipments vanish into heat and reflected light.",
+  "status": "available",
+  "notes": "A furnace district where shipments vanish into heat and reflected light.\n\nUsable as imported from gm-timeline place place-sunspike-glassworks.\n\nPrep: Use if the vault trail becomes an industrial route instead of a paperwork route.\n\nImported from gm-timeline place place-sunspike-glassworks.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-furnace-saboteur"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "id": "thread-mornqar-scarf",
+  "title": "Mornqar's Scarf",
+  "summary": "The scarf is acting like a signal as much as a possession.",
+  "linkedHookIds": ["hook-scarf-broker"],
+  "playerVisible": false
+}

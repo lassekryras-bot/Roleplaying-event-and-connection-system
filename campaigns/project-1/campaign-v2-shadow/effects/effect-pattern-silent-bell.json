@@ -1,0 +1,12 @@
+{
+  "id": "effect-pattern-silent-bell",
+  "type": "effect",
+  "title": "Silent Bell Network",
+  "summary": "A hidden courier network is moving coded orders under the cover of dockside chaos.",
+  "status": "active",
+  "effectType": "pressure",
+  "scope": "city",
+  "severity": "medium",
+  "notes": "Legacy threads in this pattern: Silent Bell Ledger.\n\nLegacy pattern was GM-only in the source data.\n\nImported from legacy pattern pattern-silent-bell.",
+  "relations": []
+}
