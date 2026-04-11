@@ -1,0 +1,13 @@
+{
+  "id": "thread-dockworkers-oath",
+  "title": "Dockworkers Oath",
+  "state": "resolved",
+  "playerSummary": "A labor pledge briefly stabilized the docks before fear took over again.",
+  "gmTruth": "The pledge failed after the union leadership was blackmailed.",
+  "timelineAnchor": "past",
+  "linkedEntityIds": [
+    "entity-union-yard"
+  ],
+  "patternId": "pattern-harbor-conspiracy",
+  "playerVisible": true
+}

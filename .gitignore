@@ -1,6 +1,10 @@
 # Prevent nested dependency installs from polluting git status
+node_modules/
 node_modules/**/node_modules/
 web/node_modules/
+web/.next/
+web/tsconfig.tsbuildinfo
+running
 
 # Common local artifacts
 *.log

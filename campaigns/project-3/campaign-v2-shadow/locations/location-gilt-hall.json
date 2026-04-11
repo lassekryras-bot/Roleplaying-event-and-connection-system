@@ -1,0 +1,13 @@
+{
+  "id": "location-gilt-hall",
+  "type": "location",
+  "campaignId": "project-3",
+  "title": "Gilt Hall",
+  "summary": "A hired hall used for masked exchanges and private bids.",
+  "tags": [
+    "auction",
+    "nobles",
+    "legacy-place"
+  ],
+  "relations": []
+}

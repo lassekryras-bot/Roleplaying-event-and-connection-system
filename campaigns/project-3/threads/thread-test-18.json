@@ -1,0 +1,16 @@
+{
+  "id": "thread-test-18",
+  "title": "Test Threat 18",
+  "state": "active",
+  "hook": "Pressure note 18 needs attention.",
+  "playerSummary": "Test threat 18 keeps pressure on the board for layout checks.",
+  "gmTruth": "Threat 18 is part of the seeded stress campaign used to inspect board density.",
+  "timelineAnchor": "future_possible",
+  "linkedEntityIds": [
+    "entity-zone-6",
+    "entity-cross-14",
+    "entity-pattern-anchor-3"
+  ],
+  "patternId": "pattern-test-3",
+  "playerVisible": true
+}

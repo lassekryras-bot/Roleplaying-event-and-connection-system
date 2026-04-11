@@ -1,0 +1,20 @@
+{
+  "id": "event-thread-lantern-broker",
+  "type": "event",
+  "title": "Lantern Broker's Warning",
+  "summary": "A broker warns that blue lanterns mark safe routes and amber lanterns mark traps.",
+  "status": "available",
+  "eventType": "clue-found",
+  "notes": "GM truth: Sera is feeding selective truths in exchange for immunity after the crackdown.\n\nLegacy thread state: active.\n\nLegacy timeline anchor: future_possible.\n\nImported from legacy thread thread-lantern-broker.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-entity-lantern-routes"
+    },
+    {
+      "type": "belongsTo",
+      "targetId": "effect-pattern-lantern-routes"
+    }
+  ],
+  "createdEffectIds": []
+}

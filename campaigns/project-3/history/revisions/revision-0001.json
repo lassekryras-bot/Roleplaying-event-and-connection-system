@@ -1,0 +1,1748 @@
+{
+  "id": "revision-0001",
+  "projectId": "project-3",
+  "actorUserId": "system",
+  "actorRole": "GM",
+  "commandKind": "seed_campaign",
+  "summary": "Initial campaign import",
+  "createdAt": "1970-01-01T00:00:00.000Z",
+  "snapshot": {
+    "project": {
+      "id": "project-3",
+      "name": "Hundred Notes Test",
+      "status": "active"
+    },
+    "now": {
+      "id": "now",
+      "title": "Current moment",
+      "playerSummary": "This seeded campaign is built to stress-test note density, hover states, and cross-pattern links.",
+      "gmTruth": "Five pattern notes each own eight threats, and the remaining threats create extra random cross-pattern pressure."
+    },
+    "threads": [
+      {
+        "id": "thread-test-01",
+        "title": "Test Threat 01",
+        "state": "active",
+        "playerSummary": "Test threat 01 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 01 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-1",
+          "entity-cross-11",
+          "entity-pattern-anchor-1"
+        ],
+        "patternId": "pattern-test-1",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-02",
+        "title": "Test Threat 02",
+        "state": "active",
+        "playerSummary": "Test threat 02 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 02 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-2",
+          "entity-cross-14",
+          "entity-pattern-anchor-1",
+          "entity-cross-2"
+        ],
+        "patternId": "pattern-test-1",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-03",
+        "title": "Test Threat 03",
+        "state": "active",
+        "hook": "Pressure note 03 needs attention.",
+        "playerSummary": "Test threat 03 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 03 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-3",
+          "entity-cross-6",
+          "entity-pattern-anchor-1"
+        ],
+        "patternId": "pattern-test-1",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-04",
+        "title": "Test Threat 04",
+        "state": "active",
+        "playerSummary": "Test threat 04 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 04 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-4",
+          "entity-cross-13",
+          "entity-pattern-anchor-1"
+        ],
+        "patternId": "pattern-test-1",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-05",
+        "title": "Test Threat 05",
+        "state": "escalated",
+        "playerSummary": "Test threat 05 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 05 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-5",
+          "entity-cross-8",
+          "entity-pattern-anchor-1"
+        ],
+        "patternId": "pattern-test-1",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-06",
+        "title": "Test Threat 06",
+        "state": "active",
+        "hook": "Pressure note 06 needs attention.",
+        "playerSummary": "Test threat 06 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 06 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-6",
+          "entity-cross-11",
+          "entity-pattern-anchor-1"
+        ],
+        "patternId": "pattern-test-1",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-07",
+        "title": "Test Threat 07",
+        "state": "active",
+        "playerSummary": "Test threat 07 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 07 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-1",
+          "entity-cross-14",
+          "entity-pattern-anchor-1",
+          "entity-cross-3"
+        ],
+        "patternId": "pattern-test-1",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-08",
+        "title": "Test Threat 08",
+        "state": "active",
+        "playerSummary": "Test threat 08 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 08 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-2",
+          "entity-cross-6",
+          "entity-pattern-anchor-1"
+        ],
+        "patternId": "pattern-test-1",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-09",
+        "title": "Test Threat 09",
+        "state": "active",
+        "hook": "Pressure note 09 needs attention.",
+        "playerSummary": "Test threat 09 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 09 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-3",
+          "entity-cross-5",
+          "entity-pattern-anchor-2"
+        ],
+        "patternId": "pattern-test-2",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-10",
+        "title": "Test Threat 10",
+        "state": "escalated",
+        "playerSummary": "Test threat 10 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 10 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-4",
+          "entity-cross-9",
+          "entity-pattern-anchor-2"
+        ],
+        "patternId": "pattern-test-2",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-11",
+        "title": "Test Threat 11",
+        "state": "active",
+        "playerSummary": "Test threat 11 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 11 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-5",
+          "entity-cross-8",
+          "entity-pattern-anchor-2"
+        ],
+        "patternId": "pattern-test-2",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-12",
+        "title": "Test Threat 12",
+        "state": "active",
+        "hook": "Pressure note 12 needs attention.",
+        "playerSummary": "Test threat 12 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 12 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-6",
+          "entity-cross-16",
+          "entity-pattern-anchor-2"
+        ],
+        "patternId": "pattern-test-2",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-13",
+        "title": "Test Threat 13",
+        "state": "active",
+        "playerSummary": "Test threat 13 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 13 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-1",
+          "entity-cross-15",
+          "entity-pattern-anchor-2"
+        ],
+        "patternId": "pattern-test-2",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-14",
+        "title": "Test Threat 14",
+        "state": "active",
+        "playerSummary": "Test threat 14 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 14 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-2",
+          "entity-cross-3",
+          "entity-pattern-anchor-2",
+          "entity-zone-1"
+        ],
+        "patternId": "pattern-test-2",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-15",
+        "title": "Test Threat 15",
+        "state": "escalated",
+        "hook": "Pressure note 15 needs attention.",
+        "playerSummary": "Test threat 15 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 15 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-3",
+          "entity-cross-5",
+          "entity-pattern-anchor-2",
+          "entity-cross-2"
+        ],
+        "patternId": "pattern-test-2",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-16",
+        "title": "Test Threat 16",
+        "state": "active",
+        "playerSummary": "Test threat 16 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 16 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-4",
+          "entity-cross-7",
+          "entity-pattern-anchor-2"
+        ],
+        "patternId": "pattern-test-2",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-17",
+        "title": "Test Threat 17",
+        "state": "active",
+        "playerSummary": "Test threat 17 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 17 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-5",
+          "entity-cross-10",
+          "entity-pattern-anchor-3"
+        ],
+        "patternId": "pattern-test-3",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-18",
+        "title": "Test Threat 18",
+        "state": "active",
+        "hook": "Pressure note 18 needs attention.",
+        "playerSummary": "Test threat 18 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 18 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-6",
+          "entity-cross-14",
+          "entity-pattern-anchor-3"
+        ],
+        "patternId": "pattern-test-3",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-19",
+        "title": "Test Threat 19",
+        "state": "active",
+        "playerSummary": "Test threat 19 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 19 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-1",
+          "entity-cross-2",
+          "entity-pattern-anchor-3"
+        ],
+        "patternId": "pattern-test-3",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-20",
+        "title": "Test Threat 20",
+        "state": "escalated",
+        "playerSummary": "Test threat 20 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 20 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-2",
+          "entity-cross-6",
+          "entity-pattern-anchor-3"
+        ],
+        "patternId": "pattern-test-3",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-21",
+        "title": "Test Threat 21",
+        "state": "active",
+        "hook": "Pressure note 21 needs attention.",
+        "playerSummary": "Test threat 21 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 21 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-3",
+          "entity-cross-12",
+          "entity-pattern-anchor-3"
+        ],
+        "patternId": "pattern-test-3",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-22",
+        "title": "Test Threat 22",
+        "state": "active",
+        "playerSummary": "Test threat 22 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 22 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-4",
+          "entity-cross-5",
+          "entity-pattern-anchor-3"
+        ],
+        "patternId": "pattern-test-3",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-23",
+        "title": "Test Threat 23",
+        "state": "active",
+        "playerSummary": "Test threat 23 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 23 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-5",
+          "entity-cross-14",
+          "entity-pattern-anchor-3"
+        ],
+        "patternId": "pattern-test-3",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-24",
+        "title": "Test Threat 24",
+        "state": "active",
+        "hook": "Pressure note 24 needs attention.",
+        "playerSummary": "Test threat 24 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 24 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-6",
+          "entity-cross-16",
+          "entity-pattern-anchor-3"
+        ],
+        "patternId": "pattern-test-3",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-25",
+        "title": "Test Threat 25",
+        "state": "escalated",
+        "playerSummary": "Test threat 25 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 25 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-1",
+          "entity-cross-9",
+          "entity-pattern-anchor-4"
+        ],
+        "patternId": "pattern-test-4",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-26",
+        "title": "Test Threat 26",
+        "state": "active",
+        "playerSummary": "Test threat 26 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 26 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-2",
+          "entity-cross-1",
+          "entity-pattern-anchor-4"
+        ],
+        "patternId": "pattern-test-4",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-27",
+        "title": "Test Threat 27",
+        "state": "active",
+        "hook": "Pressure note 27 needs attention.",
+        "playerSummary": "Test threat 27 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 27 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-3",
+          "entity-cross-14",
+          "entity-pattern-anchor-4"
+        ],
+        "patternId": "pattern-test-4",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-28",
+        "title": "Test Threat 28",
+        "state": "active",
+        "playerSummary": "Test threat 28 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 28 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-4",
+          "entity-cross-9",
+          "entity-pattern-anchor-4"
+        ],
+        "patternId": "pattern-test-4",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-29",
+        "title": "Test Threat 29",
+        "state": "active",
+        "playerSummary": "Test threat 29 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 29 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-5",
+          "entity-cross-15",
+          "entity-pattern-anchor-4"
+        ],
+        "patternId": "pattern-test-4",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-30",
+        "title": "Test Threat 30",
+        "state": "escalated",
+        "hook": "Pressure note 30 needs attention.",
+        "playerSummary": "Test threat 30 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 30 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-6",
+          "entity-cross-3",
+          "entity-pattern-anchor-4",
+          "entity-zone-5"
+        ],
+        "patternId": "pattern-test-4",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-31",
+        "title": "Test Threat 31",
+        "state": "active",
+        "playerSummary": "Test threat 31 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 31 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-1",
+          "entity-cross-5",
+          "entity-pattern-anchor-4"
+        ],
+        "patternId": "pattern-test-4",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-32",
+        "title": "Test Threat 32",
+        "state": "active",
+        "playerSummary": "Test threat 32 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 32 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-2",
+          "entity-cross-14",
+          "entity-pattern-anchor-4",
+          "entity-cross-16"
+        ],
+        "patternId": "pattern-test-4",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-33",
+        "title": "Test Threat 33",
+        "state": "active",
+        "hook": "Pressure note 33 needs attention.",
+        "playerSummary": "Test threat 33 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 33 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-3",
+          "entity-cross-6",
+          "entity-pattern-anchor-5"
+        ],
+        "patternId": "pattern-test-5",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-34",
+        "title": "Test Threat 34",
+        "state": "active",
+        "playerSummary": "Test threat 34 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 34 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-4",
+          "entity-cross-1",
+          "entity-pattern-anchor-5"
+        ],
+        "patternId": "pattern-test-5",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-35",
+        "title": "Test Threat 35",
+        "state": "escalated",
+        "playerSummary": "Test threat 35 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 35 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-5",
+          "entity-cross-9",
+          "entity-pattern-anchor-5",
+          "entity-cross-14"
+        ],
+        "patternId": "pattern-test-5",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-36",
+        "title": "Test Threat 36",
+        "state": "active",
+        "hook": "Pressure note 36 needs attention.",
+        "playerSummary": "Test threat 36 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 36 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-6",
+          "entity-cross-1",
+          "entity-pattern-anchor-5"
+        ],
+        "patternId": "pattern-test-5",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-37",
+        "title": "Test Threat 37",
+        "state": "active",
+        "playerSummary": "Test threat 37 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 37 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-1",
+          "entity-cross-13",
+          "entity-pattern-anchor-5",
+          "entity-cross-14"
+        ],
+        "patternId": "pattern-test-5",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-38",
+        "title": "Test Threat 38",
+        "state": "active",
+        "playerSummary": "Test threat 38 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 38 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-2",
+          "entity-cross-10",
+          "entity-pattern-anchor-5",
+          "entity-cross-9"
+        ],
+        "patternId": "pattern-test-5",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-39",
+        "title": "Test Threat 39",
+        "state": "active",
+        "hook": "Pressure note 39 needs attention.",
+        "playerSummary": "Test threat 39 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 39 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-3",
+          "entity-cross-11",
+          "entity-pattern-anchor-5"
+        ],
+        "patternId": "pattern-test-5",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-40",
+        "title": "Test Threat 40",
+        "state": "escalated",
+        "playerSummary": "Test threat 40 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 40 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-4",
+          "entity-cross-1",
+          "entity-pattern-anchor-5"
+        ],
+        "patternId": "pattern-test-5",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-41",
+        "title": "Test Threat 41",
+        "state": "active",
+        "playerSummary": "Test threat 41 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 41 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-5",
+          "entity-cross-16",
+          "entity-pattern-anchor-3",
+          "entity-cross-14"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-42",
+        "title": "Test Threat 42",
+        "state": "active",
+        "hook": "Pressure note 42 needs attention.",
+        "playerSummary": "Test threat 42 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 42 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-6",
+          "entity-cross-2",
+          "entity-pattern-anchor-5"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-43",
+        "title": "Test Threat 43",
+        "state": "active",
+        "playerSummary": "Test threat 43 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 43 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-1",
+          "entity-cross-2",
+          "entity-pattern-anchor-2"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-44",
+        "title": "Test Threat 44",
+        "state": "active",
+        "playerSummary": "Test threat 44 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 44 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-2",
+          "entity-cross-2",
+          "entity-pattern-anchor-3"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-45",
+        "title": "Test Threat 45",
+        "state": "escalated",
+        "hook": "Pressure note 45 needs attention.",
+        "playerSummary": "Test threat 45 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 45 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-3",
+          "entity-cross-14",
+          "entity-pattern-anchor-2"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-46",
+        "title": "Test Threat 46",
+        "state": "active",
+        "playerSummary": "Test threat 46 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 46 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-4",
+          "entity-cross-14",
+          "entity-pattern-anchor-4"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-47",
+        "title": "Test Threat 47",
+        "state": "active",
+        "playerSummary": "Test threat 47 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 47 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-5",
+          "entity-cross-11",
+          "entity-pattern-anchor-1",
+          "entity-cross-4"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-48",
+        "title": "Test Threat 48",
+        "state": "active",
+        "hook": "Pressure note 48 needs attention.",
+        "playerSummary": "Test threat 48 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 48 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-6",
+          "entity-cross-3",
+          "entity-pattern-anchor-2",
+          "entity-cross-11"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-49",
+        "title": "Test Threat 49",
+        "state": "active",
+        "playerSummary": "Test threat 49 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 49 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-1",
+          "entity-cross-12",
+          "entity-pattern-anchor-5"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-50",
+        "title": "Test Threat 50",
+        "state": "escalated",
+        "playerSummary": "Test threat 50 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 50 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-2",
+          "entity-cross-6",
+          "entity-pattern-anchor-2"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-51",
+        "title": "Test Threat 51",
+        "state": "active",
+        "hook": "Pressure note 51 needs attention.",
+        "playerSummary": "Test threat 51 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 51 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-3",
+          "entity-cross-7",
+          "entity-pattern-anchor-4",
+          "entity-cross-11"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-52",
+        "title": "Test Threat 52",
+        "state": "active",
+        "playerSummary": "Test threat 52 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 52 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-4",
+          "entity-cross-3",
+          "entity-pattern-anchor-5"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-53",
+        "title": "Test Threat 53",
+        "state": "active",
+        "playerSummary": "Test threat 53 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 53 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-5",
+          "entity-cross-8",
+          "entity-pattern-anchor-4",
+          "entity-cross-14"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-54",
+        "title": "Test Threat 54",
+        "state": "active",
+        "hook": "Pressure note 54 needs attention.",
+        "playerSummary": "Test threat 54 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 54 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-6",
+          "entity-cross-12",
+          "entity-pattern-anchor-2",
+          "entity-cross-11"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-55",
+        "title": "Test Threat 55",
+        "state": "escalated",
+        "playerSummary": "Test threat 55 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 55 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-1",
+          "entity-cross-4",
+          "entity-pattern-anchor-2"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-56",
+        "title": "Test Threat 56",
+        "state": "active",
+        "playerSummary": "Test threat 56 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 56 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-2",
+          "entity-cross-15",
+          "entity-pattern-anchor-5"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-57",
+        "title": "Test Threat 57",
+        "state": "active",
+        "hook": "Pressure note 57 needs attention.",
+        "playerSummary": "Test threat 57 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 57 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-3",
+          "entity-cross-11",
+          "entity-pattern-anchor-4",
+          "entity-cross-14"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-58",
+        "title": "Test Threat 58",
+        "state": "active",
+        "playerSummary": "Test threat 58 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 58 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-4",
+          "entity-cross-1",
+          "entity-pattern-anchor-2"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-59",
+        "title": "Test Threat 59",
+        "state": "active",
+        "playerSummary": "Test threat 59 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 59 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-5",
+          "entity-cross-5",
+          "entity-pattern-anchor-2",
+          "entity-zone-3"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-60",
+        "title": "Test Threat 60",
+        "state": "escalated",
+        "hook": "Pressure note 60 needs attention.",
+        "playerSummary": "Test threat 60 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 60 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-6",
+          "entity-cross-1",
+          "entity-pattern-anchor-5"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-61",
+        "title": "Test Threat 61",
+        "state": "active",
+        "playerSummary": "Test threat 61 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 61 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-1",
+          "entity-cross-7",
+          "entity-pattern-anchor-5"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-62",
+        "title": "Test Threat 62",
+        "state": "active",
+        "playerSummary": "Test threat 62 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 62 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-2",
+          "entity-cross-4",
+          "entity-pattern-anchor-5",
+          "entity-cross-12"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-63",
+        "title": "Test Threat 63",
+        "state": "active",
+        "hook": "Pressure note 63 needs attention.",
+        "playerSummary": "Test threat 63 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 63 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-3",
+          "entity-cross-11",
+          "entity-pattern-anchor-2"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-64",
+        "title": "Test Threat 64",
+        "state": "active",
+        "playerSummary": "Test threat 64 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 64 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-4",
+          "entity-cross-14",
+          "entity-pattern-anchor-4",
+          "entity-cross-1"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-65",
+        "title": "Test Threat 65",
+        "state": "escalated",
+        "playerSummary": "Test threat 65 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 65 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-5",
+          "entity-cross-14",
+          "entity-pattern-anchor-5"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-66",
+        "title": "Test Threat 66",
+        "state": "active",
+        "hook": "Pressure note 66 needs attention.",
+        "playerSummary": "Test threat 66 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 66 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-6",
+          "entity-cross-3",
+          "entity-pattern-anchor-5",
+          "entity-cross-14",
+          "entity-zone-3"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-67",
+        "title": "Test Threat 67",
+        "state": "active",
+        "playerSummary": "Test threat 67 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 67 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-1",
+          "entity-cross-4",
+          "entity-pattern-anchor-4"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-68",
+        "title": "Test Threat 68",
+        "state": "active",
+        "playerSummary": "Test threat 68 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 68 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-2",
+          "entity-cross-7",
+          "entity-pattern-anchor-4",
+          "entity-cross-5"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-69",
+        "title": "Test Threat 69",
+        "state": "active",
+        "hook": "Pressure note 69 needs attention.",
+        "playerSummary": "Test threat 69 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 69 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-3",
+          "entity-cross-13",
+          "entity-pattern-anchor-2"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-70",
+        "title": "Test Threat 70",
+        "state": "escalated",
+        "playerSummary": "Test threat 70 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 70 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-4",
+          "entity-cross-3",
+          "entity-pattern-anchor-1",
+          "entity-cross-1"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-71",
+        "title": "Test Threat 71",
+        "state": "active",
+        "playerSummary": "Test threat 71 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 71 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-5",
+          "entity-cross-13",
+          "entity-pattern-anchor-5"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-72",
+        "title": "Test Threat 72",
+        "state": "active",
+        "hook": "Pressure note 72 needs attention.",
+        "playerSummary": "Test threat 72 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 72 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-6",
+          "entity-cross-15",
+          "entity-pattern-anchor-4"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-73",
+        "title": "Test Threat 73",
+        "state": "active",
+        "playerSummary": "Test threat 73 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 73 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-1",
+          "entity-cross-7",
+          "entity-pattern-anchor-4"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-74",
+        "title": "Test Threat 74",
+        "state": "active",
+        "playerSummary": "Test threat 74 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 74 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-2",
+          "entity-cross-13",
+          "entity-pattern-anchor-1",
+          "entity-cross-7",
+          "entity-zone-1"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-75",
+        "title": "Test Threat 75",
+        "state": "escalated",
+        "hook": "Pressure note 75 needs attention.",
+        "playerSummary": "Test threat 75 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 75 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-3",
+          "entity-cross-9",
+          "entity-pattern-anchor-4"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-76",
+        "title": "Test Threat 76",
+        "state": "active",
+        "playerSummary": "Test threat 76 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 76 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-4",
+          "entity-cross-13",
+          "entity-pattern-anchor-5"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-77",
+        "title": "Test Threat 77",
+        "state": "active",
+        "playerSummary": "Test threat 77 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 77 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-5",
+          "entity-cross-12",
+          "entity-pattern-anchor-1"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-78",
+        "title": "Test Threat 78",
+        "state": "active",
+        "hook": "Pressure note 78 needs attention.",
+        "playerSummary": "Test threat 78 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 78 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-6",
+          "entity-cross-8",
+          "entity-pattern-anchor-5"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-79",
+        "title": "Test Threat 79",
+        "state": "active",
+        "playerSummary": "Test threat 79 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 79 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-1",
+          "entity-cross-13",
+          "entity-pattern-anchor-1"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-80",
+        "title": "Test Threat 80",
+        "state": "escalated",
+        "playerSummary": "Test threat 80 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 80 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-2",
+          "entity-cross-1",
+          "entity-pattern-anchor-3",
+          "entity-cross-3"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-81",
+        "title": "Test Threat 81",
+        "state": "active",
+        "hook": "Pressure note 81 needs attention.",
+        "playerSummary": "Test threat 81 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 81 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-3",
+          "entity-cross-12",
+          "entity-pattern-anchor-5",
+          "entity-zone-4"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-82",
+        "title": "Test Threat 82",
+        "state": "active",
+        "playerSummary": "Test threat 82 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 82 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-4",
+          "entity-cross-15",
+          "entity-pattern-anchor-2"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-83",
+        "title": "Test Threat 83",
+        "state": "active",
+        "playerSummary": "Test threat 83 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 83 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-5",
+          "entity-cross-9",
+          "entity-pattern-anchor-5"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-84",
+        "title": "Test Threat 84",
+        "state": "active",
+        "hook": "Pressure note 84 needs attention.",
+        "playerSummary": "Test threat 84 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 84 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-6",
+          "entity-cross-4",
+          "entity-pattern-anchor-4"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-85",
+        "title": "Test Threat 85",
+        "state": "escalated",
+        "playerSummary": "Test threat 85 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 85 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-1",
+          "entity-cross-1",
+          "entity-pattern-anchor-4"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-86",
+        "title": "Test Threat 86",
+        "state": "active",
+        "playerSummary": "Test threat 86 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 86 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-2",
+          "entity-cross-14",
+          "entity-pattern-anchor-2",
+          "entity-cross-10"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-87",
+        "title": "Test Threat 87",
+        "state": "active",
+        "hook": "Pressure note 87 needs attention.",
+        "playerSummary": "Test threat 87 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 87 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-3",
+          "entity-cross-16",
+          "entity-pattern-anchor-5",
+          "entity-cross-6"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-88",
+        "title": "Test Threat 88",
+        "state": "active",
+        "playerSummary": "Test threat 88 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 88 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-4",
+          "entity-cross-11",
+          "entity-pattern-anchor-2",
+          "entity-cross-6"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-89",
+        "title": "Test Threat 89",
+        "state": "active",
+        "playerSummary": "Test threat 89 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 89 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-5",
+          "entity-cross-2",
+          "entity-pattern-anchor-3"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-90",
+        "title": "Test Threat 90",
+        "state": "escalated",
+        "hook": "Pressure note 90 needs attention.",
+        "playerSummary": "Test threat 90 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 90 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-6",
+          "entity-cross-11",
+          "entity-pattern-anchor-5",
+          "entity-cross-6"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-91",
+        "title": "Test Threat 91",
+        "state": "active",
+        "playerSummary": "Test threat 91 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 91 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-1",
+          "entity-cross-6",
+          "entity-pattern-anchor-3",
+          "entity-cross-11"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-92",
+        "title": "Test Threat 92",
+        "state": "active",
+        "playerSummary": "Test threat 92 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 92 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-2",
+          "entity-cross-4",
+          "entity-pattern-anchor-1"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-93",
+        "title": "Test Threat 93",
+        "state": "active",
+        "hook": "Pressure note 93 needs attention.",
+        "playerSummary": "Test threat 93 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 93 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-zone-3",
+          "entity-cross-4",
+          "entity-pattern-anchor-4"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-94",
+        "title": "Test Threat 94",
+        "state": "active",
+        "playerSummary": "Test threat 94 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 94 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-zone-4",
+          "entity-cross-5",
+          "entity-pattern-anchor-5",
+          "entity-zone-5"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "thread-test-95",
+        "title": "Test Threat 95",
+        "state": "escalated",
+        "playerSummary": "Test threat 95 keeps pressure on the board for layout checks.",
+        "gmTruth": "Threat 95 is part of the seeded stress campaign used to inspect board density.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-zone-5",
+          "entity-cross-8",
+          "entity-pattern-anchor-3"
+        ],
+        "playerVisible": true
+      }
+    ],
+    "patterns": [
+      {
+        "id": "pattern-test-1",
+        "title": "Test Pattern 1",
+        "summary": "Pattern 1 groups a fixed cluster of threats for board load testing.",
+        "escalationLevel": 1,
+        "threadIds": [
+          "thread-test-01",
+          "thread-test-02",
+          "thread-test-03",
+          "thread-test-04",
+          "thread-test-05",
+          "thread-test-06",
+          "thread-test-07",
+          "thread-test-08"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "pattern-test-2",
+        "title": "Test Pattern 2",
+        "summary": "Pattern 2 groups a fixed cluster of threats for board load testing.",
+        "escalationLevel": 2,
+        "threadIds": [
+          "thread-test-09",
+          "thread-test-10",
+          "thread-test-11",
+          "thread-test-12",
+          "thread-test-13",
+          "thread-test-14",
+          "thread-test-15",
+          "thread-test-16"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "pattern-test-3",
+        "title": "Test Pattern 3",
+        "summary": "Pattern 3 groups a fixed cluster of threats for board load testing.",
+        "escalationLevel": 3,
+        "threadIds": [
+          "thread-test-17",
+          "thread-test-18",
+          "thread-test-19",
+          "thread-test-20",
+          "thread-test-21",
+          "thread-test-22",
+          "thread-test-23",
+          "thread-test-24"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "pattern-test-4",
+        "title": "Test Pattern 4",
+        "summary": "Pattern 4 groups a fixed cluster of threats for board load testing.",
+        "escalationLevel": 1,
+        "threadIds": [
+          "thread-test-25",
+          "thread-test-26",
+          "thread-test-27",
+          "thread-test-28",
+          "thread-test-29",
+          "thread-test-30",
+          "thread-test-31",
+          "thread-test-32"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "pattern-test-5",
+        "title": "Test Pattern 5",
+        "summary": "Pattern 5 groups a fixed cluster of threats for board load testing.",
+        "escalationLevel": 2,
+        "threadIds": [
+          "thread-test-33",
+          "thread-test-34",
+          "thread-test-35",
+          "thread-test-36",
+          "thread-test-37",
+          "thread-test-38",
+          "thread-test-39",
+          "thread-test-40"
+        ],
+        "playerVisible": true
+      }
+    ],
+    "linkedEntities": {
+      "entity-pattern-anchor-1": {
+        "id": "entity-pattern-anchor-1",
+        "type": "location",
+        "name": "Pattern Anchor 1",
+        "playerVisible": true
+      },
+      "entity-pattern-anchor-2": {
+        "id": "entity-pattern-anchor-2",
+        "type": "location",
+        "name": "Pattern Anchor 2",
+        "playerVisible": true
+      },
+      "entity-pattern-anchor-3": {
+        "id": "entity-pattern-anchor-3",
+        "type": "location",
+        "name": "Pattern Anchor 3",
+        "playerVisible": true
+      },
+      "entity-pattern-anchor-4": {
+        "id": "entity-pattern-anchor-4",
+        "type": "location",
+        "name": "Pattern Anchor 4",
+        "playerVisible": true
+      },
+      "entity-pattern-anchor-5": {
+        "id": "entity-pattern-anchor-5",
+        "type": "location",
+        "name": "Pattern Anchor 5",
+        "playerVisible": true
+      },
+      "entity-cross-1": {
+        "id": "entity-cross-1",
+        "type": "npc",
+        "name": "Cross Signal 01",
+        "playerVisible": true
+      },
+      "entity-cross-2": {
+        "id": "entity-cross-2",
+        "type": "npc",
+        "name": "Cross Signal 02",
+        "playerVisible": true
+      },
+      "entity-cross-3": {
+        "id": "entity-cross-3",
+        "type": "npc",
+        "name": "Cross Signal 03",
+        "playerVisible": true
+      },
+      "entity-cross-4": {
+        "id": "entity-cross-4",
+        "type": "npc",
+        "name": "Cross Signal 04",
+        "playerVisible": true
+      },
+      "entity-cross-5": {
+        "id": "entity-cross-5",
+        "type": "npc",
+        "name": "Cross Signal 05",
+        "playerVisible": true
+      },
+      "entity-cross-6": {
+        "id": "entity-cross-6",
+        "type": "npc",
+        "name": "Cross Signal 06",
+        "playerVisible": true
+      },
+      "entity-cross-7": {
+        "id": "entity-cross-7",
+        "type": "npc",
+        "name": "Cross Signal 07",
+        "playerVisible": true
+      },
+      "entity-cross-8": {
+        "id": "entity-cross-8",
+        "type": "npc",
+        "name": "Cross Signal 08",
+        "playerVisible": true
+      },
+      "entity-cross-9": {
+        "id": "entity-cross-9",
+        "type": "npc",
+        "name": "Cross Signal 09",
+        "playerVisible": true
+      },
+      "entity-cross-10": {
+        "id": "entity-cross-10",
+        "type": "npc",
+        "name": "Cross Signal 10",
+        "playerVisible": true
+      },
+      "entity-cross-11": {
+        "id": "entity-cross-11",
+        "type": "npc",
+        "name": "Cross Signal 11",
+        "playerVisible": true
+      },
+      "entity-cross-12": {
+        "id": "entity-cross-12",
+        "type": "npc",
+        "name": "Cross Signal 12",
+        "playerVisible": true
+      },
+      "entity-cross-13": {
+        "id": "entity-cross-13",
+        "type": "npc",
+        "name": "Cross Signal 13",
+        "playerVisible": true
+      },
+      "entity-cross-14": {
+        "id": "entity-cross-14",
+        "type": "npc",
+        "name": "Cross Signal 14",
+        "playerVisible": true
+      },
+      "entity-cross-15": {
+        "id": "entity-cross-15",
+        "type": "npc",
+        "name": "Cross Signal 15",
+        "playerVisible": true
+      },
+      "entity-cross-16": {
+        "id": "entity-cross-16",
+        "type": "npc",
+        "name": "Cross Signal 16",
+        "playerVisible": true
+      },
+      "entity-zone-1": {
+        "id": "entity-zone-1",
+        "type": "location",
+        "name": "Stress Zone 1",
+        "playerVisible": true
+      },
+      "entity-zone-2": {
+        "id": "entity-zone-2",
+        "type": "location",
+        "name": "Stress Zone 2",
+        "playerVisible": true
+      },
+      "entity-zone-3": {
+        "id": "entity-zone-3",
+        "type": "location",
+        "name": "Stress Zone 3",
+        "playerVisible": true
+      },
+      "entity-zone-4": {
+        "id": "entity-zone-4",
+        "type": "location",
+        "name": "Stress Zone 4",
+        "playerVisible": true
+      },
+      "entity-zone-5": {
+        "id": "entity-zone-5",
+        "type": "location",
+        "name": "Stress Zone 5",
+        "playerVisible": true
+      },
+      "entity-zone-6": {
+        "id": "entity-zone-6",
+        "type": "location",
+        "name": "Stress Zone 6",
+        "playerVisible": true
+      }
+    },
+    "playerProfiles": [
+      {
+        "userId": "player-1",
+        "username": "Adminplayer",
+        "displayName": "Pattern Scout",
+        "patternId": "pattern-test-1",
+        "perspectivePatternIds": [
+          "pattern-test-2",
+          "pattern-test-3"
+        ],
+        "perspectiveThreadIds": [
+          "thread-test-41",
+          "thread-test-52",
+          "thread-test-67"
+        ]
+      },
+      {
+        "userId": "player-3",
+        "username": "Adminplayer3",
+        "displayName": "Crosswind Watch",
+        "patternId": "pattern-test-4",
+        "perspectivePatternIds": [
+          "pattern-test-5"
+        ],
+        "perspectiveThreadIds": [
+          "thread-test-58",
+          "thread-test-73",
+          "thread-test-84"
+        ]
+      }
+    ],
+    "manualLinks": [],
+    "sharing": {
+      "globalNodeIds": [],
+      "playerNodeIdsByPlayer": {
+        "player-1": [],
+        "player-3": []
+      }
+    }
+  }
+}

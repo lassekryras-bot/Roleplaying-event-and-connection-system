@@ -1,0 +1,19 @@
+{
+  "id": "location-state-grand-archive-initial",
+  "type": "locationState",
+  "locationId": "location-grand-archive",
+  "title": "Grand Archive Before Visit",
+  "summary": "A powder-dry archive where ledgers go missing in plain sight.",
+  "status": "active",
+  "notes": "A powder-dry archive where ledgers go missing in plain sight.\n\nRead-aloud cues: Dust and Brass - When the archive scene opens. - Dust coats the brass railings like ash, and every missing ledger leaves a cleaner stripe behind.\n\nUsable as imported from gm-timeline place place-grand-archive.\n\nPrep: Read-aloud cues: Dust and Brass - When the archive scene opens. - Dust coats the brass railings like ash, and every missing ledger leaves a cleaner stripe behind.\n\nImported from gm-timeline place place-grand-archive.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-librarian-debt"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-sealed-stacks"
+    }
+  ]
+}

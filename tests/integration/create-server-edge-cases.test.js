@@ -133,6 +133,24 @@ test("returns health and not-found responses", async () => {
   });
 });
 
+test("responds to browser preflight requests and exposes CORS headers", async () => {
+  await withServer({}, async ({ baseUrl }) => {
+    const preflightResponse = await fetch(`${baseUrl}/auth/login`, {
+      method: "OPTIONS",
+      headers: {
+        Origin: "http://localhost:3000",
+        "Access-Control-Request-Method": "POST",
+        "Access-Control-Request-Headers": "content-type",
+      },
+    });
+
+    assert.equal(preflightResponse.status, 204);
+    assert.equal(preflightResponse.headers.get("access-control-allow-origin"), "http://localhost:3000");
+    assert.match(preflightResponse.headers.get("access-control-allow-methods") ?? "", /POST/);
+    assert.match(preflightResponse.headers.get("access-control-allow-headers") ?? "", /content-type/i);
+  });
+});
+
 test("handles auth login success and stable error responses", async () => {
   await withServer({
     authenticateUser: (username, password) => {

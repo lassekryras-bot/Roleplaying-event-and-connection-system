@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://living-campaign.dev/schemas/campaign/manual-links.schema.json",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "sourceId": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "targetId": {
+        "$ref": "./common.schema.json#/$defs/id"
+      }
+    },
+    "required": ["id", "sourceId", "targetId"]
+  }
+}

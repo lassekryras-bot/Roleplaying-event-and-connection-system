@@ -1,0 +1,7 @@
+{
+  "id": "thread-red-silt-route",
+  "title": "Red Silt Route",
+  "summary": "A courier lane links the market ambush to the bank transfer.",
+  "linkedHookIds": ["hook-runner-ambush", "hook-night-vault"],
+  "playerVisible": false
+}

@@ -1,0 +1,20 @@
+{
+  "id": "event-thread-test-63",
+  "type": "event",
+  "title": "Test Threat 63",
+  "summary": "Test threat 63 keeps pressure on the board for layout checks.",
+  "status": "available",
+  "eventType": "clue-found",
+  "notes": "Pressure note 63 needs attention.\n\nGM truth: Threat 63 is part of the seeded stress campaign used to inspect board density.\n\nLegacy thread state: active.\n\nLegacy timeline anchor: future_possible.\n\nImported from legacy thread thread-test-63.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-entity-zone-3"
+    },
+    {
+      "type": "involves",
+      "targetId": "location-entity-pattern-anchor-2"
+    }
+  ],
+  "createdEffectIds": []
+}

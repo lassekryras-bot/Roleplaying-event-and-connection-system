@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-04-11T21:45:00.000Z",
+  "items": [
+    {
+      "id": "place-alkenstar",
+      "headline": "Alkenstar",
+      "description": "A soot-choked industrial city where black powder, clockwork, crime, and political corruption collide.",
+      "tags": [
+        "city",
+        "industrial",
+        "urban",
+        "campaign-hub"
+      ],
+      "file": "place-alkenstar.json"
+    },
+    {
+      "id": "place-barrel-and-bullet-saloon",
+      "headline": "Barrel & Bullet Saloon",
+      "description": "A rough but dependable saloon in Alkenstar's Ferrous Quarter that doubles as a safehouse, job hub, and meeting ground.",
+      "tags": [
+        "saloon",
+        "safehouse",
+        "meeting-place",
+        "base-of-operations"
+      ],
+      "file": "place-barrel-and-bullet-saloon.json"
+    }
+  ]
+}

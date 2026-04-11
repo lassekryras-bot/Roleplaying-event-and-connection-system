@@ -1,0 +1,12 @@
+{
+  "id": "pattern-harbor-conspiracy",
+  "title": "Harbor Conspiracy",
+  "summary": "The docks are being manipulated so disappearances look like labor unrest instead of coordinated pressure.",
+  "escalationLevel": 2,
+  "threadIds": [
+    "thread-whispers-harbor",
+    "thread-night-watch",
+    "thread-dockworkers-oath"
+  ],
+  "playerVisible": true
+}

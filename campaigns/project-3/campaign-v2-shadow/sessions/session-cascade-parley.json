@@ -1,0 +1,32 @@
+{
+  "id": "session-cascade-parley",
+  "type": "session",
+  "title": "Cascade Parley",
+  "locationId": "location-skybridge-market",
+  "summary": "A shrine contact may turn rumor into leverage if the table pivots diplomatic.",
+  "startingLocationStateId": "location-state-skybridge-market-initial",
+  "resultingLocationStateId": "location-state-skybridge-market-post-major-visit",
+  "notes": "Use the shrine pact when the crew wants answers without a heist.\n\nThis future session should read as softer, not safer.\n\nImported from gm-timeline session session-cascade-parley.",
+  "relations": [
+    {
+      "type": "involves",
+      "targetId": "location-cascade-shrine"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-runner-ambush"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-scarf-broker"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-rain-prayer"
+    },
+    {
+      "type": "follows",
+      "targetId": "session-glassworks-ghost-route"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "event-thread-test-36",
+  "type": "event",
+  "title": "Test Threat 36",
+  "summary": "Test threat 36 keeps pressure on the board for layout checks.",
+  "status": "available",
+  "eventType": "clue-found",
+  "notes": "Pressure note 36 needs attention.\n\nGM truth: Threat 36 is part of the seeded stress campaign used to inspect board density.\n\nLegacy thread state: active.\n\nLegacy timeline anchor: future_possible.\n\nImported from legacy thread thread-test-36.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-entity-zone-6"
+    },
+    {
+      "type": "involves",
+      "targetId": "location-entity-pattern-anchor-5"
+    },
+    {
+      "type": "belongsTo",
+      "targetId": "effect-pattern-test-5"
+    }
+  ],
+  "createdEffectIds": []
+}

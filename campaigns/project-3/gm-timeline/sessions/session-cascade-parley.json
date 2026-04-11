@@ -1,0 +1,14 @@
+{
+  "id": "session-cascade-parley",
+  "campaignId": "project-3",
+  "sequence": 6,
+  "status": "planning",
+  "headline": "Cascade Parley",
+  "summary": "A shrine contact may turn rumor into leverage if the table pivots diplomatic.",
+  "expectedDirection": "Use the shrine pact when the crew wants answers without a heist.",
+  "placeIds": ["place-skybridge-market", "place-cascade-shrine"],
+  "notes": "This future session should read as softer, not safer.",
+  "startedAt": null,
+  "endedAt": null,
+  "updatedAt": "2026-04-06T09:30:00.000Z"
+}

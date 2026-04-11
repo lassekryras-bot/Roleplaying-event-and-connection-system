@@ -1,0 +1,36 @@
+{
+  "id": "session-mornqar-ledger",
+  "type": "session",
+  "title": "Mornqar's Ledger",
+  "locationId": "location-grand-archive",
+  "summary": "The active session is tracking a broker carrying the scarf ledger into the market.",
+  "startingLocationStateId": "location-state-grand-archive-initial",
+  "resultingLocationStateId": "location-state-grand-archive-post-major-visit",
+  "notes": "Push the market broker until the bank trail becomes unavoidable.\n\nKeep the broker visible and the archive pressure close behind so the table feels the squeeze.\n\nImported from gm-timeline session session-mornqar-ledger.",
+  "relations": [
+    {
+      "type": "involves",
+      "targetId": "location-skybridge-market"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-librarian-debt"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-sealed-stacks"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-runner-ambush"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-scarf-broker"
+    },
+    {
+      "type": "follows",
+      "targetId": "session-gilt-mask-auction"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "thread-river-static",
+  "title": "River Static",
+  "state": "active",
+  "playerSummary": "Boat crews repeat warning phrases before any official signal reaches the river crossing.",
+  "gmTruth": "The buried engine is piggybacking on ferry gossip to amplify false mobilization orders.",
+  "timelineAnchor": "past",
+  "linkedEntityIds": [
+    "entity-river-ferry",
+    "entity-messenger"
+  ],
+  "patternId": "pattern-river-static",
+  "playerVisible": true
+}

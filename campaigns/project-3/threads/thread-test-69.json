@@ -1,0 +1,15 @@
+{
+  "id": "thread-test-69",
+  "title": "Test Threat 69",
+  "state": "active",
+  "hook": "Pressure note 69 needs attention.",
+  "playerSummary": "Test threat 69 keeps pressure on the board for layout checks.",
+  "gmTruth": "Threat 69 is part of the seeded stress campaign used to inspect board density.",
+  "timelineAnchor": "future_possible",
+  "linkedEntityIds": [
+    "entity-zone-3",
+    "entity-cross-13",
+    "entity-pattern-anchor-2"
+  ],
+  "playerVisible": true
+}

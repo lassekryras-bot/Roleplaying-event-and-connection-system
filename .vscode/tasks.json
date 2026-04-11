@@ -1,0 +1,189 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Backend: MVP API",
+      "type": "shell",
+      "command": "npm.cmd start",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "custom",
+        "pattern": {
+          "regexp": "^(.*)$",
+          "message": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".",
+          "endsPattern": "Living Campaign Engine MVP API listening on http://localhost:3001"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "mvp"
+      }
+    },
+    {
+      "label": "Frontend: Next dev",
+      "type": "shell",
+      "command": "npm.cmd --prefix web run dev",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "custom",
+        "pattern": {
+          "regexp": "^(.*)$",
+          "message": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".",
+          "endsPattern": "Ready in"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "mvp"
+      }
+    },
+    {
+      "label": "MVP: Run frontend + backend",
+      "dependsOrder": "parallel",
+      "dependsOn": [
+        "Backend: MVP API",
+        "Frontend: Next dev"
+      ]
+    },
+    {
+      "label": "Backend: Test unit",
+      "type": "shell",
+      "command": "npm.cmd run test:unit",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "tests"
+      }
+    },
+    {
+      "label": "Backend: Test integration (node)",
+      "type": "shell",
+      "command": "npm.cmd run test:integration:node",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "tests"
+      }
+    },
+    {
+      "label": "Backend: Test integration (gherkin)",
+      "type": "shell",
+      "command": "npm.cmd run test:integration:gherkin",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "tests"
+      }
+    },
+    {
+      "label": "Backend: Test contract",
+      "type": "shell",
+      "command": "npm.cmd run test:contract",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "tests"
+      }
+    },
+    {
+      "label": "Backend: Test behavior",
+      "type": "shell",
+      "command": "npm.cmd run test:behavior",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "tests"
+      }
+    },
+    {
+      "label": "Backend: Test all",
+      "type": "shell",
+      "command": "npm.cmd test",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "tests"
+      }
+    },
+    {
+      "label": "Frontend: Test unit",
+      "type": "shell",
+      "command": "npm.cmd --prefix web run test:unit",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "tests"
+      }
+    },
+    {
+      "label": "Frontend: Test",
+      "type": "shell",
+      "command": "npm.cmd --prefix web run test",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "tests"
+      }
+    },
+    {
+      "label": "Tests: All",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Backend: Test all",
+        "Frontend: Test"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    }
+  ]
+}

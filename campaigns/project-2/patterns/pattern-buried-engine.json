@@ -1,0 +1,10 @@
+{
+  "id": "pattern-buried-engine",
+  "title": "Buried Engine",
+  "summary": "Something ancient under Signal Hill is learning the region's wartime habits and exploiting them.",
+  "escalationLevel": 3,
+  "threadIds": [
+    "thread-engine-heart"
+  ],
+  "playerVisible": false
+}

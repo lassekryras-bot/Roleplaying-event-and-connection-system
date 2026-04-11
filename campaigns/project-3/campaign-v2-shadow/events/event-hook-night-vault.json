@@ -1,0 +1,28 @@
+{
+  "id": "event-hook-night-vault",
+  "type": "event",
+  "title": "Night Vault Transfer",
+  "summary": "A quiet transfer route moves the wrong papers through the right vault.",
+  "status": "available",
+  "eventType": "clue-found",
+  "notes": "Checks: Read the transfer pattern Investigation DC 18\n\nFuture-session anchor for the bank path.\n\nPriority: high.\n\nLinked thread refs: Red Silt Route.\n\nImported from gm-timeline hook hook-night-vault.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-sparklock-bank"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "session-bank-of-ashen-notes"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "session-glassworks-ghost-route"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "session-gunworks-blackmail"
+    }
+  ],
+  "createdEffectIds": []
+}

@@ -1,29 +1,25 @@
 import { createServer } from "./api/createServer.js";
-import {
-  createInvite,
-  createMembership,
-  getMembershipByProjectAndUser,
-  listMemberships,
-  listProjects,
-  getThreadById,
-  listEvents,
-  listThreads,
-  updateThreadState,
-} from "./data/inMemoryStore.js";
+import { createFileCampaignStore } from "./data/fileCampaignStore.js";
 import { authenticateUser } from "./data/inMemoryAuthStore.js";
 
-const port = Number(process.env.PORT ?? 3000);
+const port = Number(process.env.PORT ?? 3001);
+const campaignStore = createFileCampaignStore();
 
 const server = createServer({
-  getThreadById,
-  listThreads,
-  listProjects,
-  listMemberships,
-  listEvents,
-  saveThreadState: updateThreadState,
-  createProjectMembership: createMembership,
-  createProjectInvite: createInvite,
-  getProjectMembershipByUserId: getMembershipByProjectAndUser,
+  getThreadById: campaignStore.getThreadById,
+  listThreads: campaignStore.listThreads,
+  listProjects: campaignStore.listProjects,
+  getProjectGraph: campaignStore.getProjectGraph,
+  executeProjectCommand: campaignStore.executeProjectCommand,
+  getProjectHistory: campaignStore.getProjectHistory,
+  undoProjectHistory: campaignStore.undoProjectHistory,
+  redoProjectHistory: campaignStore.redoProjectHistory,
+  listMemberships: campaignStore.listMemberships,
+  listEvents: campaignStore.listEvents,
+  saveThreadState: campaignStore.saveThreadState,
+  createProjectMembership: campaignStore.createMembership,
+  createProjectInvite: campaignStore.createInvite,
+  getProjectMembershipByUserId: campaignStore.getProjectMembershipByUserId,
   authenticateUser,
 });
 

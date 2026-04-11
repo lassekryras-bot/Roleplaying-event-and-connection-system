@@ -1,0 +1,15 @@
+{
+  "id": "thread-bell-ledger",
+  "title": "Silent Bell Ledger",
+  "state": "active",
+  "hook": "A courier ledger maps hidden payments and meeting routes.",
+  "playerSummary": "GM-only courier routes are still hidden from the players.",
+  "gmTruth": "The ledger reveals how the cult's harbor cells coordinate every public disruption.",
+  "timelineAnchor": "now",
+  "linkedEntityIds": [
+    "entity-bell-ledger",
+    "entity-cinder-choir"
+  ],
+  "patternId": "pattern-silent-bell",
+  "playerVisible": false
+}

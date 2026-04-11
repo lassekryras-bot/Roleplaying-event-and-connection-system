@@ -1,0 +1,15 @@
+{
+  "id": "location-state-brass-docks-initial",
+  "type": "locationState",
+  "locationId": "location-brass-docks",
+  "title": "Brass Docks Before Visit",
+  "summary": "Fog, labor crews, and a berth where half the rumors begin.",
+  "status": "resolved",
+  "notes": "Fog, labor crews, and a berth where half the rumors begin.\n\nRead-aloud cues: Coal Smoke - When the crew first steps onto the quay. - Coal smoke hangs low over the water, and every rope sounds louder than it should.\n\nUsable as imported from gm-timeline place place-brass-docks.\n\nPrep: Read-aloud cues: Coal Smoke - When the crew first steps onto the quay. - Coal smoke hangs low over the water, and every rope sounds louder than it should.\n\nImported from gm-timeline place place-brass-docks.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-ghost-barge-rumor"
+    }
+  ]
+}

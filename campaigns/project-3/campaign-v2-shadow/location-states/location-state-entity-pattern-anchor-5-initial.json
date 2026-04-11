@@ -1,0 +1,111 @@
+{
+  "id": "location-state-entity-pattern-anchor-5-initial",
+  "type": "locationState",
+  "locationId": "location-entity-pattern-anchor-5",
+  "title": "Pattern Anchor 5 Before Visit",
+  "summary": "Test threat 33 keeps pressure on the board for layout checks.",
+  "status": "active",
+  "notes": "Related legacy threads: Test Threat 33, Test Threat 34, Test Threat 35, Test Threat 36, Test Threat 37, Test Threat 38, Test Threat 39, Test Threat 40, Test Threat 42, Test Threat 49, Test Threat 52, Test Threat 56, Test Threat 60, Test Threat 61, Test Threat 62, Test Threat 65, Test Threat 66, Test Threat 71, Test Threat 76, Test Threat 78, Test Threat 81, Test Threat 83, Test Threat 87, Test Threat 90, Test Threat 94.\n\nReferenced by 25 legacy threads.\n\nImported from legacy linked entity entity-pattern-anchor-5.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-33"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-34"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-35"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-36"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-37"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-38"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-39"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-40"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-42"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-49"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-52"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-56"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-60"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-61"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-62"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-65"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-66"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-71"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-76"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-78"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-81"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-83"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-87"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-90"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-94"
+    }
+  ]
+}

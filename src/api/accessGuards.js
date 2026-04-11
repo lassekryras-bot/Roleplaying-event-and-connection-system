@@ -63,6 +63,9 @@ export function forbiddenErrorPayload() {
 
 export function getWriteEndpoints() {
   return [
+    { method: "POST", path: "/projects/:projectId/commands", domain: "campaign commands" },
+    { method: "POST", path: "/projects/:projectId/history/undo", domain: "campaign history" },
+    { method: "POST", path: "/projects/:projectId/history/redo", domain: "campaign history" },
     { method: "PATCH", path: "/threads/:threadId", domain: "thread updates" },
     { method: "POST", path: "/projects/:projectId/memberships", domain: "memberships" },
     { method: "POST", path: "/projects/:projectId/invites", domain: "invites" },

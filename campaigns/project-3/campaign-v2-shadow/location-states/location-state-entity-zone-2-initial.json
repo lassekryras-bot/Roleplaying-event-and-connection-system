@@ -1,0 +1,75 @@
+{
+  "id": "location-state-entity-zone-2-initial",
+  "type": "locationState",
+  "locationId": "location-entity-zone-2",
+  "title": "Stress Zone 2 Before Visit",
+  "summary": "Test threat 02 keeps pressure on the board for layout checks.",
+  "status": "active",
+  "notes": "Related legacy threads: Test Threat 02, Test Threat 08, Test Threat 14, Test Threat 20, Test Threat 26, Test Threat 32, Test Threat 38, Test Threat 44, Test Threat 50, Test Threat 56, Test Threat 62, Test Threat 68, Test Threat 74, Test Threat 80, Test Threat 86, Test Threat 92.\n\nReferenced by 16 legacy threads.\n\nImported from legacy linked entity entity-zone-2.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-02"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-08"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-14"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-20"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-26"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-32"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-38"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-44"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-50"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-56"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-62"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-68"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-74"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-80"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-86"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-92"
+    }
+  ]
+}

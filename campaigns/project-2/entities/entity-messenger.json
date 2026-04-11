@@ -1,0 +1,6 @@
+{
+  "id": "entity-messenger",
+  "type": "npc",
+  "name": "Red Messenger Yara",
+  "playerVisible": true
+}

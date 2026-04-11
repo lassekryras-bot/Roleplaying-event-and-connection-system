@@ -1,0 +1,10 @@
+{
+  "id": "place-sparklock-bank",
+  "campaignId": "project-3",
+  "headline": "Sparklock Bank",
+  "description": "A tight bank with nervous clerks, layered locks, and private notes.",
+  "tags": ["bank", "future"],
+  "hookIds": ["hook-night-vault"],
+  "notes": "Future pressure point if the market lead lands cleanly.",
+  "updatedAt": "2026-04-06T09:30:00.000Z"
+}

@@ -1,0 +1,15 @@
+{
+  "id": "session-alkenstar-opening-pressure",
+  "campaignId": "mornqar-alkenstar",
+  "sequence": 1,
+  "status": "planning",
+  "headline": "Opening Pressure in Alkenstar",
+  "summary": "The crew regroups at the Barrel & Bullet Saloon while Mugland's urban network starts squeezing every lead, favor, and safe angle in the city.",
+  "expectedDirection": "Use the saloon as the first staging ground, then push outward into deals, grudges, corruption, and city-wide pressure.",
+  "placeIds": [
+    "place-barrel-and-bullet-saloon",
+    "place-alkenstar"
+  ],
+  "notes": "Seed session for the timeline page. This is intentionally light and can be replaced once fuller session planning lands.",
+  "updatedAt": "2026-04-11T21:45:00.000Z"
+}

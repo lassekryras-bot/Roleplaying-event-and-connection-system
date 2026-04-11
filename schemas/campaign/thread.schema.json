@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://living-campaign.dev/schemas/campaign/thread.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "title": {
+      "$ref": "./common.schema.json#/$defs/nonEmptyString"
+    },
+    "state": {
+      "$ref": "./common.schema.json#/$defs/threadState"
+    },
+    "hook": {
+      "$ref": "./common.schema.json#/$defs/text"
+    },
+    "playerSummary": {
+      "$ref": "./common.schema.json#/$defs/text"
+    },
+    "gmTruth": {
+      "$ref": "./common.schema.json#/$defs/text"
+    },
+    "timelineAnchor": {
+      "$ref": "./common.schema.json#/$defs/timelineAnchor"
+    },
+    "linkedEntityIds": {
+      "$ref": "./common.schema.json#/$defs/idArray"
+    },
+    "patternId": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "playerVisible": {
+      "type": "boolean"
+    },
+    "staging": {
+      "$ref": "./common.schema.json#/$defs/staging"
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "state",
+    "playerSummary",
+    "timelineAnchor",
+    "linkedEntityIds",
+    "playerVisible"
+  ]
+}

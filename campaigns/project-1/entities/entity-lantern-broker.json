@@ -1,0 +1,6 @@
+{
+  "id": "entity-lantern-broker",
+  "type": "npc",
+  "name": "Lantern Broker Sera",
+  "playerVisible": true
+}

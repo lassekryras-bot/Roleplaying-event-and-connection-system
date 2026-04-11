@@ -29,6 +29,8 @@ const memberships = [
   { project_id: "project-1", user_id: "gm-1", role: "GM", status: "active" },
   { project_id: "project-1", user_id: "helper-1", role: "HELPER", status: "active" },
   { project_id: "project-1", user_id: "player-1", role: "PLAYER", status: "active" },
+  { project_id: "project-1", user_id: "player-2", role: "PLAYER", status: "active" },
+  { project_id: "project-1", user_id: "player-3", role: "PLAYER", status: "active" },
 ];
 
 const invites = [];

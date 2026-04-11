@@ -1,0 +1,15 @@
+{
+  "id": "place-alkenstar",
+  "campaignId": "mornqar-alkenstar",
+  "headline": "Alkenstar",
+  "description": "A soot-choked industrial city where black powder, clockwork, crime, and political corruption collide.",
+  "tags": [
+    "city",
+    "industrial",
+    "urban",
+    "campaign-hub"
+  ],
+  "hookIds": [],
+  "notes": "City-level umbrella place for timeline planning until more district-specific gm-timeline places are added.",
+  "updatedAt": "2026-04-11T21:45:00.000Z"
+}

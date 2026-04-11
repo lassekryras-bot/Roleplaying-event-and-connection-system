@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://living-campaign.dev/schemas/campaign/snapshot.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "project": {
+      "$ref": "./project.schema.json"
+    },
+    "now": {
+      "$ref": "./now.schema.json"
+    },
+    "threads": {
+      "type": "array",
+      "items": {
+        "$ref": "./thread.schema.json"
+      }
+    },
+    "patterns": {
+      "type": "array",
+      "items": {
+        "$ref": "./pattern.schema.json"
+      }
+    },
+    "linkedEntities": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "./common.schema.json#/$defs/nonEmptyString"
+      },
+      "additionalProperties": {
+        "$ref": "./entity.schema.json"
+      }
+    },
+    "playerProfiles": {
+      "$ref": "./player-profiles.schema.json"
+    },
+    "manualLinks": {
+      "$ref": "./manual-links.schema.json"
+    },
+    "sharing": {
+      "$ref": "./sharing.schema.json"
+    }
+  },
+  "required": [
+    "project",
+    "now",
+    "threads",
+    "patterns",
+    "linkedEntities",
+    "playerProfiles",
+    "manualLinks",
+    "sharing"
+  ]
+}

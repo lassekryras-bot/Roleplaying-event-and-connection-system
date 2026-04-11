@@ -1,0 +1,28 @@
+{
+  "id": "hook-ghost-barge-rumor",
+  "campaignId": "project-3",
+  "placeId": "place-brass-docks",
+  "headline": "Ghost Barge Rumor",
+  "description": "Dockhands keep swearing the same lantern code means the barge is back.",
+  "status": "resolved",
+  "priority": "medium",
+  "checks": [
+    {
+      "id": "check-docks-rumor",
+      "label": "Read the dockhands",
+      "attribute": "Society",
+      "dc": 15,
+      "rollMode": "d20_button",
+      "result": {
+        "rolledValue": 14,
+        "modifier": 2,
+        "total": 16,
+        "outcome": "success",
+        "recordedAt": "2026-03-04T20:00:00.000Z"
+      }
+    }
+  ],
+  "threadIds": ["thread-brass-ghost-barge"],
+  "notes": "Already paid off in play, but useful as connective tissue.",
+  "updatedAt": "2026-04-06T09:30:00.000Z"
+}

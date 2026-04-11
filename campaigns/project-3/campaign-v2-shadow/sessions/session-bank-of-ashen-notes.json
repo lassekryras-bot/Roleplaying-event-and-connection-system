@@ -1,0 +1,32 @@
+{
+  "id": "session-bank-of-ashen-notes",
+  "type": "session",
+  "title": "Bank of Ashen Notes",
+  "locationId": "location-grand-archive",
+  "summary": "The likely next session turns the market lead into vault pressure.",
+  "startingLocationStateId": "location-state-grand-archive-initial",
+  "resultingLocationStateId": "location-state-grand-archive-post-major-visit",
+  "notes": "Attach the vault transfer or the clerk debt as the first hard pivot.\n\nThis should feel like escalation, not a reset.\n\nImported from gm-timeline session session-bank-of-ashen-notes.",
+  "relations": [
+    {
+      "type": "involves",
+      "targetId": "location-sparklock-bank"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-librarian-debt"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-sealed-stacks"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-night-vault"
+    },
+    {
+      "type": "follows",
+      "targetId": "session-mornqar-ledger"
+    }
+  ]
+}

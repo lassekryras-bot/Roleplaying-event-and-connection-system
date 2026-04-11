@@ -1,0 +1,10 @@
+{
+  "id": "pattern-lantern-routes",
+  "title": "Lantern Routes",
+  "summary": "Lantern codes, safe approaches, and trap routes are quietly shaping who reaches the ruins alive.",
+  "escalationLevel": 1,
+  "threadIds": [
+    "thread-lantern-broker"
+  ],
+  "playerVisible": true
+}

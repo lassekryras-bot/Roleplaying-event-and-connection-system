@@ -1,0 +1,15 @@
+{
+  "id": "thread-stolen-relic",
+  "title": "Stolen Reliquary",
+  "state": "active",
+  "hook": "An empty reliquary was recovered with fresh wax seals.",
+  "playerSummary": "Someone swapped a chapel relic and left behind fresh ritual wax.",
+  "gmTruth": "The stolen relic is the final focus item for the Cinder Choir's harbor rite.",
+  "timelineAnchor": "future_possible",
+  "linkedEntityIds": [
+    "entity-ruined-chapel",
+    "entity-cinder-choir"
+  ],
+  "patternId": "pattern-ash-ritual",
+  "playerVisible": true
+}

@@ -1,0 +1,12 @@
+{
+  "id": "effect-pattern-harbor-conspiracy",
+  "type": "effect",
+  "title": "Harbor Conspiracy",
+  "summary": "The docks are being manipulated so disappearances look like labor unrest instead of coordinated pressure.",
+  "status": "active",
+  "effectType": "pressure",
+  "scope": "city",
+  "severity": "medium",
+  "notes": "Legacy threads in this pattern: Dockworkers Oath, Night Watch Vanishes, Whispers in the Harbor.\n\nImported from legacy pattern pattern-harbor-conspiracy.",
+  "relations": []
+}

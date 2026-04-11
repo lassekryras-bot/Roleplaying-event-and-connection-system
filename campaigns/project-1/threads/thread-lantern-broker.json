@@ -1,0 +1,14 @@
+{
+  "id": "thread-lantern-broker",
+  "title": "Lantern Broker's Warning",
+  "state": "active",
+  "playerSummary": "A broker warns that blue lanterns mark safe routes and amber lanterns mark traps.",
+  "gmTruth": "Sera is feeding selective truths in exchange for immunity after the crackdown.",
+  "timelineAnchor": "future_possible",
+  "linkedEntityIds": [
+    "entity-lantern-broker",
+    "entity-lantern-routes"
+  ],
+  "patternId": "pattern-lantern-routes",
+  "playerVisible": true
+}

@@ -1,0 +1,20 @@
+{
+  "id": "event-thread-whispers-harbor",
+  "type": "event",
+  "title": "Whispers in the Harbor",
+  "summary": "Dockworkers say someone is paying for silence at the piers.",
+  "status": "active",
+  "eventType": "clue-found",
+  "notes": "Dockworkers have started refusing night shifts.\n\nGM truth: Vel has been paid to redirect patrol routes and bury the first reports.\n\nLegacy thread state: active.\n\nLegacy timeline anchor: now.\n\nImported from legacy thread thread-whispers-harbor.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-entity-union-yard"
+    },
+    {
+      "type": "belongsTo",
+      "targetId": "effect-pattern-harbor-conspiracy"
+    }
+  ],
+  "createdEffectIds": []
+}

@@ -1,0 +1,68 @@
+{
+  "generatedAt": "2026-04-06T09:30:00.000Z",
+  "items": [
+    {
+      "id": "hook-ghost-barge-rumor",
+      "headline": "Ghost Barge Rumor",
+      "placeId": "place-brass-docks",
+      "threadIds": ["thread-brass-ghost-barge"],
+      "file": "hook-ghost-barge-rumor.json"
+    },
+    {
+      "id": "hook-sable-auctioneer",
+      "headline": "Sable Auctioneer",
+      "placeId": "place-gilt-hall",
+      "threadIds": ["thread-auction-mask-network"],
+      "file": "hook-sable-auctioneer.json"
+    },
+    {
+      "id": "hook-sealed-stacks",
+      "headline": "Sealed Stack Twelve",
+      "placeId": "place-grand-archive",
+      "threadIds": ["thread-sealed-stack-twelve"],
+      "file": "hook-sealed-stacks.json"
+    },
+    {
+      "id": "hook-librarian-debt",
+      "headline": "Librarian Debt",
+      "placeId": "place-grand-archive",
+      "threadIds": ["thread-sable-creditors"],
+      "file": "hook-librarian-debt.json"
+    },
+    {
+      "id": "hook-scarf-broker",
+      "headline": "Scarf Broker",
+      "placeId": "place-skybridge-market",
+      "threadIds": ["thread-mornqar-scarf"],
+      "file": "hook-scarf-broker.json"
+    },
+    {
+      "id": "hook-runner-ambush",
+      "headline": "Runner Ambush",
+      "placeId": "place-skybridge-market",
+      "threadIds": ["thread-red-silt-route"],
+      "file": "hook-runner-ambush.json"
+    },
+    {
+      "id": "hook-night-vault",
+      "headline": "Night Vault Transfer",
+      "placeId": "place-sparklock-bank",
+      "threadIds": ["thread-red-silt-route"],
+      "file": "hook-night-vault.json"
+    },
+    {
+      "id": "hook-furnace-saboteur",
+      "headline": "Furnace Saboteur",
+      "placeId": "place-sunspike-glassworks",
+      "threadIds": ["thread-furnace-blackmail"],
+      "file": "hook-furnace-saboteur.json"
+    },
+    {
+      "id": "hook-rain-prayer",
+      "headline": "Rain Prayer Pact",
+      "placeId": "place-cascade-shrine",
+      "threadIds": ["thread-rain-pact"],
+      "file": "hook-rain-prayer.json"
+    }
+  ]
+}

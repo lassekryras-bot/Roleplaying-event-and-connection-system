@@ -1,0 +1,19 @@
+{
+  "id": "location-state-sparklock-bank-post-major-visit",
+  "type": "locationState",
+  "locationId": "location-sparklock-bank",
+  "title": "Sparklock Bank After Major Visit",
+  "summary": "If the vault trail slips, the crew chases shipments to the glassworks.",
+  "status": "active",
+  "notes": "Shift from paper pressure to shipment sabotage.\n\nKeep this close enough to the bank session that drag-reordering matters.\n\nGenerated as a post-major-visit state from legacy session session-glassworks-ghost-route.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-night-vault"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-furnace-saboteur"
+    }
+  ]
+}

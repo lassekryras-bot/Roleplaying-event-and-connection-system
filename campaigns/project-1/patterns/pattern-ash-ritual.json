@@ -1,0 +1,11 @@
+{
+  "id": "pattern-ash-ritual",
+  "title": "Ash and Ritual",
+  "summary": "The chapel fire, relic theft, and strange ash all point to ritual preparation close to the city center.",
+  "escalationLevel": 3,
+  "threadIds": [
+    "thread-ashes-chapel",
+    "thread-stolen-relic"
+  ],
+  "playerVisible": true
+}

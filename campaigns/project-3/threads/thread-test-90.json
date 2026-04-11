@@ -1,0 +1,16 @@
+{
+  "id": "thread-test-90",
+  "title": "Test Threat 90",
+  "state": "escalated",
+  "hook": "Pressure note 90 needs attention.",
+  "playerSummary": "Test threat 90 keeps pressure on the board for layout checks.",
+  "gmTruth": "Threat 90 is part of the seeded stress campaign used to inspect board density.",
+  "timelineAnchor": "future_possible",
+  "linkedEntityIds": [
+    "entity-zone-6",
+    "entity-cross-11",
+    "entity-pattern-anchor-5",
+    "entity-cross-6"
+  ],
+  "playerVisible": true
+}

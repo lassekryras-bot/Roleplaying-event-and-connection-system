@@ -1,0 +1,307 @@
+{
+  "id": "revision-0012",
+  "projectId": "project-1",
+  "actorUserId": "gm-1",
+  "actorRole": "GM",
+  "commandKind": "create_manual_link",
+  "summary": "Linked pattern-lantern-routes to thread-whispers-harbor",
+  "createdAt": "2026-04-10T21:30:55.293Z",
+  "snapshot": {
+    "project": {
+      "id": "project-1",
+      "name": "Harbor of Whispers",
+      "status": "active"
+    },
+    "now": {
+      "id": "now",
+      "title": "Current moment",
+      "playerSummary": "The harbor is uneasy, the watch is stretched thin, and too many rumors point toward the old ruins.",
+      "gmTruth": "The Cinder Choir is using the unrest to hide ritual logistics while the harbor master suppresses the missing-person reports."
+    },
+    "playerProfiles": [
+      {
+        "userId": "player-1",
+        "username": "Adminplayer",
+        "displayName": "Dockside Watch",
+        "patternId": "pattern-harbor-conspiracy",
+        "perspectivePatternIds": [
+          "pattern-lantern-routes"
+        ]
+      },
+      {
+        "userId": "player-2",
+        "username": "Adminplayer2",
+        "displayName": "Ash Circle",
+        "patternId": "pattern-ash-ritual",
+        "perspectivePatternIds": [
+          "pattern-harbor-conspiracy"
+        ]
+      },
+      {
+        "userId": "player-3",
+        "username": "Adminplayer3",
+        "displayName": "Lantern Route",
+        "patternId": "pattern-lantern-routes",
+        "perspectivePatternIds": [
+          "pattern-harbor-conspiracy"
+        ]
+      }
+    ],
+    "threads": [
+      {
+        "id": "thread-ashes-chapel",
+        "title": "Ashes in the Chapel",
+        "state": "dormant",
+        "hook": "Fine ash keeps appearing in the chapel even after the fire was contained.",
+        "playerSummary": "The chapel remains closed after a suspicious fire and a handful of whispered sightings.",
+        "gmTruth": "The ash is residue from failed rehearsal rites in the crypt.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-ruined-chapel"
+        ],
+        "patternId": "pattern-ash-ritual",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-bell-ledger",
+        "title": "Silent Bell Ledger",
+        "state": "active",
+        "hook": "A courier ledger maps hidden payments and meeting routes.",
+        "playerSummary": "GM-only courier routes are still hidden from the players.",
+        "gmTruth": "The ledger reveals how the cult's harbor cells coordinate every public disruption.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-bell-ledger",
+          "entity-cinder-choir"
+        ],
+        "patternId": "pattern-silent-bell",
+        "playerVisible": false
+      },
+      {
+        "id": "thread-dockworkers-oath",
+        "title": "Dockworkers Oath",
+        "state": "resolved",
+        "playerSummary": "A labor pledge briefly stabilized the docks before fear took over again.",
+        "gmTruth": "The pledge failed after the union leadership was blackmailed.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-union-yard"
+        ],
+        "patternId": "pattern-harbor-conspiracy",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-lantern-broker",
+        "title": "Lantern Broker's Warning",
+        "state": "active",
+        "playerSummary": "A broker warns that blue lanterns mark safe routes and amber lanterns mark traps.",
+        "gmTruth": "Sera is feeding selective truths in exchange for immunity after the crackdown.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-lantern-broker",
+          "entity-lantern-routes"
+        ],
+        "patternId": "pattern-lantern-routes",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-night-watch",
+        "title": "Night Watch Vanishes",
+        "state": "escalated",
+        "hook": "A patrol disappears after following lantern lights toward the sea caves.",
+        "playerSummary": "The watch lost contact with an entire patrol near the low-tide tunnels.",
+        "gmTruth": "The patrol found a ritual staging point and was captured alive for leverage.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-night-watch",
+          "entity-cinder-choir"
+        ],
+        "patternId": "pattern-harbor-conspiracy",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-stolen-relic",
+        "title": "Stolen Reliquary",
+        "state": "active",
+        "hook": "An empty reliquary was recovered with fresh wax seals.",
+        "playerSummary": "Someone swapped a chapel relic and left behind fresh ritual wax.",
+        "gmTruth": "The stolen relic is the final focus item for the Cinder Choir's harbor rite.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-ruined-chapel",
+          "entity-cinder-choir"
+        ],
+        "patternId": "pattern-ash-ritual",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-tidegate-informant",
+        "title": "Tidegate Informant",
+        "state": "active",
+        "hook": "An informant wants safe passage in exchange for patrol logs.",
+        "playerSummary": "A dockside informant claims patrol schedules are being sold before each disappearance.",
+        "gmTruth": "A frightened signalman from the Tidegate tower has been feeding schedules to Choir intermediaries under threat.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-harbor-master",
+          "entity-night-watch"
+        ],
+        "patternId": "pattern-harbor-conspiracy",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-whispers-harbor",
+        "title": "Whispers in the Harbor",
+        "state": "active",
+        "hook": "Dockworkers have started refusing night shifts.",
+        "playerSummary": "Dockworkers say someone is paying for silence at the piers.",
+        "gmTruth": "Vel has been paid to redirect patrol routes and bury the first reports.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-harbor-master",
+          "entity-union-yard"
+        ],
+        "patternId": "pattern-harbor-conspiracy",
+        "playerVisible": true
+      }
+    ],
+    "patterns": [
+      {
+        "id": "pattern-ash-ritual",
+        "title": "Ash and Ritual",
+        "summary": "The chapel fire, relic theft, and strange ash all point to ritual preparation close to the city center.",
+        "escalationLevel": 3,
+        "threadIds": [
+          "thread-ashes-chapel",
+          "thread-stolen-relic"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "pattern-harbor-conspiracy",
+        "title": "Harbor Conspiracy",
+        "summary": "The docks are being manipulated so disappearances look like labor unrest instead of coordinated pressure.",
+        "escalationLevel": 2,
+        "threadIds": [
+          "thread-dockworkers-oath",
+          "thread-night-watch",
+          "thread-tidegate-informant",
+          "thread-whispers-harbor"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "pattern-lantern-routes",
+        "title": "Lantern Routes",
+        "summary": "Lantern codes, safe approaches, and trap routes are quietly shaping who reaches the ruins alive.",
+        "escalationLevel": 1,
+        "threadIds": [
+          "thread-lantern-broker"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "pattern-silent-bell",
+        "title": "Silent Bell Network",
+        "summary": "A hidden courier network is moving coded orders under the cover of dockside chaos.",
+        "escalationLevel": 2,
+        "threadIds": [
+          "thread-bell-ledger"
+        ],
+        "playerVisible": false
+      }
+    ],
+    "linkedEntities": {
+      "entity-bell-ledger": {
+        "id": "entity-bell-ledger",
+        "type": "item",
+        "name": "Silent Bell Ledger",
+        "playerVisible": false
+      },
+      "entity-cinder-choir": {
+        "id": "entity-cinder-choir",
+        "type": "npc",
+        "name": "The Cinder Choir",
+        "playerVisible": false
+      },
+      "entity-harbor-master": {
+        "id": "entity-harbor-master",
+        "type": "npc",
+        "name": "Harbor Master Vel",
+        "playerVisible": true
+      },
+      "entity-lantern-broker": {
+        "id": "entity-lantern-broker",
+        "type": "npc",
+        "name": "Lantern Broker Sera",
+        "playerVisible": true
+      },
+      "entity-lantern-routes": {
+        "id": "entity-lantern-routes",
+        "type": "location",
+        "name": "Lantern Route Markers",
+        "playerVisible": true
+      },
+      "entity-night-watch": {
+        "id": "entity-night-watch",
+        "type": "npc",
+        "name": "The Harbor Night Watch",
+        "playerVisible": true
+      },
+      "entity-ruined-chapel": {
+        "id": "entity-ruined-chapel",
+        "type": "location",
+        "name": "Ruined Chapel",
+        "playerVisible": true
+      },
+      "entity-union-yard": {
+        "id": "entity-union-yard",
+        "type": "location",
+        "name": "Dockworkers Union Yard",
+        "playerVisible": true
+      }
+    },
+    "manualLinks": [
+      {
+        "id": "manual-now-thread-whispers-harbor",
+        "sourceId": "now",
+        "targetId": "thread-whispers-harbor"
+      },
+      {
+        "id": "manual-pattern-harbor-conspiracy-pattern-lantern-routes",
+        "sourceId": "pattern-harbor-conspiracy",
+        "targetId": "pattern-lantern-routes"
+      },
+      {
+        "id": "manual-pattern-ash-ritual-thread-whispers-harbor",
+        "sourceId": "pattern-ash-ritual",
+        "targetId": "thread-whispers-harbor"
+      },
+      {
+        "id": "manual-now-thread-night-watch",
+        "sourceId": "now",
+        "targetId": "thread-night-watch"
+      },
+      {
+        "id": "manual-thread-lantern-broker-thread-tidegate-informant",
+        "sourceId": "thread-lantern-broker",
+        "targetId": "thread-tidegate-informant"
+      },
+      {
+        "id": "manual-pattern-lantern-routes-thread-whispers-harbor",
+        "sourceId": "pattern-lantern-routes",
+        "targetId": "thread-whispers-harbor"
+      }
+    ],
+    "sharing": {
+      "globalNodeIds": [],
+      "playerNodeIdsByPlayer": {
+        "player-1": [],
+        "player-2": [],
+        "player-3": [
+          "pattern-silent-bell"
+        ]
+      }
+    }
+  }
+}

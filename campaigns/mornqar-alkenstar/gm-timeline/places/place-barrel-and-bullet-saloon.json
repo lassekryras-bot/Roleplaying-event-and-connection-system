@@ -1,0 +1,15 @@
+{
+  "id": "place-barrel-and-bullet-saloon",
+  "campaignId": "mornqar-alkenstar",
+  "headline": "Barrel & Bullet Saloon",
+  "description": "A rough but dependable saloon in Alkenstar's Ferrous Quarter that doubles as a safehouse, job hub, and meeting ground.",
+  "tags": [
+    "saloon",
+    "safehouse",
+    "meeting-place",
+    "base-of-operations"
+  ],
+  "hookIds": [],
+  "notes": "Primary early-session staging ground tied to Foebe Dunsmith's network and the crew's operational recovery between jobs.",
+  "updatedAt": "2026-04-11T21:45:00.000Z"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "event-thread-south-march",
+  "type": "event",
+  "title": "South March Mobilizes",
+  "summary": "Militias are preparing to march on rumors alone.",
+  "status": "available",
+  "eventType": "clue-found",
+  "notes": "GM truth: The militias were fed forged responses timed to the beacon failures.\n\nLegacy thread state: escalated.\n\nLegacy timeline anchor: future_possible.\n\nImported from legacy thread thread-south-march.",
+  "relations": [
+    {
+      "type": "belongsTo",
+      "targetId": "effect-pattern-beacon-failure"
+    }
+  ],
+  "createdEffectIds": []
+}

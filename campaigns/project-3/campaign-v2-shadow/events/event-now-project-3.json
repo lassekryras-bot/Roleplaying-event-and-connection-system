@@ -1,0 +1,20 @@
+{
+  "id": "event-now-project-3",
+  "type": "event",
+  "title": "Current moment",
+  "summary": "This seeded campaign is built to stress-test note density, hover states, and cross-pattern links.",
+  "status": "active",
+  "eventType": "consequence-triggered",
+  "notes": "GM truth: Five pattern notes each own eight threats, and the remaining threats create extra random cross-pattern pressure.\n\nShadow-generated from now.json.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "session-mornqar-ledger"
+    },
+    {
+      "type": "occursAt",
+      "targetId": "location-grand-archive"
+    }
+  ],
+  "createdEffectIds": []
+}

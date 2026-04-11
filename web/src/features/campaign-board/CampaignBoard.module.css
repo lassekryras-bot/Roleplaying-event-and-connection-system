@@ -1,0 +1,853 @@
+.boardPage {
+  --control-height: 52px;
+  --panel-border: #d7d7d7;
+  --panel-border-strong: #bcbcbc;
+  --surface-base: #ffffff;
+  --surface-muted: #f3f3f3;
+  --surface-subtle: #fafafa;
+  --text-primary: #1f1f1f;
+  --text-secondary: #666666;
+  --text-muted: #7b7b7b;
+  --state-dark: #4c4c4c;
+  --state-mid: #7f7f7f;
+  --state-light: #b4b4b4;
+  width: 100%;
+  display: grid;
+  gap: 16px;
+  color: var(--text-primary);
+}
+
+.boardLoading,
+.boardStatusBar {
+  padding: 12px 16px;
+  border: 1px solid var(--panel-border);
+  background: var(--surface-base);
+}
+
+.boardTopBar {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr);
+  gap: 20px;
+  align-items: start;
+  padding: 20px 24px;
+  border: 1px solid var(--panel-border);
+  background: var(--surface-base);
+}
+
+.topBarBrand {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.brandEyebrow,
+.fieldLabel,
+.cardEyebrow,
+.timelineSegmentTitle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.brandTitle {
+  margin: 0;
+  font-size: 1.75rem;
+  line-height: 1.15;
+}
+
+.brandMeta {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.topBarControls {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+
+.fieldCluster,
+.zoomControl,
+.lockedMode,
+.historyControls,
+.menuButton {
+  min-height: var(--control-height);
+  border: 1px solid var(--panel-border);
+  background: var(--surface-base);
+}
+
+.fieldCluster,
+.lockedMode {
+  display: flex;
+  align-items: stretch;
+}
+
+.lockedMode {
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  color: var(--text-secondary);
+}
+
+.fieldSelect {
+  position: relative;
+  width: 100%;
+  display: grid;
+  gap: 4px;
+  align-content: center;
+  padding: 8px 12px;
+}
+
+.fieldSelect .fieldLabel,
+.zoomControl .fieldLabel {
+  display: block;
+}
+
+.fieldSelectButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  text-align: left;
+}
+
+.fieldSelectButton:focus-visible,
+.menuButton:focus-visible,
+.cardButton:focus-visible,
+.ghostButton:focus-visible,
+.historyButton:focus-visible,
+.timelineTrayChip:focus-visible,
+.contextMenuItem:focus-visible,
+.graphNodeButton:focus-visible {
+  outline: 2px solid #7a7a7a;
+  outline-offset: 2px;
+}
+
+.fieldSelectValue {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fieldSelectChevron {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border-right: 1px solid var(--text-secondary);
+  border-bottom: 1px solid var(--text-secondary);
+  transform: rotate(45deg);
+  transition: transform 120ms ease;
+}
+
+.fieldSelectButton[aria-expanded='true'] .fieldSelectChevron {
+  transform: rotate(-135deg);
+}
+
+.fieldSelectPanel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: grid;
+  gap: 4px;
+  padding: 6px;
+  border: 1px solid var(--panel-border-strong);
+  background: var(--surface-base);
+}
+
+.fieldSelectOption {
+  min-height: 38px;
+  padding: 0 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-primary);
+  text-align: left;
+  cursor: pointer;
+}
+
+.fieldSelectOption:hover,
+.fieldSelectOption:focus-visible,
+.fieldSelectOptionActive {
+  border-color: var(--panel-border);
+  background: var(--surface-muted);
+  outline: none;
+}
+
+.zoomControl {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+}
+
+.zoomSlider {
+  width: 100%;
+  min-width: 0;
+}
+
+.zoomValue {
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.historyControls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+}
+
+.historyButton,
+.menuButton,
+.cardButton,
+.ghostButton,
+.contextMenuItem,
+.logoutMenuItem {
+  border: 1px solid var(--panel-border);
+  background: var(--surface-base);
+  color: var(--text-primary);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.historyButton {
+  min-height: var(--control-height);
+  border: none;
+}
+
+.historyButton:disabled {
+  color: var(--text-muted);
+  background: var(--surface-subtle);
+  cursor: default;
+}
+
+.menuWrapper {
+  position: relative;
+}
+
+.menuButton {
+  width: 100%;
+  min-height: var(--control-height);
+  padding: 0 14px;
+}
+
+.menuPanel {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 20;
+  min-width: 220px;
+  display: grid;
+  gap: 6px;
+  padding: 8px;
+  border: 1px solid var(--panel-border-strong);
+  background: var(--surface-base);
+}
+
+.menuPanel :is(a, button) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 0 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-primary);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.menuPanel :is(a, button):hover,
+.menuPanel :is(a, button):focus-visible {
+  border-color: var(--panel-border);
+  background: var(--surface-muted);
+  outline: none;
+}
+
+.logoutMenuItem {
+  justify-content: flex-start;
+}
+
+.logoutMenuBullet,
+.contextMenuBullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--state-mid);
+  flex: 0 0 auto;
+}
+
+.menuMeta {
+  margin: 2px 0 0;
+  padding: 6px 10px 0;
+  border-top: 1px solid var(--panel-border);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.boardStage {
+  position: relative;
+}
+
+.boardMain {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 16px;
+  align-items: start;
+}
+
+.canvasShell {
+  min-height: 720px;
+  border: 1px solid var(--panel-border);
+  background: var(--surface-base);
+  overflow: hidden;
+}
+
+.inspectorShell {
+  position: sticky;
+  top: 16px;
+  align-self: start;
+}
+
+.timelineSection {
+  border: 1px solid var(--panel-border);
+  background: var(--surface-base);
+}
+
+.canvasSurface {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(#ececec 1px, transparent 1px),
+    linear-gradient(90deg, #ececec 1px, transparent 1px),
+    var(--surface-base);
+  background-size: 32px 32px;
+}
+
+.staticCanvasViewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+}
+
+.staticCanvasScene {
+  position: absolute;
+  transform-origin: top left;
+}
+
+.staticEdgeLayer {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.graphNodeButton,
+.graphNodeStatic {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.graphNodeButton {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  appearance: none;
+  touch-action: none;
+}
+
+.nodeBase {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--state-mid);
+  border-radius: 999px;
+  background: var(--surface-base);
+  transition: transform 120ms ease, border-color 120ms ease, background-color 120ms ease, opacity 120ms ease;
+}
+
+.nodeNow {
+  border-color: var(--state-dark);
+  background: #efefef;
+}
+
+.nodePattern {
+  background: #f5f5f5;
+}
+
+.nodeThread {
+  border-width: 1px;
+}
+
+.nodeThreadDormant {
+  border-color: var(--state-light);
+  background: #fafafa;
+}
+
+.nodeThreadActive {
+  border-color: #8c8c8c;
+  background: #eeeeee;
+}
+
+.nodeThreadEscalated {
+  border-color: var(--state-dark);
+  background: #e7e7e7;
+}
+
+.nodeThreadResolved {
+  border-style: dashed;
+  border-color: #979797;
+  background: #f7f7f7;
+}
+
+.nodePlayerAnchor {
+  box-shadow: inset 0 0 0 2px #ffffff;
+}
+
+.nodePlayerAnchorCentered {
+  border-color: #5a5a5a;
+}
+
+.nodePerspectiveHidden {
+  opacity: 0.38;
+}
+
+.nodeLinkSource,
+.nodeLinkTarget,
+.nodeTrayDropTarget,
+.nodeEmphasized {
+  border-color: #4f4f4f;
+  transform: scale(var(--node-hover-scale, 1.12));
+}
+
+.nodeDimmed {
+  opacity: 0.42;
+}
+
+.contextMenuPanel {
+  position: fixed;
+  z-index: 30;
+  min-width: 220px;
+  display: grid;
+  gap: 6px;
+  padding: 8px;
+  border: 1px solid var(--panel-border-strong);
+  background: var(--surface-base);
+}
+
+.contextMenuTitle {
+  margin: 0;
+  padding: 4px 8px 8px;
+  border-bottom: 1px solid var(--panel-border);
+  font-weight: 600;
+}
+
+.contextMenuItem,
+.logoutMenuItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 0 10px;
+}
+
+.contextMenuItem:hover,
+.contextMenuItem:focus-visible,
+.logoutMenuItem:hover,
+.logoutMenuItem:focus-visible {
+  background: var(--surface-muted);
+  outline: none;
+}
+
+.contextMenuItemDisabled,
+.contextMenuItem:disabled {
+  color: var(--text-muted);
+  background: var(--surface-subtle);
+  cursor: default;
+}
+
+.contextMenuItemDisabled .contextMenuBullet,
+.contextMenuItem:disabled .contextMenuBullet {
+  background: var(--state-light);
+}
+
+.focusCard {
+  width: 100%;
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid var(--panel-border);
+  background: var(--surface-base);
+}
+
+.focusCardHeader {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.focusCard h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1.2;
+}
+
+.closeButton {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+}
+
+.cardMetaRow,
+.actionRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cardMetaPill,
+.entityChip,
+.threadChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border: 1px solid var(--panel-border);
+  background: var(--surface-subtle);
+}
+
+.cardDivider {
+  height: 1px;
+  background: var(--panel-border);
+}
+
+.cardSection {
+  display: grid;
+  gap: 8px;
+}
+
+.cardSection h3 {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.cardSection p,
+.cardSection ul {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.editorInput,
+.editorTitleInput,
+.editorTextarea,
+.editorSelect {
+  width: 100%;
+  border: 1px solid var(--panel-border);
+  background: var(--surface-base);
+  color: var(--text-primary);
+}
+
+.editorInput,
+.editorTitleInput,
+.editorTextarea,
+.editorSelect,
+.cardButton,
+.ghostButton {
+  padding: 10px 12px;
+}
+
+.editorTitleInput {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.editorTextarea {
+  min-height: 96px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.saveIndicator {
+  margin: 6px 0 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.entityList,
+.threadList {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+}
+
+.relatedThreatList {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  padding: 0;
+}
+
+.relatedThreatItem {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--panel-border);
+  background: var(--surface-subtle);
+}
+
+.relatedThreatHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 10px;
+}
+
+.relatedThreatTitle {
+  font-size: 1rem;
+}
+
+.relationshipPill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border: 1px solid var(--panel-border);
+  background: var(--surface-base);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.relationshipPillStrong {
+  border-color: #969696;
+  background: #ececec;
+  color: var(--text-primary);
+}
+
+.relationshipPillMedium {
+  border-color: #adadad;
+}
+
+.relationshipPillWeak {
+  border-color: var(--panel-border);
+}
+
+.reasonList {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text-secondary);
+}
+
+.relationshipEmpty {
+  color: var(--text-secondary);
+}
+
+.cardButton,
+.ghostButton {
+  min-height: 42px;
+}
+
+.cardButton {
+  border-color: var(--panel-border-strong);
+  font-weight: 600;
+}
+
+.ghostButton {
+  background: var(--surface-subtle);
+}
+
+.stagedComposer {
+  display: grid;
+  gap: 10px;
+}
+
+.timelineBar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  padding: 16px;
+}
+
+.timelineSegment {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  min-height: 160px;
+  padding: 14px;
+  border: 1px solid var(--panel-border);
+  background: var(--surface-subtle);
+}
+
+.timelineSegmentActive {
+  border-color: var(--panel-border-strong);
+  background: var(--surface-base);
+}
+
+.timelineSegmentLabel {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.timelineCount {
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.timelineDots {
+  display: flex;
+  gap: 8px;
+}
+
+.timelineDot,
+.timelineDotActive {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #c8c8c8;
+}
+
+.timelineDotActive {
+  background: #6a6a6a;
+}
+
+.timelineTray {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+  gap: 8px;
+}
+
+.timelineTrayChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  max-width: 100%;
+  padding: 0 10px;
+  border: 1px solid var(--panel-border);
+  background: var(--surface-base);
+  color: var(--text-primary);
+  cursor: grab;
+  text-align: left;
+}
+
+.timelineTrayChip:hover {
+  background: var(--surface-muted);
+}
+
+.timelineTrayChipSelected {
+  border-color: var(--panel-border-strong);
+}
+
+.timelineTrayChipDragging {
+  opacity: 0.6;
+  cursor: grabbing;
+}
+
+.timelineTrayChipType {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.timelineTrayChipTitle {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timelineTrayEmpty {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 1200px) {
+  .topBarControls {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .boardMain {
+    grid-template-columns: minmax(0, 1fr) 320px;
+  }
+}
+
+@media (max-width: 960px) {
+  .boardTopBar {
+    grid-template-columns: 1fr;
+  }
+
+  .topBarControls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .boardMain {
+    grid-template-columns: 1fr;
+  }
+
+  .inspectorShell {
+    position: static;
+  }
+
+  .canvasShell {
+    min-height: 560px;
+  }
+
+  .timelineBar {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .boardTopBar {
+    padding: 16px;
+  }
+
+  .topBarControls {
+    grid-template-columns: 1fr;
+  }
+
+  .canvasShell {
+    min-height: 440px;
+  }
+
+  .focusCard,
+  .timelineBar {
+    padding: 14px;
+  }
+
+  .timelineSegment {
+    min-height: 0;
+  }
+}

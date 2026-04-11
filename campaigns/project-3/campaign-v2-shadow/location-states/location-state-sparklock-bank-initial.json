@@ -1,0 +1,15 @@
+{
+  "id": "location-state-sparklock-bank-initial",
+  "type": "locationState",
+  "locationId": "location-sparklock-bank",
+  "title": "Sparklock Bank Before Visit",
+  "summary": "A tight bank with nervous clerks, layered locks, and private notes.",
+  "status": "available",
+  "notes": "A tight bank with nervous clerks, layered locks, and private notes.\n\nUsable as imported from gm-timeline place place-sparklock-bank.\n\nPrep: Future pressure point if the market lead lands cleanly.\n\nImported from gm-timeline place place-sparklock-bank.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-night-vault"
+    }
+  ]
+}

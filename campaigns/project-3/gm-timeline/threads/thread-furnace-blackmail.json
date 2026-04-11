@@ -1,0 +1,7 @@
+{
+  "id": "thread-furnace-blackmail",
+  "title": "Furnace Blackmail",
+  "summary": "A saboteur in the glassworks is being paid to ruin the wrong shipment.",
+  "linkedHookIds": ["hook-furnace-saboteur"],
+  "playerVisible": false
+}

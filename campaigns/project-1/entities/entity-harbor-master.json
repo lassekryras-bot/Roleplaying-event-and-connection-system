@@ -1,0 +1,6 @@
+{
+  "id": "entity-harbor-master",
+  "type": "npc",
+  "name": "Harbor Master Vel",
+  "playerVisible": true
+}

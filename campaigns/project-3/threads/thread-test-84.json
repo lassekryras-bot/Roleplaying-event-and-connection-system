@@ -1,0 +1,15 @@
+{
+  "id": "thread-test-84",
+  "title": "Test Threat 84",
+  "state": "active",
+  "hook": "Pressure note 84 needs attention.",
+  "playerSummary": "Test threat 84 keeps pressure on the board for layout checks.",
+  "gmTruth": "Threat 84 is part of the seeded stress campaign used to inspect board density.",
+  "timelineAnchor": "future_possible",
+  "linkedEntityIds": [
+    "entity-zone-6",
+    "entity-cross-4",
+    "entity-pattern-anchor-4"
+  ],
+  "playerVisible": true
+}

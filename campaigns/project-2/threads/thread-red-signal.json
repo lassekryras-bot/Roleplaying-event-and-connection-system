@@ -1,0 +1,14 @@
+{
+  "id": "thread-red-signal",
+  "title": "The Red Signal",
+  "state": "active",
+  "playerSummary": "One tower keeps flashing a red pattern no operator admits to sending.",
+  "gmTruth": "The pattern is a lure sequence copied from the old border war.",
+  "timelineAnchor": "now",
+  "linkedEntityIds": [
+    "entity-signal-hill",
+    "entity-messenger"
+  ],
+  "patternId": "pattern-beacon-failure",
+  "playerVisible": true
+}

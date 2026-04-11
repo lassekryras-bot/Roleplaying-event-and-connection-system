@@ -1,0 +1,17 @@
+{
+  "id": "session-bank-job-03",
+  "campaignId": "campaign-mornqar",
+  "sequence": 3,
+  "status": "planning",
+  "headline": "The Bank Job",
+  "summary": "The party may scout, negotiate, or rob the bank.",
+  "expectedDirection": "Most likely bank infiltration, but may pivot into sewer escape.",
+  "placeIds": [
+    "place-gold-bank",
+    "place-sewer-access"
+  ],
+  "notes": "Keep two alternate future sessions ready.",
+  "startedAt": null,
+  "endedAt": null,
+  "updatedAt": "2026-04-06T12:00:00Z"
+}

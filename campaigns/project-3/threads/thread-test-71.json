@@ -1,0 +1,14 @@
+{
+  "id": "thread-test-71",
+  "title": "Test Threat 71",
+  "state": "active",
+  "playerSummary": "Test threat 71 keeps pressure on the board for layout checks.",
+  "gmTruth": "Threat 71 is part of the seeded stress campaign used to inspect board density.",
+  "timelineAnchor": "now",
+  "linkedEntityIds": [
+    "entity-zone-5",
+    "entity-cross-13",
+    "entity-pattern-anchor-5"
+  ],
+  "playerVisible": true
+}

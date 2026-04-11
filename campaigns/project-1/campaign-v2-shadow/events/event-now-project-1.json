@@ -1,0 +1,11 @@
+{
+  "id": "event-now-project-1",
+  "type": "event",
+  "title": "Current moment",
+  "summary": "The harbor is uneasy, the watch is stretched thin, and too many rumors point toward the old ruins.",
+  "status": "active",
+  "eventType": "consequence-triggered",
+  "notes": "GM truth: The Cinder Choir is using the unrest to hide ritual logistics while the harbor master suppresses the missing-person reports.\n\nShadow-generated from now.json.",
+  "relations": [],
+  "createdEffectIds": []
+}

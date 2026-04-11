@@ -1,0 +1,171 @@
+{
+  "id": "revision-0001",
+  "projectId": "project-2",
+  "actorUserId": "system",
+  "actorRole": "GM",
+  "commandKind": "seed_campaign",
+  "summary": "Initial campaign import",
+  "createdAt": "1970-01-01T00:00:00.000Z",
+  "snapshot": {
+    "project": {
+      "id": "project-2",
+      "name": "The Red Signal",
+      "status": "active"
+    },
+    "now": {
+      "id": "now",
+      "title": "Current moment",
+      "playerSummary": "Signal towers are flickering out of sync, and every village is blaming a different enemy.",
+      "gmTruth": "A surviving war engine buried in the hills is hijacking the old beacon network to lure militias into conflict."
+    },
+    "linkedEntities": {
+      "entity-signal-hill": {
+        "id": "entity-signal-hill",
+        "type": "location",
+        "name": "Signal Hill",
+        "playerVisible": true
+      },
+      "entity-war-engine": {
+        "id": "entity-war-engine",
+        "type": "item",
+        "name": "The Buried War Engine",
+        "playerVisible": false
+      },
+      "entity-militia": {
+        "id": "entity-militia",
+        "type": "npc",
+        "name": "South March Militia",
+        "playerVisible": true
+      },
+      "entity-messenger": {
+        "id": "entity-messenger",
+        "type": "npc",
+        "name": "Red Messenger Yara",
+        "playerVisible": true
+      },
+      "entity-river-ferry": {
+        "id": "entity-river-ferry",
+        "type": "location",
+        "name": "River Ferry Crossing",
+        "playerVisible": true
+      }
+    },
+    "patterns": [
+      {
+        "id": "pattern-beacon-failure",
+        "title": "Beacon Failure",
+        "summary": "Signal towers are failing in a deliberate pattern, creating panic and tactical blind spots.",
+        "escalationLevel": 2,
+        "threadIds": [
+          "thread-red-signal",
+          "thread-south-march"
+        ],
+        "playerVisible": true
+      },
+      {
+        "id": "pattern-buried-engine",
+        "title": "Buried Engine",
+        "summary": "Something ancient under Signal Hill is learning the region's wartime habits and exploiting them.",
+        "escalationLevel": 3,
+        "threadIds": [
+          "thread-engine-heart"
+        ],
+        "playerVisible": false
+      },
+      {
+        "id": "pattern-river-static",
+        "title": "River Static",
+        "summary": "Ferry crews and messengers spread conflicting signal warnings before any tower can confirm them.",
+        "escalationLevel": 1,
+        "threadIds": [
+          "thread-river-static"
+        ],
+        "playerVisible": true
+      }
+    ],
+    "threads": [
+      {
+        "id": "thread-red-signal",
+        "title": "The Red Signal",
+        "state": "active",
+        "playerSummary": "One tower keeps flashing a red pattern no operator admits to sending.",
+        "gmTruth": "The pattern is a lure sequence copied from the old border war.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-signal-hill",
+          "entity-messenger"
+        ],
+        "patternId": "pattern-beacon-failure",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-south-march",
+        "title": "South March Mobilizes",
+        "state": "escalated",
+        "playerSummary": "Militias are preparing to march on rumors alone.",
+        "gmTruth": "The militias were fed forged responses timed to the beacon failures.",
+        "timelineAnchor": "future_possible",
+        "linkedEntityIds": [
+          "entity-militia"
+        ],
+        "patternId": "pattern-beacon-failure",
+        "playerVisible": true
+      },
+      {
+        "id": "thread-engine-heart",
+        "title": "Engine Heart",
+        "state": "active",
+        "playerSummary": "GM-only engine diagnostics remain hidden.",
+        "gmTruth": "The engine is waking faster every time the network carries a false alarm.",
+        "timelineAnchor": "now",
+        "linkedEntityIds": [
+          "entity-war-engine"
+        ],
+        "patternId": "pattern-buried-engine",
+        "playerVisible": false
+      },
+      {
+        "id": "thread-river-static",
+        "title": "River Static",
+        "state": "active",
+        "playerSummary": "Boat crews repeat warning phrases before any official signal reaches the river crossing.",
+        "gmTruth": "The buried engine is piggybacking on ferry gossip to amplify false mobilization orders.",
+        "timelineAnchor": "past",
+        "linkedEntityIds": [
+          "entity-river-ferry",
+          "entity-messenger"
+        ],
+        "patternId": "pattern-river-static",
+        "playerVisible": true
+      }
+    ],
+    "playerProfiles": [
+      {
+        "userId": "player-1",
+        "username": "Adminplayer",
+        "displayName": "Beacon Runner",
+        "patternId": "pattern-beacon-failure",
+        "perspectivePatternIds": [
+          "pattern-river-static"
+        ]
+      },
+      {
+        "userId": "player-2",
+        "username": "Adminplayer2",
+        "displayName": "River Courier",
+        "patternId": "pattern-river-static",
+        "perspectivePatternIds": [
+          "pattern-beacon-failure"
+        ]
+      }
+    ],
+    "manualLinks": [],
+    "sharing": {
+      "globalNodeIds": [],
+      "playerNodeIdsByPlayer": {
+        "player-1": [],
+        "player-2": []
+      }
+    }
+  }
+}

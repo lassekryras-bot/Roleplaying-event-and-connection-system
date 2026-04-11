@@ -7,12 +7,27 @@ import { transitionThreadState } from "../threads/threadStateMachine.js";
 import { getWriteEndpoints, requireAccess, resolveRequestContext } from "./accessGuards.js";
 
 function sendJson(response, statusCode, payload) {
-  response.writeHead(statusCode, { "content-type": "application/json" });
+  const headers = arguments[3] ?? {};
+  response.writeHead(statusCode, { ...headers, "content-type": "application/json" });
   response.end(JSON.stringify(payload));
 }
 
 function sendError(response, statusCode, code, error) {
-  sendJson(response, statusCode, { code, error });
+  const headers = arguments[4] ?? {};
+  sendJson(response, statusCode, { code, error }, headers);
+}
+
+function createCorsHeaders(request) {
+  const requestOrigin = request.headers.origin;
+  const allowedOrigin = process.env.CORS_ORIGIN ?? requestOrigin ?? "*";
+
+  return {
+    "access-control-allow-origin": allowedOrigin,
+    "access-control-allow-methods": "GET,POST,PATCH,OPTIONS",
+    "access-control-allow-headers": "content-type, x-role, x-user-id",
+    "access-control-max-age": "86400",
+    vary: "Origin",
+  };
 }
 
 function parseJsonBody(request) {
@@ -44,6 +59,11 @@ export function createServer({
   getThreadById,
   listThreads,
   listProjects,
+  getProjectGraph,
+  executeProjectCommand,
+  getProjectHistory,
+  undoProjectHistory,
+  redoProjectHistory,
   listMemberships,
   listEvents,
   saveThreadState,
@@ -59,24 +79,38 @@ export function createServer({
   return http.createServer(async (request, response) => {
     const url = new URL(request.url, "http://localhost");
     const threadDetailMatch = /^\/threads\/([^/]+)$/.exec(url.pathname);
+    const projectGraphMatch = /^\/projects\/([^/]+)\/graph$/.exec(url.pathname);
+    const projectCommandsMatch = /^\/projects\/([^/]+)\/commands$/.exec(url.pathname);
+    const projectHistoryMatch = /^\/projects\/([^/]+)\/history$/.exec(url.pathname);
+    const projectHistoryUndoMatch = /^\/projects\/([^/]+)\/history\/undo$/.exec(url.pathname);
+    const projectHistoryRedoMatch = /^\/projects\/([^/]+)\/history\/redo$/.exec(url.pathname);
     const projectMembershipMatch = /^\/projects\/([^/]+)\/memberships$/.exec(url.pathname);
     const projectInviteMatch = /^\/projects\/([^/]+)\/invites$/.exec(url.pathname);
     const accessContext = resolveRequestContext(request, { getProjectMembershipByUserId });
+    const corsHeaders = createCorsHeaders(request);
+    const send = (statusCode, payload) => sendJson(response, statusCode, payload, corsHeaders);
+    const fail = (statusCode, code, error) => sendError(response, statusCode, code, error, corsHeaders);
+
+    if (request.method === "OPTIONS") {
+      response.writeHead(204, corsHeaders);
+      response.end();
+      return;
+    }
 
     if (request.method === "GET" && url.pathname === "/health") {
-      sendJson(response, 200, { status: "ok" });
+      send(200, { status: "ok" });
       return;
     }
 
     if (request.method === "GET" && url.pathname === "/meta/write-endpoints") {
-      sendJson(response, 200, { write_endpoints: getWriteEndpoints() });
+      send(200, { write_endpoints: getWriteEndpoints() });
       return;
     }
 
 
     if (request.method === "POST" && url.pathname === "/auth/login") {
       if (typeof authenticateUser !== "function") {
-        sendError(response, 501, "NOT_IMPLEMENTED", "auth endpoint not implemented");
+        fail(501, "NOT_IMPLEMENTED", "auth endpoint not implemented");
         return;
       }
 
@@ -84,32 +118,32 @@ export function createServer({
       try {
         body = await parseJsonBody(request);
       } catch {
-        sendError(response, 400, "INVALID_JSON", "invalid JSON body");
+        fail(400, "INVALID_JSON", "invalid JSON body");
         return;
       }
 
       if (typeof body !== "object" || body === null || Array.isArray(body)) {
-        sendError(response, 400, "INVALID_REQUEST", "request body must be a JSON object");
+        fail(400, "INVALID_REQUEST", "request body must be a JSON object");
         return;
       }
 
       if (typeof body.username !== "string" || body.username.trim().length === 0) {
-        sendError(response, 400, "USERNAME_REQUIRED", "username is required");
+        fail(400, "USERNAME_REQUIRED", "username is required");
         return;
       }
 
       if (typeof body.password !== "string" || body.password.length === 0) {
-        sendError(response, 400, "PASSWORD_REQUIRED", "password is required");
+        fail(400, "PASSWORD_REQUIRED", "password is required");
         return;
       }
 
       const authenticatedUser = authenticateUser(body.username, body.password);
       if (!authenticatedUser) {
-        sendError(response, 401, "INVALID_CREDENTIALS", "invalid username or password");
+        fail(401, "INVALID_CREDENTIALS", "invalid username or password");
         return;
       }
 
-      sendJson(response, 200, {
+      send(200, {
         user_id: authenticatedUser.user_id ?? authenticatedUser.id,
         username: authenticatedUser.username,
         role: authenticatedUser.role,
@@ -120,59 +154,236 @@ export function createServer({
     if (request.method === "GET" && url.pathname === "/threads") {
       const guardResult = requireAccess(accessContext);
       if (!guardResult.allowed) {
-        sendJson(response, guardResult.status, guardResult.payload);
+        send(guardResult.status, guardResult.payload);
         return;
       }
 
-      const threads = listThreads();
+      const threads = listThreads({
+        role: accessContext.role,
+        userId: accessContext.userId,
+      });
       try {
         const filteredThreads = sanitizeVisibilityPayloadForRole(threads, accessContext.role);
-        sendJson(response, 200, filteredThreads);
+        send(200, filteredThreads);
         return;
       } catch (error) {
-        sendJson(response, 400, { error: error.message, code: "UNSUPPORTED_ROLE" });
+        send(400, { error: error.message, code: "UNSUPPORTED_ROLE" });
         return;
       }
     }
 
     if (request.method === "GET" && url.pathname === "/projects") {
       if (typeof listProjects !== "function") {
-        sendError(response, 501, "NOT_IMPLEMENTED", "projects endpoint not implemented");
+        fail(501, "NOT_IMPLEMENTED", "projects endpoint not implemented");
         return;
       }
 
       const guardResult = requireAccess(accessContext);
       if (!guardResult.allowed) {
-        sendJson(response, guardResult.status, guardResult.payload);
+        send(guardResult.status, guardResult.payload);
         return;
       }
 
-      sendJson(response, 200, listProjects());
+      send(
+        200,
+        listProjects({
+          role: accessContext.role,
+          userId: accessContext.userId,
+        }),
+      );
       return;
+    }
+
+    if (request.method === "GET" && projectGraphMatch) {
+      if (typeof getProjectGraph !== "function") {
+        fail(501, "NOT_IMPLEMENTED", "project graph endpoint not implemented");
+        return;
+      }
+
+      const projectId = decodeURIComponent(projectGraphMatch[1]);
+      const guardResult = requireAccess(accessContext, { projectId });
+      if (!guardResult.allowed) {
+        send(guardResult.status, guardResult.payload);
+        return;
+      }
+
+      const requestedView = url.searchParams.get("view");
+      const playerUserId = url.searchParams.get("player_id") ?? undefined;
+      if (requestedView && requestedView !== "gm" && requestedView !== "player") {
+        fail(400, "INVALID_VIEW", "view must be gm or player");
+        return;
+      }
+
+      const effectiveView = accessContext.role === "PLAYER" ? "player" : requestedView ?? "gm";
+      const graphPayload = getProjectGraph({
+        projectId,
+        view: effectiveView,
+        role: accessContext.role,
+        userId: accessContext.userId,
+        playerUserId,
+      });
+
+      if (!graphPayload) {
+        fail(404, "PROJECT_NOT_FOUND", "project not found");
+        return;
+      }
+
+      send(200, graphPayload);
+      return;
+    }
+
+    if (request.method === "GET" && projectHistoryMatch) {
+      if (typeof getProjectHistory !== "function") {
+        fail(501, "NOT_IMPLEMENTED", "project history endpoint not implemented");
+        return;
+      }
+
+      const projectId = decodeURIComponent(projectHistoryMatch[1]);
+      const guardResult = requireAccess(accessContext, { projectId });
+      if (!guardResult.allowed) {
+        send(guardResult.status, guardResult.payload);
+        return;
+      }
+
+      const historyPayload = getProjectHistory(projectId);
+      if (!historyPayload) {
+        fail(404, "PROJECT_NOT_FOUND", "project not found");
+        return;
+      }
+
+      send(200, historyPayload);
+      return;
+    }
+
+    if (request.method === "POST" && projectCommandsMatch) {
+      if (typeof executeProjectCommand !== "function") {
+        fail(501, "NOT_IMPLEMENTED", "project command endpoint not implemented");
+        return;
+      }
+
+      const projectId = decodeURIComponent(projectCommandsMatch[1]);
+      const guardResult = requireAccess(accessContext, { projectId });
+      if (!guardResult.allowed) {
+        send(guardResult.status, guardResult.payload);
+        return;
+      }
+
+      let body;
+      try {
+        body = await parseJsonBody(request);
+      } catch {
+        fail(400, "INVALID_JSON", "invalid JSON body");
+        return;
+      }
+
+      if (!body || typeof body !== "object" || Array.isArray(body) || typeof body.kind !== "string") {
+        fail(400, "INVALID_COMMAND", "command body must include a kind");
+        return;
+      }
+
+      try {
+        const result = executeProjectCommand({
+          projectId,
+          command: body,
+          actorRole: accessContext.role,
+          actorUserId: accessContext.userId,
+        });
+        send(200, result);
+        return;
+      } catch (error) {
+        if (sendKnownError(fail, error, "REQUEST_FAILED")) {
+          return;
+        }
+
+        fail(400, "INVALID_COMMAND", error.message);
+        return;
+      }
+    }
+
+    if (request.method === "POST" && projectHistoryUndoMatch) {
+      if (typeof undoProjectHistory !== "function") {
+        fail(501, "NOT_IMPLEMENTED", "project undo endpoint not implemented");
+        return;
+      }
+
+      const projectId = decodeURIComponent(projectHistoryUndoMatch[1]);
+      const guardResult = requireAccess(accessContext, { projectId });
+      if (!guardResult.allowed) {
+        send(guardResult.status, guardResult.payload);
+        return;
+      }
+
+      try {
+        const result = undoProjectHistory({
+          projectId,
+          actorRole: accessContext.role,
+          actorUserId: accessContext.userId,
+        });
+        send(200, result);
+        return;
+      } catch (error) {
+        if (sendKnownError(fail, error, "REQUEST_FAILED")) {
+          return;
+        }
+
+        fail(400, "UNDO_FAILED", error.message);
+        return;
+      }
+    }
+
+    if (request.method === "POST" && projectHistoryRedoMatch) {
+      if (typeof redoProjectHistory !== "function") {
+        fail(501, "NOT_IMPLEMENTED", "project redo endpoint not implemented");
+        return;
+      }
+
+      const projectId = decodeURIComponent(projectHistoryRedoMatch[1]);
+      const guardResult = requireAccess(accessContext, { projectId });
+      if (!guardResult.allowed) {
+        send(guardResult.status, guardResult.payload);
+        return;
+      }
+
+      try {
+        const result = redoProjectHistory({
+          projectId,
+          actorRole: accessContext.role,
+          actorUserId: accessContext.userId,
+        });
+        send(200, result);
+        return;
+      } catch (error) {
+        if (sendKnownError(fail, error, "REQUEST_FAILED")) {
+          return;
+        }
+
+        fail(400, "REDO_FAILED", error.message);
+        return;
+      }
     }
 
     if (request.method === "GET" && url.pathname === "/memberships") {
       if (typeof listMemberships !== "function") {
-        sendError(response, 501, "NOT_IMPLEMENTED", "memberships endpoint not implemented");
+        fail(501, "NOT_IMPLEMENTED", "memberships endpoint not implemented");
         return;
       }
 
       const guardResult = requireAccess(accessContext);
       if (!guardResult.allowed) {
-        sendJson(response, guardResult.status, guardResult.payload);
+        send(guardResult.status, guardResult.payload);
         return;
       }
 
       const projectId = url.searchParams.get("project_id") ?? undefined;
       const userId = url.searchParams.get("user_id") ?? undefined;
       const memberships = listMemberships({ projectId, userId });
-      sendJson(response, 200, memberships);
+      send(200, memberships);
       return;
     }
 
     if (request.method === "POST" && url.pathname === "/invites") {
       if (typeof createProjectInvite !== "function") {
-        sendError(response, 501, "NOT_IMPLEMENTED", "invites endpoint not implemented");
+        fail(501, "NOT_IMPLEMENTED", "invites endpoint not implemented");
         return;
       }
 
@@ -180,79 +391,84 @@ export function createServer({
       try {
         body = await parseJsonBody(request);
       } catch {
-        sendError(response, 400, "INVALID_JSON", "invalid JSON body");
+        fail(400, "INVALID_JSON", "invalid JSON body");
         return;
       }
 
       if (typeof body.project_id !== "string" || body.project_id.trim().length === 0) {
-        sendError(response, 400, "PROJECT_ID_REQUIRED", "project_id is required");
+        fail(400, "PROJECT_ID_REQUIRED", "project_id is required");
         return;
       }
 
       const projectId = body.project_id.trim();
       const guardResult = requireAccess(accessContext, { allowRoles: ["GM", "HELPER"], projectId });
       if (!guardResult.allowed) {
-        sendJson(response, guardResult.status, guardResult.payload);
+        send(guardResult.status, guardResult.payload);
         return;
       }
 
       const invite = createProjectInvite(projectId, body);
-      sendJson(response, 201, invite);
+      send(201, invite);
       return;
     }
 
     if (request.method === "GET" && url.pathname === "/timeline/events") {
       if (typeof listEvents !== "function") {
-        sendJson(response, 501, { error: "timeline endpoint not implemented" });
+        send(501, { error: "timeline endpoint not implemented" });
         return;
       }
 
       const guardResult = requireAccess(accessContext);
       if (!guardResult.allowed) {
-        sendJson(response, guardResult.status, guardResult.payload);
+        send(guardResult.status, guardResult.payload);
         return;
       }
 
       try {
-        const timelineEvents = sortEventsForTimeline(listEvents());
+        const timelineEvents = sortEventsForTimeline(
+          listEvents({
+            role: accessContext.role,
+            userId: accessContext.userId,
+          }),
+        );
         const filteredTimelineEvents = sanitizeVisibilityPayloadForRole(timelineEvents, accessContext.role);
-        sendJson(response, 200, filteredTimelineEvents);
+        send(200, filteredTimelineEvents);
         return;
       } catch (error) {
-        sendJson(response, 400, { error: error.message, code: "UNSUPPORTED_ROLE" });
+        send(400, { error: error.message, code: "UNSUPPORTED_ROLE" });
         return;
       }
     }
 
     if (request.method === "POST" && projectMembershipMatch) {
       if (typeof createProjectMembership !== "function") {
-        sendJson(response, 501, { error: "project membership endpoint not implemented" });
+        send(501, { error: "project membership endpoint not implemented" });
         return;
       }
 
       const projectId = decodeURIComponent(projectMembershipMatch[1]);
       const guardResult = requireAccess(accessContext, { allowRoles: ["GM", "HELPER"], projectId });
       if (!guardResult.allowed) {
-        sendJson(response, guardResult.status, guardResult.payload);
+        send(guardResult.status, guardResult.payload);
         return;
       }
 
       const body = await parseJsonBody(request);
       const membership = createProjectMembership(projectId, body);
-      sendJson(response, 201, membership);
+      send(201, membership);
       return;
     }
 
     if (request.method === "POST" && projectInviteMatch) {
       if (typeof createProjectInvite !== "function") {
-        sendJson(response, 501, { error: "project invite endpoint not implemented" });
+        send(501, { error: "project invite endpoint not implemented" });
         return;
       }
 
       const projectId = decodeURIComponent(projectInviteMatch[1]);
       const guardResult = requireAccess(accessContext, { allowRoles: ["GM", "HELPER"], projectId });
       if (!guardResult.allowed) {
-        sendJson(response, guardResult.status, guardResult.payload);
+        send(guardResult.status, guardResult.payload);
         return;
       }
 
@@ -260,25 +476,28 @@ export function createServer({
       try {
         body = await parseJsonBody(request);
       } catch {
-        sendError(response, 400, "INVALID_JSON", "invalid JSON body");
+        fail(400, "INVALID_JSON", "invalid JSON body");
         return;
       }
       const invite = createProjectInvite(projectId, body);
-      sendJson(response, 201, invite);
+      send(201, invite);
       return;
     }
 
     if (request.method === "PATCH" && threadDetailMatch) {
       const threadId = decodeURIComponent(threadDetailMatch[1]);
-      const currentThread = getThreadById(threadId);
+      const currentThread = getThreadById(threadId, {
+        role: accessContext.role,
+        userId: accessContext.userId,
+      });
 
       if (!currentThread) {
-        sendJson(response, 404, { error: "thread not found" });
+        send(404, { error: "thread not found" });
         return;
       }
 
       if (typeof saveThreadState !== "function") {
-        sendJson(response, 501, { error: "thread transition endpoint not implemented" });
+        send(501, { error: "thread transition endpoint not implemented" });
         return;
       }
 
@@ -287,18 +506,24 @@ export function createServer({
         projectId: currentThread.project_id,
       });
       if (!guardResult.allowed) {
-        sendJson(response, guardResult.status, guardResult.payload);
+        send(guardResult.status, guardResult.payload);
         return;
       }
 
       try {
         const body = await parseJsonBody(request);
         const updatedThread = transitionThreadState(currentThread, body.state);
-        const persistedThread = saveThreadState(threadId, updatedThread.state);
-        sendJson(response, 200, persistedThread);
+        const persistedThread = saveThreadState(threadId, updatedThread.state, {
+          role: accessContext.role,
+          userId: accessContext.userId,
+        });
+        send(200, persistedThread);
         return;
       } catch (error) {
-        sendJson(response, 400, { error: error.message, code: "INVALID_STATE_TRANSITION" });
+        if (sendKnownError(fail, error, "REQUEST_FAILED")) {
+          return;
+        }
+        send(400, { error: error.message, code: "INVALID_STATE_TRANSITION" });
         return;
       }
     }
@@ -306,28 +531,40 @@ export function createServer({
     if (request.method === "GET" && threadDetailMatch) {
       const guardResult = requireAccess(accessContext);
       if (!guardResult.allowed) {
-        sendJson(response, guardResult.status, guardResult.payload);
+        send(guardResult.status, guardResult.payload);
         return;
       }
 
       const threadId = decodeURIComponent(threadDetailMatch[1]);
-      const thread = getThreadById(threadId);
+      const thread = getThreadById(threadId, {
+        role: accessContext.role,
+        userId: accessContext.userId,
+      });
 
       if (!thread) {
-        sendJson(response, 404, { error: "thread not found" });
+        send(404, { error: "thread not found" });
         return;
       }
 
       try {
         const filteredThread = filterThreadForRole(thread, accessContext.role);
-        sendJson(response, 200, filteredThread);
+        send(200, filteredThread);
         return;
       } catch (error) {
-        sendJson(response, 400, { error: error.message, code: "UNSUPPORTED_ROLE" });
+        send(400, { error: error.message, code: "UNSUPPORTED_ROLE" });
         return;
       }
     }
 
-    sendJson(response, 404, { error: "not found" });
+    send(404, { error: "not found" });
   });
+}
+
+function sendKnownError(fail, error, fallbackCode = "REQUEST_FAILED") {
+  if (error && typeof error === "object" && "statusCode" in error) {
+    fail(error.statusCode, error.code ?? fallbackCode, error.message ?? "request failed");
+    return true;
+  }
+
+  return false;
 }

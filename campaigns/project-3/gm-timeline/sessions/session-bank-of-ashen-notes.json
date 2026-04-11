@@ -1,0 +1,14 @@
+{
+  "id": "session-bank-of-ashen-notes",
+  "campaignId": "project-3",
+  "sequence": 4,
+  "status": "planning",
+  "headline": "Bank of Ashen Notes",
+  "summary": "The likely next session turns the market lead into vault pressure.",
+  "expectedDirection": "Attach the vault transfer or the clerk debt as the first hard pivot.",
+  "placeIds": ["place-grand-archive", "place-sparklock-bank"],
+  "notes": "This should feel like escalation, not a reset.",
+  "startedAt": null,
+  "endedAt": null,
+  "updatedAt": "2026-04-06T09:30:00.000Z"
+}

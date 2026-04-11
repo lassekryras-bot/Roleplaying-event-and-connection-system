@@ -65,4 +65,27 @@ describe('Thread detail role-safe rendering', () => {
     expect(screen.queryByText(/GM Truth:/)).not.toBeInTheDocument();
     expect(screen.queryByText(/secretly paid by the antagonist/)).not.toBeInTheDocument();
   });
+
+  it('treats helper role as GM-eligible for thread visibility', async () => {
+    mockUseApiClient.mockReturnValue({
+      role: 'helper',
+      getThreadById: vi.fn().mockResolvedValue({
+        id: 'thread-1',
+        title: 'Whispers in the harbor',
+        player_summary: 'Dockworkers have gone missing at night.',
+        gm_truth: 'The harbor master is secretly paid by the antagonist.',
+        messages: [],
+      }),
+    });
+
+    render(<ThreadDetailPage params={Promise.resolve({ id: 'thread-1' })} />);
+
+    await waitFor(() => {
+      expect(screen.getByText('Whispers in the harbor')).toBeInTheDocument();
+    });
+
+    expect(
+      screen.getByText('GM Truth: The harbor master is secretly paid by the antagonist.'),
+    ).toBeInTheDocument();
+  });
 });

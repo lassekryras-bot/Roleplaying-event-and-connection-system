@@ -1,0 +1,17 @@
+{
+  "id": "effect-pattern-river-static",
+  "type": "effect",
+  "title": "River Static",
+  "summary": "Ferry crews and messengers spread conflicting signal warnings before any tower can confirm them.",
+  "status": "archived",
+  "effectType": "pressure",
+  "scope": "local",
+  "severity": "low",
+  "notes": "Legacy threads in this pattern: River Static.\n\nImported from legacy pattern pattern-river-static.",
+  "relations": [
+    {
+      "type": "appliesTo",
+      "targetId": "location-entity-river-ferry"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "session-glassworks-ghost-route",
+  "type": "session",
+  "title": "Glassworks Ghost Route",
+  "locationId": "location-sparklock-bank",
+  "summary": "If the vault trail slips, the crew chases shipments to the glassworks.",
+  "startingLocationStateId": "location-state-sparklock-bank-initial",
+  "resultingLocationStateId": "location-state-sparklock-bank-post-major-visit",
+  "notes": "Shift from paper pressure to shipment sabotage.\n\nKeep this close enough to the bank session that drag-reordering matters.\n\nImported from gm-timeline session session-glassworks-ghost-route.",
+  "relations": [
+    {
+      "type": "involves",
+      "targetId": "location-sunspike-glassworks"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-night-vault"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-furnace-saboteur"
+    },
+    {
+      "type": "follows",
+      "targetId": "session-bank-of-ashen-notes"
+    }
+  ]
+}

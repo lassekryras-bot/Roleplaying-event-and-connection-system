@@ -1,0 +1,20 @@
+{
+  "id": "event-thread-red-signal",
+  "type": "event",
+  "title": "The Red Signal",
+  "summary": "One tower keeps flashing a red pattern no operator admits to sending.",
+  "status": "active",
+  "eventType": "hook-progressed",
+  "notes": "GM truth: The pattern is a lure sequence copied from the old border war.\n\nLegacy thread state: active.\n\nLegacy timeline anchor: now.\n\nImported from legacy thread thread-red-signal.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-entity-signal-hill"
+    },
+    {
+      "type": "belongsTo",
+      "targetId": "effect-pattern-beacon-failure"
+    }
+  ],
+  "createdEffectIds": []
+}

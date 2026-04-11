@@ -1,0 +1,2599 @@
+.boardShell {
+  --board-bg: #11161f;
+  --board-panel: #171d29;
+  --board-border: #2a3548;
+  --board-copy: #eef3ff;
+  --board-muted: #99a7be;
+  --board-planning: #5ba8ff;
+  --board-active: #3bd28f;
+  --board-ended: #77859f;
+  --board-warning: #f5bd5c;
+  --board-shadow: 0 26px 60px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: calc(100vh - 129px);
+  padding: 24px;
+  color: var(--board-copy);
+  background:
+    radial-gradient(circle at top left, rgba(91, 168, 255, 0.18), transparent 30%),
+    radial-gradient(circle at top right, rgba(59, 210, 143, 0.12), transparent 24%),
+    linear-gradient(180deg, #11161f 0%, #0d131b 100%);
+}
+
+/* Wireframe-first overrides */
+
+.boardShell {
+  --board-bg: #f5f5f5;
+  --board-panel: #ffffff;
+  --board-border: #d7d7d7;
+  --board-copy: #1f1f1f;
+  --board-muted: #666666;
+  --board-planning: #8b8b8b;
+  --board-active: #5f5f5f;
+  --board-ended: #adadad;
+  --board-warning: #777777;
+  --board-shadow: none;
+  min-height: 0;
+  padding: 0;
+  gap: 16px;
+  color: var(--board-copy);
+  background: transparent;
+}
+
+.utilityBar,
+.validationPanel,
+.workspace,
+.emptyPanel,
+.timelineStrip,
+.sessionFlowBoard {
+  border: 1px solid var(--board-border);
+  border-radius: 0;
+  background: var(--board-panel);
+  box-shadow: none;
+}
+
+.utilityBar,
+.validationPanel,
+.workspace,
+.emptyPanel,
+.sessionFlowBoard {
+  padding: 20px;
+}
+
+.utilityBar {
+  position: static;
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.utilityControls {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  align-items: end;
+}
+
+.fieldGroup {
+  gap: 6px;
+  color: var(--board-muted);
+}
+
+.fieldGroup :global(.ui-field),
+.fieldGroup :global(.ui-select) {
+  border-color: var(--board-border);
+  background: #ffffff;
+  color: var(--board-copy);
+}
+
+.utilityButton:global(.ui-button),
+.warningButton,
+.inlineAction,
+.linkButton,
+.menuTrigger,
+.statusButton,
+.rollButton,
+.placeSearchItem,
+.overflowItem,
+.searchResultButton,
+.contextMenu button {
+  border: 1px solid var(--board-border);
+  border-radius: 0;
+  background: #ffffff;
+  color: var(--board-copy);
+  box-shadow: none;
+}
+
+.warningButtonActive,
+.statusButtonActive,
+.sessionCardSelected,
+.hookCardHighlighted,
+.placeTileSelected {
+  border-color: #b8b8b8;
+  box-shadow: none;
+}
+
+.searchPanel {
+  position: static;
+  right: auto;
+  bottom: auto;
+  z-index: auto;
+  width: 100%;
+  margin-top: 4px;
+  padding: 10px;
+  border: 1px solid var(--board-border);
+  border-radius: 0;
+  background: #ffffff;
+  transform: none;
+}
+
+.searchResultButton,
+.overflowItem,
+.placeSearchItem {
+  border-radius: 0;
+  background: #fafafa;
+}
+
+.validationItem,
+.timelineEmpty,
+.emptyWorkspace,
+.emptyPanel,
+.placeRailEmpty,
+.hookEmpty,
+.sectionItem,
+.checkRow {
+  border: 1px solid var(--board-border);
+  border-radius: 0;
+  background: #fafafa;
+}
+
+.sessionFlowBoard {
+  min-height: 0;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.sessionFlowBackdrop,
+.sessionFlowBackdropVeil,
+.sessionFlowDust,
+.sessionFlowThreads,
+.timelineBackgroundLayer,
+.timelineBackgroundVeil,
+.timelineRopeLayer,
+.timelineUiLayer {
+  display: none;
+}
+
+.sessionFlowSurface {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 16px;
+  padding-top: 0;
+  position: static;
+}
+
+.flowPastCluster,
+.flowCurrentCluster,
+.flowFutureCluster {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  min-width: 0;
+}
+
+.flowCurrentCluster {
+  padding: 16px;
+  border: 1px solid var(--board-border);
+  background: #fafafa;
+}
+
+.flowCurrentBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 4px 8px;
+  border: 1px solid var(--board-border);
+  background: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--board-muted);
+}
+
+.flowClusterLabel,
+.sessionSequence,
+.searchResultKind,
+.eyebrow {
+  color: var(--board-muted);
+}
+
+.flowClusterHeader,
+.flowClusterHeaderFuture {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0;
+}
+
+.flowPastCardShell,
+.flowFutureRow {
+  margin-right: 0;
+}
+
+.flowFutureStack {
+  display: grid;
+  gap: 12px;
+}
+
+.flowCard,
+.sessionCard {
+  border: 1px solid var(--board-border);
+  border-radius: 0;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.flowCardPast,
+.flowCardCurrent,
+.flowCardFuture,
+.sessionCardPlanning,
+.sessionCardActive,
+.sessionCardEnded,
+.sessionCardCompact,
+.sessionCardCompact.sessionCardPlanning,
+.sessionCardCompact.sessionCardEnded,
+.sessionCardCompact.sessionCardActive {
+  background: #ffffff;
+}
+
+.flowCardButton,
+.flowCardButtonCompact,
+.flowCardButtonCurrent,
+.sessionCardButton,
+.sessionCardButtonCompact,
+.placeTileButton {
+  padding: 16px;
+}
+
+.flowCardButtonCurrent {
+  min-height: 0;
+}
+
+.flowCardCurrent h3,
+.sessionCardButton h3 {
+  font-size: 1.1rem;
+}
+
+.flowCardFutureDragging,
+.heroSessionCardDragging {
+  transform: none;
+}
+
+.flowCardFutureLinked {
+  border-color: #b8b8b8;
+}
+
+.flowEmptyCard {
+  min-height: 120px;
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--board-border);
+  background: #fafafa;
+  color: var(--board-muted);
+}
+
+.currentSessionMenuWrap,
+.sessionCardMenuWrap,
+.flowCurrentMenuWrap,
+.heroCurrentMenuWrap {
+  top: 12px;
+  right: 12px;
+}
+
+.menuTrigger,
+.compactMenuTrigger {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 0;
+  background: #ffffff;
+  color: var(--board-copy);
+}
+
+.contextMenu,
+.overflowPanel,
+.flowOverflowPanel,
+.timelineOverflowPanel {
+  border: 1px solid var(--board-border);
+  border-radius: 0;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.workspace {
+  gap: 16px;
+}
+
+.workspaceHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: start;
+}
+
+.workspaceSummary,
+.workspaceNotes,
+.placeDescription,
+.noteCopy,
+.mutedCopy,
+.timelineEmpty,
+.loadingCopy,
+.placeTileButton span,
+.placeTileMeta,
+.sessionCardButton p,
+.sectionToggle span,
+.checkResult,
+.manualLabel,
+.sectionHeadingRow span,
+.checkSummary span,
+.searchResultButton span,
+.validationItem span,
+.validationEmpty {
+  color: var(--board-muted);
+}
+
+.placeAddRow {
+  grid-template-columns: minmax(220px, 320px) 1fr;
+  gap: 16px;
+}
+
+.placeSearchResults,
+.placeRail {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.placeTile,
+.placePanel,
+.hookBoard,
+.hookCard {
+  padding: 16px;
+  border: 1px solid var(--board-border);
+  border-radius: 0;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.placePanelGrid {
+  grid-template-columns: minmax(280px, 360px) 1fr;
+  gap: 16px;
+}
+
+.sessionChip,
+.hookChip,
+.priorityPill,
+.placeTag,
+.threadChip {
+  border-radius: 0;
+  border-color: var(--board-border);
+  background: #fafafa;
+  color: var(--board-copy);
+}
+
+.sessionChipPlanning,
+.sessionChipActive,
+.sessionChipEnded,
+.hookChipAvailable,
+.hookChipProgress,
+.hookChipResolved,
+.hookChipDiscarded {
+  background: #fafafa;
+  color: var(--board-copy);
+  border-color: var(--board-border);
+}
+
+.hookCardAvailable,
+.hookCardProgress,
+.hookCardResolved,
+.hookCardDiscarded {
+  border-left-width: 3px;
+}
+
+.contextMenu button:hover,
+.searchResultButton:hover,
+.placeSearchItem:hover,
+.overflowItem:hover,
+.statusButton:hover,
+.inlineAction:hover,
+.warningButton:hover,
+.linkButton:hover,
+.menuTrigger:hover,
+.contextMenu button:focus-visible,
+.searchResultButton:focus-visible,
+.placeSearchItem:focus-visible,
+.overflowItem:focus-visible,
+.statusButton:focus-visible,
+.inlineAction:focus-visible,
+.warningButton:focus-visible,
+.linkButton:focus-visible,
+.menuTrigger:focus-visible {
+  background: #f3f3f3;
+  outline: none;
+}
+
+@media (max-width: 1280px) {
+  .utilityBar,
+  .workspaceHeader,
+  .placeAddRow,
+  .placePanelGrid,
+  .utilityControls,
+  .sessionFlowSurface {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .boardShell {
+    gap: 12px;
+  }
+
+  .utilityBar,
+  .validationPanel,
+  .workspace,
+  .emptyPanel,
+  .sessionFlowBoard {
+    padding: 16px;
+  }
+
+  .utilityButtons,
+  .workspaceActions,
+  .placeTileActions,
+  .futureCardActions,
+  .hookActionRow,
+  .checkActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.utilityBar,
+.validationPanel,
+.workspace,
+.emptyPanel,
+.timelineStrip {
+  border: 1px solid var(--board-border);
+  border-radius: 24px;
+  background: rgba(23, 29, 41, 0.94);
+  box-shadow: var(--board-shadow);
+}
+
+.utilityBar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  padding: 24px;
+}
+
+.utilityTitleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 240px;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--board-muted);
+}
+
+.utilityTitleBlock h1,
+.validationHeader h2,
+.workspaceHeader h2,
+.placePanelHeader h3,
+.sectionHeadingRow h3 {
+  margin: 0;
+}
+
+.utilityMeta {
+  font-size: 13px;
+  color: var(--board-muted);
+}
+
+.utilityControls {
+  display: grid;
+  grid-template-columns: minmax(160px, 200px) minmax(260px, 420px) auto;
+  gap: 16px;
+  align-items: end;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--board-muted);
+}
+
+.fieldGroup :global(.ui-field),
+.fieldGroup :global(.ui-select) {
+  width: 100%;
+  border-color: var(--board-border);
+  background: #121925;
+  color: var(--board-copy);
+}
+
+.searchField {
+  min-width: 280px;
+}
+
+.utilityButtons,
+.workspaceActions,
+.placeTileActions,
+.futureCardActions,
+.hookActionRow,
+.checkActions,
+.workspaceMeta,
+.threadRow,
+.placeTagRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.utilityButton:global(.ui-button) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+  padding: 10px 14px;
+  border: 1px solid var(--board-border);
+  background: #202b3f;
+  color: var(--board-copy);
+}
+
+.warningButton,
+.inlineAction,
+.linkButton,
+.menuTrigger,
+.statusButton,
+.rollButton,
+.placeSearchItem,
+.overflowItem,
+.searchResultButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+  border: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.warningButton {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border-color: var(--board-border);
+  background: rgba(18, 25, 37, 0.8);
+  color: var(--board-muted);
+}
+
+.warningButtonActive {
+  border-color: rgba(245, 189, 92, 0.5);
+  color: var(--board-warning);
+}
+
+.searchPanel {
+  position: absolute;
+  right: 24px;
+  bottom: -12px;
+  z-index: 3;
+  width: min(680px, calc(100% - 48px));
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid rgba(91, 168, 255, 0.22);
+  border-radius: 20px;
+  background: rgba(15, 21, 31, 0.98);
+  transform: translateY(100%);
+}
+
+.searchResultRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.searchResultButton {
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border-color: var(--board-border);
+  background: #141c28;
+}
+
+.searchResultButton strong {
+  font-size: 14px;
+}
+
+.searchResultButton span,
+.validationItem span,
+.validationEmpty,
+.mutedCopy,
+.timelineEmpty,
+.loadingCopy,
+.placeTileButton span,
+.placeTileMeta,
+.sessionCardButton p,
+.workspaceSummary,
+.workspaceNotes,
+.placeDescription,
+.noteCopy,
+.sectionToggle span,
+.checkResult,
+.manualLabel,
+.sectionHeadingRow span,
+.checkSummary span {
+  color: var(--board-muted);
+}
+
+.searchResultKind,
+.timelineLaneHeader,
+.sessionSequence {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 12px;
+}
+
+.validationPanel,
+.workspace {
+  padding: 22px;
+}
+
+.validationHeader,
+.workspaceHeader,
+.placePanelHeader,
+.sectionHeadingRow,
+.sessionCardHeader,
+.sessionMetaRow,
+.placeTileMeta,
+.hookHeadlineRow,
+.hookHeaderActions,
+.hookHeader,
+.checkSummary {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.validationList,
+.sectionList,
+.checkList,
+.hookGrid {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.validationItem,
+.timelineEmpty,
+.emptyWorkspace,
+.emptyPanel,
+.placeRailEmpty,
+.hookEmpty {
+  padding: 18px;
+  border-radius: 18px;
+}
+
+.validationItem {
+  display: grid;
+  gap: 4px;
+  border: 1px solid rgba(245, 189, 92, 0.24);
+  background: rgba(245, 189, 92, 0.06);
+}
+
+.sessionFlowBoard {
+  position: relative;
+  overflow: hidden;
+  min-height: 460px;
+  padding: 26px 28px 30px;
+  border: 1px solid rgba(124, 144, 175, 0.18);
+  border-radius: 30px;
+  background: linear-gradient(180deg, rgba(8, 13, 24, 0.96), rgba(8, 12, 20, 0.98));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 24px 60px rgba(2, 6, 14, 0.26);
+  isolation: isolate;
+}
+
+.sessionFlowBackdrop,
+.sessionFlowBackdropVeil,
+.sessionFlowDust,
+.sessionFlowThreads,
+.sessionFlowSurface {
+  position: absolute;
+  inset: 0;
+}
+
+.sessionFlowBackdrop {
+  z-index: 0;
+}
+
+.sessionFlowBackgroundImage {
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.38;
+  filter: saturate(0.92) brightness(0.88);
+  transform: scale(1.05);
+}
+
+.sessionFlowBackdropVeil {
+  z-index: 1;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(98, 234, 187, 0.16), transparent 18%),
+    linear-gradient(180deg, rgba(8, 12, 20, 0.12), rgba(8, 12, 20, 0.44) 48%, rgba(8, 12, 20, 0.76) 100%);
+}
+
+.sessionFlowDust {
+  z-index: 2;
+  background:
+    radial-gradient(circle at 18% 30%, rgba(255, 255, 255, 0.12) 0 1px, transparent 2px),
+    radial-gradient(circle at 74% 28%, rgba(255, 255, 255, 0.1) 0 1px, transparent 2px),
+    radial-gradient(circle at 58% 68%, rgba(255, 255, 255, 0.08) 0 1px, transparent 2px);
+  background-size: 180px 180px, 210px 210px, 240px 240px;
+  opacity: 0.28;
+  filter: blur(0.2px);
+}
+
+.sessionFlowThreads {
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  transform: translateY(14px);
+}
+
+.flowThreadGlow,
+.flowThreadCore,
+.flowThreadStream,
+.flowThreadSpark {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.flowThreadGlow {
+  stroke-width: 12;
+  opacity: 0.4;
+  filter: blur(6px);
+}
+
+.flowThreadCore {
+  stroke-width: 2.6;
+  opacity: 0.5;
+}
+
+.flowThreadStream {
+  stroke-width: var(--flow-width, 1);
+  stroke-dasharray: 38 320;
+  stroke-dashoffset: var(--flow-offset, 0);
+  opacity: var(--flow-opacity, 0.32);
+  animation: flowThreadStream var(--flow-duration, 22s) linear infinite;
+  animation-delay: var(--flow-delay, 0s);
+}
+
+.flowThreadSpark {
+  stroke-width: calc(var(--flow-width, 1) * 0.42);
+  stroke-dasharray: 4 420;
+  stroke-dashoffset: calc(var(--flow-offset, 0) * 1.18);
+  opacity: calc(var(--flow-opacity, 0.3) * 0.9);
+  animation: flowThreadSpark var(--flow-duration, 18s) linear infinite;
+  animation-delay: var(--flow-delay, 0s);
+}
+
+.flowThreadGlowIncoming {
+  stroke: rgba(107, 240, 201, 0.34);
+}
+
+.flowThreadCoreIncoming {
+  stroke: url("#flow-thread-incoming");
+}
+
+.flowThreadGlowBlue {
+  stroke: rgba(112, 185, 255, 0.32);
+}
+
+.flowThreadCoreBlue {
+  stroke: url("#flow-thread-blue");
+}
+
+.flowThreadGlowViolet {
+  stroke: rgba(139, 120, 255, 0.3);
+}
+
+.flowThreadCoreViolet {
+  stroke: url("#flow-thread-violet");
+}
+
+.flowThreadGlowAmber {
+  stroke: rgba(255, 180, 79, 0.34);
+}
+
+.flowThreadCoreAmber {
+  stroke: url("#flow-thread-amber");
+}
+
+.flowThreadHoverActive {
+  opacity: 1;
+  stroke-width: calc(var(--flow-width, 1) + 0.16);
+}
+
+.flowThreadStreamIncoming {
+  stroke: url("#flow-thread-incoming");
+}
+
+.flowThreadStreamBlue {
+  stroke: url("#flow-thread-blue");
+}
+
+.flowThreadStreamViolet {
+  stroke: url("#flow-thread-violet");
+}
+
+.flowThreadStreamAmber {
+  stroke: url("#flow-thread-amber");
+}
+
+.flowThreadSparkIncoming {
+  stroke: rgba(194, 255, 240, 0.94);
+}
+
+.flowThreadSparkBlue {
+  stroke: rgba(184, 227, 255, 0.96);
+}
+
+.flowThreadSparkViolet {
+  stroke: rgba(224, 214, 255, 0.96);
+}
+
+.flowThreadSparkAmber {
+  stroke: rgba(255, 230, 166, 0.96);
+}
+
+.flowCurrentNodeGlow {
+  fill: rgba(111, 240, 200, 0.18);
+  filter: blur(8px);
+  animation: flowCurrentPulse 3.2s ease-in-out infinite;
+}
+
+.flowCurrentNode {
+  fill: #bffff1;
+  filter: drop-shadow(0 0 10px rgba(111, 240, 200, 0.74));
+}
+
+.sessionFlowSurface {
+  z-index: 4;
+  display: grid;
+  grid-template-columns: minmax(0, 0.24fr) minmax(360px, 0.44fr) minmax(280px, 0.32fr);
+  align-items: center;
+  gap: clamp(18px, 3vw, 40px);
+  padding: 84px 10px 0;
+}
+
+.flowPastCluster,
+.flowCurrentCluster,
+.flowFutureCluster {
+  position: relative;
+  min-width: 0;
+}
+
+.flowClusterHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.flowClusterHeaderFuture {
+  justify-content: space-between;
+}
+
+.flowClusterLabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(217, 226, 242, 0.78);
+}
+
+.flowClusterAction {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(171, 186, 209, 0.76);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.flowClusterAction:hover {
+  color: #eef5ff;
+}
+
+.flowOverflowPanel {
+  margin-bottom: 14px;
+  background: rgba(10, 14, 22, 0.94);
+  backdrop-filter: blur(18px);
+}
+
+.flowPastCardShell {
+  position: relative;
+  max-width: 250px;
+}
+
+.flowPastCardShell::before,
+.flowPastCardShell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(110, 128, 161, 0.12);
+  border-radius: 22px;
+  pointer-events: none;
+}
+
+.flowPastCardShell::before {
+  transform: translate(10px, 8px);
+  opacity: 0.34;
+}
+
+.flowPastCardShell::after {
+  transform: translate(18px, 14px);
+  opacity: 0.18;
+}
+
+.flowCard {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid rgba(120, 144, 182, 0.2);
+  backdrop-filter: blur(14px);
+}
+
+.flowCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), transparent 46%);
+  pointer-events: none;
+}
+
+.flowCardButton {
+  position: relative;
+  padding: 24px 68px 24px 24px;
+}
+
+.flowCardButtonCurrent {
+  min-height: 176px;
+}
+
+.flowCardButtonCompact {
+  padding: 18px 58px 18px 18px;
+}
+
+.flowCardPast {
+  max-width: 250px;
+  opacity: 0.82;
+  background:
+    linear-gradient(180deg, rgba(70, 84, 112, 0.14), rgba(11, 16, 27, 0.84)),
+    rgba(7, 11, 20, 0.66);
+}
+
+.flowCardCurrent {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(97, 238, 189, 0.12), transparent 54%),
+    linear-gradient(180deg, rgba(24, 53, 66, 0.88), rgba(13, 22, 34, 0.94));
+  border-color: rgba(116, 216, 255, 0.68);
+  box-shadow:
+    0 0 0 1px rgba(116, 216, 255, 0.14),
+    0 0 34px rgba(82, 220, 200, 0.18),
+    0 20px 44px rgba(3, 8, 17, 0.32);
+}
+
+.flowCardCurrent h3 {
+  font-size: clamp(1.5rem, 2.2vw, 1.92rem);
+  letter-spacing: -0.03em;
+}
+
+.flowCardCurrent p {
+  max-width: 28ch;
+  color: rgba(234, 242, 255, 0.9);
+  font-size: 1rem;
+}
+
+.flowCardFuture {
+  background:
+    linear-gradient(180deg, rgba(40, 58, 93, 0.22), rgba(10, 16, 29, 0.9)),
+    rgba(7, 11, 20, 0.68);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.flowCardFutureLinked {
+  border-color: rgba(130, 197, 255, 0.42);
+  box-shadow: 0 0 20px rgba(93, 151, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.flowCardFutureDragging {
+  transform: translateY(-2px) scale(1.01);
+}
+
+.flowCurrentCluster {
+  display: grid;
+  justify-items: center;
+  margin-top: 18px;
+}
+
+.flowCurrentBadge {
+  position: relative;
+  z-index: 1;
+  margin-bottom: -16px;
+  padding: 8px 18px;
+  border: 1px solid rgba(114, 230, 182, 0.7);
+  border-radius: 999px;
+  background: rgba(27, 92, 79, 0.38);
+  color: #eafcf4;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  box-shadow: 0 0 18px rgba(114, 230, 182, 0.16);
+}
+
+.flowCurrentMenuWrap {
+  top: 16px;
+  right: 16px;
+}
+
+.flowFutureStack {
+  display: grid;
+  gap: 18px;
+  justify-items: end;
+}
+
+.flowFutureRow:nth-child(2) {
+  margin-right: 16px;
+}
+
+.flowFutureRow:nth-child(3) {
+  margin-right: 38px;
+}
+
+.flowEmptyCard {
+  display: grid;
+  place-items: center;
+  min-height: 110px;
+  border: 1px dashed rgba(130, 145, 167, 0.2);
+  background: rgba(10, 15, 24, 0.42);
+}
+
+@keyframes flowThreadStream {
+  from {
+    stroke-dashoffset: var(--flow-offset, 0);
+  }
+
+  to {
+    stroke-dashoffset: calc(var(--flow-offset, 0) - 760);
+  }
+}
+
+@keyframes flowThreadSpark {
+  from {
+    stroke-dashoffset: calc(var(--flow-offset, 0) * 1.18);
+  }
+
+  to {
+    stroke-dashoffset: calc((var(--flow-offset, 0) * 1.18) - 1040);
+  }
+}
+
+@keyframes flowCurrentPulse {
+  0%,
+  100% {
+    r: 10;
+    opacity: 0.8;
+  }
+
+  50% {
+    r: 13;
+    opacity: 1;
+  }
+}
+
+.timelineStrip {
+  position: relative;
+  min-height: clamp(540px, 48vw, 680px);
+  overflow: hidden;
+  padding: 28px 24px 30px;
+  border: 1px solid rgba(129, 141, 160, 0.16);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 50% 44%, rgba(76, 208, 143, 0.14), transparent 26%),
+    radial-gradient(circle at 82% 36%, rgba(86, 112, 255, 0.16), transparent 24%),
+    linear-gradient(180deg, rgba(10, 15, 24, 0.96), rgba(9, 14, 22, 0.98));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  isolation: isolate;
+}
+
+.timelineBackgroundLayer,
+.timelineBackgroundVeil,
+.timelineRopeLayer,
+.timelineUiLayer {
+  position: absolute;
+  inset: 0;
+}
+
+.timelineBackgroundLayer {
+  z-index: 0;
+}
+
+.timelineBackgroundImage {
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.44;
+  transform: scale(1.03);
+  filter: saturate(1.02) brightness(0.88);
+}
+
+.timelineBackgroundVeil {
+  z-index: 1;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(72, 210, 143, 0.14), transparent 20%),
+    linear-gradient(180deg, rgba(7, 10, 18, 0.14), rgba(7, 10, 18, 0.28) 30%, rgba(7, 10, 18, 0.54) 100%);
+}
+
+.timelineRopeLayer {
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+}
+
+.timelineRopeFrame {
+  position: relative;
+  width: min(1540px, 112%);
+  height: clamp(270px, 30vw, 382px);
+  transform: translateY(-24px);
+  opacity: 0.96;
+  filter: drop-shadow(0 24px 42px rgba(12, 16, 27, 0.42));
+}
+
+.timelineRopeFrame::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 38%;
+  height: 72%;
+  transform: translate(-50%, -20%);
+  background: radial-gradient(circle, rgba(62, 214, 141, 0.24), transparent 74%);
+  filter: blur(22px);
+}
+
+.timelineRopeFrame::after {
+  content: "";
+  position: absolute;
+  inset: 18% 4% 24%;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(96, 235, 166, 0.12), transparent 18%),
+    radial-gradient(circle at 20% 45%, rgba(192, 138, 255, 0.08), transparent 16%),
+    radial-gradient(circle at 84% 42%, rgba(109, 146, 255, 0.1), transparent 16%);
+  filter: blur(18px);
+}
+
+.timelineRopeImage {
+  object-fit: contain;
+  object-position: center;
+  transform: scale(1.1);
+  filter: saturate(1.14) brightness(1.04) contrast(1.06);
+}
+
+.timelineUiLayer {
+  z-index: 3;
+  min-height: inherit;
+}
+
+.timelineLegend {
+  position: absolute;
+  display: grid;
+  gap: 6px;
+  max-width: 240px;
+  z-index: 4;
+}
+
+.timelineLegendPast {
+  left: 28px;
+  top: 24px;
+  text-align: left;
+}
+
+.timelineLegendCurrent {
+  left: 50%;
+  top: 24px;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.timelineLegendFuture {
+  right: 28px;
+  top: 24px;
+  text-align: right;
+}
+
+.timelineMarkerLabel {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #dbe5f7;
+  line-height: 1.2;
+}
+
+.timelineMarkerMeta,
+.timelineMarkerAction {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(181, 195, 217, 0.78);
+  line-height: 1.2;
+}
+
+.timelineMarkerAction {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.timelineMarkerAction:hover {
+  color: #edf4ff;
+}
+
+.timelineUiLayer,
+.sessionCardButton,
+.placeTile,
+.hookCard,
+.hookBody,
+.sectionBlock,
+.placePanel,
+.hookBoard,
+.placeTileButton,
+.utilityTitleBlock {
+  display: grid;
+  gap: 12px;
+}
+
+.timelineOverflowPanel {
+  margin-top: 10px;
+  min-width: 220px;
+  background: rgba(10, 14, 22, 0.92);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+
+.heroCardSlot {
+  position: absolute;
+  z-index: 3;
+}
+
+.heroCardSlotPast {
+  left: clamp(22px, 4vw, 56px);
+  top: clamp(224px, 22vw, 306px);
+  width: min(280px, 24%);
+}
+
+.heroCardSlotCurrent {
+  left: 50%;
+  top: clamp(206px, 19vw, 258px);
+  width: min(426px, 38%);
+  transform: translateX(-50%);
+}
+
+.heroCardSlotFuture {
+  right: clamp(18px, 3vw, 34px);
+  width: min(314px, 28%);
+}
+
+.heroCardSlotFutureOne {
+  top: clamp(142px, 14vw, 194px);
+}
+
+.heroCardSlotFutureTwo {
+  right: clamp(36px, 5vw, 72px);
+  top: clamp(286px, 25vw, 348px);
+}
+
+.heroCardSlotFutureThree {
+  right: clamp(54px, 7vw, 108px);
+  top: clamp(432px, 35vw, 500px);
+}
+
+.heroCardSlotPast::before,
+.heroCardSlotPast::after,
+.heroCardSlotCurrent::before,
+.heroCardSlotCurrent::after,
+.heroCardSlotFutureOne::before,
+.heroCardSlotFutureOne::after,
+.heroCardSlotFutureTwo::before,
+.heroCardSlotFutureTwo::after,
+.heroCardSlotFutureThree::before,
+.heroCardSlotFutureThree::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.heroCardSlotPast::before {
+  right: -14px;
+  top: -86px;
+  width: 72px;
+  height: 86px;
+  border-top: 1px solid rgba(160, 176, 201, 0.24);
+  border-right: 1px solid rgba(160, 176, 201, 0.24);
+  border-top-right-radius: 28px;
+}
+
+.heroCardSlotPast::after {
+  right: 54px;
+  top: -96px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(214, 222, 243, 0.28);
+  box-shadow: 0 0 16px rgba(214, 222, 243, 0.18);
+}
+
+.heroCardSlotCurrent::before {
+  left: 50%;
+  top: -114px;
+  width: 1px;
+  height: 114px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, rgba(86, 224, 161, 0), rgba(86, 224, 161, 0.42) 45%, rgba(129, 141, 160, 0.18));
+}
+
+.heroCardSlotCurrent::after {
+  left: 50%;
+  top: -124px;
+  width: 14px;
+  height: 14px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(75, 220, 153, 0.42);
+  box-shadow: 0 0 26px rgba(75, 220, 153, 0.3);
+}
+
+.heroCardSlotFutureOne::before,
+.heroCardSlotFutureTwo::before,
+.heroCardSlotFutureThree::before {
+  left: -86px;
+  width: 86px;
+  border-left: 1px solid rgba(160, 176, 201, 0.22);
+}
+
+.heroCardSlotFutureOne::before {
+  top: 78px;
+  height: 74px;
+  border-bottom: 1px solid rgba(160, 176, 201, 0.22);
+  border-bottom-left-radius: 26px;
+}
+
+.heroCardSlotFutureTwo::before {
+  top: 54px;
+  height: 1px;
+  border-top: 1px solid rgba(160, 176, 201, 0.22);
+}
+
+.heroCardSlotFutureThree::before {
+  top: -64px;
+  height: 64px;
+  border-top: 1px solid rgba(160, 176, 201, 0.22);
+  border-top-left-radius: 26px;
+}
+
+.heroCardSlotFutureOne::after,
+.heroCardSlotFutureTwo::after,
+.heroCardSlotFutureThree::after {
+  left: -92px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(188, 198, 216, 0.2);
+  box-shadow: 0 0 14px rgba(188, 198, 216, 0.12);
+}
+
+.heroCardSlotFutureOne::after {
+  top: 140px;
+}
+
+.heroCardSlotFutureTwo::after {
+  top: 49px;
+}
+
+.heroCardSlotFutureThree::after {
+  top: -4px;
+}
+
+.heroSessionCard {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(151, 170, 198, 0.16);
+  border-radius: 24px;
+  backdrop-filter: blur(16px);
+  box-shadow:
+    0 18px 38px rgba(5, 8, 15, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.heroSessionCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), transparent 44%);
+  pointer-events: none;
+}
+
+.heroSessionCard .sessionCardHeader {
+  align-items: center;
+}
+
+.heroSessionCard h3 {
+  font-size: clamp(1rem, 1.15vw, 1.18rem);
+  letter-spacing: -0.02em;
+}
+
+.heroSessionCard p {
+  color: rgba(221, 229, 242, 0.84);
+  max-width: 36ch;
+}
+
+.heroSessionCardButton {
+  position: relative;
+  padding: 20px 60px 20px 20px;
+}
+
+.heroSessionCardPast {
+  background:
+    linear-gradient(180deg, rgba(68, 79, 99, 0.14), rgba(14, 18, 28, 0.82)),
+    rgba(8, 12, 20, 0.64);
+}
+
+.heroSessionCardFuture {
+  background:
+    linear-gradient(180deg, rgba(76, 96, 136, 0.14), rgba(11, 17, 28, 0.82)),
+    rgba(8, 12, 20, 0.62);
+}
+
+.heroSessionCardCurrent {
+  background:
+    radial-gradient(circle at 50% 0, rgba(74, 220, 151, 0.18), transparent 42%),
+    linear-gradient(180deg, rgba(20, 38, 36, 0.72), rgba(12, 18, 27, 0.88));
+  border-color: rgba(86, 224, 161, 0.28);
+  box-shadow:
+    0 24px 48px rgba(5, 8, 15, 0.34),
+    0 0 0 1px rgba(86, 224, 161, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.heroSessionCardCurrent h3 {
+  font-size: clamp(1.35rem, 1.9vw, 1.75rem);
+}
+
+.heroSessionCardCurrent p {
+  font-size: 0.98rem;
+}
+
+.heroSessionCardDragging {
+  transform: translateY(-3px) scale(1.01);
+}
+
+.heroSessionCardButtonCurrent {
+  min-height: 188px;
+  padding: 24px 68px 24px 24px;
+}
+
+.heroCurrentMenuWrap {
+  top: 16px;
+  right: 16px;
+}
+
+.heroEmptyCard {
+  display: grid;
+  place-items: center;
+  min-height: 120px;
+  border: 1px dashed rgba(151, 170, 198, 0.18);
+  background: rgba(10, 14, 22, 0.48);
+  color: rgba(205, 214, 231, 0.78);
+}
+
+.overflowPanel,
+.placeSearchResults {
+  display: grid;
+  gap: 10px;
+}
+
+.overflowPanel {
+  padding: 10px;
+  border: 1px solid var(--board-border);
+  border-radius: 18px;
+  background: #111924;
+}
+
+.overflowItem,
+.placeSearchItem {
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border-color: var(--board-border);
+  background: #141c28;
+}
+
+.overflowFutureItem {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.sessionCard {
+  position: relative;
+  border: 1px solid var(--board-border);
+  border-radius: 22px;
+  overflow: hidden;
+}
+
+.sessionCardPlanning {
+  background: linear-gradient(180deg, rgba(91, 168, 255, 0.12), rgba(24, 33, 48, 0.9));
+}
+
+.sessionCardActive {
+  background: linear-gradient(180deg, rgba(59, 210, 143, 0.16), rgba(24, 33, 48, 0.95));
+}
+
+.sessionCardEnded {
+  background: linear-gradient(180deg, rgba(119, 133, 159, 0.12), rgba(24, 33, 48, 0.82));
+}
+
+.sessionCardSelected {
+  border-color: rgba(91, 168, 255, 0.54);
+  box-shadow: 0 0 0 1px rgba(91, 168, 255, 0.22);
+}
+
+.sessionCardCompact.sessionCardSelected {
+  border-color: rgba(160, 172, 192, 0.28);
+  box-shadow: 0 0 0 1px rgba(160, 172, 192, 0.1);
+}
+
+.sessionCardMuted {
+  opacity: 0.78;
+}
+
+.sessionCardCompact {
+  border-color: rgba(119, 133, 159, 0.16);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(96, 108, 128, 0.12), rgba(23, 29, 41, 0.88));
+}
+
+.sessionCardCompact.sessionCardPlanning,
+.sessionCardCompact.sessionCardEnded,
+.sessionCardCompact.sessionCardActive {
+  background: linear-gradient(180deg, rgba(96, 108, 128, 0.12), rgba(23, 29, 41, 0.88));
+}
+
+.sessionCardButton,
+.placeTileButton {
+  width: 100%;
+  margin-top: 0;
+  padding: 24px;
+  border: 0;
+  text-align: left;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.sessionCardButtonCompact {
+  padding: 20px 58px 20px 20px;
+}
+
+.sessionChip,
+.hookChip,
+.priorityPill,
+.placeTag,
+.threadChip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sessionChipPlanning,
+.hookChipAvailable {
+  background: rgba(91, 168, 255, 0.16);
+  color: #91c8ff;
+  border-color: rgba(91, 168, 255, 0.32);
+}
+
+.sessionChipActive,
+.hookChipProgress {
+  background: rgba(59, 210, 143, 0.16);
+  color: #70e3ae;
+  border-color: rgba(59, 210, 143, 0.32);
+}
+
+.sessionChipEnded,
+.hookChipResolved {
+  background: rgba(119, 133, 159, 0.14);
+  color: #bcc6d8;
+  border-color: rgba(119, 133, 159, 0.28);
+}
+
+.hookChipDiscarded {
+  background: rgba(255, 120, 109, 0.12);
+  color: #ff9a91;
+  border-color: rgba(255, 120, 109, 0.24);
+}
+
+.currentSessionMenuWrap {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+}
+
+.sessionCardMenuWrap {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+}
+
+.menuTrigger,
+.inlineAction,
+.linkButton,
+.statusButton,
+.rollButton {
+  padding: 8px 10px;
+  border-radius: 12px;
+  border-color: var(--board-border);
+  font-size: 12px;
+}
+
+.menuTrigger {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(15, 21, 31, 0.82);
+}
+
+.compactMenuTrigger {
+  width: 34px;
+  height: 34px;
+  background: rgba(70, 78, 93, 0.42);
+  color: #d8deeb;
+}
+
+.sessionCardButton h3 {
+  margin: 0;
+  line-height: 1.35;
+}
+
+.contextMenu {
+  position: absolute;
+  top: 42px;
+  right: 0;
+  display: grid;
+  min-width: 210px;
+  gap: 6px;
+  padding: 10px;
+  border: 1px solid var(--board-border);
+  border-radius: 18px;
+  background: rgba(15, 21, 31, 0.98);
+}
+
+.contextMenu button {
+  width: 100%;
+  display: inline-flex;
+  justify-content: flex-start;
+  margin-top: 0;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.workspace {
+  gap: 18px;
+}
+
+.placeAddRow {
+  display: grid;
+  grid-template-columns: minmax(240px, 340px) 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.placeSearchField {
+  min-width: 0;
+}
+
+.placeSearchResults,
+.placeRail {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.placeTile,
+.placePanel,
+.hookBoard,
+.hookCard {
+  padding: 16px;
+  border: 1px solid var(--board-border);
+  border-radius: 20px;
+  background: rgba(18, 25, 37, 0.72);
+}
+
+.placeTileSelected {
+  border-color: rgba(91, 168, 255, 0.54);
+  background: rgba(24, 36, 53, 0.9);
+}
+
+.placePanelGrid {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.hookCardAvailable {
+  border-left: 4px solid var(--board-planning);
+}
+
+.hookCardProgress {
+  border-left: 4px solid var(--board-active);
+}
+
+.hookCardResolved {
+  border-left: 4px solid var(--board-ended);
+  opacity: 0.85;
+}
+
+.hookCardDiscarded {
+  border-left: 4px solid #ff786d;
+  opacity: 0.72;
+}
+
+.hookCardHighlighted {
+  box-shadow: 0 0 0 1px rgba(91, 168, 255, 0.25);
+}
+
+.hookHeader p,
+.sectionItem p,
+.validationEmpty,
+.loadingCopy {
+  margin: 0;
+}
+
+.sectionItem,
+.checkRow,
+.emptyWorkspace,
+.emptyPanel,
+.placeRailEmpty,
+.hookEmpty {
+  border: 1px solid var(--board-border);
+  background: rgba(14, 20, 30, 0.82);
+}
+
+.sectionToggle {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.sectionToggle input {
+  margin-top: 3px;
+}
+
+.sectionItemComplete {
+  opacity: 0.72;
+}
+
+.checkRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+}
+
+.checkSummary {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.priorityPill {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--board-copy);
+}
+
+.placeTag {
+  background: rgba(91, 168, 255, 0.08);
+  border-color: rgba(91, 168, 255, 0.22);
+  color: #b2d8ff;
+}
+
+.threadChip {
+  background: rgba(245, 189, 92, 0.1);
+  border-color: rgba(245, 189, 92, 0.26);
+  color: #ffd48b;
+}
+
+.statusButtonActive {
+  border-color: rgba(91, 168, 255, 0.42);
+  background: rgba(91, 168, 255, 0.14);
+}
+
+.rollButton {
+  border-color: rgba(59, 210, 143, 0.28);
+  background: rgba(59, 210, 143, 0.12);
+  color: #9ef1c5;
+}
+
+.contextMenu button:hover,
+.searchResultButton:hover,
+.placeSearchItem:hover,
+.overflowItem:hover,
+.statusButton:hover,
+.inlineAction:hover,
+.warningButton:hover,
+.linkButton:hover,
+.menuTrigger:hover {
+  background: rgba(91, 168, 255, 0.08);
+}
+
+@media (max-width: 1280px) {
+  .utilityControls,
+  .placeAddRow,
+  .placePanelGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .sessionFlowBoard {
+    min-height: 540px;
+    padding: 24px 20px 26px;
+  }
+
+  .sessionFlowSurface {
+    grid-template-columns: minmax(0, 0.22fr) minmax(320px, 0.46fr) minmax(240px, 0.32fr);
+    gap: 20px;
+    padding-top: 64px;
+  }
+
+  .flowCardCurrent h3 {
+    font-size: clamp(1.35rem, 2vw, 1.72rem);
+  }
+
+  .flowFutureRow:nth-child(2) {
+    margin-right: 8px;
+  }
+
+  .flowFutureRow:nth-child(3) {
+    margin-right: 20px;
+  }
+
+  .timelineStrip {
+    min-height: clamp(620px, 64vw, 760px);
+    padding: 24px 20px 26px;
+  }
+
+  .timelineLegendPast {
+    left: 20px;
+  }
+
+  .timelineLegendFuture {
+    right: 20px;
+  }
+
+  .timelineRopeFrame {
+    height: clamp(188px, 27vw, 272px);
+  }
+
+  .heroCardSlotPast {
+    width: min(248px, 26%);
+    top: clamp(216px, 24vw, 296px);
+  }
+
+  .heroCardSlotCurrent {
+    width: min(412px, 42%);
+    top: clamp(186px, 18vw, 242px);
+  }
+
+  .heroCardSlotFuture {
+    width: min(272px, 28%);
+  }
+
+  .heroCardSlotFutureOne {
+    top: clamp(126px, 14vw, 178px);
+  }
+
+  .heroCardSlotFutureTwo {
+    top: clamp(278px, 28vw, 360px);
+  }
+
+  .heroCardSlotFutureThree {
+    top: clamp(420px, 40vw, 500px);
+  }
+
+  .workspaceHeader {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 720px) {
+  .boardShell {
+    padding: 14px;
+  }
+
+  .sessionFlowBoard {
+    min-height: auto;
+    padding: 18px 16px 22px;
+    border-radius: 24px;
+  }
+
+  .sessionFlowThreads {
+    inset: 76px 0 auto;
+    height: 280px;
+  }
+
+  .sessionFlowSurface {
+    position: relative;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 84px 0 0;
+  }
+
+  .flowPastCluster,
+  .flowCurrentCluster,
+  .flowFutureCluster {
+    z-index: 1;
+  }
+
+  .flowClusterHeader,
+  .flowClusterHeaderFuture {
+    justify-content: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .flowFutureStack {
+    justify-items: stretch;
+  }
+
+  .flowFutureRow:nth-child(2),
+  .flowFutureRow:nth-child(3) {
+    margin-right: 0;
+  }
+
+  .flowCardPast,
+  .flowCardFuture,
+  .flowCardCurrent {
+    max-width: none;
+  }
+
+  .flowCardCurrent h3 {
+    font-size: 1.5rem;
+  }
+
+  .flowCardButton,
+  .flowCardButtonCurrent {
+    padding: 22px 64px 22px 20px;
+  }
+
+  .flowCardButtonCompact {
+    padding: 18px 56px 18px 18px;
+  }
+
+  .utilityBar,
+  .workspace,
+  .validationPanel,
+  .timelineStrip {
+    padding: 16px;
+  }
+
+  .timelineStrip {
+    min-height: 1160px;
+    border-radius: 24px;
+  }
+
+  .timelineRopeLayer {
+    align-items: flex-start;
+    padding: 16px 6px 0;
+  }
+
+  .timelineRopeFrame {
+    width: 100%;
+    height: 168px;
+    transform: none;
+    opacity: 0.78;
+  }
+
+  .timelineLegend {
+    left: 16px;
+    right: auto;
+    max-width: none;
+    text-align: left;
+    transform: none;
+  }
+
+  .timelineLegendPast {
+    top: 18px;
+  }
+
+  .timelineLegendCurrent {
+    top: 304px;
+  }
+
+  .timelineLegendFuture {
+    top: 618px;
+  }
+
+  .heroCardSlotPast,
+  .heroCardSlotCurrent,
+  .heroCardSlotFutureOne,
+  .heroCardSlotFutureTwo,
+  .heroCardSlotFutureThree {
+    left: 16px;
+    right: 16px;
+    width: auto;
+    transform: none;
+  }
+
+  .heroCardSlotPast {
+    top: 82px;
+  }
+
+  .heroCardSlotCurrent {
+    top: 352px;
+  }
+
+  .heroCardSlotFutureOne {
+    top: 666px;
+  }
+
+  .heroCardSlotFutureTwo {
+    top: 812px;
+  }
+
+  .heroCardSlotFutureThree {
+    top: 958px;
+  }
+
+  .heroCardSlotPast::before,
+  .heroCardSlotPast::after,
+  .heroCardSlotCurrent::before,
+  .heroCardSlotCurrent::after,
+  .heroCardSlotFutureOne::before,
+  .heroCardSlotFutureOne::after,
+  .heroCardSlotFutureTwo::before,
+  .heroCardSlotFutureTwo::after,
+  .heroCardSlotFutureThree::before,
+  .heroCardSlotFutureThree::after {
+    display: none;
+  }
+
+  .heroSessionCardButtonCurrent {
+    min-height: 0;
+  }
+
+  .utilityButtons,
+  .workspaceActions,
+  .placeTileActions,
+  .futureCardActions,
+  .hookActionRow,
+  .checkActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .checkRow,
+  .placePanelHeader,
+  .hookHeader,
+  .searchResultRow,
+  .overflowFutureItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .searchPanel {
+    position: static;
+    width: 100%;
+    transform: none;
+  }
+}
+
+/* Final wireframe overrides kept at file end so legacy themed rules cannot win */
+
+.boardShell {
+  --board-bg: #f5f5f5;
+  --board-panel: #ffffff;
+  --board-border: #d7d7d7;
+  --board-copy: #1f1f1f;
+  --board-muted: #666666;
+  --board-planning: #8b8b8b;
+  --board-active: #5f5f5f;
+  --board-ended: #adadad;
+  --board-warning: #777777;
+  --board-shadow: none;
+  min-height: 0;
+  padding: 0;
+  gap: 16px;
+  color: var(--board-copy);
+  background: transparent;
+}
+
+.utilityBar,
+.validationPanel,
+.workspace,
+.emptyPanel,
+.timelineStrip,
+.sessionFlowBoard {
+  border: 1px solid var(--board-border);
+  border-radius: 0;
+  background: var(--board-panel);
+  box-shadow: none;
+}
+
+.utilityBar,
+.validationPanel,
+.workspace,
+.emptyPanel,
+.sessionFlowBoard {
+  padding: 20px;
+}
+
+.utilityBar {
+  position: static;
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.utilityTitleBlock {
+  gap: 6px;
+}
+
+.eyebrow,
+.flowClusterLabel,
+.flowCurrentBadge,
+.sessionSequence,
+.searchResultKind {
+  color: var(--board-muted);
+}
+
+.utilityMeta,
+.searchResultButton span,
+.validationItem span,
+.validationEmpty,
+.loadingCopy,
+.workspaceSummary,
+.workspaceNotes,
+.placeDescription,
+.noteCopy,
+.mutedCopy,
+.placeTileButton span,
+.placeTileMeta,
+.sessionCardButton p,
+.sectionToggle span,
+.checkResult,
+.manualLabel,
+.sectionHeadingRow span,
+.checkSummary span,
+.timelineEmpty {
+  color: var(--board-muted);
+}
+
+.utilityControls {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  align-items: end;
+}
+
+.fieldGroup {
+  gap: 6px;
+  color: var(--board-muted);
+}
+
+.fieldGroup :global(.ui-field),
+.fieldGroup :global(.ui-select) {
+  border-color: var(--board-border);
+  background: #ffffff;
+  color: var(--board-copy);
+}
+
+.utilityButton:global(.ui-button),
+.warningButton,
+.inlineAction,
+.linkButton,
+.menuTrigger,
+.compactMenuTrigger,
+.statusButton,
+.rollButton,
+.placeSearchItem,
+.overflowItem,
+.searchResultButton,
+.contextMenu button {
+  border: 1px solid var(--board-border);
+  border-radius: 0;
+  background: #ffffff;
+  color: var(--board-copy);
+  box-shadow: none;
+}
+
+.warningButtonActive,
+.statusButtonActive,
+.sessionCardSelected,
+.hookCardHighlighted,
+.placeTileSelected,
+.flowCardFutureLinked {
+  border-color: #b8b8b8;
+  box-shadow: none;
+}
+
+.searchPanel {
+  position: static;
+  right: auto;
+  bottom: auto;
+  z-index: auto;
+  width: 100%;
+  margin-top: 4px;
+  padding: 10px;
+  border: 1px solid var(--board-border);
+  border-radius: 0;
+  background: #ffffff;
+  transform: none;
+}
+
+.searchResultButton,
+.overflowItem,
+.placeSearchItem {
+  border-radius: 0;
+  background: #fafafa;
+}
+
+.validationItem,
+.timelineEmpty,
+.emptyWorkspace,
+.emptyPanel,
+.placeRailEmpty,
+.hookEmpty,
+.sectionItem,
+.checkRow {
+  border: 1px solid var(--board-border);
+  border-radius: 0;
+  background: #fafafa;
+}
+
+.sessionFlowBoard {
+  min-height: 0;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.sessionFlowBackdrop,
+.sessionFlowBackdropVeil,
+.sessionFlowDust,
+.sessionFlowThreads,
+.timelineBackgroundLayer,
+.timelineBackgroundVeil,
+.timelineRopeLayer,
+.timelineUiLayer {
+  display: none;
+}
+
+.sessionFlowSurface {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 16px;
+  padding-top: 0;
+  position: static;
+}
+
+.flowPastCluster,
+.flowCurrentCluster,
+.flowFutureCluster {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  min-width: 0;
+}
+
+.flowCurrentCluster {
+  padding: 16px;
+  border: 1px solid var(--board-border);
+  background: #fafafa;
+}
+
+.flowCurrentBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 4px 8px;
+  border: 1px solid var(--board-border);
+  background: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.flowClusterHeader,
+.flowClusterHeaderFuture {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0;
+}
+
+.flowPastCardShell,
+.flowFutureRow {
+  margin-right: 0;
+}
+
+.flowFutureStack {
+  display: grid;
+  gap: 12px;
+}
+
+.flowCard,
+.sessionCard {
+  border: 1px solid var(--board-border);
+  border-radius: 0;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.flowCardPast,
+.flowCardCurrent,
+.flowCardFuture,
+.sessionCardPlanning,
+.sessionCardActive,
+.sessionCardEnded,
+.sessionCardCompact,
+.sessionCardCompact.sessionCardPlanning,
+.sessionCardCompact.sessionCardEnded,
+.sessionCardCompact.sessionCardActive {
+  background: #ffffff;
+}
+
+.flowCardButton,
+.flowCardButtonCompact,
+.flowCardButtonCurrent,
+.sessionCardButton,
+.sessionCardButtonCompact,
+.placeTileButton {
+  padding: 16px;
+}
+
+.flowCardButtonCurrent,
+.heroSessionCardButtonCurrent {
+  min-height: 0;
+}
+
+.flowCardCurrent h3,
+.sessionCardButton h3 {
+  font-size: 1.1rem;
+}
+
+.flowCardFutureDragging,
+.heroSessionCardDragging {
+  transform: none;
+}
+
+.flowEmptyCard,
+.heroEmptyCard {
+  min-height: 120px;
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--board-border);
+  background: #fafafa;
+  color: var(--board-muted);
+}
+
+.currentSessionMenuWrap,
+.sessionCardMenuWrap,
+.flowCurrentMenuWrap,
+.heroCurrentMenuWrap {
+  top: 12px;
+  right: 12px;
+}
+
+.menuTrigger,
+.compactMenuTrigger {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: #ffffff;
+  color: var(--board-copy);
+}
+
+.contextMenu,
+.overflowPanel,
+.flowOverflowPanel,
+.timelineOverflowPanel {
+  border: 1px solid var(--board-border);
+  border-radius: 0;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.workspace {
+  gap: 16px;
+}
+
+.workspaceHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: start;
+}
+
+.placeAddRow {
+  grid-template-columns: minmax(220px, 320px) 1fr;
+  gap: 16px;
+}
+
+.placeSearchResults,
+.placeRail {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.placeTile,
+.placePanel,
+.hookBoard,
+.hookCard {
+  padding: 16px;
+  border: 1px solid var(--board-border);
+  border-radius: 0;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.placePanelGrid {
+  grid-template-columns: minmax(280px, 360px) 1fr;
+  gap: 16px;
+}
+
+.sessionChip,
+.hookChip,
+.priorityPill,
+.placeTag,
+.threadChip {
+  border-radius: 0;
+  border-color: var(--board-border);
+  background: #fafafa;
+  color: var(--board-copy);
+}
+
+.sessionChipPlanning,
+.sessionChipActive,
+.sessionChipEnded,
+.hookChipAvailable,
+.hookChipProgress,
+.hookChipResolved,
+.hookChipDiscarded {
+  background: #fafafa;
+  color: var(--board-copy);
+  border-color: var(--board-border);
+}
+
+.hookCardAvailable,
+.hookCardProgress,
+.hookCardResolved,
+.hookCardDiscarded {
+  border-left-width: 3px;
+}
+
+.contextMenu button:hover,
+.searchResultButton:hover,
+.placeSearchItem:hover,
+.overflowItem:hover,
+.statusButton:hover,
+.inlineAction:hover,
+.warningButton:hover,
+.linkButton:hover,
+.menuTrigger:hover,
+.contextMenu button:focus-visible,
+.searchResultButton:focus-visible,
+.placeSearchItem:focus-visible,
+.overflowItem:focus-visible,
+.statusButton:focus-visible,
+.inlineAction:focus-visible,
+.warningButton:focus-visible,
+.linkButton:focus-visible,
+.menuTrigger:focus-visible {
+  background: #f3f3f3;
+  outline: none;
+}
+
+@media (max-width: 1280px) {
+  .utilityBar,
+  .workspaceHeader,
+  .placeAddRow,
+  .placePanelGrid,
+  .utilityControls,
+  .sessionFlowSurface {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .boardShell {
+    gap: 12px;
+  }
+
+  .utilityBar,
+  .validationPanel,
+  .workspace,
+  .emptyPanel,
+  .sessionFlowBoard {
+    padding: 16px;
+  }
+
+  .utilityButtons,
+  .workspaceActions,
+  .placeTileActions,
+  .futureCardActions,
+  .hookActionRow,
+  .checkActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

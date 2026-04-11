@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/timeline.schema.json",
+  "title": "Campaign Timeline",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "campaignId",
+    "currentSequence",
+    "sessionIds"
+  ],
+  "properties": {
+    "campaignId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string"
+    },
+    "currentSequence": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "activeSessionId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sessionIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "notes": {
+      "type": "string"
+    },
+    "updatedAt": {
+      "$ref": "shared-defs.schema.json#/$defs/timestamp"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "event-thread-test-44",
+  "type": "event",
+  "title": "Test Threat 44",
+  "summary": "Test threat 44 keeps pressure on the board for layout checks.",
+  "status": "active",
+  "eventType": "consequence-triggered",
+  "notes": "GM truth: Threat 44 is part of the seeded stress campaign used to inspect board density.\n\nLegacy thread state: active.\n\nLegacy timeline anchor: now.\n\nImported from legacy thread thread-test-44.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-entity-zone-2"
+    },
+    {
+      "type": "involves",
+      "targetId": "location-entity-pattern-anchor-3"
+    }
+  ],
+  "createdEffectIds": []
+}

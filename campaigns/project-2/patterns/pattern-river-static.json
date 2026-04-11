@@ -1,0 +1,10 @@
+{
+  "id": "pattern-river-static",
+  "title": "River Static",
+  "summary": "Ferry crews and messengers spread conflicting signal warnings before any tower can confirm them.",
+  "escalationLevel": 1,
+  "threadIds": [
+    "thread-river-static"
+  ],
+  "playerVisible": true
+}

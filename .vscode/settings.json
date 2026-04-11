@@ -1,0 +1,44 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": ["campaigns/*/project.json"],
+      "url": "./schemas/campaign/project.schema.json"
+    },
+    {
+      "fileMatch": ["campaigns/*/now.json"],
+      "url": "./schemas/campaign/now.schema.json"
+    },
+    {
+      "fileMatch": ["campaigns/*/threads/*.json"],
+      "url": "./schemas/campaign/thread.schema.json"
+    },
+    {
+      "fileMatch": ["campaigns/*/patterns/*.json"],
+      "url": "./schemas/campaign/pattern.schema.json"
+    },
+    {
+      "fileMatch": ["campaigns/*/entities/*.json"],
+      "url": "./schemas/campaign/entity.schema.json"
+    },
+    {
+      "fileMatch": ["campaigns/*/player-profiles.json"],
+      "url": "./schemas/campaign/player-profiles.schema.json"
+    },
+    {
+      "fileMatch": ["campaigns/*/links/manual-links.json"],
+      "url": "./schemas/campaign/manual-links.schema.json"
+    },
+    {
+      "fileMatch": ["campaigns/*/sharing.json"],
+      "url": "./schemas/campaign/sharing.schema.json"
+    },
+    {
+      "fileMatch": ["campaigns/*/history/index.json"],
+      "url": "./schemas/campaign/history-index.schema.json"
+    },
+    {
+      "fileMatch": ["campaigns/*/history/revisions/*.json"],
+      "url": "./schemas/campaign/revision.schema.json"
+    }
+  ]
+}

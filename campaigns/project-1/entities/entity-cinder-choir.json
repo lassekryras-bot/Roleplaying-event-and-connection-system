@@ -1,0 +1,6 @@
+{
+  "id": "entity-cinder-choir",
+  "type": "npc",
+  "name": "The Cinder Choir",
+  "playerVisible": false
+}

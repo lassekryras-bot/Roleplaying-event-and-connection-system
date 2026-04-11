@@ -1,0 +1,24 @@
+{
+  "name": "gm-timeline-schema-package",
+  "version": "0.1.0",
+  "schemaDraft": "2020-12",
+  "entrypoints": {
+    "bundle": "gm-timeline.bundle.schema.json",
+    "sharedDefs": "shared-defs.schema.json",
+    "timeline": "timeline.schema.json",
+    "session": "session.schema.json",
+    "place": "place.schema.json",
+    "hook": "hook.schema.json",
+    "threadRef": "thread-ref.schema.json",
+    "sessionIndex": "session-index.schema.json",
+    "placeIndex": "place-index.schema.json",
+    "hookIndex": "hook-index.schema.json",
+    "threadIndex": "thread-index.schema.json"
+  },
+  "examples": [
+    "example.timeline.json",
+    "example.session.json",
+    "example.place.json",
+    "example.hook.json"
+  ]
+}

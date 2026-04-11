@@ -1,0 +1,20 @@
+{
+  "id": "event-thread-ashes-chapel",
+  "type": "event",
+  "title": "Ashes in the Chapel",
+  "summary": "The chapel remains closed after a suspicious fire and a handful of whispered sightings.",
+  "status": "archived",
+  "eventType": "consequence-triggered",
+  "notes": "Fine ash keeps appearing in the chapel even after the fire was contained.\n\nGM truth: The ash is residue from failed rehearsal rites in the crypt.\n\nLegacy thread state: dormant.\n\nLegacy timeline anchor: past.\n\nImported from legacy thread thread-ashes-chapel.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-entity-ruined-chapel"
+    },
+    {
+      "type": "belongsTo",
+      "targetId": "effect-pattern-ash-ritual"
+    }
+  ],
+  "createdEffectIds": []
+}

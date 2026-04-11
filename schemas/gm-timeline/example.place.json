@@ -1,0 +1,26 @@
+{
+  "id": "place-gold-bank",
+  "campaignId": "campaign-mornqar",
+  "headline": "Gold Tank Bank",
+  "description": "A heavily guarded Alkenstar bank with layered defenses and a public front.",
+  "tags": [
+    "bank",
+    "heist",
+    "city-center"
+  ],
+  "readAloudSections": [
+    {
+      "id": "entrance",
+      "header": "Bank Exterior",
+      "trigger": "When the players first approach the bank",
+      "text": "Brass fittings gleam against soot-dark stone as armed guards watch the square.",
+      "completed": false
+    }
+  ],
+  "hookIds": [
+    "hook-meet-manager",
+    "hook-find-ledger"
+  ],
+  "notes": "Returning here in later sessions should reuse unresolved hooks.",
+  "updatedAt": "2026-04-06T12:00:00Z"
+}

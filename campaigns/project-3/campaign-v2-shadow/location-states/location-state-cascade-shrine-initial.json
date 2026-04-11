@@ -1,0 +1,15 @@
+{
+  "id": "location-state-cascade-shrine-initial",
+  "type": "locationState",
+  "locationId": "location-cascade-shrine",
+  "title": "Cascade Shrine Before Visit",
+  "summary": "A rain-streaked shrine where quiet promises are safer than loud ones.",
+  "status": "available",
+  "notes": "A rain-streaked shrine where quiet promises are safer than loud ones.\n\nUsable as imported from gm-timeline place place-cascade-shrine.\n\nPrep: Good when the table slows down and wants truth instead of force.\n\nImported from gm-timeline place place-cascade-shrine.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-hook-rain-prayer"
+    }
+  ]
+}

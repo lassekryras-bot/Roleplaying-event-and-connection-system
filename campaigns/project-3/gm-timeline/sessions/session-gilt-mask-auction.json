@@ -1,0 +1,14 @@
+{
+  "id": "session-gilt-mask-auction",
+  "campaignId": "project-3",
+  "sequence": 2,
+  "status": "ended",
+  "headline": "The Gilt Mask Auction",
+  "summary": "A masked buyer bought silence, credit, and three missing ledgers.",
+  "expectedDirection": "Past session only; inspect for blackmail leverage.",
+  "placeIds": ["place-gilt-hall"],
+  "notes": "Past sessions stay read-only in the MVP board.",
+  "startedAt": "2026-03-18T19:00:00.000Z",
+  "endedAt": "2026-03-18T22:00:00.000Z",
+  "updatedAt": "2026-03-18T22:00:00.000Z"
+}

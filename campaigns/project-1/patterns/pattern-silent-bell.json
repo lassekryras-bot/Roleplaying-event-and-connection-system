@@ -1,0 +1,10 @@
+{
+  "id": "pattern-silent-bell",
+  "title": "Silent Bell Network",
+  "summary": "A hidden courier network is moving coded orders under the cover of dockside chaos.",
+  "escalationLevel": 2,
+  "threadIds": [
+    "thread-bell-ledger"
+  ],
+  "playerVisible": false
+}

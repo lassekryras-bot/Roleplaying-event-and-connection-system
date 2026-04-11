@@ -1,0 +1,7 @@
+{
+  "id": "thread-sealed-stack-twelve",
+  "title": "Sealed Stack Twelve",
+  "summary": "A missing archive stack contains ledger pages with scorched edges.",
+  "linkedHookIds": ["hook-sealed-stacks"],
+  "playerVisible": false
+}

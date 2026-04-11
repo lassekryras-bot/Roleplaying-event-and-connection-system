@@ -1,0 +1,13 @@
+{
+  "id": "thread-engine-heart",
+  "title": "Engine Heart",
+  "state": "active",
+  "playerSummary": "GM-only engine diagnostics remain hidden.",
+  "gmTruth": "The engine is waking faster every time the network carries a false alarm.",
+  "timelineAnchor": "now",
+  "linkedEntityIds": [
+    "entity-war-engine"
+  ],
+  "patternId": "pattern-buried-engine",
+  "playerVisible": false
+}

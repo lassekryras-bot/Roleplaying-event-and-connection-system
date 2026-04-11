@@ -3,20 +3,25 @@
 import { FormEvent, useState } from 'react';
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { useRole } from '@/contexts/role-context';
-import { useApiClient } from '@/lib/use-api-client';
+import { useAuth } from '@/contexts/auth-context';
 import { normalizeUsername } from '@/lib/auth';
+import { api, LOGIN_ERROR_INVALID_CREDENTIALS } from '@/lib/api';
 
 export default function LoginPage() {
-  const { setSession } = useRole();
-  const { login } = useApiClient();
+  const { login: storeSession } = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (isSubmitting) {
+      return;
+    }
+
     setErrorMessage('');
 
     const normalizedUsername = normalizeUsername(username);
@@ -25,16 +30,24 @@ export default function LoginPage() {
       return;
     }
 
+    setIsSubmitting(true);
+
     try {
-      const response = await login(normalizedUsername, password);
-      setSession({
-        role: response.user.role.toLowerCase(),
-        username: response.user.username,
-        userId: response.user.id
+      const user = await api.login(normalizedUsername, password);
+      storeSession({
+        role: user.role,
+        username: user.username,
+        userId: user.id
       });
       router.push('/project');
-    } catch {
-      setErrorMessage('Invalid username or password.');
+    } catch (error) {
+      if (error instanceof Error && error.message === LOGIN_ERROR_INVALID_CREDENTIALS) {
+        setErrorMessage('Invalid username or password.');
+      } else {
+        setErrorMessage('Could not reach the API. Make sure the backend is running on http://localhost:3001.');
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -60,7 +73,9 @@ export default function LoginPage() {
           autoComplete="current-password"
         />
 
-        <button type="submit">Sign in</button>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? 'Signing in...' : 'Sign in'}
+        </button>
 
         {errorMessage.length > 0 ? <p role="alert">{errorMessage}</p> : null}
       </form>

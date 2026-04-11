@@ -1,0 +1,83 @@
+{
+  "id": "location-state-entity-zone-1-initial",
+  "type": "locationState",
+  "locationId": "location-entity-zone-1",
+  "title": "Stress Zone 1 Before Visit",
+  "summary": "Test threat 01 keeps pressure on the board for layout checks.",
+  "status": "active",
+  "notes": "Related legacy threads: Test Threat 01, Test Threat 07, Test Threat 13, Test Threat 14, Test Threat 19, Test Threat 25, Test Threat 31, Test Threat 37, Test Threat 43, Test Threat 49, Test Threat 55, Test Threat 61, Test Threat 67, Test Threat 73, Test Threat 74, Test Threat 79, Test Threat 85, Test Threat 91.\n\nReferenced by 18 legacy threads.\n\nImported from legacy linked entity entity-zone-1.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-01"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-07"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-13"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-14"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-19"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-25"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-31"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-37"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-43"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-49"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-55"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-61"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-67"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-73"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-74"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-79"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-85"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-91"
+    }
+  ]
+}

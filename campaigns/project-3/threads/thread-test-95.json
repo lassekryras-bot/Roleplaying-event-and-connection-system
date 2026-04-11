@@ -1,0 +1,14 @@
+{
+  "id": "thread-test-95",
+  "title": "Test Threat 95",
+  "state": "escalated",
+  "playerSummary": "Test threat 95 keeps pressure on the board for layout checks.",
+  "gmTruth": "Threat 95 is part of the seeded stress campaign used to inspect board density.",
+  "timelineAnchor": "now",
+  "linkedEntityIds": [
+    "entity-zone-5",
+    "entity-cross-8",
+    "entity-pattern-anchor-3"
+  ],
+  "playerVisible": true
+}

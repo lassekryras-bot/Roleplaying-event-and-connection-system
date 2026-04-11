@@ -16,12 +16,12 @@ function GmTruth() {
 describe('VisibilityGuard', () => {
   it('shows role badge text for PLAYER', () => {
     render(
-      <VisibilityGuard role="PLAYER" showDetailPageNote>
+      <VisibilityGuard role="player" showDetailPageNote>
         <div>Public content</div>
       </VisibilityGuard>,
     );
 
-    expect(screen.getByTestId('viewer-role-badge')).toHaveTextContent('Viewing as PLAYER');
+    expect(screen.getByTestId('viewer-role-badge')).toHaveTextContent('Viewing as Player');
     expect(screen.getByTestId('player-gm-hidden-note')).toHaveTextContent(
       'Some GM-only details are hidden.',
     );
@@ -29,7 +29,7 @@ describe('VisibilityGuard', () => {
 
   it('never renders gm-only blocks for PLAYER even if gmOnly prop is provided', () => {
     render(
-      <VisibilityGuard role="PLAYER" gmOnly={<GmTruth />}>
+      <VisibilityGuard role="player" gmOnly={<GmTruth />}>
         <div>Public content</div>
       </VisibilityGuard>,
     );
@@ -38,9 +38,9 @@ describe('VisibilityGuard', () => {
     expect(screen.queryByTestId('gm-truth')).not.toBeInTheDocument();
   });
 
-  it('renders gm-only blocks for GM and HELPER_GM', () => {
+  it('renders gm-only blocks for GM and helper roles', () => {
     const { rerender } = render(
-      <VisibilityGuard role="GM" gmOnly={<GmTruth />}>
+      <VisibilityGuard role="gm" gmOnly={<GmTruth />}>
         <div>Public content</div>
       </VisibilityGuard>,
     );
@@ -48,12 +48,12 @@ describe('VisibilityGuard', () => {
     expect(screen.getByTestId('gm-truth')).toBeInTheDocument();
 
     rerender(
-      <VisibilityGuard role="HELPER_GM" gmOnly={<GmTruth />}>
+      <VisibilityGuard role="helper" gmOnly={<GmTruth />}>
         <div>Public content</div>
       </VisibilityGuard>,
     );
 
     expect(screen.getByTestId('gm-truth')).toBeInTheDocument();
-    expect(screen.getByTestId('viewer-role-badge')).toHaveTextContent('Viewing as HELPER_GM');
+    expect(screen.getByTestId('viewer-role-badge')).toHaveTextContent('Viewing as Helper GM');
   });
 });

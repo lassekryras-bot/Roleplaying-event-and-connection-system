@@ -1,0 +1,13 @@
+{
+  "id": "location-entity-union-yard",
+  "type": "location",
+  "campaignId": "project-1",
+  "title": "Dockworkers Union Yard",
+  "summary": "A labor pledge briefly stabilized the docks before fear took over again.",
+  "tags": [
+    "location",
+    "shared",
+    "legacy-entity"
+  ],
+  "relations": []
+}

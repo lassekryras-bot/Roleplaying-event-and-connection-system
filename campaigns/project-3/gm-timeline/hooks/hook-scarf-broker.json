@@ -1,0 +1,30 @@
+{
+  "id": "hook-scarf-broker",
+  "campaignId": "project-3",
+  "placeId": "place-skybridge-market",
+  "headline": "Scarf Broker",
+  "description": "A broker with Mornqar's scarf is moving too calmly for someone carrying a live lead.",
+  "status": "in_progress",
+  "priority": "critical",
+  "readAloudSections": [
+    {
+      "id": "read-scarf-broker",
+      "header": "Scarf in Motion",
+      "trigger": "When the broker comes into view.",
+      "text": "The scarf catches the wind before the broker turns, as though it knows who is watching first.",
+      "completed": false
+    }
+  ],
+  "checks": [
+    {
+      "id": "check-broker-tail",
+      "label": "Keep the tail clean",
+      "attribute": "Stealth",
+      "dc": 18,
+      "rollMode": "d20_button"
+    }
+  ],
+  "threadIds": ["thread-mornqar-scarf"],
+  "notes": "This is the live-play centerpiece hook for the MVP board.",
+  "updatedAt": "2026-04-06T09:30:00.000Z"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "event-hook-librarian-debt",
+  "type": "event",
+  "title": "Librarian Debt",
+  "summary": "A junior librarian is covering payments she cannot explain.",
+  "status": "active",
+  "eventType": "clue-found",
+  "notes": "Checks: Read the lie Insight DC 14\n\nGood secondary pressure if the stack clue lands too fast.\n\nPriority: medium.\n\nLinked thread refs: Sable Creditors.\n\nImported from gm-timeline hook hook-librarian-debt.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-grand-archive"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "session-bank-of-ashen-notes"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "session-mornqar-ledger"
+    }
+  ],
+  "createdEffectIds": []
+}

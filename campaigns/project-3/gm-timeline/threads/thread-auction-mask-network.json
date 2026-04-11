@@ -1,0 +1,7 @@
+{
+  "id": "thread-auction-mask-network",
+  "title": "Auction Mask Network",
+  "summary": "Masks from the hall keep resurfacing around paid silence.",
+  "linkedHookIds": ["hook-sable-auctioneer"],
+  "playerVisible": false
+}

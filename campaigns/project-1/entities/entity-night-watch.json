@@ -1,0 +1,6 @@
+{
+  "id": "entity-night-watch",
+  "type": "npc",
+  "name": "The Harbor Night Watch",
+  "playerVisible": true
+}

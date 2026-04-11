@@ -1,0 +1,13 @@
+{
+  "id": "location-entity-zone-1",
+  "type": "location",
+  "campaignId": "project-3",
+  "title": "Stress Zone 1",
+  "summary": "Test threat 01 keeps pressure on the board for layout checks.",
+  "tags": [
+    "location",
+    "shared",
+    "legacy-entity"
+  ],
+  "relations": []
+}

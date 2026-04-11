@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "session.schema.json",
+  "title": "Session",
+  "description": "A time point of actual play at a location.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "type",
+    "title",
+    "locationId",
+    "summary"
+  ],
+  "$defs": {
+    "relation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "targetId"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "dependsOn",
+            "unlocks",
+            "follows",
+            "modifies",
+            "occursAt",
+            "belongsTo",
+            "relatedTo",
+            "appliesTo",
+            "contains",
+            "partOf",
+            "involves",
+            "blocks"
+          ]
+        },
+        "targetId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "inactive",
+            "draft"
+          ]
+        }
+      }
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^session-[a-z0-9-]+$"
+    },
+    "type": {
+      "const": "session"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "locationId": {
+      "type": "string",
+      "pattern": "^location-[a-z0-9-]+$"
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "startingLocationStateId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^location-state-[a-z0-9-]+$"
+    },
+    "resultingLocationStateId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^location-state-[a-z0-9-]+$"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/relation"
+      },
+      "default": []
+    }
+  }
+}

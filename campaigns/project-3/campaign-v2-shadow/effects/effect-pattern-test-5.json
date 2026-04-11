@@ -1,0 +1,12 @@
+{
+  "id": "effect-pattern-test-5",
+  "type": "effect",
+  "title": "Test Pattern 5",
+  "summary": "Pattern 5 groups a fixed cluster of threats for board load testing.",
+  "status": "active",
+  "effectType": "pressure",
+  "scope": "city",
+  "severity": "medium",
+  "notes": "Legacy threads in this pattern: Test Threat 33, Test Threat 34, Test Threat 35, Test Threat 36, Test Threat 37, Test Threat 38, Test Threat 39, Test Threat 40.\n\nImported from legacy pattern pattern-test-5.",
+  "relations": []
+}

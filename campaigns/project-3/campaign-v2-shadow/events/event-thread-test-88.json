@@ -1,0 +1,20 @@
+{
+  "id": "event-thread-test-88",
+  "type": "event",
+  "title": "Test Threat 88",
+  "summary": "Test threat 88 keeps pressure on the board for layout checks.",
+  "status": "archived",
+  "eventType": "consequence-triggered",
+  "notes": "GM truth: Threat 88 is part of the seeded stress campaign used to inspect board density.\n\nLegacy thread state: active.\n\nLegacy timeline anchor: past.\n\nImported from legacy thread thread-test-88.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-entity-zone-4"
+    },
+    {
+      "type": "involves",
+      "targetId": "location-entity-pattern-anchor-2"
+    }
+  ],
+  "createdEffectIds": []
+}

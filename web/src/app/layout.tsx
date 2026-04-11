@@ -1,7 +1,8 @@
+import '@xyflow/react/dist/style.css';
 import './globals.css';
 import type { Metadata } from 'next';
 import { AppShell } from '@/components/app-shell';
-import { RoleProvider } from '@/contexts/role-context';
+import { AuthProvider } from '@/contexts/auth-context';
 
 export const metadata: Metadata = {
   title: 'Roleplay MVP',
@@ -12,9 +13,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body>
-        <RoleProvider>
+        <AuthProvider>
           <AppShell>{children}</AppShell>
-        </RoleProvider>
+        </AuthProvider>
       </body>
     </html>
   );

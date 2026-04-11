@@ -1,4 +1,4 @@
-export type UserRole = 'gm' | 'helper_gm' | 'player';
+export type UserRole = 'gm' | 'helper' | 'player';
 
 export interface DemoProjectOption {
   id: string;
@@ -14,6 +14,6 @@ export interface OnboardingSetup {
 
 export const ROLE_LABELS: Record<UserRole, string> = {
   gm: 'GM',
-  helper_gm: 'Helper GM',
+  helper: 'Helper GM',
   player: 'Player',
 };

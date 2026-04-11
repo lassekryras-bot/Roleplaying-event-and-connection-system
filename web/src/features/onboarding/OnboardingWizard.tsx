@@ -8,7 +8,7 @@ interface OnboardingWizardProps {
   onOpenTimeline: () => void;
 }
 
-const ROLE_OPTIONS: UserRole[] = ['gm', 'helper_gm', 'player'];
+const ROLE_OPTIONS: UserRole[] = ['gm', 'helper', 'player'];
 
 export function OnboardingWizard({
   demoProjects,

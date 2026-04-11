@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://living-campaign.dev/schemas/campaign/sharing.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "globalNodeIds": {
+      "$ref": "./common.schema.json#/$defs/idArray"
+    },
+    "playerNodeIdsByPlayer": {
+      "$ref": "./common.schema.json#/$defs/stringToIdArrayMap"
+    }
+  },
+  "required": ["globalNodeIds", "playerNodeIdsByPlayer"]
+}

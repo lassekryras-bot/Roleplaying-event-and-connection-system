@@ -1,0 +1,67 @@
+{
+  "id": "location-state-entity-pattern-anchor-1-initial",
+  "type": "locationState",
+  "locationId": "location-entity-pattern-anchor-1",
+  "title": "Pattern Anchor 1 Before Visit",
+  "summary": "Test threat 01 keeps pressure on the board for layout checks.",
+  "status": "active",
+  "notes": "Related legacy threads: Test Threat 01, Test Threat 02, Test Threat 03, Test Threat 04, Test Threat 05, Test Threat 06, Test Threat 07, Test Threat 08, Test Threat 47, Test Threat 70, Test Threat 74, Test Threat 77, Test Threat 79, Test Threat 92.\n\nReferenced by 14 legacy threads.\n\nImported from legacy linked entity entity-pattern-anchor-1.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-01"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-02"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-03"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-04"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-05"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-06"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-07"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-08"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-47"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-70"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-74"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-77"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-79"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-test-92"
+    }
+  ]
+}

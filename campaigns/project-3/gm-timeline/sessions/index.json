@@ -1,0 +1,61 @@
+{
+  "generatedAt": "2026-04-06T09:30:00.000Z",
+  "items": [
+    {
+      "id": "session-smoke-on-the-quay",
+      "headline": "Smoke on the Quay",
+      "summary": "The crew traced rumors of a ghost barge through the Brass Docks.",
+      "status": "ended",
+      "sequence": 1,
+      "file": "session-smoke-on-the-quay.json"
+    },
+    {
+      "id": "session-gilt-mask-auction",
+      "headline": "The Gilt Mask Auction",
+      "summary": "A masked buyer bought silence, credit, and three missing ledgers.",
+      "status": "ended",
+      "sequence": 2,
+      "file": "session-gilt-mask-auction.json"
+    },
+    {
+      "id": "session-mornqar-ledger",
+      "headline": "Mornqar's Ledger",
+      "summary": "The active session is tracking a broker carrying the scarf ledger into the market.",
+      "status": "active",
+      "sequence": 3,
+      "file": "session-mornqar-ledger.json"
+    },
+    {
+      "id": "session-bank-of-ashen-notes",
+      "headline": "Bank of Ashen Notes",
+      "summary": "The likely next session turns the market lead into vault pressure.",
+      "status": "planning",
+      "sequence": 4,
+      "file": "session-bank-of-ashen-notes.json"
+    },
+    {
+      "id": "session-glassworks-ghost-route",
+      "headline": "Glassworks Ghost Route",
+      "summary": "If the vault trail slips, the crew chases shipments to the glassworks.",
+      "status": "planning",
+      "sequence": 5,
+      "file": "session-glassworks-ghost-route.json"
+    },
+    {
+      "id": "session-cascade-parley",
+      "headline": "Cascade Parley",
+      "summary": "A shrine contact may turn rumor into leverage if the table pivots diplomatic.",
+      "status": "planning",
+      "sequence": 6,
+      "file": "session-cascade-parley.json"
+    },
+    {
+      "id": "session-gunworks-blackmail",
+      "headline": "Gunworks Blackmail",
+      "summary": "Fallback future session if the bank trail points toward the gunworks instead.",
+      "status": "planning",
+      "sequence": 7,
+      "file": "session-gunworks-blackmail.json"
+    }
+  ]
+}

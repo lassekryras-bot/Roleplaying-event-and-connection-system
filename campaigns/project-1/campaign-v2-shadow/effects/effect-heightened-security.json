@@ -1,0 +1,25 @@
+{
+  "id": "effect-heightened-security",
+  "type": "effect",
+  "title": "Heightened Security",
+  "summary": "Extra watch presence, questions at the gate, and checkpoint nerves make the union yard harder to work quietly.",
+  "status": "active",
+  "notes": "Seeded from the harbor unrest threads to model a persistent local pressure.",
+  "relations": [
+    {
+      "type": "appliesTo",
+      "targetId": "location-entity-union-yard"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-whispers-harbor"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "event-thread-night-watch"
+    }
+  ],
+  "effectType": "security",
+  "scope": "local",
+  "severity": "medium"
+}

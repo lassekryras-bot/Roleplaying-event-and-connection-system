@@ -1,0 +1,13 @@
+{
+  "campaignId": "campaign-mornqar",
+  "title": "Mornqar Timeline",
+  "currentSequence": 3,
+  "activeSessionId": "session-bank-job-03",
+  "sessionIds": [
+    "session-bank-job-01",
+    "session-bank-job-02",
+    "session-bank-job-03"
+  ],
+  "notes": "Top-level campaign timeline only.",
+  "updatedAt": "2026-04-06T12:00:00Z"
+}
