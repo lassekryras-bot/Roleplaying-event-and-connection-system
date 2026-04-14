@@ -8,6 +8,10 @@ import PlayerCharacterPage from '../page';
 
 const mockFetchCampaignV2PlayerCharacter = vi.fn();
 const mockReplace = vi.fn();
+const mockCampaignSelectionState = {
+  selectedProjectId: 'project-1',
+  selectionReady: true,
+};
 
 const mockAuthSession = {
   role: 'gm',
@@ -25,6 +29,17 @@ vi.mock('@/contexts/auth-context', () => ({
     isAuthenticated: true,
     login: vi.fn(),
     logout: vi.fn(),
+  }),
+}));
+
+vi.mock('@/contexts/campaign-selection-context', () => ({
+  useCampaignSelection: () => ({
+    selectedProjectId: mockCampaignSelectionState.selectedProjectId,
+    selectionReady: mockCampaignSelectionState.selectionReady,
+    projectOptions: [],
+    isCampaignScopedRoute: true,
+    buildCampaignHref: (href: string) => href,
+    selectProject: vi.fn(),
   }),
 }));
 
@@ -191,6 +206,8 @@ function createPayload(): CampaignV2PlayerCharacterPagePayload {
 describe('player character page', () => {
   beforeEach(() => {
     mockAuthSession.role = 'gm';
+    mockCampaignSelectionState.selectedProjectId = 'project-1';
+    mockCampaignSelectionState.selectionReady = true;
     mockFetchCampaignV2PlayerCharacter.mockReset();
     mockReplace.mockReset();
   });
@@ -214,6 +231,8 @@ describe('player character page', () => {
     expect(screen.getByText('Stolen Reliquary')).toBeInTheDocument();
     expect(screen.getAllByText('Brother Carrow').length).toBeGreaterThan(0);
     expect(screen.getByText('Push witness scenes.')).toBeInTheDocument();
+    expect(screen.queryByLabelText('player character project selector')).not.toBeInTheDocument();
+    expect(screen.getByLabelText('player character selector')).toBeInTheDocument();
   });
 
   it('blocks player roles from the player character page', async () => {

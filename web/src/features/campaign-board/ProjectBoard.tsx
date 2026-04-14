@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 import React, { startTransition, useDeferredValue, useEffect, useId, useMemo, useRef, useState } from 'react';
 
 import { useAuth } from '@/contexts/auth-context';
+import { useCampaignSelection } from '@/contexts/campaign-selection-context';
 import { useApiClient } from '@/lib/use-api-client';
-import { usePreferredProject } from '@/lib/use-preferred-project';
 import { canPreviewPlayerMode, canViewGmContent, getRoleLabel, normalizeFrontendRole } from '@/lib/roles';
 
 import { toProjectBoardData } from './api-adapter';
@@ -20,7 +20,6 @@ import {
   type BoardManualLink,
   type BoardMode,
   type BoardPattern,
-  type BoardProjectOption,
   type BoardStagedNote,
   type BoardThread,
   type BoardTimelineAnchor,
@@ -259,14 +258,12 @@ function TopBarSelect({
 
 export function ProjectBoard() {
   const { logout, role, userId } = useAuth();
-  const { getProjects, getProjectGraph, runProjectCommand, undoProjectHistory, redoProjectHistory } = useApiClient();
-  const { preferredProjectId, preferenceLoaded, rememberProject } = usePreferredProject();
+  const { getProjectGraph, runProjectCommand, undoProjectHistory, redoProjectHistory } = useApiClient();
+  const { buildCampaignHref, selectedProjectId, selectionReady } = useCampaignSelection();
   const router = useRouter();
   const normalizedRole = normalizeFrontendRole(role);
   const canToggleMode = canPreviewPlayerMode(normalizedRole);
-  const [projectOptions, setProjectOptions] = useState<BoardProjectOption[]>([]);
   const [projectDataById, setProjectDataById] = useState<Record<string, ProjectBoardData>>({});
-  const [selectedProjectId, setSelectedProjectId] = useState<string>('');
   const [boardMode, setBoardMode] = useState<BoardMode>(canToggleMode ? 'gm' : 'player');
   const [selectedNodeId, setSelectedNodeId] = useState<string>('now');
   const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
@@ -297,54 +294,18 @@ export function ProjectBoard() {
   }, [canToggleMode]);
 
   useEffect(() => {
-    let active = true;
-
-    if (!preferenceLoaded) {
-      return () => {
-        active = false;
-      };
+    if (!selectionReady) {
+      setLoading(true);
+      return;
     }
 
-    setLoading(true);
-    setLoadError('');
-
-    getProjects()
-      .then((projects) => {
-        if (!active) {
-          return;
-        }
-
-        const nextOptions = projects.map((project) => ({
-          id: project.id,
-          name: project.name,
-        }));
-        const preferredOptionId =
-          preferredProjectId && nextOptions.some((project) => project.id === preferredProjectId)
-            ? preferredProjectId
-            : '';
-        setProjectOptions(nextOptions);
-        setSelectedProjectId((currentProjectId) => currentProjectId || preferredOptionId || nextOptions[0]?.id || '');
-      })
-      .catch((error: Error) => {
-        if (!active) {
-          return;
-        }
-
-        setLoadError(error.message);
-      })
-      .finally(() => {
-        if (active) {
-          setLoading(false);
-        }
-      });
-
-    return () => {
-      active = false;
-    };
-  }, [getProjects, preferenceLoaded, preferredProjectId]);
+    if (!selectedProjectId) {
+      setLoading(false);
+    }
+  }, [selectedProjectId, selectionReady]);
 
   useEffect(() => {
-    if (!selectedProjectId || projectDataById[selectedProjectId]) {
+    if (!selectionReady || !selectedProjectId || projectDataById[selectedProjectId]) {
       return;
     }
 
@@ -380,10 +341,28 @@ export function ProjectBoard() {
     return () => {
       active = false;
     };
-  }, [getProjectGraph, normalizedRole, projectDataById, selectedProjectId]);
+  }, [getProjectGraph, normalizedRole, projectDataById, selectedProjectId, selectionReady]);
+
+  useEffect(() => {
+    if (!selectedProjectId) {
+      return;
+    }
+
+    startTransition(() => {
+      setBoardMode(canToggleMode ? 'gm' : 'player');
+      setSelectedNodeId('now');
+      setHoveredNodeId(null);
+      setFocusedPatternId(null);
+      setInspectedPlayerId(null);
+      setMenuOpen(false);
+      setNodeContextMenu(null);
+      setDraggingStagedNoteId(null);
+    });
+  }, [canToggleMode, selectedProjectId]);
 
   const currentProject = useMemo(() => (selectedProjectId ? projectDataById[selectedProjectId] ?? null : null), [projectDataById, selectedProjectId]);
   const resolvedProject = currentProject ?? EMPTY_PROJECT_BOARD_DATA;
+  const awaitingProjectLoad = Boolean(selectionReady && selectedProjectId && !currentProject && loadError.length === 0);
   const currentSharing = resolvedProject.sharing ?? EMPTY_PROJECT_BOARD_DATA.sharing!;
   const currentManualLinks = resolvedProject.manualLinks ?? EMPTY_PROJECT_BOARD_DATA.manualLinks!;
   const currentHistory = resolvedProject.history ?? EMPTY_PROJECT_BOARD_DATA.history!;
@@ -769,10 +748,6 @@ export function ProjectBoard() {
         : currentPlayerProfile
           ? `Player: ${currentPlayerProfile.displayName}`
           : 'Player';
-  const campaignOptions = useMemo<TopBarSelectOption[]>(
-    () => projectOptions.map((projectOption) => ({ value: projectOption.id, label: projectOption.name })),
-    [projectOptions],
-  );
   const perspectiveOptions = useMemo<TopBarSelectOption[]>(
     () => [
       { value: 'gm', label: 'GM View' },
@@ -810,37 +785,6 @@ export function ProjectBoard() {
       setSaveState('error');
       setSaveMessage(error instanceof Error ? error.message : 'Unable to save change.');
       return null;
-    }
-  }
-
-  function handleProjectSelect(nextProjectId: string) {
-    void rememberProject(nextProjectId);
-
-    startTransition(() => {
-      setSelectedProjectId(nextProjectId);
-      setBoardMode(canToggleMode ? 'gm' : 'player');
-      setSelectedNodeId('now');
-      setHoveredNodeId(null);
-      setFocusedPatternId(null);
-      setInspectedPlayerId(null);
-      setMenuOpen(false);
-      setNodeContextMenu(null);
-      setDraggingStagedNoteId(null);
-    });
-
-    if (!projectDataById[nextProjectId]) {
-      setLoading(true);
-      setLoadError('');
-      getProjectGraph(nextProjectId, normalizedRole === 'player' ? 'player' : 'gm')
-        .then((graphResponse) => {
-          applyGraphUpdate(toProjectBoardData(graphResponse));
-        })
-        .catch((error: Error) => {
-          setLoadError(error.message);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
     }
   }
 
@@ -1105,7 +1049,7 @@ export function ProjectBoard() {
     });
   }
 
-  if (loading && !currentProject) {
+  if ((!selectionReady || loading || awaitingProjectLoad) && !currentProject) {
     return (
       <div className={styles.boardPage} data-testid="project-board">
         <div className={styles.boardLoading}>Loading campaign board...</div>
@@ -1141,16 +1085,6 @@ export function ProjectBoard() {
         </div>
 
         <div className={styles.topBarControls}>
-          <div className={styles.fieldCluster}>
-            <TopBarSelect
-              label="Campaign"
-              ariaLabel="Campaign selector"
-              value={selectedProjectId}
-              options={campaignOptions}
-              onSelect={handleProjectSelect}
-            />
-          </div>
-
           {canToggleMode ? (
             <div className={styles.fieldCluster}>
               <TopBarSelect
@@ -1206,12 +1140,12 @@ export function ProjectBoard() {
                 <Link href="/threads" role="menuitem" onClick={() => setMenuOpen(false)}>
                   Open Threads
                 </Link>
-                <Link href="/timeline" role="menuitem" onClick={() => setMenuOpen(false)}>
+                <Link href={buildCampaignHref('/timeline')} role="menuitem" onClick={() => setMenuOpen(false)}>
                   Open Timeline
                 </Link>
                 {canViewGmContent(normalizedRole) ? (
                   <Link
-                    href={`/player-characters${selectedProjectId ? `?project=${encodeURIComponent(selectedProjectId)}` : ''}`}
+                    href={buildCampaignHref('/player-characters')}
                     role="menuitem"
                     onClick={() => setMenuOpen(false)}
                   >

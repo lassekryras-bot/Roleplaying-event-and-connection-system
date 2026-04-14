@@ -5,8 +5,8 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Button, Select } from '@/components/ui';
 import { useAuth } from '@/contexts/auth-context';
+import { useCampaignSelection } from '@/contexts/campaign-selection-context';
 import { normalizeFrontendRole } from '@/lib/roles';
-import { usePreferredProject } from '@/lib/use-preferred-project';
 
 import { CampaignV2AuthoringPanel } from './CampaignV2AuthoringPanel';
 import { fetchCampaignV2Inspector } from './api';
@@ -29,11 +29,8 @@ export function CampaignV2Inspector() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { isAuthenticated, role } = useAuth();
-  const { preferredProjectId, preferenceLoaded, rememberProject } = usePreferredProject();
+  const { selectedProjectId, selectionReady } = useCampaignSelection();
   const normalizedRole = normalizeFrontendRole(role);
-  const requestedProjectId = searchParams.get('project') ?? undefined;
-  const effectiveRequestedProjectId = requestedProjectId ?? preferredProjectId ?? undefined;
-  const projectSelectionReady = Boolean(requestedProjectId) || preferenceLoaded;
   const requestedLocationId = searchParams.get('location') ?? undefined;
   const requestIdRef = useRef(0);
 
@@ -70,7 +67,7 @@ export function CampaignV2Inspector() {
   }
 
   useEffect(() => {
-    if (!projectSelectionReady) {
+    if (!selectionReady) {
       return;
     }
 
@@ -82,11 +79,9 @@ export function CampaignV2Inspector() {
       return;
     }
 
-    void loadInspector(effectiveRequestedProjectId, requestedLocationId);
-  }, [effectiveRequestedProjectId, requestedLocationId, isAuthenticated, normalizedRole, projectSelectionReady]);
+    void loadInspector(selectedProjectId || undefined, requestedLocationId);
+  }, [isAuthenticated, normalizedRole, requestedLocationId, selectedProjectId, selectionReady]);
 
-  const projectOptions = payload?.projects ?? [];
-  const selectedProjectId = payload?.project?.id ?? effectiveRequestedProjectId ?? '';
   const selectedLocationId = payload?.selectedLocationId ?? requestedLocationId ?? '';
   const overview = payload?.overview ?? null;
   const locationTimeline = payload?.locationTimeline ?? null;
@@ -116,12 +111,6 @@ export function CampaignV2Inspector() {
     router.replace(`/timeline?${nextParams.toString()}`);
   }
 
-  function handleProjectChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    const nextProjectId = event.target.value || undefined;
-    void rememberProject(nextProjectId);
-    replaceSearchParams(nextProjectId, undefined);
-  }
-
   function handleLocationChange(event: React.ChangeEvent<HTMLSelectElement>) {
     replaceSearchParams(selectedProjectId || undefined, event.target.value || undefined);
   }
@@ -146,7 +135,7 @@ export function CampaignV2Inspector() {
     );
   }
 
-  if (loading && !payload) {
+  if ((!selectionReady || loading) && !payload) {
     return (
       <section className={styles.shell}>
         <div className={styles.panel}>
@@ -200,21 +189,6 @@ export function CampaignV2Inspector() {
           </div>
 
           <div className={styles.controls}>
-            <label className={styles.field}>
-              <span>Campaign</span>
-              <Select
-                aria-label="campaign-v2 project selector"
-                value={selectedProjectId}
-                onChange={handleProjectChange}
-              >
-                {projectOptions.map((project) => (
-                  <option key={project.id} value={project.id}>
-                    {project.name}
-                  </option>
-                ))}
-              </Select>
-            </label>
-
             <label className={styles.field}>
               <span>Focus location</span>
               <Select
@@ -390,17 +364,6 @@ export function CampaignV2Inspector() {
           </div>
 
           <div className={styles.column}>
-            {payload ? (
-              <CampaignV2AuthoringPanel
-                payload={payload}
-                onPayloadChange={(nextPayload) => {
-                  startTransition(() => {
-                    setPayload(nextPayload);
-                  });
-                }}
-              />
-            ) : null}
-
             <section className={styles.card}>
               <h3>Related Events</h3>
               {(overview?.relatedEvents ?? []).length > 0 ? (
@@ -465,6 +428,17 @@ export function CampaignV2Inspector() {
                 <div className={styles.empty}>No resolver or content warnings.</div>
               )}
             </section>
+
+            {payload ? (
+              <CampaignV2AuthoringPanel
+                payload={payload}
+                onPayloadChange={(nextPayload) => {
+                  startTransition(() => {
+                    setPayload(nextPayload);
+                  });
+                }}
+              />
+            ) : null}
           </div>
         </div>
       </div>

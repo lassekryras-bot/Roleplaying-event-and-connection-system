@@ -1,0 +1,45 @@
+{
+  "id": "npc-vashon-gattlebee",
+  "type": "npc",
+  "title": "Vashon Gattlebee",
+  "summary": "A named high-level NPC requested for the campaign file set, but not yet directly described in the current `mornqar-alkenstar` subtree.",
+  "status": "active",
+  "campaignId": "mornqar-alkenstar",
+  "ancestry": null,
+  "class": null,
+  "age": null,
+  "concept": "High-level campaign figure pending fuller repo-backed detail.",
+  "role": "high-level campaign figure",
+  "background": {
+    "origin": null,
+    "history": null,
+    "reasonInStory": "Included by request as one of the five main high-level NPC files."
+  },
+  "currentSituation": {
+    "overview": "Present in the intended campaign cast, but not yet described in the currently readable campaign subtree.",
+    "currentProblem": null,
+    "currentLeverage": null,
+    "currentLocationId": null
+  },
+  "motivations": {
+    "shortTerm": null,
+    "midTerm": null,
+    "longTerm": null
+  },
+  "presentation": {
+    "appearance": null,
+    "behavior": null,
+    "voice": null
+  },
+  "gmUse": {
+    "sceneFunction": "Reserved major NPC slot pending fuller writeup.",
+    "whatTheyKnow": null,
+    "howToEscalate": "Define after repo-backed details land.",
+    "fallbackUse": "Use only after the campaign subtree establishes this NPC more clearly."
+  },
+  "campaignFitSummary": "Reserved as one of the campaign's five main high-level NPCs. The current subtree does not yet define how Vashon enters play.",
+  "startingThreadIds": [],
+  "coreThreadIds": [],
+  "notes": "Name supplied by the user. No direct descriptive detail for Vashon Gattlebee was found in the currently readable `campaigns/mornqar-alkenstar` subtree.",
+  "relations": []
+}

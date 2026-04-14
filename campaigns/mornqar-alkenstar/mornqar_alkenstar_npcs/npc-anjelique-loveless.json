@@ -1,0 +1,76 @@
+{
+  "id": "npc-anjelique-loveless",
+  "type": "npc",
+  "title": "Anjelique Loveless",
+  "summary": "A corrupt Shieldmarshal captain who used Flint Beastwood's own evidence to frame him and embody the city's compromised law.",
+  "status": "active",
+  "campaignId": "mornqar-alkenstar",
+  "ancestry": null,
+  "class": null,
+  "age": null,
+  "concept": "Compromised authority figure whose betrayal turns official law into one of the campaign's main threats.",
+  "role": "corrupt Shieldmarshal captain / betrayer / institutional blocker",
+  "background": {
+    "origin": null,
+    "history": "Flint Beastwood turned evidence linking Ambrost Mugland to a larger criminal network over to Captain Anjelique Loveless. By the next morning, Loveless had used that same evidence to frame Flint and force him into hiding.",
+    "reasonInStory": "She is the face of corrupted authority and false justice inside Alkenstar."
+  },
+  "currentSituation": {
+    "overview": "Loveless still stands as the institutional reason Flint cannot return openly to the law he once served.",
+    "currentProblem": "Her past framing job becomes more dangerous if Flint reconnects with allies, recovers evidence, or proves ties between her and Mugland.",
+    "currentLeverage": "Rank, legal machinery, and the ability to weaponize official procedure against targets.",
+    "currentLocationId": null
+  },
+  "motivations": {
+    "shortTerm": "Keep Flint discredited and prevent sensitive evidence from resurfacing.",
+    "midTerm": "Protect the arrangement between compromised law and the wider corruption web.",
+    "longTerm": "Maintain authority and survive any exposure that reaches upward or sideways through the system."
+  },
+  "presentation": {
+    "appearance": null,
+    "behavior": "Controlled, official, and dangerous because she can make injustice look procedural.",
+    "voice": null
+  },
+  "gmUse": {
+    "sceneFunction": "High-level law antagonist, betrayal trigger, and face of procedural corruption.",
+    "whatTheyKnow": "She knows how Flint's evidence was buried and likely knows what parts of the anti-corruption case had to be redirected or suppressed.",
+    "howToEscalate": "Issue warrants, lean on checkpoints and armories, or force allies inside the Shieldmarshals to choose loyalty or truth.",
+    "fallbackUse": "Use Loveless to turn any corruption lead into immediate legal danger."
+  },
+  "campaignFitSummary": "Directly tied to false charges, corrupted law enforcement, and Mugland-adjacent coverups. Best used in investigation, betrayal, and law-versus-reality scenes.",
+  "startingThreadIds": [
+    "thread-loveless-false-charge",
+    "thread-mugland-corruption-network"
+  ],
+  "coreThreadIds": [
+    "thread-loveless-false-charge",
+    "thread-mugland-corruption-network"
+  ],
+  "notes": "Current repo detail comes primarily through Flint Beastwood's file. Exact appearance and wider biography are still undefined in the subtree.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "pc-flint-beastwood",
+      "note": "Loveless framed Flint using the evidence he brought her.",
+      "strength": "central",
+      "origin": "campaign-v2-player-characters",
+      "active": true
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "thread-loveless-false-charge",
+      "note": "She is the core actor behind Flint's false charge and flight.",
+      "strength": "central",
+      "origin": "campaign-v2-player-characters",
+      "active": true
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "npc-ambrost-mugland",
+      "note": "Flint's mid-term goal is to prove Loveless and Mugland are connected.",
+      "strength": "high",
+      "origin": "campaign-v2-player-characters",
+      "active": true
+    }
+  ]
+}

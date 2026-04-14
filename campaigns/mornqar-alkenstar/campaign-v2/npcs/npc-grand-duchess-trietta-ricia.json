@@ -1,0 +1,45 @@
+{
+  "id": "npc-grand-duchess-trietta-ricia",
+  "type": "npc",
+  "title": "Grand Duchess Trietta Ricia",
+  "summary": "A named top-level civic figure requested for the campaign file set, but only lightly established in the current `mornqar-alkenstar` subtree.",
+  "status": "active",
+  "campaignId": "mornqar-alkenstar",
+  "ancestry": null,
+  "class": null,
+  "age": null,
+  "concept": "Grand-ducal authority figure positioned above the city's official machinery.",
+  "role": "grand duchess / high-level civic authority",
+  "background": {
+    "origin": null,
+    "history": null,
+    "reasonInStory": "Included by request as one of the five main high-level NPC files."
+  },
+  "currentSituation": {
+    "overview": "The title establishes her as a top civic figure, but the current campaign subtree does not yet provide a direct writeup for her role in ongoing play.",
+    "currentProblem": null,
+    "currentLeverage": "Formal title and implied civic authority.",
+    "currentLocationId": null
+  },
+  "motivations": {
+    "shortTerm": null,
+    "midTerm": null,
+    "longTerm": null
+  },
+  "presentation": {
+    "appearance": null,
+    "behavior": null,
+    "voice": null
+  },
+  "gmUse": {
+    "sceneFunction": "Reserved major authority figure pending fuller repo-backed detail.",
+    "whatTheyKnow": null,
+    "howToEscalate": "Define once the repo establishes how official power intersects with the crew's current threads.",
+    "fallbackUse": "Use cautiously until the campaign subtree adds direct references."
+  },
+  "campaignFitSummary": "Reserved as one of the campaign's five main high-level NPCs and likely tied to official power. The current subtree does not yet define her direct campaign function in detail.",
+  "startingThreadIds": [],
+  "coreThreadIds": [],
+  "notes": "The honorific in the title supports treating her as a high-level civic authority. Beyond that, the currently readable subtree does not yet provide direct descriptive detail.",
+  "relations": []
+}

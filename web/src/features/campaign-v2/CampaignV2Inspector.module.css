@@ -148,6 +148,33 @@
   border-top: 1px solid rgba(247, 239, 229, 0.08);
 }
 
+.authoringCard {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.authoringCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 1rem;
+}
+
+.authoringCardTitleBlock {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.authoringCollapsedNote {
+  margin: 0;
+  color: rgba(247, 239, 229, 0.62);
+}
+
+.authoringBody {
+  display: grid;
+  gap: 0.9rem;
+}
+
 .authoringSection:first-of-type {
   border-top: 0;
   padding-top: 0;
@@ -303,6 +330,11 @@
 
   .contextLine {
     gap: 0.4rem;
+  }
+
+  .authoringCardHeader {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .sectionGrid {
