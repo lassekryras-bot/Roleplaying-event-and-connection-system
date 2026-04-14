@@ -8,11 +8,15 @@ import type { GmTimelineBoardPayload } from '@/features/gm-timeline/types';
 
 import TimelinePage from '../page';
 
-const { mockAuthSession, mockReplace, mockSearchParamsState } = vi.hoisted(() => ({
+const { mockAuthSession, mockCampaignSelectionState, mockReplace, mockSearchParamsState } = vi.hoisted(() => ({
   mockAuthSession: {
     role: 'gm',
     userId: 'gm-1',
     username: 'Admingm',
+  },
+  mockCampaignSelectionState: {
+    selectedProjectId: 'project-3',
+    selectionReady: true,
   },
   mockReplace: vi.fn(),
   mockSearchParamsState: {
@@ -28,6 +32,17 @@ vi.mock('@/contexts/auth-context', () => ({
     isAuthenticated: true,
     login: vi.fn(),
     logout: vi.fn(),
+  }),
+}));
+
+vi.mock('@/contexts/campaign-selection-context', () => ({
+  useCampaignSelection: () => ({
+    selectedProjectId: mockCampaignSelectionState.selectedProjectId,
+    selectionReady: mockCampaignSelectionState.selectionReady,
+    projectOptions: [],
+    isCampaignScopedRoute: true,
+    buildCampaignHref: (href: string) => href,
+    selectProject: vi.fn(),
   }),
 }));
 
@@ -924,6 +939,8 @@ describe('timeline page', () => {
     mockAuthSession.role = 'gm';
     mockAuthSession.userId = 'gm-1';
     mockAuthSession.username = 'Admingm';
+    mockCampaignSelectionState.selectedProjectId = 'project-3';
+    mockCampaignSelectionState.selectionReady = true;
     mockSearchParamsState.surface = null;
     mockSearchParamsState.location = null;
     mockReplace.mockReset();
@@ -1098,7 +1115,7 @@ describe('timeline page', () => {
     expect(screen.getByText('Focus: Grand Archive')).toBeInTheDocument();
     expect(screen.getByText(/Updated/i)).toBeInTheDocument();
     expect(screen.getByText('Source campaign-v2-shadow')).toBeInTheDocument();
-    expect(screen.getByLabelText('campaign-v2 project selector')).toBeInTheDocument();
+    expect(screen.queryByLabelText('campaign-v2 project selector')).not.toBeInTheDocument();
     expect(screen.getByLabelText('campaign-v2 location selector')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Refresh' })).toBeInTheDocument();
     expect(screen.getAllByText("Mornqar's Ledger").length).toBeGreaterThan(0);
@@ -1117,6 +1134,7 @@ describe('timeline page', () => {
   it('renders guided v2 authoring and posts session creation through the authoring route', async () => {
     const user = userEvent.setup();
     mockSearchParamsState.project = 'mornqar-alkenstar';
+    mockCampaignSelectionState.selectedProjectId = 'mornqar-alkenstar';
 
     render(<TimelinePage />);
 

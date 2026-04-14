@@ -6,10 +6,10 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Button, Select } from '@/components/ui';
 import { useAuth } from '@/contexts/auth-context';
+import { useCampaignSelection } from '@/contexts/campaign-selection-context';
 import { fetchCampaignV2PlayerCharacter } from '@/features/campaign-v2/api';
 import type { CampaignV2PlayerCharacterPagePayload } from '@/features/campaign-v2/types';
 import { canViewGmContent, normalizeFrontendRole } from '@/lib/roles';
-import { usePreferredProject } from '@/lib/use-preferred-project';
 
 import {
   CharacterEntityList,
@@ -35,12 +35,9 @@ export function PlayerCharacterDetailPage({ params }: { params: Promise<{ id: st
   const router = useRouter();
   const searchParams = useSearchParams();
   const { isAuthenticated, role } = useAuth();
-  const { preferredProjectId, preferenceLoaded, rememberProject } = usePreferredProject();
+  const { selectedProjectId, selectionReady } = useCampaignSelection();
   const normalizedRole = normalizeFrontendRole(role);
   const canSeeGmReference = canViewGmContent(normalizedRole);
-  const requestedProjectId = searchParams.get('project') ?? undefined;
-  const effectiveRequestedProjectId = requestedProjectId ?? preferredProjectId ?? undefined;
-  const projectSelectionReady = Boolean(requestedProjectId) || preferenceLoaded;
   const requestIdRef = useRef(0);
 
   const [playerCharacterId, setPlayerCharacterId] = useState('');
@@ -91,7 +88,7 @@ export function PlayerCharacterDetailPage({ params }: { params: Promise<{ id: st
       return;
     }
 
-    if (!projectSelectionReady) {
+    if (!selectionReady) {
       return;
     }
 
@@ -103,20 +100,18 @@ export function PlayerCharacterDetailPage({ params }: { params: Promise<{ id: st
       return;
     }
 
-    void loadPlayerCharacter(playerCharacterId, effectiveRequestedProjectId);
+    void loadPlayerCharacter(playerCharacterId, selectedProjectId || undefined);
   }, [
     canSeeGmReference,
-    effectiveRequestedProjectId,
     isAuthenticated,
     normalizedRole,
     playerCharacterId,
-    projectSelectionReady,
+    selectedProjectId,
+    selectionReady,
   ]);
 
   const detail = payload?.detail?.playerCharacter ?? null;
-  const projects = payload?.projects ?? [];
   const characterOptions = payload?.playerCharacters ?? [];
-  const selectedProjectId = payload?.project?.id ?? effectiveRequestedProjectId ?? '';
   const selectedPlayerCharacterId = payload?.selectedPlayerCharacterId ?? playerCharacterId;
 
   const heroBadges = useMemo(
@@ -130,10 +125,10 @@ export function PlayerCharacterDetailPage({ params }: { params: Promise<{ id: st
     [detail?.age, detail?.ancestry, detail?.characterClass, detail?.status],
   );
 
-  function replaceSearch(nextPlayerCharacterId: string, nextProjectId?: string) {
+  function replaceSearch(nextPlayerCharacterId: string) {
     const nextParams = new URLSearchParams(searchParams.toString());
-    if (nextProjectId) {
-      nextParams.set('project', nextProjectId);
+    if (selectedProjectId) {
+      nextParams.set('project', selectedProjectId);
     } else {
       nextParams.delete('project');
     }
@@ -145,15 +140,8 @@ export function PlayerCharacterDetailPage({ params }: { params: Promise<{ id: st
     );
   }
 
-  function handleProjectChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    const nextProjectId = event.target.value || undefined;
-    void rememberProject(nextProjectId);
-    const nextPlayerCharacterId = characterOptions[0]?.id ?? playerCharacterId;
-    replaceSearch(nextPlayerCharacterId, nextProjectId);
-  }
-
   function handlePlayerCharacterChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    replaceSearch(event.target.value, selectedProjectId || undefined);
+    replaceSearch(event.target.value);
   }
 
   if (!isAuthenticated && normalizedRole === '') {
@@ -176,7 +164,7 @@ export function PlayerCharacterDetailPage({ params }: { params: Promise<{ id: st
     );
   }
 
-  if (loading && !payload) {
+  if ((!selectionReady || loading) && !payload) {
     return (
       <section className={styles.shell}>
         <div className={styles.panel}>
@@ -232,17 +220,6 @@ export function PlayerCharacterDetailPage({ params }: { params: Promise<{ id: st
           </div>
 
           <div className={styles.controls}>
-            <label className={styles.field}>
-              <span>Project</span>
-              <Select aria-label="player character project selector" value={selectedProjectId} onChange={handleProjectChange}>
-                {projects.map((project) => (
-                  <option key={project.id} value={project.id}>
-                    {project.name}
-                  </option>
-                ))}
-              </Select>
-            </label>
-
             <label className={styles.field}>
               <span>Player Character</span>
               <Select

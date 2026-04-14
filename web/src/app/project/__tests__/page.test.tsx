@@ -7,15 +7,18 @@ import { BOARD_PROJECT_OPTIONS, getProjectBoardData } from '@/features/campaign-
 
 import ProjectPage from '../page';
 
-const { mockAuthSession, mockProjectState, mockApiClient } = vi.hoisted(() => ({
+const { mockAuthSession, mockCampaignSelectionState, mockProjectState, mockApiClient } = vi.hoisted(() => ({
   mockAuthSession: {
     role: 'gm',
     userId: 'gm-1',
     username: 'Admingm',
   },
+  mockCampaignSelectionState: {
+    selectedProjectId: 'project-1',
+    selectionReady: true,
+  },
   mockProjectState: {} as Record<string, ReturnType<typeof getProjectBoardData>>,
   mockApiClient: {
-    getProjects: vi.fn(),
     getProjectGraph: vi.fn(),
     runProjectCommand: vi.fn(),
     undoProjectHistory: vi.fn(),
@@ -32,6 +35,24 @@ vi.mock('@/contexts/auth-context', () => ({
     isAuthenticated: true,
     login: vi.fn(),
     logout: mockLogout,
+  }),
+}));
+
+vi.mock('@/contexts/campaign-selection-context', () => ({
+  useCampaignSelection: () => ({
+    selectedProjectId: mockCampaignSelectionState.selectedProjectId,
+    selectionReady: mockCampaignSelectionState.selectionReady,
+    projectOptions: BOARD_PROJECT_OPTIONS.map((project) => ({
+      id: project.id,
+      name: project.name,
+      status: 'active',
+    })),
+    isCampaignScopedRoute: true,
+    buildCampaignHref: (href: string) =>
+      href.includes('?')
+        ? `${href}&project=${encodeURIComponent(mockCampaignSelectionState.selectedProjectId)}`
+        : `${href}?project=${encodeURIComponent(mockCampaignSelectionState.selectedProjectId)}`,
+    selectProject: vi.fn(),
   }),
 }));
 
@@ -122,27 +143,22 @@ vi.mock('@/lib/use-api-client', () => ({
 
 describe('project board page', () => {
   async function renderProjectBoard() {
-    render(<ProjectPage />);
+    const view = render(<ProjectPage />);
     await waitFor(() => {
       expect(screen.getByTestId('board-canvas')).toBeInTheDocument();
     });
+    return view;
   }
 
   beforeEach(() => {
     mockAuthSession.role = 'gm';
     mockAuthSession.userId = 'gm-1';
     mockAuthSession.username = 'Admingm';
+    mockCampaignSelectionState.selectedProjectId = 'project-1';
+    mockCampaignSelectionState.selectionReady = true;
     for (const option of BOARD_PROJECT_OPTIONS) {
       mockProjectState[option.id] = cloneProject(option.id);
     }
-    mockApiClient.getProjects.mockReset();
-    mockApiClient.getProjects.mockImplementation(async () =>
-      BOARD_PROJECT_OPTIONS.map((project) => ({
-        id: project.id,
-        name: project.name,
-        status: 'active',
-      })),
-    );
     mockApiClient.getProjectGraph.mockReset();
     mockApiClient.getProjectGraph.mockImplementation(async (projectId: string) => toGraphResponse(projectId));
     mockApiClient.runProjectCommand.mockReset();
@@ -323,6 +339,7 @@ describe('project board page', () => {
     expect(screen.getByTestId('board-canvas')).toBeInTheDocument();
     expect(within(screen.getByTestId('focus-card')).getByDisplayValue('Current moment')).toBeInTheDocument();
     expect(screen.getByLabelText('Board zoom')).toHaveValue('100');
+    expect(screen.queryByRole('button', { name: 'Campaign selector' })).not.toBeInTheDocument();
     expect(screen.queryByText('Each preview is centered on that player')).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByTestId('graph-node-thread-whispers-harbor'));
@@ -342,10 +359,9 @@ describe('project board page', () => {
     );
   });
 
-  it('updates player perspective dropdown options per campaign and lets GM open a player view from it', async () => {
+  it('updates player perspective dropdown options when the shared campaign context changes', async () => {
     const user = userEvent.setup();
-
-    await renderProjectBoard();
+    const view = await renderProjectBoard();
 
     expect(screen.getByRole('button', { name: 'Perspective' })).toHaveTextContent('GM View');
 
@@ -359,10 +375,11 @@ describe('project board page', () => {
     expect(screen.getByTestId('graph-node-pattern-harbor-conspiracy')).toBeInTheDocument();
     expect(screen.getByTestId('graph-node-pattern-lantern-routes')).toHaveAttribute('data-perspective-hidden', 'true');
 
-    await user.click(screen.getByRole('button', { name: 'Campaign selector' }));
-    await user.click(screen.getByRole('option', { name: 'The Red Signal' }));
+    mockCampaignSelectionState.selectedProjectId = 'project-2';
+    view.rerender(<ProjectPage />);
 
     await waitFor(() => {
+      expect(screen.getByText('The Red Signal')).toBeInTheDocument();
       expect(screen.getByRole('button', { name: 'Perspective' })).toHaveTextContent('GM View');
     });
     await user.click(screen.getByRole('button', { name: 'Perspective' }));
@@ -371,10 +388,11 @@ describe('project board page', () => {
     expect(screen.queryByRole('option', { name: 'Lantern Route' })).not.toBeInTheDocument();
     await user.click(screen.getByRole('option', { name: 'GM View' }));
 
-    await user.click(screen.getByRole('button', { name: 'Campaign selector' }));
-    await user.click(screen.getByRole('option', { name: 'Hundred Notes Test' }));
+    mockCampaignSelectionState.selectedProjectId = 'project-3';
+    view.rerender(<ProjectPage />);
 
     await waitFor(() => {
+      expect(screen.getByText('Hundred Notes Test')).toBeInTheDocument();
       expect(screen.getByRole('button', { name: 'Perspective' })).toHaveTextContent('GM View');
     });
     await user.click(screen.getByRole('button', { name: 'Perspective' }));
