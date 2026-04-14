@@ -1142,6 +1142,9 @@ describe('timeline page', () => {
       expect(screen.getByText('Guided V2 Authoring')).toBeInTheDocument();
     });
 
+    expect(screen.queryByLabelText('author session title')).not.toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Open authoring' }));
+
     await user.clear(screen.getByLabelText('author session title'));
     await user.type(screen.getByLabelText('author session title'), 'Saloon Follow-up');
     await user.clear(screen.getByLabelText('author session summary'));

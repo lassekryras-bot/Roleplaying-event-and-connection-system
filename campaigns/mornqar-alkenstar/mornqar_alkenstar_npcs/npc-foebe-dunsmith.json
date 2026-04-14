@@ -1,0 +1,67 @@
+{
+  "id": "npc-foebe-dunsmith",
+  "type": "npc",
+  "title": "Foebe Dunsmith",
+  "summary": "The operator of the Barrel & Bullet Saloon, a dependable safehouse and job hub where the party first comes together.",
+  "status": "active",
+  "campaignId": "mornqar-alkenstar",
+  "ancestry": null,
+  "class": null,
+  "age": null,
+  "concept": "Safehouse keeper and broker whose saloon anchors the crew's first shared base in Alkenstar.",
+  "role": "saloon owner / broker / safehouse keeper / local facilitator",
+  "background": {
+    "origin": null,
+    "history": "Foebe Dunsmith runs the Barrel & Bullet, a squat two-story tavern in the Ferrous Quarter known for cheap rooms, decent food, loud regulars, and a constant edge of danger.",
+    "reasonInStory": "Her establishment provides shelter, meetings, job brokering, basic crafting support, and regroup space between operations."
+  },
+  "currentSituation": {
+    "overview": "Foebe's saloon is the party's convergence point, rumor mill, and opening briefing room.",
+    "currentProblem": "As the crew takes on work tied to Mugland and the wider city, the saloon risks becoming a hotter and more watched node.",
+    "currentLeverage": "Neutral ground, rooms, regular traffic, and a reputation as a place to broker work and disappear for a while.",
+    "currentLocationId": "location-barrel-and-bullet-saloon"
+  },
+  "motivations": {
+    "shortTerm": "Keep the saloon useful, open, and survivable for the people relying on it.",
+    "midTerm": "Hold the Barrel & Bullet's role as a safe meeting ground without letting outside pressure shut it down.",
+    "longTerm": "Stay indispensable to local operators as a broker, host, and facilitator."
+  },
+  "presentation": {
+    "appearance": null,
+    "behavior": "Practical, connected, and accustomed to running a place where danger and opportunity share tables.",
+    "voice": null
+  },
+  "gmUse": {
+    "sceneFunction": "Quest giver, host, rumor node, and social reset point between dangerous operations.",
+    "whatTheyKnow": "She should know who comes through the saloon, what jobs are circulating, and which pressures are heating up locally.",
+    "howToEscalate": "Threaten the saloon, bring in suspicious clients, or force Foebe to choose between neutrality and protecting regulars.",
+    "fallbackUse": "Use Foebe to introduce jobs, bank intel, local gossip, or temporary shelter."
+  },
+  "campaignFitSummary": "Anchors the party's opening base of operations and gives the campaign a practical safehouse, rumor hub, and job-brokering face. Best used in regroup, briefing, and social-pressure scenes.",
+  "startingThreadIds": [
+    "thread-barrel-and-bullet-safehouse",
+    "thread-opening-bank-heist"
+  ],
+  "coreThreadIds": [
+    "thread-barrel-and-bullet-safehouse"
+  ],
+  "notes": "Repo-backed detail comes from the Barrel & Bullet location and location-state files. Wider personal history is not yet defined in the subtree.",
+  "relations": [
+    {
+      "type": "belongsTo",
+      "targetId": "location-barrel-and-bullet-saloon",
+      "note": "Foebe runs the Barrel & Bullet.",
+      "strength": "central",
+      "origin": "campaign-v2-location-states",
+      "active": true
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "session-001-barrel-and-bullet",
+      "note": "Her establishment is the opening convergence point for the campaign.",
+      "strength": "high",
+      "origin": "campaign-v2-sessions",
+      "active": true
+    }
+  ]
+}

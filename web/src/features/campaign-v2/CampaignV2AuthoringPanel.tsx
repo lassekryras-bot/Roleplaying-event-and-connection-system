@@ -95,6 +95,7 @@ export function CampaignV2AuthoringPanel({ payload, onPayloadChange }: CampaignV
   const authoring = payload.authoring;
   const projectId = payload.project?.id ?? '';
 
+  const [expanded, setExpanded] = useState(false);
   const [pending, setPending] = useState(false);
   const [mutationMessage, setMutationMessage] = useState('');
   const [mutationError, setMutationError] = useState('');
@@ -179,6 +180,12 @@ export function CampaignV2AuthoringPanel({ payload, onPayloadChange }: CampaignV
     setMutationError('');
     setMutationMessage('');
   }, [authoring?.selectedLocationId, projectId]);
+
+  useEffect(() => {
+    if (mutationError || mutationMessage) {
+      setExpanded(true);
+    }
+  }, [mutationError, mutationMessage]);
 
   useEffect(() => {
     if (!authoring) {
@@ -449,16 +456,36 @@ export function CampaignV2AuthoringPanel({ payload, onPayloadChange }: CampaignV
   const selectedLocationId = authoring.selectedLocationId;
 
   return (
-    <section className={styles.card}>
-      <h3>Guided V2 Authoring</h3>
-      <p className={styles.subtle}>
-        Create from the selected context, keep links behind helper actions, and edit only the fields this surface owns.
-      </p>
+    <section className={`${styles.card} ${styles.authoringCard}`}>
+      <div className={styles.authoringCardHeader}>
+        <div className={styles.authoringCardTitleBlock}>
+          <h3>Guided V2 Authoring</h3>
+          <p className={styles.subtle}>
+            Optional creation tools for {authoring.selectedLocationTitle ?? 'the selected location'}.
+          </p>
+        </div>
+        <Button
+          variant="ghost"
+          aria-controls="campaign-v2-authoring-body"
+          aria-expanded={expanded}
+          onClick={() => setExpanded((current) => !current)}
+        >
+          {expanded ? 'Hide authoring' : 'Open authoring'}
+        </Button>
+      </div>
 
-      {authoring.readOnly ? (
-        <div className={styles.empty}>{authoring.readOnlyReason}</div>
-      ) : (
-        <div className={styles.stack}>
+      {!expanded ? (
+        <p className={styles.authoringCollapsedNote}>
+          Keep the main page focused on GM reading and prep, then open authoring when you want to create or edit v2 content.
+        </p>
+      ) : null}
+
+      {expanded ? (
+        <div id="campaign-v2-authoring-body" className={styles.authoringBody}>
+          {authoring.readOnly ? (
+            <div className={styles.empty}>{authoring.readOnlyReason}</div>
+          ) : (
+            <div className={styles.stack}>
           {mutationError ? (
             <div className={`${styles.banner} ${styles.bannerWarning}`} role="alert">
               {mutationError}
@@ -1084,8 +1111,10 @@ export function CampaignV2AuthoringPanel({ payload, onPayloadChange }: CampaignV
               </div>
             </div>
           </section>
+            </div>
+          )}
         </div>
-      )}
+      ) : null}
     </section>
   );
 }

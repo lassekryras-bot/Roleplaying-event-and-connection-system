@@ -1,0 +1,88 @@
+{
+  "id": "npc-ambrost-mugland",
+  "type": "npc",
+  "title": "Ambrost Mugland",
+  "summary": "A hidden Alkenstar power broker whose influence runs through the city's money, muscle, crooked institutions, and multiple player-character storylines.",
+  "status": "active",
+  "campaignId": "mornqar-alkenstar",
+  "ancestry": null,
+  "class": null,
+  "age": null,
+  "concept": "Crime financier and system-level operator at the center of the campaign's corruption web.",
+  "role": "high-level power broker / criminal financier / hidden beneficiary",
+  "background": {
+    "origin": null,
+    "history": "Current repo materials frame Mugland as a city-scale force whose reach extends through finance, muscle, and compromised institutions. Player-character files tie him to hidden trafficking, a wider criminal network, the fungal trade, and suspicious financial webs.",
+    "reasonInStory": "He is one of the campaign's main pressure sources and a likely source or beneficiary of multiple active threads."
+  },
+  "currentSituation": {
+    "overview": "Mugland remains an off-screen but central force shaping heists, investigations, reprisals, and underworld maneuvering in Alkenstar.",
+    "currentProblem": "Multiple player characters are now converging on different parts of the network around him, including trafficking, fungus distribution, corrupt law, and ledgers.",
+    "currentLeverage": "Money, a vault-backed business presence, criminal reach, and ties into crooked institutions.",
+    "currentLocationId": null
+  },
+  "motivations": {
+    "shortTerm": "Protect his position and keep sensitive operations buffered behind respectable fronts and compromised officials.",
+    "midTerm": "Maintain control of the city's pressure points in money, muscle, and hidden trade.",
+    "longTerm": "Remain the hidden beneficiary of Alkenstar's corrupt machinery."
+  },
+  "presentation": {
+    "appearance": null,
+    "behavior": "Indirect, insulated, and difficult to reach directly.",
+    "voice": null
+  },
+  "gmUse": {
+    "sceneFunction": "Primary off-screen campaign antagonist, patron-risk, and convergence point for multiple investigations.",
+    "whatTheyKnow": "Potentially knows the truth behind the missing gifted children, key criminal-financial links, and parts of the fungal trade.",
+    "howToEscalate": "Have Mugland apply financial pressure, use institutional allies, close access routes, or retaliate through intermediaries.",
+    "fallbackUse": "Use his name, orders, vault access, or network traces to tie separate jobs into one larger structure."
+  },
+  "campaignFitSummary": "Central to the campaign's corruption, trafficking, financial, and underworld pressures. Best used as the hidden center of heists, investigations, reprisals, and network-reveal scenes.",
+  "startingThreadIds": [
+    "thread-mugland-knows-the-truth",
+    "thread-mugland-fungal-network",
+    "thread-mugland-corruption-network",
+    "thread-mugland-financial-web"
+  ],
+  "coreThreadIds": [
+    "thread-mugland-knows-the-truth",
+    "thread-mugland-fungal-network",
+    "thread-mugland-corruption-network",
+    "thread-mugland-financial-web"
+  ],
+  "notes": "Built from current repo-backed campaign summaries plus player-character references. Exact appearance, ancestry, and location are not yet established in the subtree.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "thread-mugland-knows-the-truth",
+      "note": "Charles Greyland believes Mugland knows what happened to the missing gifted children.",
+      "strength": "central",
+      "origin": "campaign-v2-player-characters",
+      "active": true
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "thread-mugland-fungal-network",
+      "note": "Durog's notes place fungal trade activity within or near Mugland's network.",
+      "strength": "high",
+      "origin": "campaign-v2-player-characters",
+      "active": true
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "thread-mugland-corruption-network",
+      "note": "Flint's casework tied Mugland to a larger criminal and institutional network.",
+      "strength": "central",
+      "origin": "campaign-v2-player-characters",
+      "active": true
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "thread-mugland-financial-web",
+      "note": "Zinriss is positioned to uncover the money trails around Mugland-linked trade.",
+      "strength": "high",
+      "origin": "campaign-v2-player-characters",
+      "active": true
+    }
+  ]
+}

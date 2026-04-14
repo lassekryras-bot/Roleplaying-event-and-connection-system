@@ -364,17 +364,6 @@ export function CampaignV2Inspector() {
           </div>
 
           <div className={styles.column}>
-            {payload ? (
-              <CampaignV2AuthoringPanel
-                payload={payload}
-                onPayloadChange={(nextPayload) => {
-                  startTransition(() => {
-                    setPayload(nextPayload);
-                  });
-                }}
-              />
-            ) : null}
-
             <section className={styles.card}>
               <h3>Related Events</h3>
               {(overview?.relatedEvents ?? []).length > 0 ? (
@@ -439,6 +428,17 @@ export function CampaignV2Inspector() {
                 <div className={styles.empty}>No resolver or content warnings.</div>
               )}
             </section>
+
+            {payload ? (
+              <CampaignV2AuthoringPanel
+                payload={payload}
+                onPayloadChange={(nextPayload) => {
+                  startTransition(() => {
+                    setPayload(nextPayload);
+                  });
+                }}
+              />
+            ) : null}
           </div>
         </div>
       </div>
