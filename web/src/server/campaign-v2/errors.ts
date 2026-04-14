@@ -5,7 +5,15 @@ export type CampaignV2DiagnosticCode =
   | 'ID_CONVENTION_ERROR'
   | 'REFERENCE_ERROR';
 
-export type CampaignV2ContentKind = 'relation' | 'location' | 'locationState' | 'session' | 'event' | 'effect';
+export type CampaignV2ContentKind =
+  | 'relation'
+  | 'location'
+  | 'locationState'
+  | 'session'
+  | 'event'
+  | 'effect'
+  | 'playerCharacter'
+  | 'npc';
 
 export type CampaignV2DiagnosticIssue = {
   instancePath: string;

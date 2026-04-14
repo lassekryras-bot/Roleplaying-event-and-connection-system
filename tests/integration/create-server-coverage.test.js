@@ -19,6 +19,7 @@ async function withServer(handler) {
     { project_id: "project-1", user_id: "gm-1", role: "GM", status: "active" },
     { project_id: "project-1", user_id: "helper-1", role: "HELPER", status: "active" },
   ];
+  const preferredProjectsByUserId = new Map();
 
   const events = [
     {
@@ -36,6 +37,12 @@ async function withServer(handler) {
     listEvents: () => events.map((event) => ({ ...event })),
     createProjectMembership: (projectId, membershipPayload) => ({ id: "membership-2", project_id: projectId, ...membershipPayload }),
     createProjectInvite: (projectId, invitePayload) => ({ id: "invite-1", project_id: projectId, ...invitePayload }),
+    listProjects: () => [{ id: "project-1", name: "Coverage Project", status: "active" }],
+    getPreferredProjectIdForUser: (userId) => preferredProjectsByUserId.get(userId) ?? null,
+    savePreferredProjectIdForUser: (userId, projectId) => {
+      preferredProjectsByUserId.set(userId, projectId);
+      return projectId;
+    },
     saveThreadState: (threadId, state) => {
       const existing = threads.find((thread) => thread.id === threadId);
       existing.state = state;
@@ -110,6 +117,26 @@ test("covers success and validation branches for createServer", async () => {
       body: JSON.stringify({ email: "new-player@example.com", role: "PLAYER" }),
     });
     assert.equal(createdProjectInviteResponse.status, 201);
+
+    const initialPreferenceResponse = await fetch(`${baseUrl}/preferences/selected-project`, {
+      headers: gmHeaders,
+    });
+    assert.equal(initialPreferenceResponse.status, 200);
+    assert.deepEqual(await initialPreferenceResponse.json(), { project_id: null });
+
+    const savedPreferenceResponse = await fetch(`${baseUrl}/preferences/selected-project`, {
+      method: "POST",
+      headers: gmHeaders,
+      body: JSON.stringify({ project_id: "project-1" }),
+    });
+    assert.equal(savedPreferenceResponse.status, 200);
+    assert.deepEqual(await savedPreferenceResponse.json(), { project_id: "project-1" });
+
+    const currentPreferenceResponse = await fetch(`${baseUrl}/preferences/selected-project`, {
+      headers: gmHeaders,
+    });
+    assert.equal(currentPreferenceResponse.status, 200);
+    assert.deepEqual(await currentPreferenceResponse.json(), { project_id: "project-1" });
 
     const invalidThreadTransitionResponse = await fetch(`${baseUrl}/threads/thread-1`, {
       method: "PATCH",

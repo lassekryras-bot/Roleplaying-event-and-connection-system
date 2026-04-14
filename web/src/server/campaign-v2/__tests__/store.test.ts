@@ -7,13 +7,15 @@ import { fileURLToPath } from 'node:url';
 
 import { afterEach, describe, expect, it } from 'vitest';
 
-import type { Effect, Event, Location, LocationState, Session } from '@/generated/campaign-v2';
+import type { Effect, Event, Location, LocationState, Npc, PlayerCharacter, Session } from '@/generated/campaign-v2';
 import {
   createInitialLocationState,
   createPostMajorVisitLocationState,
   createCampaignV2Session,
   createCampaignV2Store,
   getLocation,
+  getNpc,
+  getPlayerCharacter,
   getSession,
   linkLocationStateToLocation,
   resolveCampaignV2Session,
@@ -21,6 +23,8 @@ import {
   listEvents,
   listLocations,
   listLocationStates,
+  listNpcs,
+  listPlayerCharacters,
   listSessions,
   loadCampaignV2Content,
   resolveCampaignV2Paths,
@@ -28,6 +32,8 @@ import {
   saveEvent,
   saveLocation,
   saveLocationState,
+  saveNpc,
+  savePlayerCharacter,
   saveSession,
 } from '@/server/campaign-v2';
 import { loadGmTimelineContent } from '@/server/gm-timeline';
@@ -101,6 +107,121 @@ function createEffect(): Effect {
   };
 }
 
+function createPlayerCharacter(overrides: Partial<PlayerCharacter> = {}): PlayerCharacter {
+  return {
+    id: 'pc-raina-kestrel',
+    type: 'playerCharacter',
+    campaignId: projectId,
+    title: 'Raina Kestrel',
+    summary: 'A gutter-born scout who keeps finding ritual traces before anyone else notices them.',
+    status: 'active',
+    ancestry: 'Human',
+    class: 'Investigator',
+    age: 24,
+    concept: 'Streetwise scout pulled into chapel rituals and harbor conspiracies.',
+    partyRole: 'Scout',
+    background: {
+      origin: 'Ash Market',
+      history: 'Ran courier routes until she started following ritual clues instead of coin.',
+      incitingIncident: 'Found chapel wax where it should not have been.',
+      reasonInCity: 'Refuses to leave the city until she knows who is moving the reliquary.',
+    },
+    currentSituation: {
+      overview: 'Keeps returning to Ash Market to compare clues from the chapel against dock gossip.',
+      legalStatus: 'Questioned but not wanted.',
+      socialStatus: 'Useful runner with too many questions.',
+      currentProblem: 'Needs proof before the chapel witnesses disappear.',
+      currentLocationId: 'location-ash-market',
+    },
+    goals: {
+      shortTerm: 'Keep the reliquary clue alive.',
+      midTerm: 'Find who moved the relic through the market.',
+      longTerm: 'Break the ritual network before it closes around the harbor.',
+    },
+    traits: {
+      strengths: ['Observant', 'Fast talker'],
+      flaws: ['Reckless', 'Suspicious'],
+      personality: ['Dry humor', 'Restless focus'],
+    },
+    spotlight: {
+      themes: ['Ritual fallout', 'Street loyalty'],
+      gmNotes: 'Lean on clue scenes and pressure from frightened witnesses.',
+    },
+    connections: {
+      importantNpcIds: ['npc-brother-carrow'],
+      importantLocationIds: ['location-ash-market'],
+      importantThreadIds: [],
+      importantHookIds: [],
+    },
+    relationshipNotes: [
+      {
+        label: 'Brother Carrow',
+        role: 'Uneasy ally',
+        note: 'Keeps helping, but only if Raina moves faster than the cult does.',
+      },
+    ],
+    assets: {
+      signatureItems: ['Wax-marked notebook'],
+      specialCapabilities: ['Finds repeated ritual patterns in crowded scenes'],
+    },
+    campaignFitSummary: 'Raina makes the stolen reliquary and chapel fallout immediately actionable at the table.',
+    startingThreadIds: [],
+    coreThreadIds: [],
+    notes: 'Treat as a high-visibility clue hound for early sessions.',
+    relations: [],
+    ...overrides,
+  };
+}
+
+function createNpc(overrides: Partial<Npc> = {}): Npc {
+  return {
+    id: 'npc-brother-carrow',
+    type: 'npc',
+    campaignId: projectId,
+    title: 'Brother Carrow',
+    summary: 'A rattled chapel caretaker trying to survive the aftermath of a sacrilege he barely understands.',
+    status: 'active',
+    ancestry: 'Human',
+    class: 'Acolyte',
+    age: 52,
+    concept: 'Caretaker whose fear keeps the chapel thread emotionally alive.',
+    role: 'Reluctant witness',
+    background: {
+      origin: 'Harbor district',
+      history: 'Spent decades keeping records and relics in order.',
+      reasonInStory: 'Knows which visitors came before the reliquary vanished.',
+    },
+    currentSituation: {
+      overview: 'Trying to look harmless while quietly tracking who keeps returning to the chapel grounds.',
+      currentProblem: 'Knows too much about the reliquary switch.',
+      currentLeverage: 'Still controls access to the surviving chapel records.',
+      currentLocationId: 'location-ash-market',
+    },
+    motivations: {
+      shortTerm: 'Stay alive.',
+      midTerm: 'Keep the chapel scandal contained.',
+      longTerm: 'See the relic restored before the cult reaches the harbor rite.',
+    },
+    presentation: {
+      appearance: 'Smoke-stained robes and tired hands.',
+      behavior: 'Stops speaking whenever footsteps get too close.',
+      voice: 'Thin, urgent, and careful.',
+    },
+    gmUse: {
+      sceneFunction: 'Deliver witness context and chapel access under pressure.',
+      whatTheyKnow: 'Who last asked for the reliquary records.',
+      howToEscalate: 'Have him vanish or panic if the cult gets close.',
+      fallbackUse: 'Turn him into a frightened source who can confirm ritual clues.',
+    },
+    campaignFitSummary: 'Brother Carrow keeps the chapel threat personal and immediately actionable.',
+    startingThreadIds: [],
+    coreThreadIds: [],
+    notes: 'Useful pressure gauge for how exposed the chapel story feels.',
+    relations: [],
+    ...overrides,
+  };
+}
+
 async function createWorkspace() {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'campaign-v2-store-'));
   tempDirectories.push(root);
@@ -169,6 +290,22 @@ async function seedMinimalGmTimeline(campaignsRoot: string) {
   });
 }
 
+async function seedLegacyThread(campaignsRoot: string, threadId: string, overrides: Record<string, unknown> = {}) {
+  await writeJsonFile(path.join(campaignsRoot, projectId, 'threads', `${threadId}.json`), {
+    id: threadId,
+    title: 'Known Thread',
+    state: 'active',
+    hook: 'A useful known thread for validation.',
+    playerSummary: 'Players know this thread exists.',
+    gmTruth: 'The GM knows the full truth behind it.',
+    timelineAnchor: 'now',
+    linkedEntityIds: [],
+    patternId: 'pattern-known-thread',
+    playerVisible: true,
+    ...overrides,
+  });
+}
+
 afterEach(async () => {
   await Promise.all(tempDirectories.splice(0).map((directory) => fs.rm(directory, { recursive: true, force: true })));
 });
@@ -187,6 +324,8 @@ describe('campaign-v2 storage', () => {
     await saveEvent(storageOptions, createEvent());
     await saveEffect(storageOptions, createEffect());
     await saveSession(storageOptions, createSession());
+    await savePlayerCharacter(storageOptions, createPlayerCharacter());
+    await saveNpc(storageOptions, createNpc());
 
     const resolvedPaths = resolveCampaignV2Paths(storageOptions);
     expect(resolvedPaths.contentRoot).toContain(path.join(projectId, 'campaign-v2'));
@@ -198,6 +337,8 @@ describe('campaign-v2 storage', () => {
     expect(loadResult.sessions).toHaveLength(1);
     expect(loadResult.events).toHaveLength(1);
     expect(loadResult.effects).toHaveLength(1);
+    expect(loadResult.playerCharacters).toHaveLength(1);
+    expect(loadResult.npcs).toHaveLength(1);
     expect(loadResult.locations[0]?.value).toEqual(
       expect.objectContaining({
         id: 'location-ash-market',
@@ -219,6 +360,8 @@ describe('campaign-v2 storage', () => {
     expect((await getLocation(storageOptions, 'location-ash-market'))?.relations).toEqual([]);
     expect((await getSession(storageOptions, 'session-ash-market-01'))?.locationId).toBe('location-ash-market');
     expect((await getSession(storageOptions, 'session-ash-market-01'))?.relations).toEqual([]);
+    expect((await getPlayerCharacter(storageOptions, 'pc-raina-kestrel'))?.campaignFitSummary).toContain('stolen reliquary');
+    expect((await getNpc(storageOptions, 'npc-brother-carrow'))?.role).toBe('Reluctant witness');
     expect((await listLocations(storageOptions)).map((location) => location.id)).toEqual(['location-ash-market']);
     expect((await listLocationStates(storageOptions)).map((locationState) => locationState.id)).toEqual([
       'location-state-ash-market-after-riot',
@@ -226,12 +369,16 @@ describe('campaign-v2 storage', () => {
     expect((await listSessions(storageOptions)).map((session) => session.id)).toEqual(['session-ash-market-01']);
     expect((await listEvents(storageOptions)).map((event) => event.id)).toEqual(['event-merchant-strike']);
     expect((await listEffects(storageOptions)).map((effect) => effect.id)).toEqual(['effect-heightened-security']);
+    expect((await listPlayerCharacters(storageOptions)).map((playerCharacter) => playerCharacter.id)).toEqual(['pc-raina-kestrel']);
+    expect((await listNpcs(storageOptions)).map((npc) => npc.id)).toEqual(['npc-brother-carrow']);
 
     const store = await createCampaignV2Store(storageOptions);
     expect(store.getDiagnostics()).toEqual([]);
     expect(store.getSession('session-ash-market-01')?.startingLocationStateId).toBe('location-state-ash-market-after-riot');
     expect(store.getSession('session-ash-market-01')?.relations).toEqual([]);
     expect(store.getSnapshot().effects.map((effect) => effect.id)).toEqual(['effect-heightened-security']);
+    expect(store.getSnapshot().playerCharacters.map((playerCharacter) => playerCharacter.id)).toEqual(['pc-raina-kestrel']);
+    expect(store.getSnapshot().npcs.map((npc) => npc.id)).toEqual(['npc-brother-carrow']);
   });
 
   it('rejects invalid writes before they reach disk', async () => {
@@ -308,11 +455,15 @@ describe('campaign-v2 storage', () => {
     await store.saveEvent(createEvent());
     await store.saveEffect(createEffect());
     await store.saveSession(createSession());
+    await store.savePlayerCharacter(createPlayerCharacter());
+    await store.saveNpc(createNpc());
 
     expect(store.getDiagnostics()).toEqual([]);
     expect(store.getLocationState('location-state-ash-market-after-riot')?.notes).toContain('Smoke stains remain');
     expect(store.getSession('session-ash-market-01')?.notes).toContain('Open with the market bells');
     expect(store.listSessions()[0]?.resultingLocationStateId).toBe('location-state-ash-market-after-riot');
+    expect(store.getPlayerCharacter('pc-raina-kestrel')?.title).toBe('Raina Kestrel');
+    expect(store.listNpcs()[0]?.id).toBe('npc-brother-carrow');
   });
 
   it('supports one initial and one post-major-visit state for the same important location', async () => {
@@ -436,6 +587,67 @@ describe('campaign-v2 storage', () => {
           direction: 'outgoing',
         }),
       ]),
+    );
+  });
+
+  it('reports missing location and legacy thread references for player characters and npcs', async () => {
+    const workspace = await createWorkspace();
+    const storageOptions = {
+      campaignsRoot: workspace.campaignsRoot,
+      schemaRoot,
+      projectId,
+    };
+
+    await seedLegacyThread(workspace.campaignsRoot, 'thread-known');
+    await saveLocation(storageOptions, createLocation());
+    await savePlayerCharacter(
+      storageOptions,
+      createPlayerCharacter({
+        currentSituation: {
+          overview: 'Operating on incomplete clues.',
+          legalStatus: 'Wanted for questioning.',
+          socialStatus: 'Watched by the market.',
+          currentProblem: 'Needs the missing reliquary route.',
+          currentLocationId: 'location-missing',
+        },
+        startingThreadIds: ['thread-known'],
+        coreThreadIds: ['thread-missing'],
+      }),
+    );
+    await saveNpc(
+      storageOptions,
+      createNpc({
+        startingThreadIds: ['thread-known'],
+        coreThreadIds: ['thread-missing-npc'],
+      }),
+    );
+
+    const store = await createCampaignV2Store(storageOptions);
+
+    expect(store.getDiagnostics()).toContainEqual(
+      expect.objectContaining({
+        code: 'REFERENCE_ERROR',
+        contentKind: 'playerCharacter',
+        sourceName: 'player-characters/pc-raina-kestrel.json',
+        message:
+          'playerCharacter pc-raina-kestrel references missing location location-missing in currentSituation.currentLocationId.',
+      }),
+    );
+    expect(store.getDiagnostics()).toContainEqual(
+      expect.objectContaining({
+        code: 'REFERENCE_ERROR',
+        contentKind: 'playerCharacter',
+        sourceName: 'player-characters/pc-raina-kestrel.json',
+        message: 'playerCharacter pc-raina-kestrel references missing legacy thread thread-missing in coreThreadIds.',
+      }),
+    );
+    expect(store.getDiagnostics()).toContainEqual(
+      expect.objectContaining({
+        code: 'REFERENCE_ERROR',
+        contentKind: 'npc',
+        sourceName: 'npcs/npc-brother-carrow.json',
+        message: 'npc npc-brother-carrow references missing legacy thread thread-missing-npc in coreThreadIds.',
+      }),
     );
   });
 

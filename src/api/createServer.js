@@ -59,6 +59,8 @@ export function createServer({
   getThreadById,
   listThreads,
   listProjects,
+  getPreferredProjectIdForUser,
+  savePreferredProjectIdForUser,
   getProjectGraph,
   executeProjectCommand,
   getProjectHistory,
@@ -192,6 +194,100 @@ export function createServer({
         }),
       );
       return;
+    }
+
+    if (request.method === "GET" && url.pathname === "/preferences/selected-project") {
+      if (typeof getPreferredProjectIdForUser !== "function") {
+        fail(501, "NOT_IMPLEMENTED", "selected project preference endpoint not implemented");
+        return;
+      }
+
+      const guardResult = requireAccess(accessContext);
+      if (!guardResult.allowed) {
+        send(guardResult.status, guardResult.payload);
+        return;
+      }
+
+      if (!accessContext.userId) {
+        fail(400, "USER_ID_REQUIRED", "user id is required");
+        return;
+      }
+
+      const preferredProjectId = getPreferredProjectIdForUser(accessContext.userId);
+      const accessibleProjectIds =
+        typeof listProjects === "function"
+          ? new Set(
+              listProjects({
+                role: accessContext.role,
+                userId: accessContext.userId,
+              }).map((project) => project.id),
+            )
+          : null;
+
+      send(200, {
+        project_id:
+          typeof preferredProjectId === "string" &&
+          preferredProjectId.length > 0 &&
+          (!accessibleProjectIds || accessibleProjectIds.has(preferredProjectId))
+            ? preferredProjectId
+            : null,
+      });
+      return;
+    }
+
+    if (request.method === "POST" && url.pathname === "/preferences/selected-project") {
+      if (typeof savePreferredProjectIdForUser !== "function") {
+        fail(501, "NOT_IMPLEMENTED", "selected project preference endpoint not implemented");
+        return;
+      }
+
+      const guardResult = requireAccess(accessContext);
+      if (!guardResult.allowed) {
+        send(guardResult.status, guardResult.payload);
+        return;
+      }
+
+      if (!accessContext.userId) {
+        fail(400, "USER_ID_REQUIRED", "user id is required");
+        return;
+      }
+
+      let body;
+      try {
+        body = await parseJsonBody(request);
+      } catch {
+        fail(400, "INVALID_JSON", "invalid JSON body");
+        return;
+      }
+
+      if (!body || typeof body !== "object" || Array.isArray(body)) {
+        fail(400, "INVALID_REQUEST", "request body must be a JSON object");
+        return;
+      }
+
+      if (typeof body.project_id !== "string" || body.project_id.trim().length === 0) {
+        fail(400, "PROJECT_ID_REQUIRED", "project_id is required");
+        return;
+      }
+
+      const projectAccessGuard = requireAccess(accessContext, { projectId: body.project_id.trim() });
+      if (!projectAccessGuard.allowed) {
+        send(projectAccessGuard.status, projectAccessGuard.payload);
+        return;
+      }
+
+      try {
+        const projectId = savePreferredProjectIdForUser(accessContext.userId, body.project_id.trim());
+        send(200, { project_id: projectId });
+        return;
+      } catch (error) {
+        if (sendKnownError(fail, error, "REQUEST_FAILED")) {
+          return;
+        }
+
+        fail(400, "REQUEST_FAILED", error.message);
+        return;
+      }
     }
 
     if (request.method === "GET" && projectGraphMatch) {

@@ -1,0 +1,22 @@
+{
+  "id": "event-zinriss-forges-mugland-vault-order",
+  "type": "event",
+  "title": "Zinriss Forges Mugland Vault Order",
+  "summary": "Zinriss creates a highly convincing forged order from Mugland that can smooth the crew's access to the bank vault.",
+  "status": "resolved",
+  "eventType": "forgery",
+  "createdEffectIds": [
+    "effect-party-has-forged-vault-order"
+  ],
+  "notes": "Critical success. Treat this as a major infiltration advantage for the next bank-facing scene.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-barrel-and-bullet-saloon"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "session-001-barrel-and-bullet"
+    }
+  ]
+}

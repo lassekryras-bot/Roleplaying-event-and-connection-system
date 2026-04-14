@@ -78,6 +78,41 @@ function listJsonFiles(directoryPath) {
     .map((entry) => readJsonFile(path.join(directoryPath, entry)));
 }
 
+function getUserPreferenceFilePath(rootDir) {
+  return path.join(rootDir, ".user-preferences.json");
+}
+
+function readUserPreferences(rootDir) {
+  const filePath = getUserPreferenceFilePath(rootDir);
+  if (!fs.existsSync(filePath)) {
+    return { users: {} };
+  }
+
+  try {
+    const payload = readJsonFile(filePath);
+    if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+      return { users: {} };
+    }
+
+    return {
+      users:
+        payload.users && typeof payload.users === "object" && !Array.isArray(payload.users)
+          ? payload.users
+          : {},
+    };
+  } catch {
+    return { users: {} };
+  }
+}
+
+function writeUserPreferences(rootDir, preferences) {
+  writeJsonAtomic(getUserPreferenceFilePath(rootDir), preferences);
+}
+
+function normalizeProjectPreferenceId(value) {
+  return typeof value === "string" && value.trim().length > 0 ? value.trim() : null;
+}
+
 function createInitialHistoryIndex() {
   return {
     revisionIds: [INITIAL_REVISION_ID],
@@ -1235,6 +1270,51 @@ export function createFileCampaignStore({ rootDir = DEFAULT_CAMPAIGNS_ROOT } = {
       .map((snapshot) => ({ ...snapshot.project }));
   }
 
+  function getPreferredProjectIdForUser(userId) {
+    if (typeof userId !== "string" || userId.trim().length === 0) {
+      return null;
+    }
+
+    const preferences = readUserPreferences(rootDir);
+    return normalizeProjectPreferenceId(preferences.users?.[userId]?.selectedProjectId);
+  }
+
+  function savePreferredProjectIdForUser(userId, projectId) {
+    const normalizedUserId = typeof userId === "string" ? userId.trim() : "";
+    const normalizedProjectId = normalizeProjectPreferenceId(projectId);
+
+    if (!normalizedUserId) {
+      const error = new Error("userId is required.");
+      error.statusCode = 400;
+      error.code = "USER_ID_REQUIRED";
+      throw error;
+    }
+
+    if (!normalizedProjectId) {
+      const error = new Error("projectId is required.");
+      error.statusCode = 400;
+      error.code = "PROJECT_ID_REQUIRED";
+      throw error;
+    }
+
+    if (!loadCampaignSnapshot(rootDir, normalizedProjectId)) {
+      const error = new Error("Project not found.");
+      error.statusCode = 404;
+      error.code = "PROJECT_NOT_FOUND";
+      throw error;
+    }
+
+    const preferences = readUserPreferences(rootDir);
+    preferences.users[normalizedUserId] = {
+      ...(preferences.users[normalizedUserId] ?? {}),
+      selectedProjectId: normalizedProjectId,
+      updatedAt: new Date().toISOString(),
+    };
+    writeUserPreferences(rootDir, preferences);
+
+    return normalizedProjectId;
+  }
+
   function listThreadsForContext({ role, userId } = {}) {
     const snapshots = loadSnapshots();
     const threads = [];
@@ -1545,6 +1625,8 @@ export function createFileCampaignStore({ rootDir = DEFAULT_CAMPAIGNS_ROOT } = {
       });
     },
     getProjectMembershipByUserId: getMembership,
+    getPreferredProjectIdForUser,
+    savePreferredProjectIdForUser,
     createMembership(projectId, data) {
       const createdMembership = {
         project_id: projectId,

@@ -1,0 +1,21 @@
+{
+  "id": "thread-loveless-false-charge",
+  "type": "thread",
+  "title": "Loveless False Charge",
+  "summary": "A thread about Flint being framed after presenting evidence and the role Loveless played in turning law into a weapon.",
+  "status": "active",
+  "threadType": "conflict",
+  "priority": "high",
+  "campaignId": "campaign-mornqar-alkenstar",
+  "notes": "Core Flint thread. Use for betrayal, fugitive pressure, missing evidence, and cracks inside the Shieldmarshals.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "pc-flint-beastwood"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "npc-anjelique-loveless"
+    }
+  ]
+}

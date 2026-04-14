@@ -604,21 +604,7 @@ function createCampaignV2InspectorPayload(): CampaignV2InspectorPayload {
         },
       },
     },
-    migrationChecklist: {
-      projectId: 'project-3',
-      contentSubdir: 'campaign-v2-shadow',
-      validationCommand: 'npm run validate:campaign-v2 -- --project project-3',
-      items: [
-        {
-          key: 'v2-only-writes',
-          title: 'V2 is the only write path',
-          status: 'complete',
-          detail: 'Legacy dual-write is frozen. New authoring flows write campaign-v2 only.',
-        },
-      ],
-    },
     contentSubdir: 'campaign-v2-shadow',
-    trustedLocationDualWriteEnabled: false,
     counts: {
       locations: 7,
       locationStates: 10,
@@ -918,21 +904,7 @@ function createTrustedCampaignV2InspectorPayload(): CampaignV2InspectorPayload {
         },
       },
     },
-    migrationChecklist: {
-      projectId: 'mornqar-alkenstar',
-      contentSubdir: 'campaign-v2',
-      validationCommand: 'npm run validate:campaign-v2 -- --project mornqar-alkenstar',
-      items: [
-        {
-          key: 'v2-only-writes',
-          title: 'V2 is the only write path',
-          status: 'complete',
-          detail: 'Legacy dual-write is frozen. New authoring flows write campaign-v2 only.',
-        },
-      ],
-    },
     contentSubdir: 'campaign-v2',
-    trustedLocationDualWriteEnabled: false,
     counts: {
       locations: 2,
       locationStates: 2,
@@ -958,6 +930,15 @@ describe('timeline page', () => {
     mockFetch.mockReset();
     mockFetch.mockImplementation(async (input: RequestInfo | URL) => {
       const url = String(input);
+
+      if (url.includes('/preferences/selected-project')) {
+        return {
+          ok: true,
+          json: async () => ({
+            project_id: mockSearchParamsState.project,
+          }),
+        };
+      }
 
       if (url.includes('/api/campaign-v2/dual-write/location')) {
         return {
@@ -1095,47 +1076,13 @@ describe('timeline page', () => {
     vi.unstubAllGlobals();
   });
 
-  it('renders the gm board with one visible past session and the current session centered', async () => {
-    mockSearchParamsState.surface = 'classic';
-
-    render(<TimelinePage />);
-
-    await waitFor(() => {
-      expect(screen.getByTestId('gm-timeline-board')).toBeInTheDocument();
-    });
-
-    expect(screen.getByTestId('legacy-timeline-fallback-banner')).toBeInTheDocument();
-    expect(screen.getByTestId('timeline-current-session')).toHaveTextContent("Mornqar's Ledger");
-    expect(screen.getByTestId('timeline-session-session-past-auction')).toBeInTheDocument();
-    expect(screen.queryByTestId('timeline-session-session-past-docks')).not.toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Earlier sessions \(1\)/i })).toBeInTheDocument();
-  });
-
-  it('refreshes the board from the loader route and shows success feedback', async () => {
-    const user = userEvent.setup();
-    mockSearchParamsState.surface = 'classic';
-
-    render(<TimelinePage />);
-
-    await waitFor(() => {
-      expect(screen.getByTestId('gm-timeline-board')).toBeInTheDocument();
-    });
-
-    await user.click(screen.getByTestId('gm-timeline-refresh'));
-
-    await waitFor(() => {
-      expect(mockFetch).toHaveBeenCalledTimes(2);
-    });
-    expect(screen.getByRole('status')).toHaveTextContent('Refreshed successfully.');
-  });
-
   it('blocks non-gm roles from the board', async () => {
     mockAuthSession.role = 'helper';
 
     render(<TimelinePage />);
 
     expect(screen.getByText('The campaign-v2 inspector is GM-only in this phase.')).toBeInTheDocument();
-    expect(mockFetch).not.toHaveBeenCalled();
+    expect(mockFetch.mock.calls.some(([input]) => String(input).includes('/api/campaign-v2/inspector'))).toBe(false);
   });
 
   it('defaults to the v2 inspector surface', async () => {
@@ -1146,29 +1093,25 @@ describe('timeline page', () => {
     });
 
     expect(screen.getByTestId('campaign-v2-inspector')).toBeInTheDocument();
-    expect(screen.getByText('Campaign V2 Inspector')).toBeInTheDocument();
+    expect(screen.queryByText('Campaign V2 Inspector')).not.toBeInTheDocument();
+    expect(screen.getByText('GM timeline')).toBeInTheDocument();
+    expect(screen.getByText('Focus: Grand Archive')).toBeInTheDocument();
+    expect(screen.getByText(/Updated/i)).toBeInTheDocument();
+    expect(screen.getByText('Source campaign-v2-shadow')).toBeInTheDocument();
+    expect(screen.getByLabelText('campaign-v2 project selector')).toBeInTheDocument();
+    expect(screen.getByLabelText('campaign-v2 location selector')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Refresh' })).toBeInTheDocument();
     expect(screen.getAllByText("Mornqar's Ledger").length).toBeGreaterThan(0);
     expect(screen.getByText('Grand Archive Before Visit')).toBeInTheDocument();
     expect(screen.getByText('Prep Answers')).toBeInTheDocument();
-    expect(screen.getByText('Migration Status')).toBeInTheDocument();
     expect(screen.getByText('What is active now?')).toBeInTheDocument();
+    expect(screen.queryByText('Migration Status')).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Open classic fallback' })).not.toBeInTheDocument();
+    expect(screen.queryByText(/Legacy dual-write is frozen/i)).not.toBeInTheDocument();
     expect(mockFetch).toHaveBeenCalledWith(
       '/api/campaign-v2/inspector?project=project-3',
       expect.objectContaining({ cache: 'no-store' }),
     );
-  });
-
-  it('keeps the legacy write bridge hidden on the primary campaign-v2 surface', async () => {
-    mockSearchParamsState.project = 'mornqar-alkenstar';
-
-    render(<TimelinePage />);
-
-    await waitFor(() => {
-      expect(screen.getByText('Guided V2 Authoring')).toBeInTheDocument();
-    });
-
-    expect(screen.queryByRole('button', { name: 'Save dual-write' })).not.toBeInTheDocument();
-    expect(screen.getAllByText(/Legacy dual-write is frozen/i).length).toBeGreaterThan(0);
   });
 
   it('renders guided v2 authoring and posts session creation through the authoring route', async () => {

@@ -1,0 +1,11 @@
+{
+  "id": "thread-psychic-memory-fragments",
+  "title": "Psychic Memory Fragments",
+  "state": "active",
+  "hook": "Psychic echoes and half-recovered memory fragments keep surfacing around Charles' story.",
+  "playerSummary": "Clues may emerge through mental impressions, haunted machinery, or memories that return in broken pieces.",
+  "gmTruth": "Use this thread in scenes with psychic traces, machine spirits, trauma-linked recall, and evidence that only makes sense once several incomplete fragments are put together.",
+  "timelineAnchor": "now",
+  "linkedEntityIds": [],
+  "playerVisible": true
+}

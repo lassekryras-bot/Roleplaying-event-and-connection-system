@@ -1,0 +1,18 @@
+{
+  "id": "thread-missing-gifted-children",
+  "type": "thread",
+  "title": "Missing Gifted Children",
+  "summary": "A thread about missing gifted children tied to Mugland, hidden trafficking, and the burned orphanage.",
+  "status": "active",
+  "threadType": "mystery",
+  "priority": "high",
+  "campaignId": "campaign-mornqar-alkenstar",
+  "notes": "Core Charles thread. Use for orphanage survivors, trafficking clues, and revelations about missing gifted youths.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "pc-charles-greyland",
+      "note": "This thread is central to Charles."
+    }
+  ]
+}

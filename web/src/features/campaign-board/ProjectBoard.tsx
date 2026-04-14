@@ -6,6 +6,7 @@ import React, { startTransition, useDeferredValue, useEffect, useId, useMemo, us
 
 import { useAuth } from '@/contexts/auth-context';
 import { useApiClient } from '@/lib/use-api-client';
+import { usePreferredProject } from '@/lib/use-preferred-project';
 import { canPreviewPlayerMode, canViewGmContent, getRoleLabel, normalizeFrontendRole } from '@/lib/roles';
 
 import { toProjectBoardData } from './api-adapter';
@@ -259,6 +260,7 @@ function TopBarSelect({
 export function ProjectBoard() {
   const { logout, role, userId } = useAuth();
   const { getProjects, getProjectGraph, runProjectCommand, undoProjectHistory, redoProjectHistory } = useApiClient();
+  const { preferredProjectId, preferenceLoaded, rememberProject } = usePreferredProject();
   const router = useRouter();
   const normalizedRole = normalizeFrontendRole(role);
   const canToggleMode = canPreviewPlayerMode(normalizedRole);
@@ -297,6 +299,12 @@ export function ProjectBoard() {
   useEffect(() => {
     let active = true;
 
+    if (!preferenceLoaded) {
+      return () => {
+        active = false;
+      };
+    }
+
     setLoading(true);
     setLoadError('');
 
@@ -310,8 +318,12 @@ export function ProjectBoard() {
           id: project.id,
           name: project.name,
         }));
+        const preferredOptionId =
+          preferredProjectId && nextOptions.some((project) => project.id === preferredProjectId)
+            ? preferredProjectId
+            : '';
         setProjectOptions(nextOptions);
-        setSelectedProjectId((currentProjectId) => currentProjectId || nextOptions[0]?.id || '');
+        setSelectedProjectId((currentProjectId) => currentProjectId || preferredOptionId || nextOptions[0]?.id || '');
       })
       .catch((error: Error) => {
         if (!active) {
@@ -329,7 +341,7 @@ export function ProjectBoard() {
     return () => {
       active = false;
     };
-  }, [getProjects]);
+  }, [getProjects, preferenceLoaded, preferredProjectId]);
 
   useEffect(() => {
     if (!selectedProjectId || projectDataById[selectedProjectId]) {
@@ -802,6 +814,8 @@ export function ProjectBoard() {
   }
 
   function handleProjectSelect(nextProjectId: string) {
+    void rememberProject(nextProjectId);
+
     startTransition(() => {
       setSelectedProjectId(nextProjectId);
       setBoardMode(canToggleMode ? 'gm' : 'player');
@@ -1195,6 +1209,15 @@ export function ProjectBoard() {
                 <Link href="/timeline" role="menuitem" onClick={() => setMenuOpen(false)}>
                   Open Timeline
                 </Link>
+                {canViewGmContent(normalizedRole) ? (
+                  <Link
+                    href={`/player-characters${selectedProjectId ? `?project=${encodeURIComponent(selectedProjectId)}` : ''}`}
+                    role="menuitem"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Open Characters
+                  </Link>
+                ) : null}
                 <button
                   type="button"
                   role="menuitem"

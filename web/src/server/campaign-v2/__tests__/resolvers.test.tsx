@@ -4,12 +4,14 @@ import { cleanup, render, screen } from '@testing-library/react';
 import React from 'react';
 import { afterEach, describe, expect, it } from 'vitest';
 
-import type { Effect, Event, Location, LocationState, Session } from '@/generated/campaign-v2';
+import type { Effect, Event, Location, LocationState, Npc, PlayerCharacter, Session } from '@/generated/campaign-v2';
 import {
   buildCampaignV2GmOverview,
   buildCampaignV2LocationTimeline,
+  buildCampaignV2PlayerCharacterDetail,
   createCampaignV2Resolver,
   createCampaignV2Session,
+  type CampaignLegacyThreadSummary,
   type CampaignV2GmOverviewPayload,
   type CampaignV2LocationTimelinePayload,
 } from '@/server/campaign-v2';
@@ -215,6 +217,133 @@ function createFixtureSource() {
     },
   ];
 
+  const npcs: Npc[] = [
+    {
+      id: 'npc-brother-carrow',
+      type: 'npc',
+      campaignId: projectId,
+      title: 'Brother Carrow',
+      summary: 'A rattled chapel witness trying to stay useful without being seen helping too openly.',
+      status: 'active',
+      concept: 'Witness who keeps the chapel fallout personal.',
+      role: 'Reluctant witness',
+      currentSituation: {
+        overview: 'Still close enough to the chapel to hear what the city has started to whisper.',
+        currentProblem: 'Is being watched by the wrong people.',
+        currentLeverage: 'Knows what records are missing.',
+        currentLocationId: 'location-ash-market',
+      },
+      campaignFitSummary: 'Keeps the chapel pressure tied to a living witness.',
+      startingThreadIds: ['thread-stolen-relic'],
+      coreThreadIds: ['thread-broker-trail'],
+      relations: [
+        {
+          type: 'relatedTo',
+          targetId: 'pc-raina-kestrel',
+          note: 'Trusts her instincts more than her plans.',
+        },
+      ],
+    },
+  ];
+
+  const playerCharacters: PlayerCharacter[] = [
+    {
+      id: 'pc-raina-kestrel',
+      type: 'playerCharacter',
+      campaignId: projectId,
+      title: 'Raina Kestrel',
+      summary: 'A scout who turns ritual clues into actionable pressure for the crew.',
+      status: 'active',
+      concept: 'Streetwise clue hound pulled into chapel fallout.',
+      partyRole: 'Scout',
+      ancestry: 'Human',
+      class: 'Investigator',
+      age: 24,
+      background: {
+        origin: 'Ash Market',
+        history: 'Ran courier routes until she started chasing ritual inconsistencies instead.',
+        incitingIncident: 'Found chapel wax in a market ledger bag.',
+        reasonInCity: 'Needs to know who moved the reliquary before the trail goes cold.',
+      },
+      currentSituation: {
+        overview: 'Working the market and chapel together before the witness line collapses.',
+        legalStatus: 'Questioned, not charged.',
+        socialStatus: 'Useful but disruptive.',
+        currentProblem: 'Needs proof before the cult shutters every witness.',
+        currentLocationId: 'location-ash-market',
+      },
+      goals: {
+        shortTerm: 'Keep the reliquary clue alive.',
+        midTerm: 'Find the courier route that moved it.',
+        longTerm: 'Break the ritual network before it matures.',
+      },
+      traits: {
+        strengths: ['Observant', 'Fast'],
+        flaws: ['Reckless'],
+        personality: ['Dry humor', 'Compulsive note-taking'],
+      },
+      spotlight: {
+        themes: ['Ritual fallout', 'Street loyalty'],
+        gmNotes: 'Push her toward witness scenes and escalating clue pressure.',
+      },
+      connections: {
+        importantNpcIds: ['npc-brother-carrow'],
+        importantLocationIds: ['location-ash-market'],
+        importantThreadIds: ['thread-broker-trail'],
+        importantHookIds: ['hook-silent-bell'],
+      },
+      relationshipNotes: [
+        {
+          label: 'Brother Carrow',
+          role: 'Witness contact',
+          note: 'Needs reassurance before he names names.',
+        },
+      ],
+      assets: {
+        signatureItems: ['Wax-marked notebook'],
+        specialCapabilities: ['Tracks repeated ritual symbols across scenes'],
+      },
+      campaignFitSummary: 'Turns the chapel and market clues into a concrete playable pressure line.',
+      startingThreadIds: ['thread-stolen-relic'],
+      coreThreadIds: ['thread-broker-trail'],
+      notes: 'A strong first-session focal point when the table needs a clue engine.',
+      relations: [
+        {
+          type: 'relatedTo',
+          targetId: 'npc-brother-carrow',
+          note: 'He keeps feeding her half-truths because she is the only one moving fast enough.',
+        },
+        {
+          type: 'occursAt',
+          targetId: 'location-ash-market',
+        },
+      ],
+    },
+  ];
+
+  const legacyThreads: CampaignLegacyThreadSummary[] = [
+    {
+      id: 'thread-stolen-relic',
+      title: 'Stolen Reliquary',
+      state: 'active',
+      hook: 'The reliquary is missing.',
+      playerSummary: 'Someone swapped a chapel relic and left ritual wax behind.',
+      gmTruth: 'The reliquary is feeding a harbor rite.',
+      timelineAnchor: 'future_possible',
+      patternId: 'pattern-ash-ritual',
+    },
+    {
+      id: 'thread-broker-trail',
+      title: 'Broker Trail',
+      state: 'dormant',
+      hook: 'A runner points toward the broker network.',
+      playerSummary: 'A courier route might connect the market and chapel clues.',
+      gmTruth: 'The broker trail is the cult’s logistics line.',
+      timelineAnchor: 'now',
+      patternId: 'pattern-lantern-routes',
+    },
+  ];
+
   return {
     projectId,
     loadedAt: '2026-04-11T22:10:00.000Z',
@@ -223,6 +352,9 @@ function createFixtureSource() {
     sessions,
     events,
     effects,
+    playerCharacters,
+    npcs,
+    legacyThreads,
     diagnostics: [],
   };
 }
@@ -306,5 +438,37 @@ describe('campaign-v2 resolvers', () => {
     expect(screen.getByText('Night Bazaar')).toBeInTheDocument();
     expect(screen.getByText('Ash Market Before Visit')).toBeInTheDocument();
     expect(screen.getByText('Ash Market After Major Visit')).toBeInTheDocument();
+  });
+
+  it('builds a player character detail payload with campaign integration and resolved relations', () => {
+    const payload = buildCampaignV2PlayerCharacterDetail(createFixtureSource(), 'pc-raina-kestrel');
+
+    expect(payload).not.toBeNull();
+    expect(payload?.playerCharacter.title).toBe('Raina Kestrel');
+    expect(payload?.playerCharacter.currentSituation.currentLocationTitle).toBe('Ash Market');
+    expect(payload?.playerCharacter.startingThreads.map((thread) => thread.title)).toEqual(['Stolen Reliquary']);
+    expect(payload?.playerCharacter.coreThreads.map((thread) => thread.title)).toEqual(['Broker Trail']);
+    expect(payload?.playerCharacter.relations).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          targetId: 'npc-brother-carrow',
+          targetTitle: 'Brother Carrow',
+          targetType: 'npc',
+          missing: false,
+        }),
+      ]),
+    );
+    expect(payload?.playerCharacter.linkedEntities).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: 'npc-brother-carrow',
+          type: 'npc',
+        }),
+        expect.objectContaining({
+          id: 'thread-broker-trail',
+          type: 'thread',
+        }),
+      ]),
+    );
   });
 });

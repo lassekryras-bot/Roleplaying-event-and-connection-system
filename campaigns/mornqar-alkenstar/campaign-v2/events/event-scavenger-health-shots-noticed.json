@@ -1,0 +1,19 @@
+{
+  "id": "event-scavenger-health-shots-noticed",
+  "type": "event",
+  "title": "Scavenger Health Shots Noticed",
+  "summary": "The party notices the scavenger expedition using health shots, lightly surfacing the fungal angle without pursuing it deeply.",
+  "status": "resolved",
+  "eventType": "background-seed",
+  "notes": "Durog reacts badly because of the connection to fungal brew and red mist mold. The moment should seed future relevance without turning Session 1 into a full detour.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-barrel-and-bullet-saloon"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "session-001-barrel-and-bullet"
+    }
+  ]
+}

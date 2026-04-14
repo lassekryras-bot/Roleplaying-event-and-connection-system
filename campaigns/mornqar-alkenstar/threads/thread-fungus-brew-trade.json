@@ -1,0 +1,11 @@
+{
+  "id": "thread-fungus-brew-trade",
+  "title": "Fungus Brew Trade",
+  "state": "active",
+  "hook": "A dangerous brew derived from the fungus Durog survived is moving through the city.",
+  "playerSummary": "The party can trace distributors, refiners, and street-level fallout from the fungus brew trade.",
+  "gmTruth": "This is a core Durog thread. Use it for street dealers, hidden labs, raids, and the moral horror of a market built on the same corruption that nearly consumed him.",
+  "timelineAnchor": "now",
+  "linkedEntityIds": [],
+  "playerVisible": true
+}

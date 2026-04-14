@@ -22,6 +22,8 @@ export function useApiClient() {
       userId,
       getHealth: () => api.getHealth(authenticatedRequest),
       getProjects: () => api.getProjects(authenticatedRequest),
+      getPreferredProject: () => api.getPreferredProject(authenticatedRequest),
+      savePreferredProject: (projectId: string) => api.savePreferredProject(projectId, authenticatedRequest),
       getProjectGraph: (id: string, view: 'gm' | 'player', playerUserId?: string) =>
         api.getProjectGraph(id, view, authenticatedRequest, playerUserId),
       runProjectCommand: (projectId: string, command: Parameters<typeof api.runProjectCommand>[1]) =>

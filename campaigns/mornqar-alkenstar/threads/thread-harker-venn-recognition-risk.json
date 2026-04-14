@@ -1,0 +1,11 @@
+{
+  "id": "thread-harker-venn-recognition-risk",
+  "title": "Recognition Risk",
+  "state": "active",
+  "hook": "Pebble is at risk of being recognized, tracked, or sold out by somebody from an older dangerous orbit.",
+  "playerSummary": "Old contacts, watchers, or checkpoint-linked enemies may identify Pebble and turn that into leverage.",
+  "gmTruth": "Use this when Pebble's past catches up, especially through handlers, informants, or anyone who can connect the checkpoint incident to Dragon's Breath operations.",
+  "timelineAnchor": "now",
+  "linkedEntityIds": [],
+  "playerVisible": true
+}

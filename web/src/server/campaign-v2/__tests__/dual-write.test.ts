@@ -122,7 +122,6 @@ describe('trusted location identity dual-write', () => {
     ]);
     expect(result.report.oldWrite.success).toBe(false);
     expect(result.report.newWrite.success).toBe(false);
-    expect(result.payload.trustedLocationDualWriteEnabled).toBe(false);
 
     const writtenLocation = JSON.parse(
       await fs.readFile(

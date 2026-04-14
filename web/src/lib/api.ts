@@ -55,6 +55,10 @@ export type ProjectSummary = {
   status: string;
 };
 
+export type SelectedProjectPreference = {
+  project_id: string | null;
+};
+
 export type ProjectGraphView = 'gm' | 'player';
 
 export type ProjectGraphLinkedEntity = {
@@ -326,6 +330,15 @@ async function apiWriteRequest<T>(
 export const api = {
   getHealth: (auth: AuthenticatedRequestContext) => apiRequest<{ status: string }>('/health', auth),
   getProjects: (auth: AuthenticatedRequestContext) => apiRequest<ProjectSummary[]>('/projects', auth),
+  getPreferredProject: (auth: AuthenticatedRequestContext) =>
+    apiRequest<SelectedProjectPreference>('/preferences/selected-project', auth),
+  savePreferredProject: (projectId: string, auth: AuthenticatedRequestContext) =>
+    apiWriteRequest<SelectedProjectPreference>(
+      '/preferences/selected-project',
+      'POST',
+      { project_id: projectId },
+      auth,
+    ),
   getThreads: (auth: AuthenticatedRequestContext) => apiRequest<ThreadSummary[]>('/threads', auth),
   getThreadById: (id: string, auth: AuthenticatedRequestContext) => apiRequest<ThreadDetail>(`/threads/${id}`, auth),
   getTimelineEvents: (auth: AuthenticatedRequestContext) => apiRequest<TimelineEvent[]>('/timeline/events', auth),

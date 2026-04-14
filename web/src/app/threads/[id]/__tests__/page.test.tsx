@@ -38,9 +38,8 @@ describe('Thread detail role-safe rendering', () => {
     });
 
     expect(screen.getByText('Dockworkers have gone missing at night.')).toBeInTheDocument();
-    expect(
-      screen.getByText('GM Truth: The harbor master is secretly paid by the antagonist.'),
-    ).toBeInTheDocument();
+    expect(screen.getByText('GM Truth')).toBeInTheDocument();
+    expect(screen.getByText('The harbor master is secretly paid by the antagonist.')).toBeInTheDocument();
   });
 
   it('does not render gm truth for PLAYER role on the same thread ID', async () => {
@@ -85,7 +84,7 @@ describe('Thread detail role-safe rendering', () => {
     });
 
     expect(
-      screen.getByText('GM Truth: The harbor master is secretly paid by the antagonist.'),
+      screen.getByText('The harbor master is secretly paid by the antagonist.'),
     ).toBeInTheDocument();
   });
 });

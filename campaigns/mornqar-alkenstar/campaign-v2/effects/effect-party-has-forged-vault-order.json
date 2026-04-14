@@ -1,0 +1,21 @@
+{
+  "id": "effect-party-has-forged-vault-order",
+  "type": "effect",
+  "title": "Party Has Forged Vault Order",
+  "summary": "The crew holds a convincing forged Mugland vault order that can smooth entry into the next bank-facing scene.",
+  "status": "active",
+  "effectType": "heist-advantage",
+  "scope": "subtree",
+  "severity": null,
+  "notes": "Zinriss produced the order at exceptional quality during the opening session.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "event-zinriss-forges-mugland-vault-order"
+    },
+    {
+      "type": "appliesTo",
+      "targetId": "location-alkenstar"
+    }
+  ]
+}

@@ -3,10 +3,12 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/contexts/auth-context';
+import { usePreferredProject } from '@/lib/use-preferred-project';
 import { getRoleLabel } from '@/lib/roles';
 
 const navItems = [
   { href: '/project', label: 'Project' },
+  { href: '/player-characters', label: 'Player Characters' },
   { href: '/threads', label: 'Threads' },
   { href: '/timeline', label: 'Timeline' }
 ];
@@ -14,6 +16,7 @@ const navItems = [
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { role } = useAuth();
+  const { preferredProjectId } = usePreferredProject();
   const isWidePage = pathname === '/project' || pathname === '/timeline';
   const pageContainerClassName = isWidePage ? 'page-container page-container--wide' : 'page-container';
 
@@ -28,8 +31,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <nav>
           {navItems.map((item) => {
             const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+            const href =
+              preferredProjectId && (item.href === '/timeline' || item.href === '/player-characters')
+                ? `${item.href}?project=${encodeURIComponent(preferredProjectId)}`
+                : item.href;
             return (
-              <Link key={item.href} href={item.href} className={isActive ? 'nav-link active' : 'nav-link'}>
+              <Link key={item.href} href={href} className={isActive ? 'nav-link active' : 'nav-link'}>
                 {item.label}
               </Link>
             );

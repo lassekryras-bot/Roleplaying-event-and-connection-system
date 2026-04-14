@@ -1,0 +1,11 @@
+{
+  "id": "thread-bank-heist-planning",
+  "title": "Bank Heist Planning",
+  "state": "active",
+  "hook": "The crew has a real bank job on the table and just enough intel to start planning the break-in.",
+  "playerSummary": "The party is planning a bank heist after taking the job at the Barrel & Bullet.",
+  "gmTruth": "This thread covers the practical planning, scouting, and leverage around the bank job. Zinriss' forged Mugland order gives the crew an unusually strong opening advantage.",
+  "timelineAnchor": "now",
+  "linkedEntityIds": [],
+  "playerVisible": true
+}

@@ -1,0 +1,21 @@
+{
+  "id": "thread-honor-tharvi-ironstill",
+  "type": "thread",
+  "title": "Honor Tharvi Ironstill",
+  "summary": "A thread about returning Tharvi Ironstill's remains, fulfilling Durog's promise, and living by the discipline she taught him.",
+  "status": "active",
+  "threadType": "personal",
+  "priority": "medium",
+  "campaignId": "campaign-mornqar-alkenstar",
+  "notes": "Use for temple access, moral decisions, discipline, and Durog's path of self-mastery.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "pc-durog"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "npc-tharvi-ironstill"
+    }
+  ]
+}

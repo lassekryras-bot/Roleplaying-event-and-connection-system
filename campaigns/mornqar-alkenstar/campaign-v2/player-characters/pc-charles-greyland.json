@@ -1,0 +1,114 @@
+{
+  "id": "pc-charles-greyland",
+  "type": "playerCharacter",
+  "title": "Charles Greyland",
+  "summary": "A gifted psychic scholar hunting Mugland for answers about the children taken from his burned orphanage.",
+  "status": "active",
+  "campaignId": "mornqar-alkenstar",
+  "ancestry": null,
+  "class": "Psychic",
+  "age": null,
+  "concept": "Psychic scholar driven by the disappearance of gifted children and the man who may know why.",
+  "partyRole": "occult sensitivity / interrogation / mystery pursuit / trafficking thread",
+  "background": {
+    "origin": "Raised in an orphanage in Anvilstone among other unusual children with strange talents.",
+    "history": "Charles could read minds and buried himself in study early, finding library work by sixteen. Three months before adulthood he returned from work to find the orphanage burning, the staff butchered, and the gifted youths gone. His underworld search led him to the name Ambrost Mugland, a man rumored to know who would profit from stealing children like them. Charles forced his way into Mugland's residence by manipulating weak minds, but Mugland had him handed to the authorities. Charles escaped a capital sentence by using his gifts on weaker-minded officers and now lives with more certainty than ever that Mugland knows what happened.",
+    "incitingIncident": "The orphanage burned, the gifted children vanished, and Mugland's name surfaced as the man who might know where they went.",
+    "reasonInCity": "To force answers out of the city's hidden trafficking network and the power behind it."
+  },
+  "currentSituation": {
+    "overview": "A haunted psychic fugitive chasing memory fragments, rumors, and any sign of the stolen children.",
+    "legalStatus": "Fugitive after trespass, arrest, and escape from capital punishment.",
+    "socialStatus": "Isolated scholar with dangerous gifts and little reason to trust official channels.",
+    "currentProblem": "He has motive, trauma, and psychic sensitivity, but no safe route to prove Mugland's involvement or reach the missing children first.",
+    "currentLocationId": null
+  },
+  "goals": {
+    "shortTerm": "Follow the next clue, psychic echo, or witness tied to the missing gifted children.",
+    "midTerm": "Uncover who took the children and how Mugland was involved.",
+    "longTerm": "Get answers, rescue survivors if possible, or kill Mugland for his part in the crime."
+  },
+  "traits": {
+    "strengths": [
+      "Mind reading",
+      "Academic focus",
+      "Stubborn pursuit of hidden truth"
+    ],
+    "flaws": [
+      "Obsessive",
+      "Traumatized by the orphanage fire",
+      "Wanted by authorities"
+    ],
+    "personality": [
+      "Intense",
+      "Curious",
+      "Unforgiving"
+    ]
+  },
+  "spotlight": {
+    "themes": [
+      "Stolen children",
+      "Psychic echoes",
+      "Knowledge turned into obsession"
+    ],
+    "gmNotes": "Use Charles in memory-fragment scenes, interrogations, trafficking revelations, and moments when knowledge becomes emotionally costly."
+  },
+  "connections": {
+    "importantNpcIds": [
+      "npc-ambrost-mugland"
+    ],
+    "importantLocationIds": [
+      "location-anvilstone-orphanage"
+    ],
+    "importantThreadIds": [
+      "thread-missing-gifted-children",
+      "thread-mugland-knows-the-truth",
+      "thread-psychic-memory-fragments"
+    ],
+    "importantHookIds": []
+  },
+  "relationshipNotes": [
+    {
+      "label": "Ambrost Mugland",
+      "role": "suspected key to the truth",
+      "note": "Charles believes Mugland knows what happened to the missing gifted children."
+    }
+  ],
+  "assets": {
+    "signatureItems": [],
+    "specialCapabilities": [
+      "Mind reading",
+      "Academic research"
+    ]
+  },
+  "campaignFitSummary": "Strongly tied to trafficking, gifted children, psychic echoes, and Mugland as a personal target. Best used in mystery, memory, and exploitation-of-the-vulnerable scenes.",
+  "startingThreadIds": [
+    "thread-missing-gifted-children",
+    "thread-mugland-knows-the-truth",
+    "thread-psychic-memory-fragments"
+  ],
+  "coreThreadIds": [
+    "thread-missing-gifted-children",
+    "thread-mugland-knows-the-truth",
+    "thread-psychic-memory-fragments"
+  ],
+  "notes": "Age and ancestry remain unconfirmed from the current notes. 'Psychic' is used as a best-fit class label because his gifts are explicit, even though the exact mechanical build is not yet locked.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "npc-ambrost-mugland",
+      "note": "Charles sees Mugland as the man who knows what happened to the children.",
+      "strength": "central",
+      "origin": "imported-pc-notes",
+      "active": true
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "thread-missing-gifted-children",
+      "note": "His entire campaign drive begins with the vanished youths from the orphanage.",
+      "strength": "central",
+      "origin": "campaign-overview",
+      "active": true
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "thread-bookkeeping-disaster",
+  "title": "Bookkeeping Disaster",
+  "state": "active",
+  "hook": "Zinriss' old accounting catastrophe still casts a shadow over his life in Alkenstar.",
+  "playerSummary": "The fallout from Zinriss' bookkeeping mistake is still driving debt, reputation trouble, and pressure from the past.",
+  "gmTruth": "Use this thread for debts, reputation damage, the question of whether Zinriss was merely careless or manipulated, and any pressure that forces him to confront the numbers he ran from.",
+  "timelineAnchor": "now",
+  "linkedEntityIds": [],
+  "playerVisible": true
+}

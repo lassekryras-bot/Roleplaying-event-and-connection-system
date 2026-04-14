@@ -34,6 +34,7 @@ const memberships = [
 ];
 
 const invites = [];
+const projectPreferencesByUserId = new Map();
 
 const events = [
   {
@@ -123,4 +124,31 @@ export function createInvite(projectId, data) {
 
 export function getMembershipByProjectAndUser(projectId, userId) {
   return memberships.find((membership) => membership.project_id === projectId && membership.user_id === userId) ?? null;
+}
+
+export function getPreferredProjectIdForUser(userId) {
+  if (typeof userId !== "string" || userId.trim().length === 0) {
+    return null;
+  }
+
+  return projectPreferencesByUserId.get(userId) ?? null;
+}
+
+export function savePreferredProjectIdForUser(userId, projectId) {
+  if (typeof userId !== "string" || userId.trim().length === 0) {
+    const error = new Error("userId is required");
+    error.statusCode = 400;
+    error.code = "USER_ID_REQUIRED";
+    throw error;
+  }
+
+  if (typeof projectId !== "string" || projectId.trim().length === 0) {
+    const error = new Error("projectId is required");
+    error.statusCode = 400;
+    error.code = "PROJECT_ID_REQUIRED";
+    throw error;
+  }
+
+  projectPreferencesByUserId.set(userId.trim(), projectId.trim());
+  return projectId.trim();
 }

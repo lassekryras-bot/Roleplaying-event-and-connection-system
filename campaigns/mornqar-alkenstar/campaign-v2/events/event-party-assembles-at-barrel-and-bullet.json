@@ -1,0 +1,19 @@
+{
+  "id": "event-party-assembles-at-barrel-and-bullet",
+  "type": "event",
+  "title": "Party Assembles at Barrel & Bullet",
+  "summary": "The player characters gather at the saloon and establish the first shared direction of the campaign.",
+  "status": "resolved",
+  "eventType": "party-formation",
+  "notes": "Opening convergence event.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-barrel-and-bullet-saloon"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "session-001-barrel-and-bullet"
+    }
+  ]
+}

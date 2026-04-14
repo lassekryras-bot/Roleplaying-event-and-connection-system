@@ -212,3 +212,17 @@ test("file campaign store creates staged notes, activates them, and restores the
     assert.equal(redoneThread.state, "active");
   });
 });
+
+test("file campaign store persists the preferred project per user in a file", () => {
+  withTempCampaignStore(({ rootDir, store }) => {
+    const savedProjectId = store.savePreferredProjectIdForUser("gm-1", "project-3");
+    assert.equal(savedProjectId, "project-3");
+    assert.equal(store.getPreferredProjectIdForUser("gm-1"), "project-3");
+
+    const preferencePath = path.join(rootDir, ".user-preferences.json");
+    const preferences = readJson(preferencePath);
+
+    assert.equal(preferences.users["gm-1"].selectedProjectId, "project-3");
+    assert.equal(typeof preferences.users["gm-1"].updatedAt, "string");
+  });
+});

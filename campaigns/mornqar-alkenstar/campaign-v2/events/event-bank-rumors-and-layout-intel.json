@@ -1,0 +1,23 @@
+{
+  "id": "event-bank-rumors-and-layout-intel",
+  "type": "event",
+  "title": "Bank Rumors and Layout Intel",
+  "summary": "The party gathers useful information about the bank, its routines, and practical details that matter for the heist.",
+  "status": "resolved",
+  "eventType": "intel",
+  "notes": "Use this as the practical planning and rumor-gathering outcome from the opening session.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-barrel-and-bullet-saloon"
+    },
+    {
+      "type": "involves",
+      "targetId": "location-alkenstar"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "session-001-barrel-and-bullet"
+    }
+  ]
+}

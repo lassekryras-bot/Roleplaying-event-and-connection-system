@@ -1,0 +1,65 @@
+{
+  "id": "npc-brother-carrow",
+  "type": "npc",
+  "campaignId": "project-1",
+  "title": "Brother Carrow",
+  "summary": "A shaken caretaker trying to survive the ruined chapel scandal without becoming the next loose end.",
+  "status": "active",
+  "ancestry": "Human",
+  "class": "Acolyte",
+  "age": 52,
+  "concept": "Caretaker whose fear keeps the chapel threat personal and immediate.",
+  "role": "Reluctant caretaker and frightened witness",
+  "background": {
+    "origin": "Harbor district",
+    "history": "He spent decades keeping chapel records, relic inventories, and quiet confessions in order until the fire and the missing reliquary shattered routine.",
+    "reasonInStory": "He knows who asked the wrong questions before the reliquary vanished, but saying the names aloud feels dangerous."
+  },
+  "currentSituation": {
+    "overview": "Carrow is trying to look harmless while quietly tracking who keeps returning to the chapel grounds.",
+    "currentProblem": "He knows too much about the reliquary switch and is close to panicking.",
+    "currentLeverage": "He still controls access to the surviving chapel records.",
+    "currentLocationId": "location-entity-ruined-chapel"
+  },
+  "motivations": {
+    "shortTerm": "Stay alive and keep the chapel doors from being sealed permanently.",
+    "midTerm": "Get the reliquary trail into hands that can actually act on it.",
+    "longTerm": "See the ritual network broken before the harbor rite completes."
+  },
+  "presentation": {
+    "appearance": "Smoke-stained robes, tired eyes, and hands that never stop cleaning soot from his sleeves.",
+    "behavior": "Drops his voice whenever footsteps get too close.",
+    "voice": "Thin, urgent, and careful."
+  },
+  "gmUse": {
+    "sceneFunction": "Deliver chapel witness context and access under pressure.",
+    "whatTheyKnow": "Which visitors asked for relic records before the fire and what the missing reliquary looked like before it vanished.",
+    "howToEscalate": "Have him disappear, recant, or crack under direct cult pressure.",
+    "fallbackUse": "Turn him into a frightened source who confirms clues the party has already uncovered."
+  },
+  "campaignFitSummary": "Brother Carrow keeps the chapel danger tied to a living witness instead of leaving it as abstract lore.",
+  "startingThreadIds": [
+    "thread-stolen-relic"
+  ],
+  "coreThreadIds": [
+    "thread-ashes-chapel"
+  ],
+  "notes": "Use him to show how quickly the chapel story can become personal and unstable.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "pc-raina-kestrel",
+      "note": "He trusts Raina's instincts more than her plans.",
+      "strength": "medium"
+    },
+    {
+      "type": "occursAt",
+      "targetId": "location-entity-ruined-chapel"
+    },
+    {
+      "type": "belongsTo",
+      "targetId": "effect-pattern-ash-ritual",
+      "note": "His fear is one of the best human tells that the chapel pattern is still alive."
+    }
+  ]
+}

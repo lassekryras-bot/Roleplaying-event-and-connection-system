@@ -1,0 +1,111 @@
+{
+  "id": "pc-raina-kestrel",
+  "type": "playerCharacter",
+  "campaignId": "project-1",
+  "title": "Raina Kestrel",
+  "summary": "A gutter-born scout who keeps finding ritual traces before anyone else notices them.",
+  "status": "active",
+  "ancestry": "Human",
+  "class": "Investigator",
+  "age": 24,
+  "concept": "Streetwise clue hound pulled into the chapel fallout before the rest of the city realizes how bad it is.",
+  "partyRole": "Scout and ritual clue-hound",
+  "background": {
+    "origin": "Harbor of Whispers",
+    "history": "Raina learned the city by running messages for dock crews and market brokers until suspicious errands started leaving ritual residue behind.",
+    "incitingIncident": "She found chapel wax sealed inside a market courier pouch that should never have come near a reliquary.",
+    "reasonInCity": "She refuses to leave until she knows who moved the reliquary and why the chapel is suddenly full of frightened lies."
+  },
+  "currentSituation": {
+    "overview": "Raina is triangulating chapel whispers, market gossip, and dock rumors before the cult can erase the witness trail.",
+    "legalStatus": "Questioned but not charged",
+    "socialStatus": "Useful runner with a reputation for asking the wrong questions",
+    "currentProblem": "She needs proof that the reliquary route is real before the remaining witnesses disappear.",
+    "currentLocationId": "location-entity-ruined-chapel"
+  },
+  "goals": {
+    "shortTerm": "Keep the stolen reliquary clue active at the table.",
+    "midTerm": "Identify the courier route that carried the relic out of the chapel.",
+    "longTerm": "Break the harbor rite network before the city gets pulled fully into it."
+  },
+  "traits": {
+    "strengths": [
+      "Observant",
+      "Quick on her feet",
+      "Good at reading frightened witnesses"
+    ],
+    "flaws": [
+      "Reckless under pressure",
+      "Suspicious of authority"
+    ],
+    "personality": [
+      "Dry humor",
+      "Compulsive note-taker",
+      "Pushes until someone cracks"
+    ]
+  },
+  "spotlight": {
+    "themes": [
+      "Ritual fallout",
+      "Street loyalty",
+      "Witness pressure"
+    ],
+    "gmNotes": "Use Raina when the table needs an aggressive clue engine and a reason to revisit frightened witnesses."
+  },
+  "connections": {
+    "importantNpcIds": [
+      "npc-brother-carrow"
+    ],
+    "importantLocationIds": [
+      "location-entity-ruined-chapel"
+    ],
+    "importantThreadIds": [
+      "thread-stolen-relic",
+      "thread-night-watch"
+    ],
+    "importantHookIds": []
+  },
+  "relationshipNotes": [
+    {
+      "label": "Brother Carrow",
+      "role": "Uneasy ally",
+      "note": "He keeps helping Raina, but only if she moves faster than the people watching the chapel."
+    }
+  ],
+  "assets": {
+    "signatureItems": [
+      "Wax-marked notebook",
+      "Courier satchel with hidden pockets"
+    ],
+    "specialCapabilities": [
+      "Tracks repeated ritual symbols across separate scenes",
+      "Can turn dock gossip into concrete leads quickly"
+    ]
+  },
+  "campaignFitSummary": "Raina makes the stolen reliquary, the ruined chapel, and the market pressure all point at the same playable story line.",
+  "startingThreadIds": [
+    "thread-stolen-relic"
+  ],
+  "coreThreadIds": [
+    "thread-night-watch",
+    "thread-ashes-chapel"
+  ],
+  "notes": "Strong first-session reference when the GM wants one character to anchor the clue web.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "npc-brother-carrow",
+      "note": "Needs his chapel access and witness memory before the story closes around him.",
+      "strength": "high"
+    },
+    {
+      "type": "occursAt",
+      "targetId": "location-entity-ruined-chapel"
+    },
+    {
+      "type": "dependsOn",
+      "targetId": "event-thread-stolen-relic",
+      "note": "This clue thread is the cleanest route into her spotlight."
+    }
+  ]
+}

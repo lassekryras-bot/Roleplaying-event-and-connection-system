@@ -1,0 +1,17 @@
+{
+  "id": "thread-psychic-memory-fragments",
+  "type": "thread",
+  "title": "Psychic Memory Fragments",
+  "summary": "A thread about psychic echoes, recovered memory fragments, and clues that surface through mental impressions or haunted machinery.",
+  "status": "active",
+  "threadType": "mystery",
+  "priority": "high",
+  "campaignId": "campaign-mornqar-alkenstar",
+  "notes": "Best used in scenes with psychic traces, machine spirits, and half-understood memories.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "pc-charles-greyland"
+    }
+  ]
+}

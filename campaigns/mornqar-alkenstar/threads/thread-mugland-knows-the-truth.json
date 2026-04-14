@@ -1,0 +1,11 @@
+{
+  "id": "thread-mugland-knows-the-truth",
+  "title": "Mugland Knows the Truth",
+  "state": "active",
+  "hook": "Charles suspects Ambrost Mugland knows what happened to the missing children and is hiding the answers.",
+  "playerSummary": "Direct pressure on Mugland may reveal witnesses, records, or denials tied to the children who vanished.",
+  "gmTruth": "Use this thread for suppressed records, hidden witnesses, carefully curated denials, and the possibility that Mugland knows far more than anyone has been allowed to prove.",
+  "timelineAnchor": "now",
+  "linkedEntityIds": [],
+  "playerVisible": true
+}

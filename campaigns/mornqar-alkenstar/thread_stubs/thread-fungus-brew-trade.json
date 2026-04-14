@@ -1,0 +1,17 @@
+{
+  "id": "thread-fungus-brew-trade",
+  "type": "thread",
+  "title": "Fungus Brew Trade",
+  "summary": "A thread about the trade, refinement, and street spread of a dangerous brew derived from the fungus Durog survived.",
+  "status": "active",
+  "threadType": "investigation",
+  "priority": "high",
+  "campaignId": "campaign-mornqar-alkenstar",
+  "notes": "Core Durog thread. Supports street distributors, hidden labs, and anti-fungus raids.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "pc-durog"
+    }
+  ]
+}

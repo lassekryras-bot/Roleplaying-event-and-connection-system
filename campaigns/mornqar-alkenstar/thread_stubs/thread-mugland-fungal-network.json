@@ -1,0 +1,21 @@
+{
+  "id": "thread-mugland-fungal-network",
+  "type": "thread",
+  "title": "Mugland Fungal Network",
+  "summary": "A thread connecting Mugland's operations to fungal production, experimentation, and the spread of parasitic products through the city.",
+  "status": "active",
+  "threadType": "conflict",
+  "priority": "high",
+  "campaignId": "campaign-mornqar-alkenstar",
+  "notes": "Links Durog's past suffering to Mugland's present exploitation of the fungus.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "pc-durog"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "npc-ambrost-mugland"
+    }
+  ]
+}

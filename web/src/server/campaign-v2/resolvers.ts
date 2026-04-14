@@ -7,7 +7,7 @@ import {
   resolveCampaignV2LocationEffects,
   type CampaignV2LocationEffectResolution,
 } from './effect';
-import { createCampaignV2RelationGraph, type CampaignV2RelationGraph, type CampaignV2ObjectKind } from './relations';
+import { createCampaignV2RelationGraph, type CampaignV2RelationGraph } from './relations';
 import { resolveCampaignV2Event } from './event';
 import { resolveCampaignV2Session } from './session';
 
@@ -156,6 +156,8 @@ type CampaignV2ObjectByKind = {
   event: Event;
   effect: Effect;
 };
+
+type CampaignV2ResolverObjectKind = keyof CampaignV2ObjectByKind;
 
 type ResolverContext = {
   projectId: string;
@@ -351,7 +353,7 @@ function summarizeLocation(location: Location): CampaignV2LocationSummaryViewMod
   };
 }
 
-function getRelatedObjectsOfType<T extends CampaignV2ObjectKind>(
+function getRelatedObjectsOfType<T extends CampaignV2ResolverObjectKind>(
   context: ResolverContext,
   id: string,
   kind: T,

@@ -1,0 +1,11 @@
+{
+  "id": "thread-mugland-fungal-network",
+  "title": "Mugland Fungal Network",
+  "state": "active",
+  "hook": "Mugland's operations may be tied directly to fungal production, experimentation, and distribution across the city.",
+  "playerSummary": "Durog's past suffering may connect to a larger network that is turning fungal corruption into profit.",
+  "gmTruth": "Use this thread to connect the fungus brew trade to Mugland's present exploitation of the fungus, including refiners, traffickers, experimental uses, and deliberate spread.",
+  "timelineAnchor": "now",
+  "linkedEntityIds": [],
+  "playerVisible": true
+}

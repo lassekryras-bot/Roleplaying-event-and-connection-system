@@ -30,6 +30,7 @@ test("returns not implemented responses for optional route handlers", async () =
     const headers = { "x-role": "GM", "x-user-id": "gm-1" };
 
     const projectsResponse = await fetch(`${baseUrl}/projects`, { headers });
+    const preferenceResponse = await fetch(`${baseUrl}/preferences/selected-project`, { headers });
     const membershipsResponse = await fetch(`${baseUrl}/memberships`, { headers });
     const invitesResponse = await fetch(`${baseUrl}/invites`, {
       method: "POST",
@@ -49,6 +50,7 @@ test("returns not implemented responses for optional route handlers", async () =
     });
 
     assert.equal(projectsResponse.status, 501);
+    assert.equal(preferenceResponse.status, 501);
     assert.equal(membershipsResponse.status, 501);
     assert.equal(invitesResponse.status, 501);
     assert.equal(timelineResponse.status, 501);
@@ -58,6 +60,10 @@ test("returns not implemented responses for optional route handlers", async () =
     assert.deepEqual(await projectsResponse.json(), {
       code: "NOT_IMPLEMENTED",
       error: "projects endpoint not implemented",
+    });
+    assert.deepEqual(await preferenceResponse.json(), {
+      code: "NOT_IMPLEMENTED",
+      error: "selected project preference endpoint not implemented",
     });
     assert.deepEqual(await membershipsResponse.json(), {
       code: "NOT_IMPLEMENTED",

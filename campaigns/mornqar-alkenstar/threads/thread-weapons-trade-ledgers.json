@@ -1,0 +1,11 @@
+{
+  "id": "thread-weapons-trade-ledgers",
+  "title": "Weapons Trade Ledgers",
+  "state": "active",
+  "hook": "Hidden accounts and missing production numbers could become hard proof against Mugland's weapons dealings.",
+  "playerSummary": "The party may be able to uncover ledgers that tie economic records directly to criminal intent.",
+  "gmTruth": "Use this thread for bookwork, missing entries, forged or altered accounts, and the moment dry financial evidence becomes one of the strongest weapons the party has.",
+  "timelineAnchor": "now",
+  "linkedEntityIds": [],
+  "playerVisible": true
+}
