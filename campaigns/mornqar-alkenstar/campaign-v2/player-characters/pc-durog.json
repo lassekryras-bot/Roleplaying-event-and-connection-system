@@ -1,0 +1,139 @@
+{
+  "id": "pc-durog",
+  "type": "playerCharacter",
+  "title": "Durog",
+  "summary": "A disciplined orc disciple of Irori hunting the fungal trade that almost consumed him while honoring his dead mentor.",
+  "status": "active",
+  "campaignId": "mornqar-alkenstar",
+  "ancestry": "orc",
+  "class": "Monk",
+  "age": null,
+  "concept": "Self-mastered survivor of fungal infection determined to destroy its trade in Alkenstar.",
+  "partyRole": "frontline discipline / fungus investigation / field medicine / moral pressure",
+  "background": {
+    "origin": "Raised among some of the last northern orcs, a people devastated by a parasitic fungus that drove many into rage.",
+    "history": "Infected as a child, Durog was spared after his tribe attacked a caravan and an unarmed dwarven monk defeated them. Tharvi Ironstill removed the fungus through rare, agonizing treatment, then raised and trained him in the discipline of Irori. After her death he brought her remains to Alkenstar to return her to her birth temple, only to discover that a substance derived from the same fungus was being sold there as a drug or brew. He destroyed one shipment and badly injured traffickers, becoming an outlaw in the process.",
+    "incitingIncident": "He reached Alkenstar carrying his mentor's remains and found the same fungal corruption from his childhood being sold in the city as a consumable trade good.",
+    "reasonInCity": "To return Tharvi Ironstill home, trace the fungus-brew network, and stop others from suffering what he survived."
+  },
+  "currentSituation": {
+    "overview": "A scarred ascetic in Alkenstar, calm and watchful, carrying his mentor's remains while hunting fungus distributors.",
+    "legalStatus": "Wanted for destroying a shipment and injuring traffickers.",
+    "socialStatus": "Outsider and outlaw, but potentially respected by those who value discipline or hate the trade.",
+    "currentProblem": "He needs access to Irori's temple while evading consequences for the raid that exposed his crusade against the fungus-brew market.",
+    "currentLocationId": "location-alkenstar"
+  },
+  "goals": {
+    "shortTerm": "Return Tharvi Ironstill's remains properly and identify the next distributor in the fungus-brew chain.",
+    "midTerm": "Trace the fungus-brew network and expose those refining it, including Vessa Coilhand.",
+    "longTerm": "Destroy the fungus trade entirely before it spreads further through Alkenstar."
+  },
+  "traits": {
+    "strengths": [
+      "Discipline",
+      "Observation",
+      "Field medicine and survival"
+    ],
+    "flaws": [
+      "Rigid sense of necessity",
+      "Wanted for violent vigilantism",
+      "Carries trauma from infection"
+    ],
+    "personality": [
+      "Calm",
+      "Reserved",
+      "Steadfast"
+    ]
+  },
+  "spotlight": {
+    "themes": [
+      "Discipline versus corruption",
+      "Plague as commerce",
+      "Duty to the dead"
+    ],
+    "gmNotes": "Use Durog in scenes about bodily threat, restraint under pressure, moral necessity, temple duty, and the industrial spread of biological horror."
+  },
+  "connections": {
+    "importantNpcIds": [
+      "npc-tharvi-ironstill",
+      "npc-karguk-sporeborn",
+      "npc-vessa-coilhand",
+      "npc-ambrost-mugland"
+    ],
+    "importantLocationIds": [
+      "location-irori-temple",
+      "location-alkenstar"
+    ],
+    "importantThreadIds": [
+      "thread-fungus-brew-trade",
+      "thread-honor-tharvi-ironstill",
+      "thread-mugland-fungal-network"
+    ],
+    "importantHookIds": []
+  },
+  "relationshipNotes": [
+    {
+      "label": "Tharvi Ironstill",
+      "role": "mentor",
+      "note": "Dwarf monk who cured him, trained him, and whose remains he now carries home."
+    },
+    {
+      "label": "Karguk Sporeborn",
+      "role": "dark mirror",
+      "note": "Former clanmate who fully succumbed to the fungus."
+    },
+    {
+      "label": "Vessa Coilhand",
+      "role": "alchemical target",
+      "note": "Refines the fungus into consumable forms within or near Mugland's network."
+    }
+  ],
+  "assets": {
+    "signatureItems": [
+      "Braid made from Tharvi Ironstill's hair"
+    ],
+    "specialCapabilities": [
+      "Irori discipline",
+      "Field medicine",
+      "Unarmed combat"
+    ]
+  },
+  "campaignFitSummary": "Directly tied to the fungal threat, Mugland's drug trade, and the clash between spiritual discipline and industrial corruption. Best used in plague, trafficking, and anti-corruption pressure scenes.",
+  "startingThreadIds": [
+    "thread-fungus-brew-trade",
+    "thread-honor-tharvi-ironstill",
+    "thread-mugland-fungal-network"
+  ],
+  "coreThreadIds": [
+    "thread-fungus-brew-trade",
+    "thread-honor-tharvi-ironstill",
+    "thread-mugland-fungal-network"
+  ],
+  "notes": "Exact age is not established in the current notes. 'Monk' is used as a best-fit class label because his training under Tharvi Ironstill is explicit, though a final build may vary.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "npc-tharvi-ironstill",
+      "note": "Dead mentor whose memory and remains still guide Durog's actions.",
+      "strength": "central",
+      "origin": "imported-pc-notes",
+      "active": true
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "npc-vessa-coilhand",
+      "note": "Key refiner in the fungus trade he wants to break.",
+      "strength": "high",
+      "origin": "imported-pc-notes",
+      "active": true
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "thread-fungus-brew-trade",
+      "note": "His personal history makes the city's fungal commerce intolerable.",
+      "strength": "central",
+      "origin": "campaign-overview",
+      "active": true
+    }
+  ]
+}

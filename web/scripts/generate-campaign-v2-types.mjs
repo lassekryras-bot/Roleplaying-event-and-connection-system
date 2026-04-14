@@ -15,6 +15,8 @@ const MODULE_NAME_BY_KEY = {
   session: 'session',
   event: 'event',
   effect: 'effect',
+  playerCharacter: 'playerCharacter',
+  npc: 'npc',
 };
 
 const ROOT_TYPE_NAME_BY_KEY = {
@@ -24,6 +26,8 @@ const ROOT_TYPE_NAME_BY_KEY = {
   session: 'Session',
   event: 'Event',
   effect: 'Effect',
+  playerCharacter: 'PlayerCharacter',
+  npc: 'Npc',
 };
 
 const repoRoot = path.resolve(fileURLToPath(new URL('../..', import.meta.url)));

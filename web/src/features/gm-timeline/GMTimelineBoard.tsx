@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import React, { startTransition, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -17,6 +18,7 @@ import type {
   Timeline,
 } from '@/generated/gm-timeline';
 import { normalizeFrontendRole } from '@/lib/roles';
+import { usePreferredProject } from '@/lib/use-preferred-project';
 import { formatGmTimelineDiagnostic } from '@/server/gm-timeline/errors';
 
 import { fetchGmTimelineBoard } from './api';
@@ -921,8 +923,11 @@ export function GMTimelineBoard() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { isAuthenticated, role } = useAuth();
+  const { preferredProjectId, preferenceLoaded, rememberProject } = usePreferredProject();
   const normalizedRole = normalizeFrontendRole(role);
   const requestedProjectId = searchParams.get('project') ?? undefined;
+  const effectiveRequestedProjectId = requestedProjectId ?? preferredProjectId ?? undefined;
+  const projectSelectionReady = Boolean(requestedProjectId) || preferenceLoaded;
   const [payload, setPayload] = useState<GmTimelineBoardPayload | null>(null);
   const [loadError, setLoadError] = useState('');
   const [loading, setLoading] = useState(true);
@@ -1054,6 +1059,10 @@ export function GMTimelineBoard() {
   }
 
   useEffect(() => {
+    if (!projectSelectionReady) {
+      return;
+    }
+
     if (!isAuthenticated && normalizedRole === '') {
       return;
     }
@@ -1062,9 +1071,9 @@ export function GMTimelineBoard() {
       return;
     }
 
-    void loadBoard(requestedProjectId);
+    void loadBoard(effectiveRequestedProjectId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [requestedProjectId, isAuthenticated, normalizedRole]);
+  }, [effectiveRequestedProjectId, isAuthenticated, normalizedRole, projectSelectionReady]);
 
   const orderedSessions = useMemo(() => {
     if (!payload) {
@@ -1179,6 +1188,7 @@ export function GMTimelineBoard() {
 
   function handleProjectChange(event: React.ChangeEvent<HTMLSelectElement>) {
     const nextProjectId = event.target.value;
+    void rememberProject(nextProjectId || undefined);
     const nextParams = new URLSearchParams(searchParams.toString());
     if (nextProjectId) {
       nextParams.set('project', nextProjectId);
@@ -1190,7 +1200,7 @@ export function GMTimelineBoard() {
   }
 
   function handleRefresh() {
-    void loadBoard(payload?.project?.id ?? requestedProjectId, {
+    void loadBoard(payload?.project?.id ?? effectiveRequestedProjectId, {
       preserveFocusId: workspaceSession?.id ?? null,
       toastOnSuccess: true,
     });
@@ -1662,7 +1672,7 @@ export function GMTimelineBoard() {
             <span>Project</span>
             <Select
               aria-label="GM timeline project selector"
-              value={payload?.project?.id ?? requestedProjectId ?? ''}
+              value={payload?.project?.id ?? effectiveRequestedProjectId ?? ''}
               onChange={handleProjectChange}
             >
               {(payload?.projects ?? []).map((project) => (
@@ -1684,6 +1694,12 @@ export function GMTimelineBoard() {
           </label>
 
           <div className={styles.utilityButtons}>
+            <Link
+              href={`/player-characters${payload?.project?.id ? `?project=${encodeURIComponent(payload.project.id)}` : ''}`}
+              className={styles.utilityButton}
+            >
+              Characters
+            </Link>
             <Button
               className={styles.utilityButton}
               onClick={handleRefresh}

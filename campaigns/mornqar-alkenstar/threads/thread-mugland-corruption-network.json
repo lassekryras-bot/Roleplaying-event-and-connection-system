@@ -1,0 +1,11 @@
+{
+  "id": "thread-mugland-corruption-network",
+  "title": "Mugland Corruption Network",
+  "state": "active",
+  "hook": "Mugland's influence reaches through compromised officials and the structures that shield elite crime.",
+  "playerSummary": "Flint's hunt for justice keeps colliding with a corruption network that protects Mugland and punishes truth-tellers.",
+  "gmTruth": "Use this thread to tie personal cases to wider institutional decay, showing how officials, enforcers, and business interests keep Mugland insulated from consequences.",
+  "timelineAnchor": "now",
+  "linkedEntityIds": [],
+  "playerVisible": true
+}

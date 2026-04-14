@@ -9,6 +9,8 @@ const server = createServer({
   getThreadById: campaignStore.getThreadById,
   listThreads: campaignStore.listThreads,
   listProjects: campaignStore.listProjects,
+  getPreferredProjectIdForUser: campaignStore.getPreferredProjectIdForUser,
+  savePreferredProjectIdForUser: campaignStore.savePreferredProjectIdForUser,
   getProjectGraph: campaignStore.getProjectGraph,
   executeProjectCommand: campaignStore.executeProjectCommand,
   getProjectHistory: campaignStore.getProjectHistory,

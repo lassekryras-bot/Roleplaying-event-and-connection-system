@@ -1,0 +1,139 @@
+{
+  "id": "pc-flint-beastwood",
+  "type": "playerCharacter",
+  "title": "Flint Beastwood",
+  "summary": "A disgraced Shieldmarshal investigator hiding in the underworld after Loveless turned his own evidence against him.",
+  "status": "active",
+  "campaignId": "mornqar-alkenstar",
+  "ancestry": "dromaar human (half-orc)",
+  "class": "Investigator",
+  "age": 37,
+  "concept": "Fugitive detective obsessed with exposing Mugland and the officials protecting him.",
+  "partyRole": "investigation / forensics / conspiracy mapping / anti-corruption pressure",
+  "background": {
+    "origin": "Transferred by his organization into the Alkenstar Shieldmarshals to help fight corruption and support deeper ties with Mornqar.",
+    "history": "Fresh out of detective training, Flint joined the watch and found only one true ally there: Niles Angel, a young idealist who also wanted corruption purged. Flint's evidence led to arrests of lesser nobles and dirty businessmen, but when he uncovered links between Ambrost Mugland and a larger criminal network, Niles warned him not to push further. Flint ignored the warning and gave the evidence to Captain Anjelique Loveless, who framed him with his own casework by the next morning. He escaped, vanished into the alleys, and has since survived through specialist jobs and underworld contacts such as the fixer called Femme Fatale.",
+    "incitingIncident": "After he handed Loveless evidence tying Mugland to organized crime, Loveless framed him using the same evidence and forced him into flight.",
+    "reasonInCity": "He came to root out corruption and stayed because the city's compromised law made him its next target."
+  },
+  "currentSituation": {
+    "overview": "A wanted man in Alkenstar's alleys, surviving on specialist work while gathering allies and evidence against the system that betrayed him.",
+    "legalStatus": "Wanted after being framed by corrupt Shieldmarshals.",
+    "socialStatus": "Hidden fugitive with underworld clients and almost no institutional protection.",
+    "currentProblem": "He needs to contact Niles Angel and recover his service arquebus from the Shieldmarshal armory without exposing himself.",
+    "currentLocationId": "location-alkenstar-underworld"
+  },
+  "goals": {
+    "shortTerm": "Contact Niles Angel and smuggle his service arquebus out of the Shieldmarshal armory.",
+    "midTerm": "Clear his name by proving Loveless and Mugland are connected.",
+    "longTerm": "Break Mugland's network and purge the corrupt aristocracy and officials protecting it."
+  },
+  "traits": {
+    "strengths": [
+      "Sharp eye for details",
+      "Chemistry and gunpowder expertise",
+      "Relentless investigation"
+    ],
+    "flaws": [
+      "Distrusts the establishment",
+      "Can overconnect weak patterns",
+      "Wanted by the law"
+    ],
+    "personality": [
+      "Suspicious",
+      "Driven",
+      "Analytical"
+    ]
+  },
+  "spotlight": {
+    "themes": [
+      "Betrayal by authority",
+      "Law versus justice",
+      "Paranoia and pattern-seeking"
+    ],
+    "gmNotes": "Use Flint in evidence scenes, corruption reveals, forensic analysis, and hard choices between institutional justice and survival."
+  },
+  "connections": {
+    "importantNpcIds": [
+      "npc-niles-angel",
+      "npc-anjelique-loveless",
+      "npc-ambrost-mugland",
+      "npc-femme-fatale"
+    ],
+    "importantLocationIds": [
+      "location-shieldmarshal-armory",
+      "location-alkenstar-underworld"
+    ],
+    "importantThreadIds": [
+      "thread-loveless-false-charge",
+      "thread-mugland-corruption-network",
+      "thread-recover-service-arquebus"
+    ],
+    "importantHookIds": []
+  },
+  "relationshipNotes": [
+    {
+      "label": "Niles Angel",
+      "role": "ally inside the Shieldmarshals",
+      "note": "The one officer who truly welcomed Flint and may still help him."
+    },
+    {
+      "label": "Anjelique Loveless",
+      "role": "betrayer",
+      "note": "Captain who used Flint's own evidence to destroy his position."
+    },
+    {
+      "label": "Femme Fatale",
+      "role": "fixer",
+      "note": "Gruff dwarf broker who helps Flint survive through specialist jobs."
+    }
+  ],
+  "assets": {
+    "signatureItems": [
+      "Service arquebus (currently inaccessible)"
+    ],
+    "specialCapabilities": [
+      "Forensics",
+      "Chemistry",
+      "Gunpowder analysis"
+    ]
+  },
+  "campaignFitSummary": "Directly tied to Loveless, Mugland, and corrupted law enforcement. Best used in investigation, betrayal, false-charge, and law-versus-reality scenes.",
+  "startingThreadIds": [
+    "thread-loveless-false-charge",
+    "thread-mugland-corruption-network",
+    "thread-recover-service-arquebus"
+  ],
+  "coreThreadIds": [
+    "thread-loveless-false-charge",
+    "thread-mugland-corruption-network",
+    "thread-recover-service-arquebus"
+  ],
+  "notes": "Flint's distrust of institutions is justified by events, but it may also lead him to see wider conspiracies in weaker patterns.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "npc-anjelique-loveless",
+      "note": "Loveless framed him and embodies the system he now seeks to expose.",
+      "strength": "central",
+      "origin": "imported-pc-notes",
+      "active": true
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "npc-niles-angel",
+      "note": "Potential ally still inside the institution Flint can no longer access openly.",
+      "strength": "high",
+      "origin": "imported-pc-notes",
+      "active": true
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "thread-mugland-corruption-network",
+      "note": "His casework directly points into Mugland's wider criminal structure.",
+      "strength": "central",
+      "origin": "campaign-overview",
+      "active": true
+    }
+  ]
+}

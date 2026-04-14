@@ -1,0 +1,19 @@
+{
+  "id": "location-state-barrel-and-bullet-saloon-after-session-001",
+  "type": "locationState",
+  "locationId": "location-barrel-and-bullet-saloon",
+  "title": "Barrel & Bullet After Session 1",
+  "summary": "The opening briefing is complete, the bank job is accepted, and the crew is ready to leave planning mode and push toward the bank.",
+  "status": "active",
+  "notes": "The party left with useful bank intel and a convincing forged Mugland vault order. Scavenger health shots and the fungal angle were noticed but stayed in the background, leaving the saloon available as a rumor hub instead of the main objective.",
+  "relations": [
+    {
+      "type": "belongsTo",
+      "targetId": "location-barrel-and-bullet-saloon"
+    },
+    {
+      "type": "follows",
+      "targetId": "session-001-barrel-and-bullet"
+    }
+  ]
+}

@@ -1,13 +1,19 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import type { CampaignV2InspectorPayload, CampaignV2ProjectSummary } from '@/features/campaign-v2/types';
+import type {
+  CampaignV2InspectorPayload,
+  CampaignV2PlayerCharacterPagePayload,
+  CampaignV2ProjectSummary,
+} from '@/features/campaign-v2/types';
 
 import { buildCampaignV2AuthoringPayload } from './authoring';
-import { buildCampaignV2MigrationChecklist } from './migration-checklist';
+import { loadCampaignLegacyThreads } from './legacy-threads';
+import { buildCampaignV2PlayerCharacterDetail, listCampaignV2PlayerCharacters } from './player-character';
 import { buildCampaignV2PrepPayload } from './prep';
 import { buildCampaignV2GmOverview, buildCampaignV2LocationTimeline } from './resolvers';
 import { loadCampaignV2Content, resolveCampaignV2Paths, CAMPAIGN_V2_DIRECTORY_BY_KIND, type CampaignV2StorageOptions } from './storage';
+import { createCampaignV2Store } from './store';
 
 type CampaignProjectFile = {
   id?: string;
@@ -113,9 +119,7 @@ export async function buildCampaignV2InspectorPayload(
       locationTimeline: null,
       prep: null,
       authoring: null,
-      migrationChecklist: null,
       contentSubdir: null,
-      trustedLocationDualWriteEnabled: false,
       counts: {
         locations: 0,
         locationStates: 0,
@@ -168,12 +172,7 @@ export async function buildCampaignV2InspectorPayload(
     locationTimeline: selectedLocationId ? buildCampaignV2LocationTimeline(resolverSource, selectedLocationId) : null,
     prep: buildCampaignV2PrepPayload(resolverSource, selectedLocationId),
     authoring: buildCampaignV2AuthoringPayload(resolverSource, selectedLocationId, contentSubdir),
-    migrationChecklist: buildCampaignV2MigrationChecklist({
-      projectId: resolvedProjectId,
-      contentSubdir,
-    }),
     contentSubdir,
-    trustedLocationDualWriteEnabled: false,
     counts: {
       locations: loadResult.locations.length,
       locationStates: loadResult.locationStates.length,
@@ -183,5 +182,79 @@ export async function buildCampaignV2InspectorPayload(
       invalidFiles: loadResult.diagnostics.filter((diagnostic) => diagnostic.code !== 'REFERENCE_ERROR').length,
     },
     loadedAt: loadResult.loadedAt.toISOString(),
+  };
+}
+
+export async function buildCampaignV2PlayerCharacterPagePayload(
+  options: CampaignV2StorageOptions & { requestedProjectId?: string; requestedPlayerCharacterId?: string },
+): Promise<CampaignV2PlayerCharacterPagePayload> {
+  const resolvedPaths = resolveCampaignV2Paths({
+    ...options,
+    projectId: options.projectId,
+  });
+  const projects = await listProjectSummaries(resolvedPaths.campaignsRoot);
+  const resolvedProjectId =
+    options.requestedProjectId && projects.some((project) => project.id === options.requestedProjectId)
+      ? options.requestedProjectId
+      : projects[0]?.id ?? options.projectId;
+  const project = projects.find((entry) => entry.id === resolvedProjectId) ?? null;
+  const contentSubdir = project?.preferredContentSubdir ?? options.contentSubdir ?? null;
+
+  if (!project || !contentSubdir) {
+    return {
+      project,
+      projects,
+      selectedPlayerCharacterId: null,
+      playerCharacters: [],
+      detail: null,
+      contentSubdir: null,
+      loadedAt: new Date().toISOString(),
+    };
+  }
+
+  const store = await createCampaignV2Store({
+    campaignsRoot: resolvedPaths.campaignsRoot,
+    schemaRoot: resolvedPaths.schemaRoot,
+    projectId: resolvedProjectId,
+    contentSubdir,
+  });
+  const snapshot = store.getSnapshot();
+  const loadResult = await loadCampaignV2Content({
+    campaignsRoot: resolvedPaths.campaignsRoot,
+    schemaRoot: resolvedPaths.schemaRoot,
+    projectId: resolvedProjectId,
+    contentSubdir,
+  });
+  const legacyThreads = await loadCampaignLegacyThreads({
+    campaignsRoot: resolvedPaths.campaignsRoot,
+    projectId: resolvedProjectId,
+  });
+  const resolverSource = {
+    projectId: resolvedProjectId,
+    loadedAt: snapshot.loadedAt,
+    locations: loadResult.locations.map((entry) => entry.value),
+    locationStates: loadResult.locationStates.map((entry) => entry.value),
+    sessions: loadResult.sessions.map((entry) => entry.value),
+    events: loadResult.events.map((entry) => entry.value),
+    effects: loadResult.effects.map((entry) => entry.value),
+    playerCharacters: loadResult.playerCharacters.map((entry) => entry.value),
+    npcs: loadResult.npcs.map((entry) => entry.value),
+    legacyThreads,
+    diagnostics: store.getDiagnostics(),
+  };
+  const playerCharacters = listCampaignV2PlayerCharacters(resolverSource);
+  const selectedPlayerCharacterId =
+    options.requestedPlayerCharacterId && playerCharacters.some((entry) => entry.id === options.requestedPlayerCharacterId)
+      ? options.requestedPlayerCharacterId
+      : playerCharacters[0]?.id ?? null;
+
+  return {
+    project,
+    projects,
+    selectedPlayerCharacterId,
+    playerCharacters,
+    detail: selectedPlayerCharacterId ? buildCampaignV2PlayerCharacterDetail(resolverSource, selectedPlayerCharacterId) : null,
+    contentSubdir,
+    loadedAt: snapshot.loadedAt?.toISOString() ?? new Date().toISOString(),
   };
 }

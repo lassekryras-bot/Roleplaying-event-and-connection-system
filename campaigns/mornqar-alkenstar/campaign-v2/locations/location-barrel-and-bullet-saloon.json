@@ -3,7 +3,7 @@
   "type": "location",
   "title": "Barrel & Bullet Saloon",
   "campaignId": "mornqar-alkenstar",
-  "summary": "A rough but dependable saloon in Alkenstar's Ferrous Quarter that functions as a safehouse, job hub, and neutral meeting ground for outcasts, mercenaries, and conspirators.",
+  "summary": "A rough but dependable saloon in Alkenstar's Ferrous Quarter that serves as a safehouse, job hub, and the party's opening heist briefing point.",
   "tags": [
     "saloon",
     "safehouse",
@@ -12,7 +12,9 @@
     "underworld",
     "base-of-operations",
     "crafting",
-    "lodging"
+    "lodging",
+    "heist-hub",
+    "opening-location"
   ],
   "parentLocationId": "location-alkenstar",
   "relations": []

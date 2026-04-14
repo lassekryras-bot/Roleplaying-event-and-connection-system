@@ -1,0 +1,21 @@
+{
+  "id": "thread-mugland-corruption-network",
+  "type": "thread",
+  "title": "Mugland Corruption Network",
+  "summary": "A thread exposing the corrupt ties between Mugland, compromised officials, and the structures that protect elite crime in Alkenstar.",
+  "status": "active",
+  "threadType": "investigation",
+  "priority": "high",
+  "campaignId": "campaign-mornqar-alkenstar",
+  "notes": "Supports Flint's law-versus-corruption angle and links to broader institutional decay.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "pc-flint-beastwood"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "npc-ambrost-mugland"
+    }
+  ]
+}

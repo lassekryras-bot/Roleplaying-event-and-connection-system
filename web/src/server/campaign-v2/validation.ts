@@ -6,10 +6,6 @@ import { fileURLToPath } from 'node:url';
 import type { CampaignV2ContentKind, CampaignV2Diagnostic, CampaignV2DiagnosticIssue } from './errors';
 
 const require = createRequire(import.meta.url);
-const Ajv2020 = require('ajv/dist/2020.js').default as new (options: Record<string, unknown>) => {
-  addSchema(schema: object): void;
-  getSchema(schemaId: string): ValidateFunction | undefined;
-};
 
 export const CAMPAIGN_V2_SCHEMA_FILE_BY_KIND: Record<CampaignV2ContentKind, string> = {
   relation: 'relation.schema.json',
@@ -18,10 +14,13 @@ export const CAMPAIGN_V2_SCHEMA_FILE_BY_KIND: Record<CampaignV2ContentKind, stri
   session: 'session.schema.json',
   event: 'event.schema.json',
   effect: 'effect.schema.json',
+  playerCharacter: 'playerCharacter.schema.json',
+  npc: 'npc.schema.json',
 };
 
 type AjvError = {
-  instancePath: string;
+  instancePath?: string;
+  dataPath?: string;
   keyword: string;
   message?: string;
   params?: {
@@ -33,6 +32,57 @@ type AjvError = {
 type ValidateFunction = ((data: unknown) => boolean) & {
   errors?: AjvError[] | null;
 };
+
+type AjvConstructor = new (options: Record<string, unknown>) => {
+  addSchema(schema: object): void;
+  getSchema(schemaId: string): ValidateFunction | undefined;
+};
+
+function resolveAjvImplementation(): {
+  Ajv: AjvConstructor;
+  needsLegacySchemaTransform: boolean;
+} {
+  try {
+    return {
+      Ajv: require('ajv/dist/2020.js').default as AjvConstructor,
+      needsLegacySchemaTransform: false,
+    };
+  } catch {
+    const legacyAjv = require('ajv');
+    return {
+      Ajv: (legacyAjv.default ?? legacyAjv) as AjvConstructor,
+      needsLegacySchemaTransform: true,
+    };
+  }
+}
+
+const { Ajv: AjvImplementation, needsLegacySchemaTransform } = resolveAjvImplementation();
+
+function normalizeSchemaForAjv(schema: unknown): unknown {
+  if (!needsLegacySchemaTransform || schema === null || typeof schema !== 'object') {
+    return schema;
+  }
+
+  if (Array.isArray(schema)) {
+    return schema.map(normalizeSchemaForAjv);
+  }
+
+  const normalizedEntries = Object.entries(schema as Record<string, unknown>).flatMap(([key, value]) => {
+    if (key === '$schema') {
+      return [];
+    }
+
+    const normalizedKey = key === '$defs' ? 'definitions' : key;
+    const normalizedValue =
+      normalizedKey === '$ref' && typeof value === 'string'
+        ? value.replaceAll('#/$defs/', '#/definitions/')
+        : normalizeSchemaForAjv(value);
+
+    return [[normalizedKey, normalizedValue] as const];
+  });
+
+  return Object.fromEntries(normalizedEntries);
+}
 
 export type CampaignV2ValidationContext = {
   sourceName: string;
@@ -62,9 +112,15 @@ function getDefaultSchemaRoot() {
   return path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../../schemas/campaign-v2');
 }
 
-function toIssue(error: AjvError): CampaignV2DiagnosticIssue {
+function normalizeErrorMessage(message: string) {
+  return message.startsWith('should ') ? `must ${message.slice('should '.length)}` : message;
+}
+
+function toIssue(error: AjvError & { dataPath?: string }): CampaignV2DiagnosticIssue {
+  const instancePath = error.instancePath ?? error.dataPath ?? '/';
+
   if (error.keyword === 'required' && typeof error.params?.missingProperty === 'string') {
-    const requiredPath = `${error.instancePath}/${error.params.missingProperty}`.replace(/\/+/g, '/');
+    const requiredPath = `${instancePath}/${error.params.missingProperty}`.replace(/\/+/g, '/');
     return {
       instancePath: requiredPath.startsWith('/') ? requiredPath : `/${requiredPath}`,
       keyword: error.keyword,
@@ -73,21 +129,22 @@ function toIssue(error: AjvError): CampaignV2DiagnosticIssue {
   }
 
   return {
-    instancePath: error.instancePath || '/',
+    instancePath: instancePath || '/',
     keyword: error.keyword,
-    message: error.message ?? 'is invalid',
+    message: normalizeErrorMessage(error.message ?? 'is invalid'),
   };
 }
 
 async function loadSchemaFile(schemaRoot: string, fileName: string): Promise<unknown> {
   const schemaPath = path.join(schemaRoot, fileName);
-  return JSON.parse(await fs.readFile(schemaPath, 'utf8'));
+  return normalizeSchemaForAjv(JSON.parse(await fs.readFile(schemaPath, 'utf8')));
 }
 
 export async function createCampaignV2Validator(schemaRoot = getDefaultSchemaRoot()): Promise<CampaignV2Validator> {
-  const ajv = new Ajv2020({
+  const ajv = new AjvImplementation({
     allErrors: true,
     strict: false,
+    schemaId: 'auto',
   });
 
   const schemaFiles = [...new Set(Object.values(CAMPAIGN_V2_SCHEMA_FILE_BY_KIND))];

@@ -1,0 +1,21 @@
+{
+  "id": "thread-mugland-financial-web",
+  "type": "thread",
+  "title": "Mugland Financial Web",
+  "summary": "A thread about the money trails, hidden ledgers, intermediaries, and shell dealings that connect Mugland to wider criminal enterprise.",
+  "status": "active",
+  "threadType": "investigation",
+  "priority": "high",
+  "campaignId": "campaign-mornqar-alkenstar",
+  "notes": "Core Zinriss thread. Best used for ledgers, quiet deals, and exposing profit behind the violence.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "pc-zinriss-book-numeri"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "npc-ambrost-mugland"
+    }
+  ]
+}

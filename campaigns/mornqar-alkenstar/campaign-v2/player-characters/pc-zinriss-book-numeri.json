@@ -1,0 +1,132 @@
+{
+  "id": "pc-zinriss-book-numeri",
+  "type": "playerCharacter",
+  "title": "Zinriss \"Book\" Numeri",
+  "summary": "A polished exile-bookkeeper whose ruined accounts and social graces pull him into Alkenstar's hidden financial web.",
+  "status": "active",
+  "campaignId": "mornqar-alkenstar",
+  "ancestry": null,
+  "class": null,
+  "age": null,
+  "concept": "Cultivated exile bookkeeper entangled in suspicious debts and the city's money trails.",
+  "partyRole": "social connector / financial analysis / respectable-front access",
+  "background": {
+    "origin": "Anvilstone, from the Numeri tailor family on his father's side and the Sharian line on his mother's.",
+    "history": "Zinriss once kept the books for Numeri Skraedderi but found the work stifling and drifted into helping around the local area. A bookkeeping disaster left him owing far more than he could pay, and he fled to Alkenstar rather than become trapped in a dwarven family contract. In the city he survives through manners, languages, presentation, and financial competence, while maintaining ties to Garik Geode, PapirHer, Romano Letuuse, and other respectable-seeming contacts.",
+    "incitingIncident": "A bookkeeping mistake left him with crushing debt and forced him to flee to Alkenstar.",
+    "reasonInCity": "To survive exile, build leverage through trade and account work, and understand the money networks that now surround him."
+  },
+  "currentSituation": {
+    "overview": "Living rough but presentably in Alkenstar, he uses polish, pipe smoke, and careful social ties to stay useful.",
+    "legalStatus": "Fled debt-related fallout in Anvilstone; exact formal legal status in Alkenstar is unclear.",
+    "socialStatus": "Well dressed and well mannered, but more connected than genuinely trusted.",
+    "currentProblem": "His old accounting scandal still shadows him, and his place in Alkenstar's financial web may drag him deeper into Mugland-linked trade.",
+    "currentLocationId": null
+  },
+  "goals": {
+    "shortTerm": "Stabilize his position in Alkenstar and turn his financial skill into protection and leverage.",
+    "midTerm": "Learn who truly benefited from the bookkeeping disaster and whether he was set up or merely used.",
+    "longTerm": "Clear his name and expose or outmaneuver the corrupt financial network behind the city's trade and weapons economy."
+  },
+  "traits": {
+    "strengths": [
+      "Cultivated manners",
+      "Financial competence",
+      "Multilingual and socially adaptable"
+    ],
+    "flaws": [
+      "Few genuine friends",
+      "Past debt scandal",
+      "Hides fear behind polish"
+    ],
+    "personality": [
+      "Polite",
+      "Cultivated",
+      "Socially strategic"
+    ]
+  },
+  "spotlight": {
+    "themes": [
+      "Debt and exile",
+      "Respectable fronts hiding corruption",
+      "Money as power"
+    ],
+    "gmNotes": "Bring Book forward in scenes about ledgers, trade routes, social access, debt pressure, and the respectable surface of corrupt commerce."
+  },
+  "connections": {
+    "importantNpcIds": [
+      "npc-garik-geode",
+      "npc-papirher",
+      "npc-romano-letuuse"
+    ],
+    "importantLocationIds": [
+      "location-numeri-skraedderi",
+      "location-vino-babino",
+      "location-alkenstar-library"
+    ],
+    "importantThreadIds": [
+      "thread-bookkeeping-disaster",
+      "thread-mugland-financial-web",
+      "thread-weapons-trade-ledgers"
+    ],
+    "importantHookIds": []
+  },
+  "relationshipNotes": [
+    {
+      "label": "Garik Geode",
+      "role": "friend and landlord",
+      "note": "A dwarf companion and pipe-smoking veranda contact."
+    },
+    {
+      "label": "PapirHer",
+      "role": "assistant",
+      "note": "Automaton helper tied to his current life in the city."
+    },
+    {
+      "label": "Romano Letuuse",
+      "role": "social contact",
+      "note": "Goblin owner of Vino Babino and part of Book's cultivated network."
+    }
+  ],
+  "assets": {
+    "signatureItems": [
+      "Fine meerschaum pipe",
+      "Tailored clothing"
+    ],
+    "specialCapabilities": [
+      "Bookkeeping",
+      "Languages",
+      "Financial reading of people and institutions"
+    ]
+  },
+  "campaignFitSummary": "Strongly tied to Alkenstar's money flows, respectable fronts, and the hidden economics behind Mugland's network. Best used in debt, trade, ledger, and social-maneuver scenes.",
+  "startingThreadIds": [
+    "thread-bookkeeping-disaster",
+    "thread-mugland-financial-web",
+    "thread-weapons-trade-ledgers"
+  ],
+  "coreThreadIds": [
+    "thread-bookkeeping-disaster",
+    "thread-mugland-financial-web",
+    "thread-weapons-trade-ledgers"
+  ],
+  "notes": "Built from partial freeform notes. Whether Zinriss was framed or simply made an honest but catastrophic mistake remains socially contested; source framing leans toward innocence.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "npc-garik-geode",
+      "note": "Landlord, friend, and relaxed social anchor in Alkenstar.",
+      "strength": "high",
+      "origin": "imported-pc-notes",
+      "active": true
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "thread-mugland-financial-web",
+      "note": "His skills and contacts make him a natural entry point into the city's hidden account books.",
+      "strength": "central",
+      "origin": "campaign-overview",
+      "active": true
+    }
+  ]
+}

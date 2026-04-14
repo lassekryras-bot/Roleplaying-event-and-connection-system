@@ -1,6 +1,13 @@
-import type { Effect, Event, Location, LocationState, Relation, Session } from '@/generated/campaign-v2';
+import type { Effect, Event, Location, LocationState, Npc, PlayerCharacter, Relation, Session } from '@/generated/campaign-v2';
 
-export type CampaignV2ObjectKind = 'location' | 'locationState' | 'session' | 'event' | 'effect';
+export type CampaignV2ObjectKind =
+  | 'location'
+  | 'locationState'
+  | 'session'
+  | 'event'
+  | 'effect'
+  | 'playerCharacter'
+  | 'npc';
 export type CampaignV2RelationType = Relation['type'];
 export type CampaignV2RelationDirection = 'incoming' | 'outgoing' | 'both';
 
@@ -10,6 +17,8 @@ type CampaignV2RawDocumentMap = {
   session: Session;
   event: Event;
   effect: Effect;
+  playerCharacter: PlayerCharacter;
+  npc: Npc;
 };
 
 type WithNormalizedRelations<T> = Omit<T, 'relations'> & {
@@ -22,6 +31,8 @@ export type CampaignV2DocumentRecordMap = {
   session: WithNormalizedRelations<Session>;
   event: WithNormalizedRelations<Event>;
   effect: WithNormalizedRelations<Effect>;
+  playerCharacter: WithNormalizedRelations<PlayerCharacter>;
+  npc: WithNormalizedRelations<Npc>;
 };
 
 export type CampaignV2ObjectRecord = CampaignV2DocumentRecordMap[CampaignV2ObjectKind];
@@ -32,6 +43,8 @@ export type CampaignV2GraphSource = {
   sessions?: readonly CampaignV2RawDocumentMap['session'][];
   events?: readonly CampaignV2RawDocumentMap['event'][];
   effects?: readonly CampaignV2RawDocumentMap['effect'][];
+  playerCharacters?: readonly CampaignV2RawDocumentMap['playerCharacter'][];
+  npcs?: readonly CampaignV2RawDocumentMap['npc'][];
 };
 
 export type CampaignV2ResolvedRelation = {
@@ -126,6 +139,8 @@ function toObjectArray(source: CampaignV2GraphSource): CampaignV2ObjectRecord[] 
     ...normalizeDocumentGroup<'session'>(source.sessions),
     ...normalizeDocumentGroup<'event'>(source.events),
     ...normalizeDocumentGroup<'effect'>(source.effects),
+    ...normalizeDocumentGroup<'playerCharacter'>(source.playerCharacters),
+    ...normalizeDocumentGroup<'npc'>(source.npcs),
   ];
 }
 

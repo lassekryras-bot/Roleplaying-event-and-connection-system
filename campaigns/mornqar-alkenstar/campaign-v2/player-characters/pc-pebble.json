@@ -1,0 +1,144 @@
+{
+  "id": "pc-pebble",
+  "type": "playerCharacter",
+  "title": "Pebble",
+  "summary": "A street-bred courier and thief caught between Dragon's Breath's criminal cover business and the corrupt officers now hunting him.",
+  "status": "active",
+  "campaignId": "mornqar-alkenstar",
+  "ancestry": null,
+  "class": null,
+  "age": null,
+  "concept": "Underworld runner whose survival skills expose the link between laundering fronts and compromised law.",
+  "partyRole": "stealth / street contacts / smuggling routes / underworld intelligence",
+  "background": {
+    "origin": "Grew up in a small orphanage in the city, ran away, and survived on the streets by stealing.",
+    "history": "Pebble built a network among street contacts and now works under Spice at Dragon's Breath, a spice shop that covers money laundering and other dirty business. Around him are Granit, a cold dwarf cleanup specialist, and Silt, a younger goblin he feels protective toward. His work includes shadowing targets, delivering stolen or illegal goods, and planting false evidence. A routine delivery became a trap when checkpoint officers closed in under orders, forcing him into a humiliating rooftop escape. Later fallout tied that danger to Harker Venn, a violent Shield Marshal linked to Granit's past and to the larger corruption web.",
+    "incitingIncident": "A routine delivery turned into a staged checkpoint trap, proving that corrupt law and criminal money were coordinating against him.",
+    "reasonInCity": "Alkenstar is his home turf, his livelihood, and the only place where his contacts can still keep him alive."
+  },
+  "currentSituation": {
+    "overview": "Still moving through the underworld after a rooftop escape, but now increasingly visible to both corrupt officers and the people who own his work.",
+    "legalStatus": "At risk of arrest after humiliating officers and fleeing a staged checkpoint.",
+    "socialStatus": "Useful underworld courier with fragile loyalties and dangerous recognition risk.",
+    "currentProblem": "If Harker Venn identifies him, word can reach Granit and expose both his movements and his current allies.",
+    "currentLocationId": "location-dragons-breath"
+  },
+  "goals": {
+    "shortTerm": "Stay ahead of the crackdown and learn who ordered the checkpoint on his delivery.",
+    "midTerm": "Figure out how deep Dragon's Breath is tied into laundering, dirty law, and the wider corruption web.",
+    "longTerm": "Survive the underworld without becoming fully owned by it, and turn what he knows against the network using him if he gets the chance."
+  },
+  "traits": {
+    "strengths": [
+      "Street instincts",
+      "Mobility and stealth",
+      "Informant network"
+    ],
+    "flaws": [
+      "Criminal entanglement",
+      "Trust issues",
+      "Exposure risk from former associates"
+    ],
+    "personality": [
+      "Quick",
+      "Guarded",
+      "Protective of the vulnerable"
+    ]
+  },
+  "spotlight": {
+    "themes": [
+      "Street survival",
+      "Loyalty under pressure",
+      "Respectable business as criminal cover"
+    ],
+    "gmNotes": "Use Pebble in chases, courier jobs, checkpoint tension, false-evidence setups, and scenes where underworld relationships become painfully personal."
+  },
+  "connections": {
+    "importantNpcIds": [
+      "npc-spice",
+      "npc-granit",
+      "npc-silt",
+      "npc-borge",
+      "npc-harker-venn"
+    ],
+    "importantLocationIds": [
+      "location-dragons-breath"
+    ],
+    "importantThreadIds": [
+      "thread-dragons-breath-cover-business",
+      "thread-corrupt-checkpoint-crackdown",
+      "thread-harker-venn-recognition-risk"
+    ],
+    "importantHookIds": []
+  },
+  "relationshipNotes": [
+    {
+      "label": "Spice",
+      "role": "boss and mentor",
+      "note": "Quiet criminal operator who offers structure more than kindness."
+    },
+    {
+      "label": "Granit",
+      "role": "dangerous co-worker",
+      "note": "Cleanup specialist Pebble respects but does not trust."
+    },
+    {
+      "label": "Silt",
+      "role": "younger friend",
+      "note": "Goblin co-worker Pebble protects and feels kinship toward."
+    },
+    {
+      "label": "Harker Venn",
+      "role": "recognition threat",
+      "note": "Violent Shield Marshal whose sighting could expose Pebble to both law and underworld retaliation."
+    }
+  ],
+  "assets": {
+    "signatureItems": [
+      "Rapier"
+    ],
+    "specialCapabilities": [
+      "Shadowing targets",
+      "Smuggling deliveries",
+      "Planting false evidence"
+    ]
+  },
+  "campaignFitSummary": "Strongly tied to the criminal underground, laundering fronts, compromised officers, and the street-level logistics of corruption. Best used in chase, infiltration, courier, and underworld-pressure scenes.",
+  "startingThreadIds": [
+    "thread-dragons-breath-cover-business",
+    "thread-corrupt-checkpoint-crackdown",
+    "thread-harker-venn-recognition-risk"
+  ],
+  "coreThreadIds": [
+    "thread-dragons-breath-cover-business",
+    "thread-corrupt-checkpoint-crackdown",
+    "thread-harker-venn-recognition-risk"
+  ],
+  "notes": "Ancestry, age, and exact class are not established in the current notes. Pebble's underworld role is clear even without a locked mechanical build.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "npc-spice",
+      "note": "Employer whose legitimate-looking shop hides money laundering and other criminal work.",
+      "strength": "high",
+      "origin": "imported-pc-notes",
+      "active": true
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "npc-silt",
+      "note": "Protective bond that gives Pebble a personal stake inside Dragon's Breath.",
+      "strength": "high",
+      "origin": "imported-pc-notes",
+      "active": true
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "thread-corrupt-checkpoint-crackdown",
+      "note": "The staged checkpoint proved the city and underworld are coordinating around his route.",
+      "strength": "central",
+      "origin": "imported-pc-notes",
+      "active": true
+    }
+  ]
+}

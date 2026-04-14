@@ -1,0 +1,17 @@
+{
+  "id": "thread-weapons-trade-ledgers",
+  "type": "thread",
+  "title": "Weapons Trade Ledgers",
+  "summary": "A thread about hidden accounts, missing production numbers, and financial proof tied to Mugland's weapons dealings.",
+  "status": "active",
+  "threadType": "investigation",
+  "priority": "high",
+  "campaignId": "campaign-mornqar-alkenstar",
+  "notes": "Supports bookwork, evidence trails, and tying economic records to criminal intent.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "pc-zinriss-book-numeri"
+    }
+  ]
+}

@@ -8,3 +8,5 @@ export * from './locationState';
 export * from './session';
 export * from './event';
 export * from './effect';
+export * from './playerCharacter';
+export * from './npc';

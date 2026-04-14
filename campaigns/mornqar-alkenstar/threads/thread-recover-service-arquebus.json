@@ -1,0 +1,11 @@
+{
+  "id": "thread-recover-service-arquebus",
+  "title": "Recover Service Arquebus",
+  "state": "active",
+  "hook": "Flint still has reason to recover his service arquebus from the Shieldmarshal armory.",
+  "playerSummary": "Getting the arquebus back may require stealth, leverage, favors, or a dangerous amount of trust.",
+  "gmTruth": "Use this as a practical prep thread with infiltration, negotiations, or trust tests around the armory and anyone who might help Flint reclaim what was taken from him.",
+  "timelineAnchor": "now",
+  "linkedEntityIds": [],
+  "playerVisible": true
+}

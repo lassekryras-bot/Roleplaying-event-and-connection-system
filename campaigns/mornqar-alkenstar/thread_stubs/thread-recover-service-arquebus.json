@@ -1,0 +1,21 @@
+{
+  "id": "thread-recover-service-arquebus",
+  "type": "thread",
+  "title": "Recover Service Arquebus",
+  "summary": "A thread about Flint regaining his service arquebus from the Shieldmarshal armory through Niles or other risky means.",
+  "status": "active",
+  "threadType": "personal",
+  "priority": "medium",
+  "campaignId": "campaign-mornqar-alkenstar",
+  "notes": "Useful as a practical prep thread with stealth, leverage, or trust tests.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "pc-flint-beastwood"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "npc-niles-angel"
+    }
+  ]
+}

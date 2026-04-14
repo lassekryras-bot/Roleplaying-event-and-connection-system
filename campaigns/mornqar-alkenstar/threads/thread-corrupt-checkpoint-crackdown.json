@@ -1,0 +1,11 @@
+{
+  "id": "thread-corrupt-checkpoint-crackdown",
+  "title": "Corrupt Checkpoint Crackdown",
+  "state": "active",
+  "hook": "A suspicious checkpoint stop suggests Pebble was targeted for reasons nobody has explained yet.",
+  "playerSummary": "Rising patrol pressure and a corrupt checkpoint incident point to a hidden reason Pebble was singled out.",
+  "gmTruth": "This thread supports pursuit, betrayal, planted evidence, and the question of who ordered the stop and why Pebble mattered to them.",
+  "timelineAnchor": "now",
+  "linkedEntityIds": [],
+  "playerVisible": true
+}

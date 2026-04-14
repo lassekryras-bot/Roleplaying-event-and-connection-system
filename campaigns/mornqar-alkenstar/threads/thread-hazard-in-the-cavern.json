@@ -1,0 +1,11 @@
+{
+  "id": "thread-hazard-in-the-cavern",
+  "title": "Hazard in the Cavern",
+  "state": "active",
+  "hook": "Scavenger work has stirred up a cavern hazard tied to red mist mold and escalating environmental risk.",
+  "playerSummary": "A dangerous cavern and its strange fungal contamination may become important if the party follows the scavenger lead.",
+  "gmTruth": "Keep this grounded as a hazard and ecosystem-pressure thread at first. The health-shot detail is an early warning sign, not the full reveal.",
+  "timelineAnchor": "future_possible",
+  "linkedEntityIds": [],
+  "playerVisible": true
+}

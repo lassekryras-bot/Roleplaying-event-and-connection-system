@@ -1,0 +1,21 @@
+{
+  "id": "thread-mugland-knows-the-truth",
+  "type": "thread",
+  "title": "Mugland Knows the Truth",
+  "summary": "A thread built around the suspicion that Ambrost Mugland knows what happened to the missing children and is hiding key answers.",
+  "status": "active",
+  "threadType": "investigation",
+  "priority": "high",
+  "campaignId": "campaign-mornqar-alkenstar",
+  "notes": "Use for direct pressure, missing records, hidden witnesses, and Mugland's denials.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "pc-charles-greyland"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "npc-ambrost-mugland"
+    }
+  ]
+}

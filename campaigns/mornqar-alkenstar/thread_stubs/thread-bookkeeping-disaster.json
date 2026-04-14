@@ -1,0 +1,17 @@
+{
+  "id": "thread-bookkeeping-disaster",
+  "type": "thread",
+  "title": "Bookkeeping Disaster",
+  "summary": "A thread about Zinriss's accounting mistake, the fallout that drove him to Alkenstar, and the financial mess he wants to escape.",
+  "status": "active",
+  "threadType": "personal",
+  "priority": "medium",
+  "campaignId": "campaign-mornqar-alkenstar",
+  "notes": "Use for debts, reputation, returning home, and being forced to solve the consequences of old numbers.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "pc-zinriss-book-numeri"
+    }
+  ]
+}

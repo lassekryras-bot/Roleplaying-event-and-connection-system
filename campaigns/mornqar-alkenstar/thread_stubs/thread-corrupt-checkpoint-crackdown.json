@@ -1,0 +1,17 @@
+{
+  "id": "thread-corrupt-checkpoint-crackdown",
+  "type": "thread",
+  "title": "Corrupt Checkpoint Crackdown",
+  "summary": "A thread about the suspicious checkpoint stop, rising patrol pressure, and the hidden reason Pebble was targeted.",
+  "status": "active",
+  "threadType": "mystery",
+  "priority": "high",
+  "campaignId": "campaign-mornqar-alkenstar",
+  "notes": "Supports pursuit, betrayal, planted evidence, and who ordered the stop.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "pc-pebble"
+    }
+  ]
+}

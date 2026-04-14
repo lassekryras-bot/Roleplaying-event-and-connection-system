@@ -1,0 +1,25 @@
+{
+  "id": "thread-dragons-breath-cover-business",
+  "type": "thread",
+  "title": "Dragon's Breath Cover Business",
+  "summary": "A thread about the spice shop Dragon's Breath as a front for laundering, shady work, and hidden operations under Spice's control.",
+  "status": "active",
+  "threadType": "faction",
+  "priority": "medium",
+  "campaignId": "campaign-mornqar-alkenstar",
+  "notes": "Core Pebble thread. Use for criminal logistics, hidden loyalties, and problems inside the shop.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "pc-pebble"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "npc-spice"
+    },
+    {
+      "type": "occursAt",
+      "targetId": "location-dragons-breath"
+    }
+  ]
+}

@@ -8,6 +8,8 @@
     "locationState": "locationState.schema.json",
     "session": "session.schema.json",
     "event": "event.schema.json",
-    "effect": "effect.schema.json"
+    "effect": "effect.schema.json",
+    "playerCharacter": "playerCharacter.schema.json",
+    "npc": "npc.schema.json"
   }
 }

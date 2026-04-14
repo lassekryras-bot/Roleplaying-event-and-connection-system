@@ -1,0 +1,19 @@
+{
+  "id": "event-heist-job-is-pitched",
+  "type": "event",
+  "title": "Heist Job Is Pitched",
+  "summary": "The bank heist becomes the party's immediate shared job and the practical reason to work together.",
+  "status": "resolved",
+  "eventType": "job-offer",
+  "notes": "This should make the bank immediately important and keep the session focused.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-barrel-and-bullet-saloon"
+    },
+    {
+      "type": "relatedTo",
+      "targetId": "session-001-barrel-and-bullet"
+    }
+  ]
+}

@@ -1,0 +1,307 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/npc.schema.json",
+  "title": "NPC",
+  "description": "Schema for non-player characters in the campaign tool. Designed to hold functional scene role, motivation, use in prep, and campaign-fit information.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "type",
+    "title",
+    "summary",
+    "status",
+    "campaignId",
+    "concept",
+    "role",
+    "campaignFitSummary",
+    "startingThreadIds",
+    "coreThreadIds",
+    "relations"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^npc-[a-z0-9-]+$"
+    },
+    "type": {
+      "type": "string",
+      "const": "npc"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive",
+        "dead",
+        "missing",
+        "retired",
+        "archived"
+      ]
+    },
+    "campaignId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ancestry": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "class": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "age": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "concept": {
+      "type": "string",
+      "minLength": 1
+    },
+    "role": {
+      "type": "string",
+      "minLength": 1
+    },
+    "background": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "origin": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "history": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reasonInStory": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "currentSituation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "overview": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "currentProblem": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "currentLeverage": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "currentLocationId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "motivations": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "shortTerm": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "midTerm": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "longTerm": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "presentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "appearance": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "behavior": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "voice": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "gmUse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sceneFunction": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "whatTheyKnow": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "howToEscalate": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fallbackUse": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "campaignFitSummary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "startingThreadIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "coreThreadIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/relation"
+      },
+      "default": []
+    }
+  },
+  "$defs": {
+    "relation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "targetId"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "dependsOn",
+            "unlocks",
+            "follows",
+            "modifies",
+            "occursAt",
+            "belongsTo",
+            "relatedTo",
+            "appliesTo",
+            "contains",
+            "partOf",
+            "involves",
+            "blocks"
+          ]
+        },
+        "targetId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": "string"
+        },
+        "strength": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "central"
+          ]
+        },
+        "origin": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

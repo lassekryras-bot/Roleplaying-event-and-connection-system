@@ -3,9 +3,10 @@ import type {
   CampaignV2AuthoringPayload,
   CampaignV2GmOverviewPayload,
   CampaignV2PrepPayload,
-  CampaignV2MigrationChecklistPayload,
   CampaignV2LocationSummaryViewModel,
   CampaignV2LocationTimelinePayload,
+  CampaignV2PlayerCharacterDetailPayload,
+  CampaignV2PlayerCharacterSummaryViewModel,
 } from '@/server/campaign-v2';
 
 export type CampaignV2ProjectSummary = {
@@ -34,49 +35,19 @@ export type CampaignV2InspectorPayload = {
   locationTimeline: CampaignV2LocationTimelinePayload | null;
   prep: CampaignV2PrepPayload | null;
   authoring: CampaignV2AuthoringPayload | null;
-  migrationChecklist: CampaignV2MigrationChecklistPayload | null;
   contentSubdir: string | null;
-  trustedLocationDualWriteEnabled: boolean;
   counts: CampaignV2InspectorCounts;
   loadedAt: string;
 };
 
-export type CampaignV2LocationEditDraft = {
-  projectId: string;
-  locationId: string;
-  title: string;
-  summary: string;
-  tags: string[];
-};
-
-export type CampaignV2DualWriteChannelResult = {
-  model: 'old' | 'new';
-  targetId: string;
-  relativePath: string | null;
-  success: boolean;
-  message: string;
-  data: {
-    title: string;
-    summary: string;
-    tags: string[];
-  } | null;
-};
-
-export type CampaignV2DualWriteReport = {
-  flow: 'trusted-location-identity';
-  projectId: string;
-  locationId: string;
-  placeId: string;
-  success: boolean;
-  divergence: boolean;
-  divergenceReasons: string[];
-  oldWrite: CampaignV2DualWriteChannelResult;
-  newWrite: CampaignV2DualWriteChannelResult;
-};
-
-export type CampaignV2LocationDualWriteResponse = {
-  payload: CampaignV2InspectorPayload;
-  report: CampaignV2DualWriteReport;
+export type CampaignV2PlayerCharacterPagePayload = {
+  project: CampaignV2ProjectSummary | null;
+  projects: CampaignV2ProjectSummary[];
+  selectedPlayerCharacterId: string | null;
+  playerCharacters: CampaignV2PlayerCharacterSummaryViewModel[];
+  detail: CampaignV2PlayerCharacterDetailPayload | null;
+  contentSubdir: string | null;
+  loadedAt: string;
 };
 
 export type CampaignV2AuthoringResponse = {

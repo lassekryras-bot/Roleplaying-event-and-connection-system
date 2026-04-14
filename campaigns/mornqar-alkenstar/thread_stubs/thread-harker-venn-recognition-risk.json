@@ -1,0 +1,17 @@
+{
+  "id": "thread-harker-venn-recognition-risk",
+  "type": "thread",
+  "title": "Recognition Risk",
+  "summary": "A thread about Pebble being recognized, tracked, or sold out by someone connected to the checkpoint incident or Dragon's Breath operations.",
+  "status": "active",
+  "threadType": "conflict",
+  "priority": "medium",
+  "campaignId": "campaign-mornqar-alkenstar",
+  "notes": "Use when Pebble's old contacts, handlers, or watchers become a danger.",
+  "relations": [
+    {
+      "type": "relatedTo",
+      "targetId": "pc-pebble"
+    }
+  ]
+}

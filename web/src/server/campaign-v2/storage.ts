@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import type { Effect, Event, Location, LocationState, Session } from '@/generated/campaign-v2';
+import type { Effect, Event, Location, LocationState, Npc, PlayerCharacter, Session } from '@/generated/campaign-v2';
 
 import type { CampaignV2ContentKind, CampaignV2Diagnostic } from './errors';
 import { formatCampaignV2Diagnostic } from './errors';
@@ -17,6 +17,8 @@ type CampaignV2RawDocumentMap = {
   session: Session;
   event: Event;
   effect: Effect;
+  playerCharacter: PlayerCharacter;
+  npc: Npc;
 };
 
 type ReadValidatedFileResult<T> = {
@@ -45,6 +47,8 @@ export type CampaignV2ResolvedPaths = {
   sessionsDir: string;
   eventsDir: string;
   effectsDir: string;
+  playerCharactersDir: string;
+  npcsDir: string;
 };
 
 export type CampaignV2LoadedFile<T> = {
@@ -61,6 +65,8 @@ export type CampaignV2LoadResult = {
   sessions: Array<CampaignV2LoadedFile<CampaignV2DocumentRecordMap['session']>>;
   events: Array<CampaignV2LoadedFile<CampaignV2DocumentRecordMap['event']>>;
   effects: Array<CampaignV2LoadedFile<CampaignV2DocumentRecordMap['effect']>>;
+  playerCharacters: Array<CampaignV2LoadedFile<CampaignV2DocumentRecordMap['playerCharacter']>>;
+  npcs: Array<CampaignV2LoadedFile<CampaignV2DocumentRecordMap['npc']>>;
   diagnostics: CampaignV2Diagnostic[];
 };
 
@@ -70,6 +76,8 @@ export const CAMPAIGN_V2_DIRECTORY_BY_KIND: Record<CampaignV2DocumentKind, strin
   session: 'sessions',
   event: 'events',
   effect: 'effects',
+  playerCharacter: 'player-characters',
+  npc: 'npcs',
 };
 
 export const CAMPAIGN_V2_ID_PREFIX_BY_KIND: Record<CampaignV2DocumentKind, string> = {
@@ -78,6 +86,8 @@ export const CAMPAIGN_V2_ID_PREFIX_BY_KIND: Record<CampaignV2DocumentKind, strin
   session: 'session-',
   event: 'event-',
   effect: 'effect-',
+  playerCharacter: 'pc-',
+  npc: 'npc-',
 };
 
 const DEFAULT_CONTENT_SUBDIR = 'campaign-v2';
@@ -181,6 +191,24 @@ function assertFilenameMatchesId(kind: CampaignV2DocumentKind, sourceName: strin
   }
 }
 
+function normalizeRawRelations<T extends { relations?: unknown }>(document: T): T {
+  return {
+    ...document,
+    relations: Array.isArray(document.relations) ? document.relations : [],
+  };
+}
+
+function normalizeDocumentForStorage<K extends CampaignV2DocumentKind>(
+  contentKind: K,
+  document: CampaignV2RawDocumentMap[K],
+): CampaignV2DocumentRecordMap[K] {
+  if (contentKind === 'playerCharacter' || contentKind === 'npc') {
+    return normalizeRawRelations(document) as CampaignV2DocumentRecordMap[K];
+  }
+
+  return normalizeCampaignV2Document(document) as CampaignV2DocumentRecordMap[K];
+}
+
 async function writeJsonAtomically(filePath: string, payload: unknown) {
   await fs.mkdir(path.dirname(filePath), { recursive: true });
 
@@ -256,7 +284,8 @@ async function readValidatedJsonFile<T extends { id: string }>({
     };
   }
 
-  const document = normalizeCampaignV2Document(
+  const document = normalizeDocumentForStorage(
+    contentKind,
     parsedContents as CampaignV2RawDocumentMap[typeof contentKind],
   ) as unknown as T;
   if (path.posix.basename(relativePath) !== `${document.id}.json`) {
@@ -352,7 +381,7 @@ async function saveDocument<K extends CampaignV2DocumentKind>(
 ): Promise<CampaignV2DocumentRecordMap[K]> {
   const resolvedPaths = resolveCampaignV2Paths(options);
   const validator = await getValidator(options);
-  const normalizedDocument = normalizeCampaignV2Document(document);
+  const normalizedDocument = normalizeDocumentForStorage(contentKind, document);
   const relativePath = resolveDocumentRelativePath(contentKind, normalizedDocument.id);
 
   assertIdConvention(contentKind, normalizedDocument.id, relativePath);
@@ -428,6 +457,8 @@ export function resolveCampaignV2Paths(options: CampaignV2StorageOptions): Campa
     sessionsDir: path.join(contentRoot, CAMPAIGN_V2_DIRECTORY_BY_KIND.session),
     eventsDir: path.join(contentRoot, CAMPAIGN_V2_DIRECTORY_BY_KIND.event),
     effectsDir: path.join(contentRoot, CAMPAIGN_V2_DIRECTORY_BY_KIND.effect),
+    playerCharactersDir: path.join(contentRoot, CAMPAIGN_V2_DIRECTORY_BY_KIND.playerCharacter),
+    npcsDir: path.join(contentRoot, CAMPAIGN_V2_DIRECTORY_BY_KIND.npc),
   };
 }
 
@@ -479,6 +510,22 @@ export async function loadCampaignV2Content(
   });
   diagnostics.push(...effectsResult.diagnostics);
 
+  const playerCharactersResult = await loadJsonDirectory({
+    contentRoot: resolvedPaths.contentRoot,
+    directoryName: CAMPAIGN_V2_DIRECTORY_BY_KIND.playerCharacter,
+    contentKind: 'playerCharacter',
+    validator: activeValidator,
+  });
+  diagnostics.push(...playerCharactersResult.diagnostics);
+
+  const npcsResult = await loadJsonDirectory({
+    contentRoot: resolvedPaths.contentRoot,
+    directoryName: CAMPAIGN_V2_DIRECTORY_BY_KIND.npc,
+    contentKind: 'npc',
+    validator: activeValidator,
+  });
+  diagnostics.push(...npcsResult.diagnostics);
+
   return {
     projectId: options.projectId,
     contentRoot: resolvedPaths.contentRoot,
@@ -488,6 +535,8 @@ export async function loadCampaignV2Content(
     sessions: sessionsResult.files,
     events: eventsResult.files,
     effects: effectsResult.files,
+    playerCharacters: playerCharactersResult.files,
+    npcs: npcsResult.files,
     diagnostics,
   };
 }
@@ -512,6 +561,14 @@ export async function saveEffect(options: CampaignV2StorageOptions, effect: Effe
   return saveDocument(options, 'effect', effect);
 }
 
+export async function savePlayerCharacter(options: CampaignV2StorageOptions, playerCharacter: PlayerCharacter) {
+  return saveDocument(options, 'playerCharacter', playerCharacter);
+}
+
+export async function saveNpc(options: CampaignV2StorageOptions, npc: Npc) {
+  return saveDocument(options, 'npc', npc);
+}
+
 export async function getLocation(options: CampaignV2StorageOptions, id: string) {
   return getDocument(options, 'location', id);
 }
@@ -532,6 +589,14 @@ export async function getEffect(options: CampaignV2StorageOptions, id: string) {
   return getDocument(options, 'effect', id);
 }
 
+export async function getPlayerCharacter(options: CampaignV2StorageOptions, id: string) {
+  return getDocument(options, 'playerCharacter', id);
+}
+
+export async function getNpc(options: CampaignV2StorageOptions, id: string) {
+  return getDocument(options, 'npc', id);
+}
+
 export async function listLocations(options: CampaignV2StorageOptions) {
   return listDocuments(options, 'location');
 }
@@ -550,4 +615,12 @@ export async function listEvents(options: CampaignV2StorageOptions) {
 
 export async function listEffects(options: CampaignV2StorageOptions) {
   return listDocuments(options, 'effect');
+}
+
+export async function listPlayerCharacters(options: CampaignV2StorageOptions) {
+  return listDocuments(options, 'playerCharacter');
+}
+
+export async function listNpcs(options: CampaignV2StorageOptions) {
+  return listDocuments(options, 'npc');
 }

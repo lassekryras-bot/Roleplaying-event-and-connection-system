@@ -1,6 +1,7 @@
-import type { Effect, Event, Location, LocationState, Relation, Session } from '@/generated/campaign-v2';
+import type { Effect, Event, Location, LocationState, Npc, PlayerCharacter, Relation, Session } from '@/generated/campaign-v2';
 
 import type { CampaignV2Diagnostic } from './errors';
+import { loadCampaignLegacyThreads, type CampaignLegacyThreadSummary } from './legacy-threads';
 import {
   createCampaignV2RelationGraph,
   type CampaignV2DocumentRecordMap,
@@ -15,6 +16,8 @@ import {
   saveEvent as writeEvent,
   saveLocation as writeLocation,
   saveLocationState as writeLocationState,
+  saveNpc as writeNpc,
+  savePlayerCharacter as writePlayerCharacter,
   saveSession as writeSession,
   type CampaignV2LoadResult,
   type CampaignV2LoadedFile,
@@ -29,6 +32,9 @@ type CampaignV2Snapshot = {
   sessionsById: Map<string, CampaignV2DocumentRecordMap['session']>;
   eventsById: Map<string, CampaignV2DocumentRecordMap['event']>;
   effectsById: Map<string, CampaignV2DocumentRecordMap['effect']>;
+  playerCharactersById: Map<string, CampaignV2DocumentRecordMap['playerCharacter']>;
+  npcsById: Map<string, CampaignV2DocumentRecordMap['npc']>;
+  legacyThreadsById: Map<string, CampaignLegacyThreadSummary>;
   relationGraph: CampaignV2RelationGraph;
   diagnostics: CampaignV2Diagnostic[];
 };
@@ -41,6 +47,8 @@ export type CampaignV2StoreSnapshot = {
   sessions: CampaignV2DocumentRecordMap['session'][];
   events: CampaignV2DocumentRecordMap['event'][];
   effects: CampaignV2DocumentRecordMap['effect'][];
+  playerCharacters: CampaignV2DocumentRecordMap['playerCharacter'][];
+  npcs: CampaignV2DocumentRecordMap['npc'][];
   diagnostics: CampaignV2Diagnostic[];
 };
 
@@ -60,16 +68,22 @@ export type CampaignV2Store = {
   saveSession(session: Session): Promise<CampaignV2DocumentRecordMap['session']>;
   saveEvent(event: Event): Promise<CampaignV2DocumentRecordMap['event']>;
   saveEffect(effect: Effect): Promise<CampaignV2DocumentRecordMap['effect']>;
+  savePlayerCharacter(playerCharacter: PlayerCharacter): Promise<CampaignV2DocumentRecordMap['playerCharacter']>;
+  saveNpc(npc: Npc): Promise<CampaignV2DocumentRecordMap['npc']>;
   getLocation(id: string): CampaignV2DocumentRecordMap['location'] | null;
   getLocationState(id: string): CampaignV2DocumentRecordMap['locationState'] | null;
   getSession(id: string): CampaignV2DocumentRecordMap['session'] | null;
   getEvent(id: string): CampaignV2DocumentRecordMap['event'] | null;
   getEffect(id: string): CampaignV2DocumentRecordMap['effect'] | null;
+  getPlayerCharacter(id: string): CampaignV2DocumentRecordMap['playerCharacter'] | null;
+  getNpc(id: string): CampaignV2DocumentRecordMap['npc'] | null;
   listLocations(): CampaignV2DocumentRecordMap['location'][];
   listLocationStates(): CampaignV2DocumentRecordMap['locationState'][];
   listSessions(): CampaignV2DocumentRecordMap['session'][];
   listEvents(): CampaignV2DocumentRecordMap['event'][];
   listEffects(): CampaignV2DocumentRecordMap['effect'][];
+  listPlayerCharacters(): CampaignV2DocumentRecordMap['playerCharacter'][];
+  listNpcs(): CampaignV2DocumentRecordMap['npc'][];
 };
 
 function createEmptySnapshot(projectId: string): CampaignV2Snapshot {
@@ -81,6 +95,9 @@ function createEmptySnapshot(projectId: string): CampaignV2Snapshot {
     sessionsById: new Map(),
     eventsById: new Map(),
     effectsById: new Map(),
+    playerCharactersById: new Map(),
+    npcsById: new Map(),
+    legacyThreadsById: new Map(),
     relationGraph: createCampaignV2RelationGraph({}),
     diagnostics: [],
   };
@@ -112,6 +129,53 @@ function createReferenceDiagnostic(
   };
 }
 
+function toLegacyThreadMap(threads: CampaignLegacyThreadSummary[]) {
+  return new Map(threads.map((thread) => [thread.id, thread]));
+}
+
+function validateCurrentLocationReference(
+  snapshot: CampaignV2Snapshot,
+  contentKind: CampaignV2Diagnostic['contentKind'],
+  sourceName: string,
+  object: { id: string; currentSituation?: { currentLocationId?: string | null } },
+) {
+  const locationId = object.currentSituation?.currentLocationId;
+  if (!locationId || snapshot.locationsById.has(locationId)) {
+    return;
+  }
+
+  snapshot.diagnostics.push(
+    createReferenceDiagnostic(
+      contentKind,
+      sourceName,
+      `${contentKind} ${object.id} references missing location ${locationId} in currentSituation.currentLocationId.`,
+    ),
+  );
+}
+
+function validateThreadIds(
+  snapshot: CampaignV2Snapshot,
+  contentKind: CampaignV2Diagnostic['contentKind'],
+  sourceName: string,
+  object: { id: string },
+  threadIds: readonly string[] | undefined,
+  fieldName: 'startingThreadIds' | 'coreThreadIds',
+) {
+  for (const threadId of threadIds ?? []) {
+    if (snapshot.legacyThreadsById.has(threadId)) {
+      continue;
+    }
+
+    snapshot.diagnostics.push(
+      createReferenceDiagnostic(
+        contentKind,
+        sourceName,
+        `${contentKind} ${object.id} references missing legacy thread ${threadId} in ${fieldName}.`,
+      ),
+    );
+  }
+}
+
 function validateRelationTargets(
   snapshot: CampaignV2Snapshot,
   contentKind: CampaignV2Diagnostic['contentKind'],
@@ -133,7 +197,7 @@ function validateRelationTargets(
   }
 }
 
-function normalizeLoadResult(loadResult: CampaignV2LoadResult): CampaignV2Snapshot {
+function normalizeLoadResult(loadResult: CampaignV2LoadResult, legacyThreads: CampaignLegacyThreadSummary[]): CampaignV2Snapshot {
   const snapshot = createEmptySnapshot(loadResult.projectId);
   snapshot.loadedAt = loadResult.loadedAt;
   snapshot.diagnostics = [...loadResult.diagnostics];
@@ -142,12 +206,17 @@ function normalizeLoadResult(loadResult: CampaignV2LoadResult): CampaignV2Snapsh
   snapshot.sessionsById = toUniqueMap(loadResult.sessions);
   snapshot.eventsById = toUniqueMap(loadResult.events);
   snapshot.effectsById = toUniqueMap(loadResult.effects);
+  snapshot.playerCharactersById = toUniqueMap(loadResult.playerCharacters);
+  snapshot.npcsById = toUniqueMap(loadResult.npcs);
+  snapshot.legacyThreadsById = toLegacyThreadMap(legacyThreads);
   snapshot.relationGraph = createCampaignV2RelationGraph({
     locations: [...snapshot.locationsById.values()],
     locationStates: [...snapshot.locationStatesById.values()],
     sessions: [...snapshot.sessionsById.values()],
     events: [...snapshot.eventsById.values()],
     effects: [...snapshot.effectsById.values()],
+    playerCharacters: [...snapshot.playerCharactersById.values()],
+    npcs: [...snapshot.npcsById.values()],
   });
 
   for (const file of loadResult.locationStates) {
@@ -219,6 +288,20 @@ function normalizeLoadResult(loadResult: CampaignV2LoadResult): CampaignV2Snapsh
     validateRelationTargets(snapshot, 'effect', file.relativePath, file.value);
   }
 
+  for (const file of loadResult.playerCharacters) {
+    validateCurrentLocationReference(snapshot, 'playerCharacter', file.relativePath, file.value);
+    validateThreadIds(snapshot, 'playerCharacter', file.relativePath, file.value, file.value.startingThreadIds, 'startingThreadIds');
+    validateThreadIds(snapshot, 'playerCharacter', file.relativePath, file.value, file.value.coreThreadIds, 'coreThreadIds');
+    validateRelationTargets(snapshot, 'playerCharacter', file.relativePath, file.value);
+  }
+
+  for (const file of loadResult.npcs) {
+    validateCurrentLocationReference(snapshot, 'npc', file.relativePath, file.value);
+    validateThreadIds(snapshot, 'npc', file.relativePath, file.value, file.value.startingThreadIds, 'startingThreadIds');
+    validateThreadIds(snapshot, 'npc', file.relativePath, file.value, file.value.coreThreadIds, 'coreThreadIds');
+    validateRelationTargets(snapshot, 'npc', file.relativePath, file.value);
+  }
+
   return snapshot;
 }
 
@@ -231,6 +314,8 @@ function toStoreSnapshot(snapshot: CampaignV2Snapshot): CampaignV2StoreSnapshot 
     sessions: [...snapshot.sessionsById.values()].sort(sortSessions),
     events: [...snapshot.eventsById.values()].sort(sortByTitle),
     effects: [...snapshot.effectsById.values()].sort(sortByTitle),
+    playerCharacters: [...snapshot.playerCharactersById.values()].sort(sortByTitle),
+    npcs: [...snapshot.npcsById.values()].sort(sortByTitle),
     diagnostics: [...snapshot.diagnostics],
   };
 }
@@ -239,7 +324,9 @@ export async function createCampaignV2Store(options: CampaignV2StorageOptions): 
   let snapshot = createEmptySnapshot(options.projectId);
 
   async function refresh() {
-    snapshot = normalizeLoadResult(await loadCampaignV2Content(options));
+    const loadResult = await loadCampaignV2Content(options);
+    const legacyThreads = await loadCampaignLegacyThreads(options);
+    snapshot = normalizeLoadResult(loadResult, legacyThreads);
   }
 
   await refresh();
@@ -289,6 +376,16 @@ export async function createCampaignV2Store(options: CampaignV2StorageOptions): 
       await refresh();
       return savedEffect;
     },
+    async savePlayerCharacter(playerCharacter) {
+      const savedPlayerCharacter = await writePlayerCharacter(options, playerCharacter);
+      await refresh();
+      return savedPlayerCharacter;
+    },
+    async saveNpc(npc) {
+      const savedNpc = await writeNpc(options, npc);
+      await refresh();
+      return savedNpc;
+    },
     getLocation(id) {
       return snapshot.locationsById.get(id) ?? null;
     },
@@ -304,6 +401,12 @@ export async function createCampaignV2Store(options: CampaignV2StorageOptions): 
     getEffect(id) {
       return snapshot.effectsById.get(id) ?? null;
     },
+    getPlayerCharacter(id) {
+      return snapshot.playerCharactersById.get(id) ?? null;
+    },
+    getNpc(id) {
+      return snapshot.npcsById.get(id) ?? null;
+    },
     listLocations() {
       return toStoreSnapshot(snapshot).locations;
     },
@@ -318,6 +421,12 @@ export async function createCampaignV2Store(options: CampaignV2StorageOptions): 
     },
     listEffects() {
       return toStoreSnapshot(snapshot).effects;
+    },
+    listPlayerCharacters() {
+      return toStoreSnapshot(snapshot).playerCharacters;
+    },
+    listNpcs() {
+      return toStoreSnapshot(snapshot).npcs;
     },
   };
 }

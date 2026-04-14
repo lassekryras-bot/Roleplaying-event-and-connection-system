@@ -6,11 +6,12 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Button, Select } from '@/components/ui';
 import { useAuth } from '@/contexts/auth-context';
 import { normalizeFrontendRole } from '@/lib/roles';
+import { usePreferredProject } from '@/lib/use-preferred-project';
 
 import { CampaignV2AuthoringPanel } from './CampaignV2AuthoringPanel';
-import { fetchCampaignV2Inspector, saveCampaignV2TrustedLocationIdentity } from './api';
+import { fetchCampaignV2Inspector } from './api';
 import styles from './CampaignV2Inspector.module.css';
-import type { CampaignV2DualWriteReport, CampaignV2InspectorPayload } from './types';
+import type { CampaignV2InspectorPayload } from './types';
 
 function formatLoadedAt(value: string) {
   try {
@@ -24,38 +25,21 @@ function joinValues(values: readonly string[]) {
   return values.length > 0 ? values.join(', ') : 'None';
 }
 
-function normalizeTags(values: readonly string[]) {
-  return [...new Set(values.map((value) => value.trim()).filter((value) => value.length > 0))].sort((left, right) =>
-    left.localeCompare(right),
-  );
-}
-
-function parseTags(value: string) {
-  return normalizeTags(value.split(','));
-}
-
-function joinTags(values: readonly string[]) {
-  return normalizeTags(values).join(', ');
-}
-
 export function CampaignV2Inspector() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { isAuthenticated, role } = useAuth();
+  const { preferredProjectId, preferenceLoaded, rememberProject } = usePreferredProject();
   const normalizedRole = normalizeFrontendRole(role);
   const requestedProjectId = searchParams.get('project') ?? undefined;
+  const effectiveRequestedProjectId = requestedProjectId ?? preferredProjectId ?? undefined;
+  const projectSelectionReady = Boolean(requestedProjectId) || preferenceLoaded;
   const requestedLocationId = searchParams.get('location') ?? undefined;
   const requestIdRef = useRef(0);
 
   const [payload, setPayload] = useState<CampaignV2InspectorPayload | null>(null);
   const [loading, setLoading] = useState(false);
   const [loadError, setLoadError] = useState('');
-  const [draftTitle, setDraftTitle] = useState('');
-  const [draftSummary, setDraftSummary] = useState('');
-  const [draftTags, setDraftTags] = useState('');
-  const [savePending, setSavePending] = useState(false);
-  const [saveError, setSaveError] = useState('');
-  const [saveReport, setSaveReport] = useState<CampaignV2DualWriteReport | null>(null);
 
   async function loadInspector(projectId?: string, locationId?: string) {
     const nextRequestId = requestIdRef.current + 1;
@@ -86,6 +70,10 @@ export function CampaignV2Inspector() {
   }
 
   useEffect(() => {
+    if (!projectSelectionReady) {
+      return;
+    }
+
     if (!isAuthenticated && normalizedRole === '') {
       return;
     }
@@ -94,58 +82,24 @@ export function CampaignV2Inspector() {
       return;
     }
 
-    void loadInspector(requestedProjectId, requestedLocationId);
-  }, [requestedLocationId, requestedProjectId, isAuthenticated, normalizedRole]);
+    void loadInspector(effectiveRequestedProjectId, requestedLocationId);
+  }, [effectiveRequestedProjectId, requestedLocationId, isAuthenticated, normalizedRole, projectSelectionReady]);
 
   const projectOptions = payload?.projects ?? [];
-  const selectedProjectId = payload?.project?.id ?? requestedProjectId ?? '';
+  const selectedProjectId = payload?.project?.id ?? effectiveRequestedProjectId ?? '';
   const selectedLocationId = payload?.selectedLocationId ?? requestedLocationId ?? '';
   const overview = payload?.overview ?? null;
   const locationTimeline = payload?.locationTimeline ?? null;
   const prep = payload?.prep ?? null;
-  const migrationChecklist = payload?.migrationChecklist ?? null;
-  const selectedLocation = useMemo(
-    () => payload?.locations.find((location) => location.id === selectedLocationId) ?? null,
-    [payload?.locations, selectedLocationId],
-  );
-  const parsedDraftTags = useMemo(() => parseTags(draftTags), [draftTags]);
-  const draftHasChanges = useMemo(() => {
-    if (!selectedLocation) {
-      return false;
-    }
-
-    return (
-      draftTitle.trim() !== selectedLocation.title ||
-      draftSummary.trim() !== selectedLocation.summary ||
-      JSON.stringify(parsedDraftTags) !== JSON.stringify(normalizeTags(selectedLocation.tags))
-    );
-  }, [draftSummary, draftTitle, parsedDraftTags, selectedLocation]);
   const diagnostics = useMemo(
     () => [...(overview?.diagnosticMessages ?? []), ...(locationTimeline?.diagnosticMessages ?? [])],
     [locationTimeline?.diagnosticMessages, overview?.diagnosticMessages],
   );
-
-  useEffect(() => {
-    if (!selectedLocation) {
-      setDraftTitle('');
-      setDraftSummary('');
-      setDraftTags('');
-      return;
-    }
-
-    setDraftTitle(selectedLocation.title);
-    setDraftSummary(selectedLocation.summary);
-    setDraftTags(joinTags(selectedLocation.tags));
-  }, [selectedLocation]);
-
-  useEffect(() => {
-    setSaveError('');
-    setSaveReport(null);
-  }, [selectedProjectId, selectedLocationId]);
+  const focusedLocationTitle = locationTimeline?.location.title ?? prep?.selectedLocationTitle ?? null;
 
   function replaceSearchParams(nextProjectId?: string, nextLocationId?: string) {
     const nextParams = new URLSearchParams(searchParams.toString());
-    nextParams.set('surface', 'v2-inspector');
+    nextParams.delete('surface');
 
     if (nextProjectId) {
       nextParams.set('project', nextProjectId);
@@ -163,48 +117,13 @@ export function CampaignV2Inspector() {
   }
 
   function handleProjectChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    replaceSearchParams(event.target.value || undefined, undefined);
+    const nextProjectId = event.target.value || undefined;
+    void rememberProject(nextProjectId);
+    replaceSearchParams(nextProjectId, undefined);
   }
 
   function handleLocationChange(event: React.ChangeEvent<HTMLSelectElement>) {
     replaceSearchParams(selectedProjectId || undefined, event.target.value || undefined);
-  }
-
-  function handleOpenClassicTimeline() {
-    const nextParams = new URLSearchParams(searchParams.toString());
-    nextParams.set('surface', 'classic');
-    nextParams.delete('location');
-    router.replace(`/timeline${nextParams.size > 0 ? `?${nextParams.toString()}` : ''}`);
-  }
-
-  async function handleSaveLocationIdentity(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    if (!payload?.project || !selectedLocation || !payload.trustedLocationDualWriteEnabled || savePending) {
-      return;
-    }
-
-    setSavePending(true);
-    setSaveError('');
-
-    try {
-      const result = await saveCampaignV2TrustedLocationIdentity({
-        projectId: payload.project.id,
-        locationId: selectedLocation.id,
-        title: draftTitle.trim(),
-        summary: draftSummary.trim(),
-        tags: parsedDraftTags,
-      });
-      setSaveReport(result.report);
-
-      startTransition(() => {
-        setPayload(result.payload);
-      });
-    } catch (error) {
-      setSaveError(error instanceof Error ? error.message : 'Failed to save the trusted dual-write edit.');
-    } finally {
-      setSavePending(false);
-    }
   }
 
   if (!isAuthenticated && normalizedRole === '') {
@@ -251,16 +170,38 @@ export function CampaignV2Inspector() {
     <section className={styles.shell} data-testid="campaign-v2-inspector">
       <div className={styles.panel}>
         <header className={styles.hero}>
-          <p className={styles.eyebrow}>Campaign V2 Inspector</p>
-          <h1>{payload?.project?.name ?? 'Campaign V2'}</h1>
-          <div className={styles.heroMeta}>
-            <span>Source: {payload?.contentSubdir ?? 'none'}</span>
-            <span>Loaded: {payload ? formatLoadedAt(payload.loadedAt) : 'just now'}</span>
+          <div className={styles.heroHeader}>
+            <div className={styles.titleBlock}>
+              <h1>{payload?.project?.name ?? 'Campaign V2'}</h1>
+              <p className={styles.contextLine}>
+                <span>GM timeline</span>
+                {focusedLocationTitle ? (
+                  <>
+                    <span aria-hidden="true" className={styles.contextDivider}>
+                      /
+                    </span>
+                    <span>Focus: {focusedLocationTitle}</span>
+                  </>
+                ) : null}
+                <span aria-hidden="true" className={styles.contextDivider}>
+                  /
+                </span>
+                <span>Updated {payload ? formatLoadedAt(payload.loadedAt) : 'just now'}</span>
+                {payload?.contentSubdir ? (
+                  <>
+                    <span aria-hidden="true" className={styles.contextDivider}>
+                      /
+                    </span>
+                    <span>Source {payload.contentSubdir}</span>
+                  </>
+                ) : null}
+              </p>
+            </div>
           </div>
 
           <div className={styles.controls}>
             <label className={styles.field}>
-              <span>Project</span>
+              <span>Campaign</span>
               <Select
                 aria-label="campaign-v2 project selector"
                 value={selectedProjectId}
@@ -275,7 +216,7 @@ export function CampaignV2Inspector() {
             </label>
 
             <label className={styles.field}>
-              <span>Location Timeline</span>
+              <span>Focus location</span>
               <Select
                 aria-label="campaign-v2 location selector"
                 value={selectedLocationId}
@@ -292,9 +233,6 @@ export function CampaignV2Inspector() {
             <div className={styles.buttonRow}>
               <Button onClick={() => void loadInspector(selectedProjectId || undefined, selectedLocationId || undefined)}>
                 Refresh
-              </Button>
-              <Button variant="ghost" onClick={handleOpenClassicTimeline}>
-                Open classic fallback
               </Button>
             </div>
           </div>
@@ -449,114 +387,9 @@ export function CampaignV2Inspector() {
               )}
             </section>
 
-            <section className={styles.card}>
-              <h2>Migration Status</h2>
-              <p className={styles.subtle}>
-                Use this checklist before deleting the old model or its conversion paths.
-              </p>
-
-              {migrationChecklist ? (
-                <div className={styles.stack}>
-                  {migrationChecklist.items.map((item) => (
-                    <div key={item.key} className={styles.listItem}>
-                      <div className={styles.listItemTitle}>
-                        <strong>{item.title}</strong>
-                        <span className={styles.subtle}>{item.status}</span>
-                      </div>
-                      <p className={styles.subtle}>{item.detail}</p>
-                    </div>
-                  ))}
-                  <div className={styles.listItem}>
-                    <div className={styles.listItemTitle}>
-                      <strong>Validation command</strong>
-                    </div>
-                    <code className={styles.inlineCode}>{migrationChecklist.validationCommand}</code>
-                  </div>
-                </div>
-              ) : (
-                <div className={styles.empty}>No migration checklist is available yet.</div>
-              )}
-            </section>
           </div>
 
           <div className={styles.column}>
-            <section className={styles.card}>
-              <h3>Legacy Write Bridge</h3>
-              <p className={styles.subtle}>
-                {payload?.trustedLocationDualWriteEnabled
-                  ? 'This path updates shared location identity fields in both the old gm-timeline place and the new campaign-v2 location.'
-                  : 'Legacy dual-write is frozen. Campaign-v2 authoring below is now the only write path.'}
-              </p>
-
-              {payload?.trustedLocationDualWriteEnabled && selectedLocation ? (
-                <form className={styles.formGrid} onSubmit={handleSaveLocationIdentity}>
-                  <label className={styles.field}>
-                    <span>Title</span>
-                    <input
-                      aria-label="location title"
-                      className={styles.textInput}
-                      value={draftTitle}
-                      onChange={(event) => setDraftTitle(event.target.value)}
-                    />
-                  </label>
-
-                  <label className={styles.field}>
-                    <span>Summary</span>
-                    <textarea
-                      aria-label="location summary"
-                      className={styles.textArea}
-                      rows={4}
-                      value={draftSummary}
-                      onChange={(event) => setDraftSummary(event.target.value)}
-                    />
-                  </label>
-
-                  <label className={styles.field}>
-                    <span>Tags</span>
-                    <input
-                      aria-label="location tags"
-                      className={styles.textInput}
-                      value={draftTags}
-                      onChange={(event) => setDraftTags(event.target.value)}
-                    />
-                  </label>
-
-                  <p className={styles.helperText}>Comma-separated. This trusted flow only writes title, summary, and tags.</p>
-
-                  <div className={styles.buttonRow}>
-                    <Button
-                      type="submit"
-                      disabled={
-                        savePending || draftTitle.trim().length === 0 || draftSummary.trim().length === 0 || !draftHasChanges
-                      }
-                    >
-                      {savePending ? 'Saving dual-write...' : 'Save dual-write'}
-                    </Button>
-                  </div>
-                </form>
-              ) : null}
-
-              {saveError ? (
-                <div className={`${styles.banner} ${styles.bannerWarning}`} role="alert">
-                  {saveError}
-                </div>
-              ) : null}
-
-              {saveReport ? (
-                <div
-                  className={`${styles.banner} ${saveReport.success ? styles.bannerSuccess : styles.bannerWarning}`}
-                  role="status"
-                >
-                  <strong>{saveReport.success ? 'Old and new writes matched.' : 'Dual-write needs attention.'}</strong>
-                  <div>Old: {saveReport.oldWrite.message}</div>
-                  <div>New: {saveReport.newWrite.message}</div>
-                  {saveReport.divergenceReasons.length > 0 ? (
-                    <div>Divergence: {saveReport.divergenceReasons.join(' ')}</div>
-                  ) : null}
-                </div>
-              ) : null}
-            </section>
-
             {payload ? (
               <CampaignV2AuthoringPanel
                 payload={payload}

@@ -1,0 +1,24 @@
+{
+  "id": "session-001-barrel-and-bullet",
+  "type": "session",
+  "title": "Session 1 - Barrel & Bullet",
+  "locationId": "location-barrel-and-bullet-saloon",
+  "summary": "The party came together at the saloon, accepted the bank heist, gathered initial bank intel, and left with a forged Mugland vault order.",
+  "startingLocationStateId": "location-state-barrel-and-bullet-saloon-initial",
+  "resultingLocationStateId": "location-state-barrel-and-bullet-saloon-after-session-001",
+  "notes": "The scavenger expedition stayed mostly in the background. Their health shots stood out to Durog and lightly seeded the fungal thread without taking focus away from the bank job.",
+  "relations": [
+    {
+      "type": "occursAt",
+      "targetId": "location-barrel-and-bullet-saloon"
+    },
+    {
+      "type": "follows",
+      "targetId": "location-state-barrel-and-bullet-saloon-initial"
+    },
+    {
+      "type": "involves",
+      "targetId": "location-alkenstar"
+    }
+  ]
+}
